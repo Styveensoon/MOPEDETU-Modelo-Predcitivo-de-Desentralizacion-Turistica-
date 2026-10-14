@@ -4,6 +4,10 @@ __pycache__/
 .venv/
 venv/
 .env
+!.env.example
+
+# Node
+node_modules/
 .ipynb_checkpoints/
 
 # Datos pesados / modelos
