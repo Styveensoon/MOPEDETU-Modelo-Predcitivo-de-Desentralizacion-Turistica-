@@ -1,0 +1,19 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.ipynb_checkpoints/
+
+# Datos pesados / modelos
+data/raw/*
+!data/raw/.gitkeep
+*.pkl
+*.joblib
+
+# Sistema / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
