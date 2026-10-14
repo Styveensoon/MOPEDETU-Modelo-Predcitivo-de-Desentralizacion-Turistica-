@@ -48,6 +48,24 @@ Construir un **modelo predictivo** que:
   transparencia)
 ```
 
+## 🚀 Abrir el tablero
+
+**Windows:** doble clic en **`MOPEDETU.bat`**
+**Mac / Linux:** `sh mopedetu.sh`
+**Cualquier sistema:** `python iniciar.py`
+
+Solo se necesita Python 3.10 o superior. La primera vez se instalan las dependencias de forma automática y después se abre el navegador. Por ahora el tablero funciona **sin backend**, con datos DEMO simulados sobre los 217 municipios reales.
+
+| Página | Qué hace |
+|---|---|
+| 🏠 Panorama | KPIs, mapa del índice de oportunidad, rutas, top emergentes y curva de concentración |
+| 🗺️ Mapa de oportunidades | Cualquier indicador por municipio, flags, columnas 3D y clic para ver el detalle |
+| 🧭 Rutas | Rutas intermunicipales optimizadas a partir de destinos ancla |
+| 🔁 Circuitos | Circuitos dentro de un municipio, variados o de una sola actividad |
+| 🔮 Simulador | Inversión y promoción contra el escenario tendencial |
+| 🏘️ Ficha municipal | Predominancia, explicación del índice, flags y proyección |
+| 🚩 Alertas | Tabla filtrable de flags, exportable a CSV |
+
 ## 📂 Estructura del repositorio
 
 ```
