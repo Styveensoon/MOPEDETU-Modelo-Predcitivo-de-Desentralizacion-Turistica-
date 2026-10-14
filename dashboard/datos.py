@@ -1,4 +1,4 @@
-﻿"""Fuente de datos del tablero.
+"""Fuente de datos del tablero.
 
 Por ahora genera datos DEMO (sintéticos pero coherentes) sobre los 217 municipios
 reales de Puebla. Cuando exista el backend, `cargar_datos()` leerá de Supabase y
@@ -266,7 +266,7 @@ def generar_demo(geo: dict) -> Datos:
     for r in ma.itertuples():
         mm = m.loc[r.cve_geo]
         n = int(np.clip(r.unidades // 4, 1, 6))
-        radio_km = max(1.5, np.sqrt(mm.area_km2 / np.pi) * 0.55)
+        radio_km = max(2.5, np.sqrt(mm.area_km2 / np.pi) * 0.8)
         tipos = TIPOS_POI[r.actividad]
         for k in range(n):
             ang, d = rng.uniform(0, 2 * np.pi), radio_km * np.sqrt(rng.uniform(0.02, 1))

@@ -35,7 +35,8 @@ def render():
         actividad = c2.selectbox("Actividad", act.index, format_func=lambda k: f"{act.icono[k]} {act.nombre[k]}")
     flag = c2.selectbox("Resaltar flag", ["Ninguno"] + list(motor.FLAGS)) if metrica != "cl_actividad" else "Ninguno"
     columnas_3d = c3.toggle("Columnas 3D", value=False, help="Altura = personal ocupado turístico")
-    oscuro = c4.toggle("Mapa oscuro", value=False)
+    nombres_fijos = c4.toggle("🏷️ Todos los nombres", value=False,
+                              help="Apagado: nombres principales y el resto aparece al hacer zoom.")
 
     df = mp.copy()
     if actividad:
@@ -54,11 +55,13 @@ def render():
     vista = mapas.VISTA_PUEBLA
     if columnas_3d:
         capas.append(mapas.capa_columnas(df, "po_actual", escala_altura=25))
-        vista = mapas.pdk.ViewState(latitude=18.7, longitude=-97.95, zoom=6.8, pitch=50, bearing=-15)
+        vista = mapas.pdk.ViewState(latitude=19.0, longitude=-97.9, zoom=7.6, pitch=50, bearing=-15)
+    destacados = set(df.nlargest(12, metrica).cve_geo) | set(df[df.es_ancla].cve_geo)
+    capas += mapas.capas_nombres(df, destacados, fijos=nombres_fijos)
 
     mapa, panel = st.columns([2, 1])
     with mapa:
-        evento = st.pydeck_chart(mapas.deck(capas, vista, oscuro), height=600, on_select="rerun",
+        evento = st.pydeck_chart(mapas.deck(capas, vista), height=640, on_select="rerun",
                                  selection_mode="single-object", key="mapa_op")
         mapas.leyenda(titulo, "bajo", "alto", paleta)
         if resaltar:
@@ -91,10 +94,10 @@ def render():
                 st.switch_page(st.session_state["paginas"]["ficha"])
         else:
             st.markdown("#### Ranking")
-            orden = df.sort_values(metrica, ascending=False)[["nombre", "region", metrica, "actividad_lider"]]
-            st.dataframe(orden, hide_index=True, height=560, width="stretch",
+            orden = df.sort_values(metrica, ascending=False)[["nombre", metrica, "actividad_lider"]]
+            st.dataframe(orden, hide_index=True, height=600, width="stretch",
                          column_config={metrica: st.column_config.NumberColumn(titulo.split(" (")[0], format="%.2f"),
-                                        "actividad_lider": "Actividad líder", "nombre": "Municipio", "region": "Región"})
+                                        "actividad_lider": "Actividad líder", "nombre": "Municipio"})
 
     st.markdown("#### 🔍 Oferta contra visibilidad: dónde está lo invisible")
     sc = pred.assign(actividad_n=pred.actividad.map(act.nombre))

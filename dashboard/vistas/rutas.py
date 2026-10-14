@@ -47,7 +47,7 @@ def render():
                 "path": [[p["lon"], p["lat"]] for p in r.paradas],
                 "tt": f"<b>{r.nombre}</b><br/>{len(r.paradas)} paradas · {r.minutos / 60:.1f} h"}]), color))
             for k, p in enumerate(r.paradas):
-                paradas.append(dict(lon=p["lon"], lat=p["lat"], etiqueta=f"{k + 1}",
+                paradas.append(dict(lon=p["lon"], lat=p["lat"], etiqueta=f"{k + 1}. {p['nombre']}",
                                     color=[14, 42, 92, 255] if p["es_ancla"] else color + [255],
                                     tt=f"<b>{k + 1}. {p['nombre']}</b><br/>{p['iconos']}<br/>"
                                        + ("⚓ Ancla" if p["es_ancla"] else f"🌱 Emergente · score {p['score']:.2f}")))
@@ -55,10 +55,10 @@ def render():
         capas.append(mapas.pdk.Layer("ScatterplotLayer", pdf, get_position=["lon", "lat"], get_fill_color="color",
                                      get_radius=2600, radius_min_pixels=7, stroked=True, get_line_color=[255, 255, 255],
                                      line_width_min_pixels=2, pickable=True))
-        capas.append(mapas.capa_texto(pdf, "etiqueta", 12))
-        centro = pdf[["lat", "lon"]].mean()
-        vista = mapas.pdk.ViewState(latitude=centro.lat, longitude=centro.lon, zoom=7.6, pitch=0)
-        st.pydeck_chart(mapas.deck(capas, vista), height=600)
+        capas += mapas.capas_nombres(mp[~mp.cve_geo.isin({p["cve_geo"] for i in idx for p in rutas[i].paradas})], todos=True)
+        capas.append(mapas.capa_texto(pdf.drop_duplicates(["lon", "lat"]), "etiqueta", 12))
+        vista = mapas.vista_ajustada(pdf.lat, pdf.lon, ancho=740, alto=620, margen=1.3)
+        st.pydeck_chart(mapas.deck(capas, vista), height=620)
 
     with lista:
         for i, r in enumerate(rutas):

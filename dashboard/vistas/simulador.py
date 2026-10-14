@@ -63,7 +63,8 @@ def render():
         tope = max(df.delta_pct.quantile(.97), 1)
         capas = [mapas.capa_municipios(d.geo, df, "delta_pct", df.set_index("cve_geo").tt,
                                        paleta=tema.SEQ_CRECIMIENTO, vmin=0, vmax=tope)]
-        st.pydeck_chart(mapas.deck(capas), height=500)
+        capas += mapas.capas_nombres(d.municipios, set(df.nlargest(10, "delta_pct").cve_geo))
+        st.pydeck_chart(mapas.deck(capas), height=600)
         mapas.leyenda("Cambio porcentual contra el escenario tendencial", "0 %", f"+{tope:.0f} %", tema.SEQ_CRECIMIENTO)
 
     with der:

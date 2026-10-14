@@ -43,15 +43,16 @@ def render():
             lambda r: f"<b>{r.nombre}</b><br/>{r.region}<br/>Índice: <b>{r.indice_oportunidad:.2f}</b><br/>"
                       f"Líder: {r.icono_lider} {r.actividad_lider}<br/>Flags: {r.num_flags}"
                       + ("<br/>⚓ Destino consolidado" if r.es_ancla else ""), axis=1)
-        capas = [mapas.capa_municipios(d.geo, mp, "indice_oportunidad", tt,
-                                       resaltar=set(estado.filtrar_region(mp).cve_geo) if ctx.supuestos.region else None,
-                                       cuantiles=True)]
+        fuera = set(mp.cve_geo) - set(estado.filtrar_region(mp).cve_geo)
+        capas = [mapas.capa_municipios(d.geo, mp, "indice_oportunidad", tt, cuantiles=True, atenuar=fuera)]
         anclas = mp[mp.es_ancla].copy()
         anclas["tt"] = "<b>⚓ " + anclas.nombre + "</b><br/>Destino consolidado"
-        capas.append(mapas.capa_puntos(anclas, [14, 42, 92, 255], 2800))
         if rutas:
             capas.append(mapas.capa_arcos(_arcos(rutas)))
-        st.pydeck_chart(mapas.deck(capas), height=520)
+        capas.append(mapas.capa_puntos(anclas, [14, 42, 92, 255], 2800))
+        destacados = set(anclas.cve_geo) | set(estado.filtrar_region(mp[~mp.es_ancla]).nlargest(5, "indice_oportunidad").cve_geo)
+        capas += mapas.capas_nombres(mp, destacados)
+        st.pydeck_chart(mapas.deck(capas), height=600)
         mapas.leyenda("Índice de oportunidad (percentil estatal)", "bajo", "alto")
 
     with der:

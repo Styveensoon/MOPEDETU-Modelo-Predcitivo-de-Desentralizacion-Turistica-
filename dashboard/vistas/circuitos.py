@@ -30,7 +30,7 @@ def render():
     izq, der = st.columns([1, 2.2])
     with izq:
         st.markdown("#### 🏆 Mejor potencial para circuitos")
-        st.dataframe(ranking[["nombre", "region", "actividades", "potencial"]], hide_index=True,
+        st.dataframe(ranking[["nombre", "actividades", "potencial"]], hide_index=True,
                      height=280, width="stretch",
                      column_config={"nombre": "Municipio", "region": "Región", "actividades": "Actividades",
                                     "potencial": st.column_config.ProgressColumn("Potencial", min_value=0, max_value=1,
@@ -65,22 +65,23 @@ def render():
         trayecto = pd.DataFrame([{"path": [[m.lon, m.lat]] + circ[["lon", "lat"]].values.tolist(),
                                   "tt": f"Circuito {tipo.lower()} · {m.nombre}"}])
         inicio = pd.DataFrame([{"lon": m.lon, "lat": m.lat, "tt": f"<b>Inicio: cabecera de {m.nombre}</b>",
-                                "etiqueta": "★"}])
-        sub = mp[mp.cve_geo == cve]
+                                "etiqueta": "Inicio"}])
+        otros = set(mp.cve_geo) - {cve}
         capas = [
-            mapas.capa_municipios(d.geo, sub, "indice_oportunidad", sub.set_index("cve_geo").nombre,
-                                  vmin=0, vmax=1),
+            mapas.capa_municipios(d.geo, mp, "indice_oportunidad", mp.set_index("cve_geo").nombre,
+                                  paleta=[(255, 246, 214), (255, 246, 214)], atenuar=otros, resaltar={cve}),
+            mapas.capa_texto(mp[mp.cve_geo != cve], "nombre", 11, offset=(0, 0)),
             mapas.capa_trayecto(trayecto, (14, 42, 92)),
             mapas.pdk.Layer("ScatterplotLayer", circ, get_position=["lon", "lat"], get_fill_color="color",
-                            get_radius=250, radius_min_pixels=8, stroked=True, get_line_color=[255, 255, 255],
+                            get_radius=250, radius_min_pixels=11, stroked=True, get_line_color=[255, 255, 255],
                             line_width_min_pixels=2, pickable=True),
             mapas.capa_puntos(inicio, [232, 177, 13, 255], 300),
-            mapas.capa_texto(pd.concat([circ[["lon", "lat", "etiqueta"]], inicio[["lon", "lat", "etiqueta"]]]),
-                             "etiqueta", 13),
+            mapas.capa_texto(circ[["lon", "lat", "etiqueta"]], "etiqueta", 13, offset=(0, 0)),
+            mapas.capa_texto(inicio[["lon", "lat", "etiqueta"]], "etiqueta", 13, offset=(0, -18)),
         ]
-        zoom = 11.2 if m.area_km2 < 250 else 10.4 if m.area_km2 < 700 else 9.7
-        vista = mapas.pdk.ViewState(latitude=m.lat, longitude=m.lon, zoom=zoom, pitch=35)
-        st.pydeck_chart(mapas.deck(capas, vista), height=470)
+        vista = mapas.vista_ajustada(list(circ.lat) + [m.lat], list(circ.lon) + [m.lon], ancho=950, alto=520,
+                                     margen=1.6, zoom_max=14)
+        st.pydeck_chart(mapas.deck(capas, vista), height=520)
 
         st.markdown("#### 🗒️ Itinerario sugerido")
         reloj = 9 * 60
