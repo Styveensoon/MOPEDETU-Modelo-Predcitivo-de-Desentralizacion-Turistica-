@@ -44,6 +44,30 @@ def test_paginas():
             print(f"✔ {pagina:<14} {cfg or 'General'}")
 
 
+def test_ficha_tecnica():
+    """Ficha con datos reales de Supabase: varios perfiles (ancla, emergente, sin oferta) y cada semáforo."""
+    import sys
+
+    sys.path.insert(0, DASH)
+    import ficha_bd
+
+    df = ficha_bd.cargar.__wrapped__()
+    if df is None:
+        print("… ficha_tecnica omitida: sin conexión a Supabase (.env)")
+        return
+    sin_oferta = df[df.actividades_principales.map(len) == 0].cve_geo.head(1).tolist()
+    muestras = ["21043", "21027", "21121", "21114", "21170"] + sin_oferta
+    for i, cve in enumerate(muestras):
+        dim = list(ficha_bd.DIMENSIONES)[i % len(ficha_bd.DIMENSIONES)]
+        at = AppTest.from_function(_pagina, args=(DASH, "ficha_tecnica"), default_timeout=180)
+        at.session_state["ft_cve"] = cve
+        at.session_state["ft_dim"] = dim
+        at.run()
+        assert not at.exception, f"ficha_tecnica {cve}: {[e.message for e in at.exception]}"
+        print(f"✔ ficha_tecnica  {cve} · {dim}")
+
+
 if __name__ == "__main__":
     test_paginas()
+    test_ficha_tecnica()
     print("OK")
