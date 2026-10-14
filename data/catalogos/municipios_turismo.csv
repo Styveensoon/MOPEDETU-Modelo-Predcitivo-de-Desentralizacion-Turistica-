@@ -1,0 +1,218 @@
+cve_geo,nombre,region,es_pueblo_magico,anio_pueblo_magico,es_ancla,criterio_ancla,lon,lat
+21001,Acajete,Angelópolis,False,,False,,-97.93983,19.1033
+21002,Acateno,Sierra Nororiental,False,,False,,-97.2298,20.10915
+21003,Acatlán,Mixteca,False,,False,,-98.05789,18.23585
+21004,Acatzingo,Valle de Serdán,False,,False,,-97.76498,19.02611
+21005,Acteopan,Valle de Atlixco y Matamoros,False,,False,,-98.67909,18.75939
+21006,Ahuacatlán,Sierra Norte,False,,False,,-97.86768,20.02695
+21007,Ahuatlán,Valle de Atlixco y Matamoros,False,,False,,-98.28281,18.57566
+21008,Ahuazotepec,Sierra Norte,False,,False,,-98.13362,20.06116
+21009,Ahuehuetitla,Mixteca,False,,False,,-98.19112,18.23129
+21010,Ajalpan,Tehuacán y Sierra Negra,False,,False,,-97.12561,18.42157
+21011,Albino Zertuche,Mixteca,False,,False,,-98.54711,18.01069
+21012,Aljojuca,Valle de Serdán,False,,False,,-97.51742,19.1026
+21013,Altepexi,Tehuacán y Sierra Negra,False,,False,,-97.30037,18.35634
+21014,Amixtlán,Sierra Norte,False,,False,,-97.80068,20.05581
+21015,Amozoc,Angelópolis,False,,False,,-98.055,19.04832
+21016,Aquixtla,Sierra Norte,False,,False,,-97.93024,19.77229
+21017,Atempan,Sierra Nororiental,False,,False,,-97.44091,19.81168
+21018,Atexcal,Mixteca,False,,False,,-97.69008,18.37557
+21019,Atlixco,Valle de Atlixco y Matamoros,True,2015,True,Pueblo Mágico desde 2015 (≥ 10 años de nombramiento),-98.45229,18.89907
+21020,Atoyatempan,Angelópolis,False,,False,,-97.90907,18.80601
+21021,Atzala,Valle de Atlixco y Matamoros,False,,False,,-98.54172,18.54704
+21022,Atzitzihuacán,Valle de Atlixco y Matamoros,False,,False,,-98.60777,18.82308
+21023,Atzitzintla,Valle de Serdán,False,,False,,-97.30399,18.93379
+21024,Axutla,Mixteca,False,,False,,-98.39351,18.18468
+21025,Ayotoxco de Guerrero,Sierra Nororiental,False,,False,,-97.40878,20.08399
+21026,Calpan,Angelópolis,False,,False,,-98.47622,19.10644
+21027,Caltepec,Tehuacán y Sierra Negra,False,,False,,-97.48291,18.14187
+21028,Camocuautla,Sierra Norte,False,,False,,-97.75295,20.03083
+21029,Caxhuacan,Sierra Nororiental,False,,False,,-97.6063,20.07349
+21030,Coatepec,Sierra Norte,False,,False,,-97.73105,20.05515
+21031,Coatzingo,Mixteca,False,,False,,-98.16492,18.57117
+21032,Cohetzala,Mixteca,False,,False,,-98.78853,18.19049
+21033,Cohuecan,Valle de Atlixco y Matamoros,False,,False,,-98.71821,18.74582
+21034,Coronango,Angelópolis,False,,False,,-98.29175,19.13523
+21035,Coxcatlán,Tehuacán y Sierra Negra,False,,False,,-97.11723,18.24559
+21036,Coyomeapan,Tehuacán y Sierra Negra,False,,False,,-96.96594,18.28235
+21037,Coyotepec,Mixteca,False,,False,,-97.81295,18.40133
+21038,Cuapiaxtla de Madero,Valle de Serdán,False,,False,,-97.82638,18.92019
+21039,Cuautempan,Sierra Norte,False,,False,,-97.79213,19.91357
+21040,Cuautinchán,Angelópolis,False,,False,,-98.0451,18.96165
+21041,Cuautlancingo,Angelópolis,False,,False,,-98.2561,19.11671
+21042,Cuayuca de Andrade,Mixteca,False,,False,,-98.18899,18.44567
+21043,Cuetzalan del Progreso,Sierra Nororiental,True,2002,True,Pueblo Mágico desde 2002 (≥ 10 años de nombramiento),-97.50058,20.02798
+21044,Cuyoaco,Valle de Serdán,False,,False,,-97.57326,19.59666
+21045,Chalchicomula de Sesma,Valle de Serdán,False,,False,,-97.42971,18.97734
+21046,Chapulco,Tehuacán y Sierra Negra,False,,False,,-97.40364,18.63964
+21047,Chiautla,Mixteca,False,,False,,-98.59919,18.27657
+21048,Chiautzingo,Angelópolis,False,,False,,-98.51334,19.1956
+21049,Chiconcuautla,Sierra Norte,False,,False,,-97.96598,20.08875
+21050,Chichiquila,Valle de Serdán,False,,False,,-97.07009,19.20472
+21051,Chietla,Valle de Atlixco y Matamoros,False,,False,,-98.62591,18.51037
+21052,Chigmecatitlán,Mixteca,False,,False,,-98.05935,18.6488
+21053,Chignahuapan,Sierra Norte,True,2012,True,Pueblo Mágico desde 2012 (≥ 10 años de nombramiento),-98.13474,19.82102
+21054,Chignautla,Sierra Nororiental,False,,False,,-97.43656,19.73556
+21055,Chila,Mixteca,False,,False,,-97.87924,17.96025
+21056,Chila de la Sal,Mixteca,False,,False,,-98.47001,18.13956
+21057,Honey,Sierra Norte,False,,False,,-98.23888,20.26016
+21058,Chilchotla,Valle de Serdán,False,,False,,-97.21356,19.25827
+21059,Chinantla,Mixteca,False,,False,,-98.27959,18.23293
+21060,Domingo Arenas,Angelópolis,False,,False,,-98.44114,19.13217
+21061,Eloxochitlán,Tehuacán y Sierra Negra,False,,False,,-96.9267,18.50678
+21062,Epatlán,Valle de Atlixco y Matamoros,False,,False,,-98.37626,18.61559
+21063,Esperanza,Valle de Serdán,False,,False,,-97.36463,18.85903
+21064,Francisco Z. Mena,Sierra Norte,False,,False,,-97.81316,20.71054
+21065,General Felipe Ángeles,Valle de Serdán,False,,False,,-97.66751,19.02072
+21066,Guadalupe,Mixteca,False,,False,,-98.15115,18.04838
+21067,Guadalupe Victoria,Valle de Serdán,False,,False,,-97.38013,19.31642
+21068,Hermenegildo Galeana,Sierra Norte,False,,False,,-97.73118,20.11676
+21069,Huaquechula,Valle de Atlixco y Matamoros,False,,False,,-98.51717,18.76929
+21070,Huatlatlauca,Mixteca,False,,False,,-98.06784,18.68379
+21071,Huauchinango,Sierra Norte,True,2015,True,Pueblo Mágico desde 2015 (≥ 10 años de nombramiento),-98.05174,20.16621
+21072,Huehuetla,Sierra Nororiental,False,,False,,-97.62197,20.11386
+21073,Huehuetlán el Chico,Mixteca,False,,False,,-98.72713,18.38645
+21074,Huejotzingo,Angelópolis,True,2023,False,,-98.44878,19.16712
+21075,Hueyapan,Sierra Nororiental,False,,False,,-97.40113,19.92183
+21076,Hueytamalco,Sierra Nororiental,False,,False,,-97.31017,20.03061
+21077,Hueytlalpan,Sierra Nororiental,False,,False,,-97.68416,20.04315
+21078,Huitzilan de Serdán,Sierra Nororiental,False,,False,,-97.7133,19.94375
+21079,Huitziltepec,Mixteca,False,,False,,-97.85963,18.76693
+21080,Atlequizayan,Sierra Nororiental,False,,False,,-97.62733,20.01469
+21081,Ixcamilpa de Guerrero,Mixteca,False,,False,,-98.71232,18.03444
+21082,Ixcaquixtla,Mixteca,False,,False,,-97.83349,18.48166
+21083,Ixtacamaxtitlán,Sierra Norte,False,,False,,-97.85842,19.62404
+21084,Ixtepec,Sierra Nororiental,False,,False,,-97.64144,20.04064
+21085,Izúcar de Matamoros,Valle de Atlixco y Matamoros,False,,False,,-98.44701,18.50192
+21086,Jalpan,Sierra Norte,False,,False,,-97.87595,20.45615
+21087,Jolalpan,Mixteca,False,,False,,-98.91566,18.3072
+21088,Jonotla,Sierra Nororiental,False,,False,,-97.5677,20.04525
+21089,Jopala,Sierra Norte,False,,False,,-97.77798,20.2064
+21090,Juan C. Bonilla,Angelópolis,False,,False,,-98.34546,19.11933
+21091,Juan Galindo,Sierra Norte,False,,False,,-97.99659,20.2237
+21092,Juan N. Méndez,Mixteca,False,,False,,-97.73988,18.53209
+21093,Lafragua,Valle de Serdán,False,,False,,-97.29372,19.2811
+21094,Libres,Valle de Serdán,False,,False,,-97.67614,19.46915
+21095,La Magdalena Tlatlauquitepec,Mixteca,False,,False,,-98.10249,18.74182
+21096,Mazapiltepec de Juárez,Valle de Serdán,False,,False,,-97.69201,19.15112
+21097,Mixtla,Angelópolis,False,,False,,-97.89171,18.90772
+21098,Molcaxac,Mixteca,False,,False,,-97.86981,18.66862
+21099,Cañada Morelos,Valle de Serdán,False,,False,,-97.42813,18.73316
+21100,Naupan,Sierra Norte,False,,False,,-98.10286,20.24527
+21101,Nauzontla,Sierra Nororiental,False,,False,,-97.58899,19.96307
+21102,Nealtican,Angelópolis,False,,False,,-98.44712,19.0612
+21103,Nicolás Bravo,Tehuacán y Sierra Negra,False,,False,,-97.33754,18.62752
+21104,Nopalucan,Angelópolis,False,,False,,-97.8333,19.19062
+21105,Ocotepec,Valle de Serdán,False,,False,,-97.67382,19.55552
+21106,Ocoyucan,Angelópolis,False,,False,,-98.31914,18.93167
+21107,Olintla,Sierra Norte,False,,False,,-97.67182,20.11243
+21108,Oriental,Valle de Serdán,False,,False,,-97.58344,19.3265
+21109,Pahuatlán,Sierra Norte,True,2012,True,Pueblo Mágico desde 2012 (≥ 10 años de nombramiento),-98.13737,20.29327
+21110,Palmar de Bravo,Valle de Serdán,False,,False,,-97.53558,18.83501
+21111,Pantepec,Sierra Norte,False,,False,,-97.87683,20.55491
+21112,Petlalcingo,Mixteca,False,,False,,-97.91588,18.06912
+21113,Piaxtla,Mixteca,False,,False,,-98.27075,18.11397
+21114,Puebla,Angelópolis,False,,True,"Capital; Centro Histórico Patrimonio de la Humanidad (UNESCO, 1987)",-98.17616,19.00762
+21115,Quecholac,Valle de Serdán,False,,False,,-97.63447,18.94816
+21116,Quimixtlán,Valle de Serdán,False,,False,,-97.11339,19.25374
+21117,Rafael Lara Grajales,Valle de Serdán,False,,False,,-97.82624,19.26486
+21118,Los Reyes de Juárez,Valle de Serdán,False,,False,,-97.8239,18.96244
+21119,San Andrés Cholula,Angelópolis,True,2012,True,Pueblo Mágico desde 2012 (≥ 10 años de nombramiento),-98.28975,19.02414
+21120,San Antonio Cañada,Tehuacán y Sierra Negra,False,,False,,-97.27369,18.49701
+21121,San Diego la Mesa Tochimiltzingo,Valle de Atlixco y Matamoros,False,,False,,-98.33586,18.76741
+21122,San Felipe Teotlalcingo,Angelópolis,False,,False,,-98.52594,19.23152
+21123,San Felipe Tepatlán,Sierra Norte,False,,False,,-97.78676,20.11152
+21124,San Gabriel Chilac,Tehuacán y Sierra Negra,False,,False,,-97.38397,18.31813
+21125,San Gregorio Atzompa,Valle de Atlixco y Matamoros,False,,False,,-98.34562,19.01049
+21126,San Jerónimo Tecuanipan,Valle de Atlixco y Matamoros,False,,False,,-98.39375,19.03492
+21127,San Jerónimo Xayacatlán,Mixteca,False,,False,,-97.92169,18.1985
+21128,San José Chiapa,Valle de Serdán,False,,False,,-97.72857,19.25467
+21129,San José Miahuatlán,Tehuacán y Sierra Negra,False,,False,,-97.29007,18.22887
+21130,San Juan Atenco,Valle de Serdán,False,,False,,-97.55189,19.04707
+21131,San Juan Atzompa,Mixteca,False,,False,,-98.03049,18.7448
+21132,San Martín Texmelucan,Angelópolis,False,,False,,-98.42851,19.26896
+21133,San Martín Totoltepec,Valle de Atlixco y Matamoros,False,,False,,-98.35524,18.65772
+21134,San Matías Tlalancaleca,Angelópolis,False,,False,,-98.50282,19.34665
+21135,San Miguel Ixitlán,Mixteca,False,,False,,-97.76989,18.01192
+21136,San Miguel Xoxtla,Angelópolis,False,,False,,-98.30645,19.17266
+21137,San Nicolás Buenos Aires,Valle de Serdán,False,,False,,-97.49753,19.22311
+21138,San Nicolás de los Ranchos,Angelópolis,False,,False,,-98.56693,19.07943
+21139,San Pablo Anicano,Mixteca,False,,False,,-98.13894,18.14194
+21140,San Pedro Cholula,Angelópolis,True,2012,True,Pueblo Mágico desde 2012 (≥ 10 años de nombramiento),-98.34313,19.07296
+21141,San Pedro Yeloixtlahuaca,Mixteca,False,,False,,-98.04404,18.04067
+21142,San Salvador el Seco,Valle de Serdán,False,,False,,-97.61392,19.15395
+21143,San Salvador el Verde,Angelópolis,False,,False,,-98.56134,19.24459
+21144,San Salvador Huixcolotla,Valle de Serdán,False,,False,,-97.77233,18.92652
+21145,San Sebastián Tlacotepec,Tehuacán y Sierra Negra,False,,False,,-96.8288,18.37958
+21146,Santa Catarina Tlaltempan,Mixteca,False,,False,,-98.07914,18.6159
+21147,Santa Inés Ahuatempan,Mixteca,False,,False,,-98.04927,18.4033
+21148,Santa Isabel Cholula,Valle de Atlixco y Matamoros,False,,False,,-98.38532,18.97483
+21149,Santiago Miahuatlán,Tehuacán y Sierra Negra,False,,False,,-97.42487,18.55546
+21150,Huehuetlán el Grande,Mixteca,False,,False,,-98.15696,18.75718
+21151,Santo Tomás Hueyotlipan,Angelópolis,False,,False,,-97.86522,18.88752
+21152,Soltepec,Valle de Serdán,False,,False,,-97.74609,19.12066
+21153,Tecali de Herrera,Angelópolis,False,,False,,-97.96823,18.887
+21154,Tecamachalco,Valle de Serdán,False,,False,,-97.73122,18.8593
+21155,Tecomatlán,Mixteca,False,,False,,-98.31905,18.07142
+21156,Tehuacán,Tehuacán y Sierra Negra,False,,True,"Segunda ciudad del estado; acceso a la Reserva de la Biosfera Tehuacán-Cuicatlán (UNESCO, 2018)",-97.44508,18.46129
+21157,Tehuitzingo,Mixteca,False,,False,,-98.30395,18.35319
+21158,Tenampulco,Sierra Nororiental,False,,False,,-97.4016,20.1892
+21159,Teopantlán,Valle de Atlixco y Matamoros,False,,False,,-98.2506,18.72946
+21160,Teotlalco,Mixteca,False,,False,,-98.83874,18.45046
+21161,Tepanco de López,Tehuacán y Sierra Negra,False,,False,,-97.54302,18.5539
+21162,Tepango de Rodríguez,Sierra Norte,False,,False,,-97.78433,20.00846
+21163,Tepatlaxco de Hidalgo,Angelópolis,False,,False,,-98.0036,19.14522
+21164,Tepeaca,Angelópolis,False,,False,,-97.87616,19.01193
+21165,Tepemaxalco,Valle de Atlixco y Matamoros,False,,False,,-98.63294,18.73975
+21166,Tepeojuma,Valle de Atlixco y Matamoros,False,,False,,-98.43127,18.72177
+21167,Tepetzintla,Sierra Norte,False,,False,,-97.85304,19.94949
+21168,Tepexco,Valle de Atlixco y Matamoros,False,,False,,-98.654,18.64632
+21169,Tepexi de Rodríguez,Mixteca,False,,False,,-97.93734,18.49675
+21170,Tepeyahualco,Valle de Serdán,False,,False,,-97.46328,19.47961
+21171,Tepeyahualco de Cuauhtémoc,Angelópolis,False,,False,,-97.86668,18.80631
+21172,Tetela de Ocampo,Sierra Norte,True,2020,False,,-97.78573,19.81821
+21173,Teteles de Ávila Castillo,Sierra Nororiental,False,,False,,-97.44936,19.85437
+21174,Teziutlán,Sierra Nororiental,True,2023,False,,-97.35858,19.86381
+21175,Tianguismanalco,Valle de Atlixco y Matamoros,False,,False,,-98.47915,19.00019
+21176,Tilapa,Valle de Atlixco y Matamoros,False,,False,,-98.54199,18.6143
+21177,Tlacotepec de Benito Juárez,Tehuacán y Sierra Negra,False,,False,,-97.62887,18.65571
+21178,Tlacuilotepec,Sierra Norte,False,,False,,-97.9962,20.37774
+21179,Tlachichuca,Valle de Serdán,False,,False,,-97.35212,19.13361
+21180,Tlahuapan,Angelópolis,False,,False,,-98.58532,19.36228
+21181,Tlaltenango,Angelópolis,False,,False,,-98.34284,19.1565
+21182,Tlanepantla,Angelópolis,False,,False,,-97.88532,18.85701
+21183,Tlaola,Sierra Norte,False,,False,,-97.90981,20.16731
+21184,Tlapacoya,Sierra Norte,False,,False,,-97.83828,20.12982
+21185,Tlapanalá,Valle de Atlixco y Matamoros,False,,False,,-98.5362,18.68996
+21186,Tlatlauquitepec,Sierra Nororiental,True,2012,True,Pueblo Mágico desde 2012 (≥ 10 años de nombramiento),-97.49935,19.84214
+21187,Tlaxco,Sierra Norte,False,,False,,-98.04887,20.39983
+21188,Tochimilco,Valle de Atlixco y Matamoros,False,,False,,-98.61221,18.92247
+21189,Tochtepec,Angelópolis,False,,False,,-97.8212,18.82845
+21190,Totoltepec de Guerrero,Mixteca,False,,False,,-97.84805,18.29154
+21191,Tulcingo,Mixteca,False,,False,,-98.39756,17.97508
+21192,Tuzamapan de Galeana,Sierra Nororiental,False,,False,,-97.53058,20.10382
+21193,Tzicatlacoyan,Mixteca,False,,False,,-98.04174,18.8162
+21194,Venustiano Carranza,Sierra Norte,False,,False,,-97.68724,20.50835
+21195,Vicente Guerrero,Tehuacán y Sierra Negra,False,,False,,-97.18206,18.53035
+21196,Xayacatlán de Bravo,Mixteca,False,,False,,-97.94652,18.27825
+21197,Xicotepec,Sierra Norte,True,2012,True,Pueblo Mágico desde 2012 (≥ 10 años de nombramiento),-97.90263,20.32662
+21198,Xicotlán,Mixteca,False,,False,,-98.60058,18.09563
+21199,Xiutetelco,Sierra Nororiental,False,,False,,-97.35992,19.72254
+21200,Xochiapulco,Sierra Norte,False,,False,,-97.64678,19.84795
+21201,Xochiltepec,Valle de Atlixco y Matamoros,False,,False,,-98.33696,18.6581
+21202,Xochitlán de Vicente Suárez,Sierra Nororiental,False,,False,,-97.65361,19.93889
+21203,Xochitlán Todos Santos,Mixteca,False,,False,,-97.77793,18.69581
+21204,Yaonáhuac,Sierra Nororiental,False,,False,,-97.44248,19.91962
+21205,Yehualtepec,Tehuacán y Sierra Negra,False,,False,,-97.67825,18.76755
+21206,Zacapala,Mixteca,False,,False,,-98.05248,18.58008
+21207,Zacapoaxtla,Sierra Nororiental,False,,False,,-97.58127,19.85437
+21208,Zacatlán,Sierra Norte,True,2011,True,Pueblo Mágico desde 2011 (≥ 10 años de nombramiento),-97.99901,19.96492
+21209,Zapotitlán,Tehuacán y Sierra Negra,False,,False,,-97.5219,18.27742
+21210,Zapotitlán de Méndez,Sierra Nororiental,False,,False,,-97.69261,20.00415
+21211,Zaragoza,Sierra Nororiental,False,,False,,-97.56857,19.74726
+21212,Zautla,Sierra Nororiental,False,,False,,-97.68269,19.7143
+21213,Zihuateutla,Sierra Norte,False,,False,,-97.7983,20.2991
+21214,Zinacatepec,Tehuacán y Sierra Negra,False,,False,,-97.22247,18.32744
+21215,Zongozotla,Sierra Norte,False,,False,,-97.76052,19.97654
+21216,Zoquiapan,Sierra Nororiental,False,,False,,-97.59963,20.00904
+21217,Zoquitlán,Tehuacán y Sierra Negra,False,,False,,-96.97867,18.37711

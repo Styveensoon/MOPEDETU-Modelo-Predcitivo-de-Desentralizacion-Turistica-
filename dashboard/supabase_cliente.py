@@ -39,9 +39,13 @@ def _peticion(ruta: str, secreta: bool = False, esquema: str = "public", metodo:
     datos = json.dumps(cuerpo).encode() if cuerpo is not None else None
     req = urllib.request.Request(f"{os.environ['SUPABASE_URL']}/rest/v1/{ruta}", data=datos,
                                  headers=cab, method=metodo)
-    with urllib.request.urlopen(req, timeout=20) as r:
-        texto = r.read().decode()
-        return json.loads(texto) if texto else None
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            texto = r.read().decode()
+            return json.loads(texto) if texto else None
+    except urllib.error.HTTPError as e:
+        e.msg = f"{e.msg} · {metodo} {esquema}.{ruta.split('?')[0]} · {e.read().decode()[:500]}"
+        raise
 
 
 def leer(tabla: str, esquema: str = "public", select: str = "*", secreta: bool = False) -> pd.DataFrame:
