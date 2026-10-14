@@ -3,3 +3,5 @@ pydeck>=0.9
 plotly>=5.20
 pandas>=2.1
 numpy>=1.26
+scikit-learn>=1.4
+scipy>=1.11

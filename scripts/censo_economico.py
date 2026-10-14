@@ -12,12 +12,15 @@ de los subsectores turísticos y los deja en formato largo:
 
 Las combinaciones municipio × sector sin establecimientos no aparecen en INEGI y no se crean aquí.
 
-El Censo 2014 no tiene conjunto de datos abiertos descargable de forma directa (solo vía SAIC).
+Se usa la versión histórica publicada con los Censos Económicos 2024, que homologa 2014, 2019 y
+2024 a SCIAN 2023 y al marco geoestadístico vigente, para que las transiciones sean comparables.
 
 Uso:
     python scripts/censo_economico.py
 Salidas:
     data/stg/censo_economico.csv
+    data/stg/censo_economico_totales.csv  (auxiliar: totales estatales por sector, cve_geo 21000,
+                                           y total de actividades por municipio, sector TOTAL)
     data/stg/dim_fuente_censos.csv
 """
 
@@ -34,21 +37,19 @@ STG = RAIZ / "data" / "stg"
 
 ENTIDAD = "21"
 SECTORES = {"721", "722", "711", "712", "713", "5615"}
+TOTAL = "TOTAL"  # todas las actividades económicas
 LICENCIA = "Términos de libre uso de la información del INEGI: https://www.inegi.org.mx/inegi/terminos.html"
 
+# Versión histórica de los Censos Económicos 2024: las tres ediciones homologadas a SCIAN 2023
+# y al marco geoestadístico vigente, con la misma estructura de columnas.
+BASE_URL = "https://www.inegi.org.mx/contenidos/programas/ce/2024/datosabiertos"
 CENSOS = {
-    2019: {
-        "url": "https://www.inegi.org.mx/contenidos/programas/ce/2019/Datosabiertos/ce2019_pue_csv.zip",
-        "csv": "conjunto_de_datos/ce2019_pue.csv",
-        "cols": {"ent": "ENTIDAD", "mun": "MUNICIPIO", "codigo": "CODIGO", "estrato": "ID_ESTRATO"},
-        "version": "Censos Económicos 2019, resultados definitivos (datos abiertos, ref. 2018), SCIAN 2018",
-    },
-    2024: {
-        "url": "https://www.inegi.org.mx/contenidos/programas/ce/2024/datosabiertos/conjunto_de_datos_ce_pue_2024_csv.zip",
-        "csv": "conjunto_de_datos/tr_ce_pue_2024.csv",
-        "cols": {"ent": "E03", "mun": "E04", "codigo": "CODIGO", "estrato": "ID_ESTRATO"},
-        "version": "Censos Económicos 2024, resultados definitivos (datos abiertos, ref. 2023), SCIAN 2023",
-    },
+    anio: {
+        "url": f"{BASE_URL}/conjunto_de_datos_ce_pue_{anio}_csv.zip",
+        "csv": f"conjunto_de_datos/tr_ce_pue_{anio}.csv",
+        "version": f"Censos Económicos {anio} (ref. {anio - 1}), versión histórica CE 2024 homologada a SCIAN 2023",
+    }
+    for anio in (2014, 2019, 2024)
 }
 
 
@@ -68,17 +69,18 @@ def _num(valor: str):
 
 def filas_censo(anio: int, cfg: dict):
     zip_path = descargar(cfg["url"], RAW / Path(cfg["url"]).name)
-    c = cfg["cols"]
     with zipfile.ZipFile(zip_path) as z, z.open(cfg["csv"]) as f:
         lector = csv.DictReader(io.TextIOWrapper(f, encoding="utf-8-sig"))
         for r in lector:
-            ent, mun = r[c["ent"]].strip(), r[c["mun"]].strip()
-            codigo, estrato = r[c["codigo"]].strip(), r[c["estrato"]].strip()
-            if ent != ENTIDAD or not mun or estrato or codigo not in SECTORES:
+            ent, mun = r["E03"].strip(), r["E04"].strip()
+            codigo, estrato = r["CODIGO"].strip(), r["ID_ESTRATO"].strip()
+            if r["SECTOR"].strip() == "" and codigo == "TOTAL DE SECTOR":
+                codigo = TOTAL
+            if ent != ENTIDAD or estrato or codigo not in SECTORES | {TOTAL}:
                 continue
             personal, va = _num(r["H001A"]), _num(r["A131A"])
             yield {
-                "cve_geo": ENTIDAD + mun.zfill(3),
+                "cve_geo": ENTIDAD + (mun.zfill(3) if mun else "000"),
                 "anio_censal": anio,
                 "sector_scian": codigo,
                 "unidades": int(float(r["UE"])),
@@ -88,19 +90,27 @@ def filas_censo(anio: int, cfg: dict):
             }
 
 
-def main():
-    STG.mkdir(parents=True, exist_ok=True)
-    filas = []
-    for anio, cfg in CENSOS.items():
-        filas.extend(filas_censo(anio, cfg))
-    filas.sort(key=lambda r: (r["anio_censal"], r["cve_geo"], r["sector_scian"]))
-
+def escribir(ruta: Path, filas: list[dict]):
     campos = ["cve_geo", "anio_censal", "sector_scian", "unidades", "personal_ocupado", "va_censal_bruto", "confidencial"]
-    with open(STG / "censo_economico.csv", "w", newline="", encoding="utf-8") as f:
+    with open(ruta, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=campos)
         w.writeheader()
         for r in filas:
             w.writerow({k: ("" if r[k] is None else str(r[k]).lower() if k == "confidencial" else r[k]) for k in campos})
+
+
+def main():
+    STG.mkdir(parents=True, exist_ok=True)
+    todas = []
+    for anio, cfg in CENSOS.items():
+        todas.extend(filas_censo(anio, cfg))
+    todas.sort(key=lambda r: (r["anio_censal"], r["cve_geo"], r["sector_scian"]))
+
+    # stg.censo_economico: municipio × censo × sector turístico
+    filas = [r for r in todas if not r["cve_geo"].endswith("000") and r["sector_scian"] != TOTAL]
+    escribir(STG / "censo_economico.csv", filas)
+    # Auxiliar para el modelo: totales estatales por sector y total de actividades por municipio
+    escribir(STG / "censo_economico_totales.csv", [r for r in todas if r not in filas])
 
     hoy = date.today().isoformat()
     with open(STG / "dim_fuente_censos.csv", "w", newline="", encoding="utf-8") as f:

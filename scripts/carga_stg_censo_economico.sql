@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS stg.censo_economico (
     PRIMARY KEY (cve_geo, anio_censal, sector_scian)
 );
 
-DELETE FROM stg.censo_economico WHERE anio_censal IN (2019, 2024);
+DELETE FROM stg.censo_economico WHERE anio_censal IN (2014, 2019, 2024);
 
 \copy stg.censo_economico (cve_geo, anio_censal, sector_scian, unidades, personal_ocupado, va_censal_bruto, confidencial) FROM 'data/stg/censo_economico.csv' WITH (FORMAT csv, HEADER true, NULL '')
 

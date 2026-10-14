@@ -1,0 +1,271 @@
+cve_geo,nom_mun,eje,modelo,periodo_base,horizonte_anios,personal_base,base_confidencial,unidades_base,delta_log_pred,crecimiento_pred_pct,intervalo_inf_pct,intervalo_sup_pct,personal_pred,incremento_personal_pred,ranking_potencial
+21146,Santa Catarina Tlaltempan,alimentos,crecimiento_gbm_v1,CE 2024,5,14,False,6,1.1333,210.59,121.69,345.64,46,32,1
+21077,Hueytlalpan,alimentos,crecimiento_gbm_v1,CE 2024,5,13,False,8,0.9325,154.08,81.35,264.56,35,22,2
+21096,Mazapiltepec de Juárez,alimentos,crecimiento_gbm_v1,CE 2024,5,9,False,6,0.8502,134.01,67.02,235.76,22,13,3
+21056,Chila de la Sal,alimentos,crecimiento_gbm_v1,CE 2024,5,13,False,6,0.8257,128.34,62.98,227.63,31,18,4
+21033,Cohuecan,alimentos,crecimiento_gbm_v1,CE 2024,5,11,False,5,0.791,120.55,57.42,216.45,25,14,5
+21028,Camocuautla,alimentos,crecimiento_gbm_v1,CE 2024,5,20,False,10,0.7178,104.99,46.31,194.12,42,22,6
+21092,Juan N. Méndez,alimentos,crecimiento_gbm_v1,CE 2024,5,21,False,10,0.6586,93.21,37.9,177.21,42,21,7
+21160,Teotlalco,alimentos,crecimiento_gbm_v1,CE 2024,5,24,False,12,0.6523,92.0,37.04,175.48,47,23,8
+21202,Xochitlán de Vicente Suárez,alimentos,crecimiento_gbm_v1,CE 2024,5,36,False,25,0.6423,90.08,35.67,172.73,69,33,9
+21088,Jonotla,alimentos,crecimiento_gbm_v1,CE 2024,5,20,False,11,0.6156,85.07,32.09,165.54,38,18,10
+21009,Ahuehuetitla,alimentos,crecimiento_gbm_v1,CE 2024,5,18,False,12,0.6048,83.1,30.69,162.71,34,16,11
+21196,Xayacatlán de Bravo,alimentos,crecimiento_gbm_v1,CE 2024,5,17,False,9,0.5841,79.33,28.0,157.3,31,14,12
+21021,Atzala,alimentos,crecimiento_gbm_v1,CE 2024,5,15,False,9,0.5824,79.04,27.79,156.88,28,13,13
+21075,Hueyapan,alimentos,crecimiento_gbm_v1,CE 2024,5,146,False,74,0.5594,74.97,24.88,151.04,256,110,14
+21066,Guadalupe,alimentos,crecimiento_gbm_v1,CE 2024,5,54,False,32,0.5347,70.69,21.83,144.9,93,39,15
+21114,Puebla,alimentos,crecimiento_gbm_v1,CE 2024,5,42244,False,12692,0.5061,65.89,18.4,138.01,70078,27834,16
+21133,San Martín Totoltepec,alimentos,crecimiento_gbm_v1,CE 2024,5,18,False,10,0.5032,65.4,18.05,137.32,30,12,17
+21153,Tecali de Herrera,alimentos,crecimiento_gbm_v1,CE 2024,5,326,False,135,0.4877,62.85,16.24,133.66,532,206,18
+21149,Santiago Miahuatlán,alimentos,crecimiento_gbm_v1,CE 2024,5,301,False,124,0.4866,62.68,16.11,133.41,490,189,19
+21054,Chignautla,alimentos,crecimiento_gbm_v1,CE 2024,5,259,False,140,0.477,61.12,15.0,131.17,418,159,20
+21026,Calpan,alimentos,crecimiento_gbm_v1,CE 2024,5,139,False,72,0.4761,60.97,14.89,130.96,224,85,21
+21199,Xiutetelco,alimentos,crecimiento_gbm_v1,CE 2024,5,325,False,168,0.4758,60.93,14.86,130.9,524,199,22
+21170,Tepeyahualco,alimentos,crecimiento_gbm_v1,CE 2024,5,174,False,72,0.4755,60.88,14.83,130.83,281,107,23
+21104,Nopalucan,alimentos,crecimiento_gbm_v1,CE 2024,5,263,False,108,0.469,59.85,14.09,129.35,421,158,24
+21144,San Salvador Huixcolotla,alimentos,crecimiento_gbm_v1,CE 2024,5,631,False,209,0.4689,59.83,14.08,129.32,1009,378,25
+21127,San Jerónimo Xayacatlán,alimentos,crecimiento_gbm_v1,CE 2024,5,62,False,27,0.4658,59.33,13.72,128.6,99,37,26
+21134,San Matías Tlalancaleca,alimentos,crecimiento_gbm_v1,CE 2024,5,294,False,149,0.4611,58.58,13.19,127.53,467,173,27
+21180,Tlahuapan,alimentos,crecimiento_gbm_v1,CE 2024,5,435,False,190,0.4602,58.44,13.08,127.32,690,255,28
+21060,Domingo Arenas,alimentos,crecimiento_gbm_v1,CE 2024,5,50,False,29,0.4544,57.52,12.43,126.01,79,29,29
+21016,Aquixtla,alimentos,crecimiento_gbm_v1,CE 2024,5,24,False,12,0.4531,57.32,12.29,125.72,38,14,30
+21011,Albino Zertuche,alimentos,crecimiento_gbm_v1,CE 2024,5,30,False,14,0.4508,56.96,12.03,125.21,48,18,31
+21037,Coyotepec,alimentos,crecimiento_gbm_v1,CE 2024,5,11,False,9,0.4497,56.79,11.91,124.96,18,7,32
+21182,Tlanepantla,alimentos,crecimiento_gbm_v1,CE 2024,5,32,False,17,0.4487,56.63,11.8,124.74,51,19,33
+21044,Cuyoaco,alimentos,crecimiento_gbm_v1,CE 2024,5,129,False,68,0.4464,56.26,11.53,124.21,202,73,34
+21001,Acajete,alimentos,crecimiento_gbm_v1,CE 2024,5,613,False,300,0.4461,56.23,11.51,124.15,958,345,35
+21110,Palmar de Bravo,alimentos,crecimiento_gbm_v1,CE 2024,5,464,False,224,0.4419,55.57,11.04,123.21,722,258,36
+21179,Tlachichuca,alimentos,crecimiento_gbm_v1,CE 2024,5,225,False,94,0.4386,55.05,10.67,122.46,349,124,37
+21013,Altepexi,alimentos,crecimiento_gbm_v1,CE 2024,5,584,False,250,0.4383,55.01,10.64,122.41,906,322,38
+21030,Coatepec,alimentos,crecimiento_gbm_v1,CE 2024,5,9,False,6,0.4378,54.93,10.58,122.3,14,5,39
+21126,San Jerónimo Tecuanipan,alimentos,crecimiento_gbm_v1,CE 2024,5,32,False,21,0.4351,54.51,10.28,121.69,50,18,40
+21115,Quecholac,alimentos,crecimiento_gbm_v1,CE 2024,5,689,False,296,0.4347,54.45,10.24,121.6,1065,376,41
+21204,Yaonáhuac,alimentos,crecimiento_gbm_v1,CE 2024,5,55,False,32,0.4271,53.28,9.41,119.93,85,30,42
+21006,Ahuacatlán,alimentos,crecimiento_gbm_v1,CE 2024,5,71,False,39,0.4266,53.2,9.35,119.81,109,38,43
+21015,Amozoc,alimentos,crecimiento_gbm_v1,CE 2024,5,1817,False,797,0.4266,53.21,9.35,119.83,2784,967,44
+21045,Chalchicomula de Sesma,alimentos,crecimiento_gbm_v1,CE 2024,5,680,False,267,0.4225,52.57,8.9,118.91,1038,358,45
+21074,Huejotzingo,alimentos,crecimiento_gbm_v1,CE 2024,5,1358,False,572,0.4223,52.55,8.88,118.87,2072,714,46
+21080,Atlequizayan,alimentos,crecimiento_gbm_v1,CE 2024,5,15,False,8,0.4219,52.49,8.84,118.8,23,8,47
+21041,Cuautlancingo,alimentos,crecimiento_gbm_v1,CE 2024,5,2011,False,796,0.4171,51.76,8.32,117.74,3052,1041,48
+21087,Jolalpan,alimentos,crecimiento_gbm_v1,CE 2024,5,114,False,49,0.4128,51.11,7.86,116.81,173,59,49
+21078,Huitzilan de Serdán,alimentos,crecimiento_gbm_v1,CE 2024,5,63,False,35,0.41,50.69,7.55,116.21,95,32,50
+21109,Pahuatlán,alimentos,crecimiento_gbm_v1,CE 2024,5,159,False,84,0.4064,50.13,7.16,115.41,239,80,51
+21174,Teziutlán,alimentos,crecimiento_gbm_v1,CE 2024,5,2005,False,804,0.4028,49.6,6.78,114.65,3000,995,52
+21117,Rafael Lara Grajales,alimentos,crecimiento_gbm_v1,CE 2024,5,419,False,170,0.4012,49.37,6.61,114.31,626,207,53
+21142,San Salvador el Seco,alimentos,crecimiento_gbm_v1,CE 2024,5,575,False,236,0.3997,49.14,6.45,113.98,858,283,54
+21136,San Miguel Xoxtla,alimentos,crecimiento_gbm_v1,CE 2024,5,250,False,117,0.3984,48.94,6.31,113.7,373,123,55
+21156,Tehuacán,alimentos,crecimiento_gbm_v1,CE 2024,5,7610,False,2637,0.3951,48.45,5.96,113.0,11298,3688,56
+21022,Atzitzihuacán,alimentos,crecimiento_gbm_v1,CE 2024,5,134,False,64,0.3915,47.92,5.57,112.23,199,65,57
+21189,Tochtepec,alimentos,crecimiento_gbm_v1,CE 2024,5,298,False,147,0.388,47.41,5.21,111.5,440,142,58
+21177,Tlacotepec de Benito Juárez,alimentos,crecimiento_gbm_v1,CE 2024,5,641,False,248,0.3863,47.15,5.03,111.13,944,303,59
+21217,Zoquitlán,alimentos,crecimiento_gbm_v1,CE 2024,5,93,False,45,0.3833,46.72,4.72,110.51,137,44,60
+21195,Vicente Guerrero,alimentos,crecimiento_gbm_v1,CE 2024,5,128,False,60,0.3801,46.24,4.38,109.82,188,60,61
+21131,San Juan Atzompa,alimentos,crecimiento_gbm_v1,CE 2024,5,32,False,16,0.378,45.94,4.16,109.39,47,15,62
+21065,General Felipe Ángeles,alimentos,crecimiento_gbm_v1,CE 2024,5,238,False,104,0.3618,43.59,2.49,106.02,342,104,63
+21150,Huehuetlán el Grande,alimentos,crecimiento_gbm_v1,CE 2024,5,36,False,17,0.3616,43.56,2.47,105.98,52,16,64
+21103,Nicolás Bravo,alimentos,crecimiento_gbm_v1,CE 2024,5,51,False,27,0.3583,43.09,2.13,105.31,73,22,65
+21082,Ixcaquixtla,alimentos,crecimiento_gbm_v1,CE 2024,5,167,False,84,0.3573,42.95,2.03,105.1,239,72,66
+21067,Guadalupe Victoria,alimentos,crecimiento_gbm_v1,CE 2024,5,293,False,134,0.3571,42.92,2.01,105.06,419,126,67
+21017,Atempan,alimentos,crecimiento_gbm_v1,CE 2024,5,295,False,146,0.3559,42.74,1.88,104.8,422,127,68
+21169,Tepexi de Rodríguez,alimentos,crecimiento_gbm_v1,CE 2024,5,152,False,86,0.3559,42.74,1.88,104.8,217,65,69
+21031,Coatzingo,alimentos,crecimiento_gbm_v1,CE 2024,5,79,False,37,0.347,41.47,0.98,102.99,112,33,70
+21132,San Martín Texmelucan,alimentos,crecimiento_gbm_v1,CE 2024,5,3826,False,1492,0.3445,41.13,0.73,102.49,5400,1574,71
+21010,Ajalpan,alimentos,crecimiento_gbm_v1,CE 2024,5,880,False,404,0.344,41.05,0.68,102.38,1242,362,72
+21122,San Felipe Teotlalcingo,alimentos,crecimiento_gbm_v1,CE 2024,5,164,False,79,0.3426,40.86,0.54,102.1,231,67,73
+21102,Nealtican,alimentos,crecimiento_gbm_v1,CE 2024,5,375,False,165,0.3422,40.81,0.5,102.03,528,153,74
+21119,San Andrés Cholula,alimentos,crecimiento_gbm_v1,CE 2024,5,6710,False,1524,0.341,40.64,0.38,101.79,9437,2727,75
+21181,Tlaltenango,alimentos,crecimiento_gbm_v1,CE 2024,5,53,False,38,0.3378,40.19,0.06,101.14,75,22,76
+21173,Teteles de Ávila Castillo,alimentos,crecimiento_gbm_v1,CE 2024,5,83,False,42,0.3377,40.18,0.05,101.12,117,34,77
+21108,Oriental,alimentos,crecimiento_gbm_v1,CE 2024,5,237,False,102,0.3364,39.99,-0.08,100.86,332,95,78
+21186,Tlatlauquitepec,alimentos,crecimiento_gbm_v1,CE 2024,5,583,False,232,0.3324,39.43,-0.48,100.05,813,230,79
+21091,Juan Galindo,alimentos,crecimiento_gbm_v1,CE 2024,5,259,False,114,0.3299,39.09,-0.73,99.56,361,102,80
+21072,Huehuetla,alimentos,crecimiento_gbm_v1,CE 2024,5,178,False,72,0.3288,38.92,-0.84,99.33,248,70,81
+21205,Yehualtepec,alimentos,crecimiento_gbm_v1,CE 2024,5,296,False,125,0.3286,38.9,-0.86,99.3,412,116,82
+21157,Tehuitzingo,alimentos,crecimiento_gbm_v1,CE 2024,5,296,False,133,0.3229,38.11,-1.43,98.16,409,113,83
+21004,Acatzingo,alimentos,crecimiento_gbm_v1,CE 2024,5,871,False,327,0.3224,38.05,-1.47,98.07,1203,332,84
+21040,Cuautinchán,alimentos,crecimiento_gbm_v1,CE 2024,5,72,False,39,0.3224,38.05,-1.47,98.07,100,28,85
+21071,Huauchinango,alimentos,crecimiento_gbm_v1,CE 2024,5,2039,False,834,0.3155,37.1,-2.15,96.71,2796,757,86
+21058,Chilchotla,alimentos,crecimiento_gbm_v1,CE 2024,5,229,False,111,0.3136,36.84,-2.33,96.34,314,85,87
+21197,Xicotepec,alimentos,crecimiento_gbm_v1,CE 2024,5,1538,False,679,0.3129,36.74,-2.4,96.19,2103,565,88
+21100,Naupan,alimentos,crecimiento_gbm_v1,CE 2024,5,36,False,14,0.3116,36.56,-2.53,95.94,50,14,89
+21211,Zaragoza,alimentos,crecimiento_gbm_v1,CE 2024,5,339,False,169,0.3113,36.53,-2.55,95.89,463,124,90
+21214,Zinacatepec,alimentos,crecimiento_gbm_v1,CE 2024,5,425,False,215,0.3095,36.28,-2.73,95.53,580,155,91
+21003,Acatlán,alimentos,crecimiento_gbm_v1,CE 2024,5,884,False,367,0.304,35.52,-3.27,94.44,1198,314,92
+21143,San Salvador el Verde,alimentos,crecimiento_gbm_v1,CE 2024,5,638,False,267,0.304,35.53,-3.27,94.46,865,227,93
+21025,Ayotoxco de Guerrero,alimentos,crecimiento_gbm_v1,CE 2024,5,137,False,71,0.3039,35.51,-3.28,94.43,186,49,94
+21124,San Gabriel Chilac,alimentos,crecimiento_gbm_v1,CE 2024,5,467,False,225,0.3026,35.33,-3.41,94.17,632,165,95
+21172,Tetela de Ocampo,alimentos,crecimiento_gbm_v1,CE 2024,5,316,False,139,0.3026,35.33,-3.41,94.17,428,112,96
+21035,Coxcatlán,alimentos,crecimiento_gbm_v1,CE 2024,5,274,False,146,0.2965,34.52,-3.99,93.01,369,95,97
+21111,Pantepec,alimentos,crecimiento_gbm_v1,CE 2024,5,120,False,54,0.2947,34.27,-4.17,92.65,161,41,98
+21141,San Pedro Yeloixtlahuaca,alimentos,crecimiento_gbm_v1,CE 2024,5,67,False,27,0.2889,33.5,-4.72,91.54,90,23,99
+21212,Zautla,alimentos,crecimiento_gbm_v1,CE 2024,5,153,False,76,0.2859,33.09,-5.0,90.96,204,51,100
+21191,Tulcingo,alimentos,crecimiento_gbm_v1,CE 2024,5,338,False,136,0.2832,32.74,-5.26,90.45,449,111,101
+21051,Chietla,alimentos,crecimiento_gbm_v1,CE 2024,5,586,False,302,0.2817,32.54,-5.4,90.17,777,191,102
+21194,Venustiano Carranza,alimentos,crecimiento_gbm_v1,CE 2024,5,725,False,314,0.2774,31.97,-5.8,89.35,957,232,103
+21076,Hueytamalco,alimentos,crecimiento_gbm_v1,CE 2024,5,197,False,92,0.2726,31.34,-6.25,88.45,259,62,104
+21207,Zacapoaxtla,alimentos,crecimiento_gbm_v1,CE 2024,5,724,False,335,0.2711,31.14,-6.4,88.16,950,226,105
+21047,Chiautla,alimentos,crecimiento_gbm_v1,CE 2024,5,569,False,216,0.2655,30.4,-6.92,87.1,742,173,106
+21053,Chignahuapan,alimentos,crecimiento_gbm_v1,CE 2024,5,923,False,345,0.2618,29.93,-7.26,86.42,1200,277,107
+21208,Zacatlán,alimentos,crecimiento_gbm_v1,CE 2024,5,1461,False,529,0.2587,29.53,-7.55,85.84,1893,432,108
+21034,Coronango,alimentos,crecimiento_gbm_v1,CE 2024,5,730,False,266,0.2582,29.45,-7.6,85.74,945,215,109
+21007,Ahuatlán,alimentos,crecimiento_gbm_v1,CE 2024,5,23,False,10,0.2539,28.91,-7.99,84.96,30,7,110
+21064,Francisco Z. Mena,alimentos,crecimiento_gbm_v1,CE 2024,5,168,False,76,0.2459,27.87,-8.73,83.47,215,47,111
+21125,San Gregorio Atzompa,alimentos,crecimiento_gbm_v1,CE 2024,5,293,False,89,0.2359,26.6,-9.64,81.65,371,78,112
+21038,Cuapiaxtla de Madero,alimentos,crecimiento_gbm_v1,CE 2024,5,272,False,102,0.2284,25.66,-10.31,80.3,342,70,113
+21084,Ixtepec,alimentos,crecimiento_gbm_v1,CE 2024,5,71,False,36,0.2278,25.58,-10.37,80.18,89,18,114
+21043,Cuetzalan del Progreso,alimentos,crecimiento_gbm_v1,CE 2024,5,505,False,185,0.2277,25.56,-10.38,80.16,634,129,115
+21164,Tepeaca,alimentos,crecimiento_gbm_v1,CE 2024,5,2037,False,765,0.2247,25.19,-10.64,79.62,2550,513,116
+21094,Libres,alimentos,crecimiento_gbm_v1,CE 2024,5,717,False,264,0.2242,25.13,-10.69,79.54,897,180,117
+21140,San Pedro Cholula,alimentos,crecimiento_gbm_v1,CE 2024,5,4099,False,1244,0.2111,23.5,-11.85,77.2,5062,963,118
+21154,Tecamachalco,alimentos,crecimiento_gbm_v1,CE 2024,5,1584,False,526,0.2045,22.69,-12.43,76.04,1944,360,119
+21209,Zapotitlán,alimentos,crecimiento_gbm_v1,CE 2024,5,173,False,64,0.2036,22.58,-12.51,75.87,212,39,120
+21085,Izúcar de Matamoros,alimentos,crecimiento_gbm_v1,CE 2024,5,2358,False,890,0.1956,21.61,-13.2,74.48,2868,510,121
+21201,Xochiltepec,alimentos,crecimiento_gbm_v1,CE 2024,5,33,False,15,0.1939,21.4,-13.35,74.18,40,7,122
+21019,Atlixco,alimentos,crecimiento_gbm_v1,CE 2024,5,3733,False,1208,0.1912,21.07,-13.59,73.71,4520,787,123
+21079,Huitziltepec,alimentos,crecimiento_gbm_v1,CE 2024,5,50,False,22,0.1883,20.72,-13.83,73.22,61,11,124
+21171,Tepeyahualco de Cuauhtémoc,alimentos,crecimiento_gbm_v1,CE 2024,5,55,False,30,0.1538,16.63,-16.76,67.34,64,9,125
+21206,Zacapala,alimentos,crecimiento_gbm_v1,CE 2024,5,36,False,21,0.1476,15.9,-17.27,66.3,42,6,126
+21155,Tecomatlán,alimentos,crecimiento_gbm_v1,CE 2024,5,103,False,36,0.1456,15.68,-17.43,65.97,119,16,127
+21055,Chila,alimentos,crecimiento_gbm_v1,CE 2024,5,34,False,23,0.1205,12.81,-19.48,61.85,38,4,128
+21210,Zapotitlán de Méndez,alimentos,crecimiento_gbm_v1,CE 2024,5,91,False,50,0.0253,2.57,-26.79,47.16,93,2,129
+21043,Cuetzalan del Progreso,comercio_turistico,crecimiento_gbm_v1,CE 2024,5,49,False,9,0.566,76.12,11.88,177.37,87,38,1
+21156,Tehuacán,comercio_turistico,crecimiento_gbm_v1,CE 2024,5,50,False,18,0.4808,61.74,2.75,154.73,81,31,2
+21019,Atlixco,comercio_turistico,crecimiento_gbm_v1,CE 2024,5,20,False,10,0.4762,60.99,2.27,153.54,33,13,3
+21114,Puebla,comercio_turistico,crecimiento_gbm_v1,CE 2024,5,378,False,110,0.4712,60.18,1.76,152.27,606,228,4
+21085,Izúcar de Matamoros,comercio_turistico,crecimiento_gbm_v1,CE 2024,5,4,False,3,0.3968,48.7,-5.54,134.19,6,2,5
+21140,San Pedro Cholula,comercio_turistico,crecimiento_gbm_v1,CE 2024,5,46,False,8,0.3769,45.78,-7.39,129.59,68,22,6
+21013,Altepexi,hospedaje,crecimiento_gbm_v1,CE 2024,5,9,False,3,0.7915,120.68,31.51,267.77,21,12,1
+21180,Tlahuapan,hospedaje,crecimiento_gbm_v1,CE 2024,5,18,False,3,0.7847,119.17,30.61,265.25,41,23,2
+21010,Ajalpan,hospedaje,crecimiento_gbm_v1,CE 2024,5,10,False,4,0.7327,108.08,24.0,246.77,22,12,3
+21124,San Gabriel Chilac,hospedaje,crecimiento_gbm_v1,CE 2024,5,7,False,3,0.6948,100.34,19.39,233.87,15,8,4
+21208,Zacatlán,hospedaje,crecimiento_gbm_v1,CE 2024,5,468,False,109,0.6927,99.9,19.13,233.15,937,469,5
+21075,Hueyapan,hospedaje,crecimiento_gbm_v1,CE 2024,5,8,False,4,0.6739,96.19,16.92,226.95,17,9,6
+21034,Coronango,hospedaje,crecimiento_gbm_v1,CE 2024,5,61,False,3,0.6218,86.24,10.99,210.37,114,53,7
+21199,Xiutetelco,hospedaje,crecimiento_gbm_v1,CE 2024,5,8,False,3,0.5524,73.74,3.54,189.54,15,7,8
+21072,Huehuetla,hospedaje,crecimiento_gbm_v1,CE 2024,5,7,False,4,0.5396,71.53,2.22,185.86,13,6,9
+21025,Ayotoxco de Guerrero,hospedaje,crecimiento_gbm_v1,CE 2024,5,5,False,3,0.5201,68.22,0.25,180.34,9,4,10
+21144,San Salvador Huixcolotla,hospedaje,crecimiento_gbm_v1,CE 2024,5,13,False,5,0.5156,67.47,-0.2,179.09,22,9,11
+21194,Venustiano Carranza,hospedaje,crecimiento_gbm_v1,CE 2024,5,32,False,7,0.4977,64.5,-1.97,174.14,53,21,12
+21001,Acajete,hospedaje,crecimiento_gbm_v1,CE 2024,5,19,False,6,0.4933,63.76,-2.41,172.92,32,13,13
+21051,Chietla,hospedaje,crecimiento_gbm_v1,CE 2024,5,12,False,5,0.4659,59.35,-5.04,165.56,20,8,14
+21053,Chignahuapan,hospedaje,crecimiento_gbm_v1,CE 2024,5,341,False,83,0.4556,57.71,-6.02,162.82,538,197,15
+21125,San Gregorio Atzompa,hospedaje,crecimiento_gbm_v1,CE 2024,5,10,False,3,0.4524,57.2,-6.32,161.99,16,6,16
+21195,Vicente Guerrero,hospedaje,crecimiento_gbm_v1,CE 2024,5,5,False,3,0.4308,53.85,-8.31,156.4,8,3,17
+21164,Tepeaca,hospedaje,crecimiento_gbm_v1,CE 2024,5,120,False,30,0.4288,53.54,-8.5,155.88,185,65,18
+21143,San Salvador el Verde,hospedaje,crecimiento_gbm_v1,CE 2024,5,51,False,8,0.4223,52.55,-9.09,154.23,78,27,19
+21214,Zinacatepec,hospedaje,crecimiento_gbm_v1,CE 2024,5,13,False,4,0.4148,51.41,-9.77,152.33,20,7,20
+21109,Pahuatlán,hospedaje,crecimiento_gbm_v1,CE 2024,5,38,False,11,0.3925,48.06,-11.76,146.75,57,19,21
+21084,Ixtepec,hospedaje,crecimiento_gbm_v1,CE 2024,5,6,False,3,0.3914,47.91,-11.85,146.5,9,3,22
+21191,Tulcingo,hospedaje,crecimiento_gbm_v1,CE 2024,5,21,False,11,0.3898,47.68,-11.99,146.11,31,10,23
+21173,Teteles de Ávila Castillo,hospedaje,crecimiento_gbm_v1,CE 2024,5,13,False,5,0.3809,46.36,-12.78,143.91,19,6,24
+21186,Tlatlauquitepec,hospedaje,crecimiento_gbm_v1,CE 2024,5,105,False,24,0.3685,44.56,-13.85,140.92,152,47,25
+21115,Quecholac,hospedaje,crecimiento_gbm_v1,CE 2024,5,29,False,5,0.3668,44.31,-14.0,140.5,42,13,26
+21136,San Miguel Xoxtla,hospedaje,crecimiento_gbm_v1,CE 2024,5,12,False,3,0.3638,43.88,-14.26,139.78,18,6,27
+21189,Tochtepec,hospedaje,crecimiento_gbm_v1,CE 2024,5,6,False,4,0.3609,43.47,-14.5,139.09,9,3,28
+21041,Cuautlancingo,hospedaje,crecimiento_gbm_v1,CE 2024,5,72,False,7,0.3506,41.99,-15.38,136.64,103,31,29
+21017,Atempan,hospedaje,crecimiento_gbm_v1,CE 2024,5,11,False,4,0.3473,41.53,-15.66,135.86,16,5,30
+21035,Coxcatlán,hospedaje,crecimiento_gbm_v1,CE 2024,5,9,False,3,0.3408,40.61,-16.2,134.34,13,4,31
+21157,Tehuitzingo,hospedaje,crecimiento_gbm_v1,CE 2024,5,9,False,5,0.3381,40.23,-16.43,133.69,13,4,32
+21110,Palmar de Bravo,hospedaje,crecimiento_gbm_v1,CE 2024,5,14,False,6,0.317,37.3,-18.18,128.81,20,6,33
+21171,Tepeyahualco de Cuauhtémoc,hospedaje,crecimiento_gbm_v1,CE 2024,5,4,False,3,0.3069,35.92,-19.0,126.52,6,2,34
+21117,Rafael Lara Grajales,hospedaje,crecimiento_gbm_v1,CE 2024,5,21,False,7,0.3019,35.24,-19.41,125.38,29,8,35
+21134,San Matías Tlalancaleca,hospedaje,crecimiento_gbm_v1,CE 2024,5,13,False,5,0.2811,32.46,-21.06,120.75,18,5,36
+21202,Xochitlán de Vicente Suárez,hospedaje,crecimiento_gbm_v1,CE 2024,5,8,False,4,0.277,31.92,-21.39,119.84,11,3,37
+21074,Huejotzingo,hospedaje,crecimiento_gbm_v1,CE 2024,5,60,False,13,0.2607,29.79,-22.66,116.29,78,18,38
+21212,Zautla,hospedaje,crecimiento_gbm_v1,CE 2024,5,6,False,4,0.2497,28.36,-23.51,113.91,8,2,39
+21209,Zapotitlán,hospedaje,crecimiento_gbm_v1,CE 2024,5,29,False,7,0.2459,27.87,-23.8,113.1,37,8,40
+21026,Calpan,hospedaje,crecimiento_gbm_v1,CE 2024,5,13,False,3,0.2453,27.81,-23.83,112.99,17,4,41
+21082,Ixcaquixtla,hospedaje,crecimiento_gbm_v1,CE 2024,5,31,False,6,0.2354,26.54,-24.59,110.88,39,8,42
+21015,Amozoc,hospedaje,crecimiento_gbm_v1,CE 2024,5,83,False,13,0.2323,26.15,-24.82,110.23,105,22,43
+21004,Acatzingo,hospedaje,crecimiento_gbm_v1,CE 2024,5,43,False,12,0.2318,26.09,-24.86,110.13,54,11,44
+21177,Tlacotepec de Benito Juárez,hospedaje,crecimiento_gbm_v1,CE 2024,5,32,False,8,0.2305,25.92,-24.96,109.85,41,9,45
+21006,Ahuacatlán,hospedaje,crecimiento_gbm_v1,CE 2024,5,11,False,3,0.2221,24.86,-25.59,108.09,14,3,46
+21142,San Salvador el Seco,hospedaje,crecimiento_gbm_v1,CE 2024,5,43,False,13,0.2156,24.06,-26.07,106.75,54,11,47
+21154,Tecamachalco,hospedaje,crecimiento_gbm_v1,CE 2024,5,95,False,18,0.1988,21.99,-27.3,103.3,116,21,48
+21045,Chalchicomula de Sesma,hospedaje,crecimiento_gbm_v1,CE 2024,5,117,False,24,0.192,21.17,-27.79,101.94,142,25,49
+21132,San Martín Texmelucan,hospedaje,crecimiento_gbm_v1,CE 2024,5,167,False,36,0.1918,21.14,-27.81,101.88,203,36,50
+21047,Chiautla,hospedaje,crecimiento_gbm_v1,CE 2024,5,18,False,6,0.1876,20.63,-28.11,101.04,22,4,51
+21094,Libres,hospedaje,crecimiento_gbm_v1,CE 2024,5,65,False,16,0.1789,19.59,-28.73,99.3,78,13,52
+21038,Cuapiaxtla de Madero,hospedaje,crecimiento_gbm_v1,CE 2024,5,14,False,4,0.1777,19.45,-28.81,99.07,17,3,53
+21076,Hueytamalco,hospedaje,crecimiento_gbm_v1,CE 2024,5,27,False,5,0.1721,18.77,-29.22,97.94,32,5,54
+21054,Chignautla,hospedaje,crecimiento_gbm_v1,CE 2024,5,17,False,4,0.17,18.53,-29.37,97.53,20,3,55
+21114,Puebla,hospedaje,crecimiento_gbm_v1,CE 2024,5,4760,False,333,0.1664,18.11,-29.61,96.83,5622,862,56
+21043,Cuetzalan del Progreso,hospedaje,crecimiento_gbm_v1,CE 2024,5,311,False,56,0.1635,17.76,-29.82,96.25,366,55,57
+21091,Juan Galindo,hospedaje,crecimiento_gbm_v1,CE 2024,5,19,False,5,0.1492,16.09,-30.82,93.47,22,3,58
+21067,Guadalupe Victoria,hospedaje,crecimiento_gbm_v1,CE 2024,5,15,False,5,0.1419,15.24,-31.32,92.05,17,2,59
+21211,Zaragoza,hospedaje,crecimiento_gbm_v1,CE 2024,5,27,False,7,0.1414,15.19,-31.35,91.97,31,4,60
+21016,Aquixtla,hospedaje,crecimiento_gbm_v1,CE 2024,5,10,False,5,0.1413,15.18,-31.36,91.95,12,2,61
+21085,Izúcar de Matamoros,hospedaje,crecimiento_gbm_v1,CE 2024,5,163,False,33,0.1192,12.66,-32.86,87.75,184,21,62
+21088,Jonotla,hospedaje,crecimiento_gbm_v1,CE 2024,5,41,False,6,0.1152,12.2,-33.13,86.99,46,5,63
+21003,Acatlán,hospedaje,crecimiento_gbm_v1,CE 2024,5,64,False,11,0.1113,11.77,-33.39,86.27,72,8,64
+21207,Zacapoaxtla,hospedaje,crecimiento_gbm_v1,CE 2024,5,64,False,11,0.1037,10.93,-33.89,84.86,71,7,65
+21179,Tlachichuca,hospedaje,crecimiento_gbm_v1,CE 2024,5,13,False,4,0.0949,9.96,-34.47,83.25,14,1,66
+21104,Nopalucan,hospedaje,crecimiento_gbm_v1,CE 2024,5,23,False,4,0.09,9.42,-34.79,82.35,25,2,67
+21156,Tehuacán,hospedaje,crecimiento_gbm_v1,CE 2024,5,744,False,94,0.0737,7.65,-35.85,79.39,801,57,68
+21210,Zapotitlán de Méndez,hospedaje,crecimiento_gbm_v1,CE 2024,5,10,False,6,0.0707,7.32,-36.04,78.86,11,1,69
+21172,Tetela de Ocampo,hospedaje,crecimiento_gbm_v1,CE 2024,5,26,False,7,0.0698,7.23,-36.1,78.7,28,2,70
+21217,Zoquitlán,hospedaje,crecimiento_gbm_v1,CE 2024,5,21,False,4,0.0686,7.1,-36.17,78.49,23,2,71
+21071,Huauchinango,hospedaje,crecimiento_gbm_v1,CE 2024,5,227,False,43,0.0679,7.03,-36.22,78.37,243,16,72
+21019,Atlixco,hospedaje,crecimiento_gbm_v1,CE 2024,5,677,False,77,0.0608,6.27,-36.67,77.1,719,42,73
+21155,Tecomatlán,hospedaje,crecimiento_gbm_v1,CE 2024,5,26,False,4,0.0516,5.3,-37.25,75.48,27,1,74
+21169,Tepexi de Rodríguez,hospedaje,crecimiento_gbm_v1,CE 2024,5,38,False,6,0.0463,4.73,-37.58,74.54,40,2,75
+21111,Pantepec,hospedaje,crecimiento_gbm_v1,CE 2024,5,23,False,3,0.0356,3.63,-38.25,72.7,24,1,76
+21058,Chilchotla,hospedaje,crecimiento_gbm_v1,CE 2024,5,21,False,7,0.0268,2.72,-38.79,71.19,22,1,77
+21108,Oriental,hospedaje,crecimiento_gbm_v1,CE 2024,5,43,False,7,0.0164,1.66,-39.42,69.41,44,1,78
+21153,Tecali de Herrera,hospedaje,crecimiento_gbm_v1,CE 2024,5,39,False,4,0.0159,1.6,-39.45,69.32,40,1,79
+21174,Teziutlán,hospedaje,crecimiento_gbm_v1,CE 2024,5,228,False,29,0.0158,1.59,-39.46,69.3,232,4,80
+21064,Francisco Z. Mena,hospedaje,crecimiento_gbm_v1,CE 2024,5,15,False,5,0.0043,0.44,-40.15,67.38,15,0,81
+21170,Tepeyahualco,hospedaje,crecimiento_gbm_v1,CE 2024,5,36,False,3,0.0034,0.34,-40.2,67.22,36,0,82
+21197,Xicotepec,hospedaje,crecimiento_gbm_v1,CE 2024,5,202,False,33,0.0018,0.18,-40.3,66.95,202,0,83
+21140,San Pedro Cholula,hospedaje,crecimiento_gbm_v1,CE 2024,5,430,False,44,-0.0168,-1.67,-41.4,63.87,423,-7,84
+21119,San Andrés Cholula,hospedaje,crecimiento_gbm_v1,CE 2024,5,726,False,26,-0.0295,-2.91,-42.14,61.8,705,-21,85
+21150,Huehuetlán el Grande,hospedaje,crecimiento_gbm_v1,CE 2024,5,11,False,6,-0.2134,-19.21,-51.86,34.63,9,-2,86
+21143,San Salvador el Verde,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,23,False,13,0.3831,46.68,-11.18,149.51,34,11,1
+21038,Cuapiaxtla de Madero,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,8,False,6,0.3605,43.41,-13.16,143.93,12,4,2
+21111,Pantepec,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,4,False,3,0.2798,32.29,-19.89,125.02,6,2,3
+21197,Xicotepec,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,107,False,39,0.275,31.66,-20.28,123.94,141,34,4
+21164,Tepeaca,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,150,False,46,0.2552,29.07,-21.85,119.54,194,44,5
+21154,Tecamachalco,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,133,False,41,0.2509,28.51,-22.18,118.6,171,38,6
+21144,San Salvador Huixcolotla,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,30,False,20,0.246,27.89,-22.55,117.55,39,9,7
+21109,Pahuatlán,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,13,False,6,0.2446,27.72,-22.66,117.24,17,4,8
+21051,Chietla,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,24,False,14,0.2422,27.4,-22.85,116.71,31,7,9
+21074,Huejotzingo,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,138,False,44,0.2327,26.19,-23.58,114.66,174,36,10
+21015,Amozoc,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,212,False,70,0.2264,25.4,-24.06,113.31,266,54,11
+21097,Mixtla,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,64,False,6,0.219,24.48,-24.62,111.74,80,16,12
+21174,Teziutlán,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,144,False,70,0.2145,23.92,-24.96,110.79,179,35,13
+21035,Coxcatlán,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,36,False,8,0.2047,22.71,-25.69,108.73,44,8,14
+21136,San Miguel Xoxtla,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,19,False,8,0.2035,22.56,-25.78,108.48,24,5,15
+21045,Chalchicomula de Sesma,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,51,False,22,0.1982,21.92,-26.17,107.38,62,11,16
+21186,Tlatlauquitepec,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,36,False,18,0.1956,21.6,-26.37,106.84,44,8,17
+21114,Puebla,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,5937,False,1009,0.1877,20.65,-26.94,105.22,7163,1226,18
+21214,Zinacatepec,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,91,False,18,0.1762,19.27,-27.78,102.88,109,18,19
+21205,Yehualtepec,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,16,False,8,0.1747,19.09,-27.88,102.58,19,3,20
+21067,Guadalupe Victoria,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,28,False,14,0.173,18.89,-28.01,102.22,33,5,21
+21129,San José Miahuatlán,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,36,False,7,0.168,18.29,-28.37,101.21,43,7,22
+21071,Huauchinango,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,210,False,63,0.1614,17.51,-28.84,99.89,247,37,23
+21010,Ajalpan,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,116,False,27,0.158,17.12,-29.08,99.22,136,20,24
+21094,Libres,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,75,False,23,0.1556,16.84,-29.25,98.74,88,13,25
+21142,San Salvador el Seco,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,80,False,29,0.1543,16.69,-29.34,98.48,94,14,26
+21117,Rafael Lara Grajales,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,31,False,13,0.1427,15.34,-30.16,96.18,36,5,27
+21075,Hueyapan,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,15,False,7,0.1368,14.66,-30.57,95.03,17,2,28
+21124,San Gabriel Chilac,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,31,False,11,0.1277,13.62,-31.2,93.26,35,4,29
+21102,Nealtican,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,50,False,12,0.119,12.64,-31.79,91.59,56,6,30
+21065,General Felipe Ángeles,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,40,False,16,0.1145,12.13,-32.1,90.74,45,5,31
+21188,Tochimilco,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,29,False,6,0.1106,11.69,-32.37,89.98,33,4,32
+21085,Izúcar de Matamoros,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,208,False,61,0.1057,11.15,-32.7,89.06,231,23,33
+21169,Tepexi de Rodríguez,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,9,False,4,0.0968,10.16,-33.29,87.38,10,1,34
+21189,Tochtepec,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,64,False,17,0.0845,8.82,-34.11,85.1,70,6,35
+21069,Huaquechula,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,11,False,3,0.0738,7.65,-34.81,83.12,12,1,36
+21108,Oriental,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,37,False,9,0.0677,7.0,-35.21,82.01,40,3,37
+21091,Juan Galindo,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,15,False,7,0.0656,6.78,-35.34,81.62,16,1,38
+21119,San Andrés Cholula,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,1128,False,136,0.048,4.92,-36.47,78.47,1184,56,39
+21146,Santa Catarina Tlaltempan,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,100,False,7,0.0435,4.45,-36.75,77.67,104,4,40
+21122,San Felipe Teotlalcingo,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,12,False,4,0.0327,3.33,-37.43,75.76,12,0,41
+21001,Acajete,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,189,False,43,0.0037,0.37,-39.22,70.73,190,1,42
+21013,Altepexi,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,201,False,37,-0.0132,-1.31,-40.24,67.87,198,-3,43
+21163,Tepatlaxco de Hidalgo,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,54,False,14,-0.0174,-1.72,-40.49,67.17,53,-1,44
+21063,Esperanza,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,12,False,6,-0.0228,-2.25,-40.81,66.27,12,0,45
+21204,Yaonáhuac,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,4,False,4,-0.0573,-5.57,-42.82,60.62,4,0,46
+21140,San Pedro Cholula,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,560,False,94,-0.0699,-6.75,-43.53,58.62,522,-38,47
+21020,Atoyatempan,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,22,False,8,-0.0911,-8.7,-44.72,55.29,20,-2,48
+21062,Epatlán,turismo_cultura,crecimiento_gbm_v1,CE 2024,5,44,False,4,-0.3888,-32.22,-58.95,15.3,30,-14,49

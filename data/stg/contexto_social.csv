@@ -1,0 +1,218 @@
+cve_geo,nom_mun,periodo,poblacion_total,indice_marginacion,grado_marginacion,indice_marginacion_normalizado
+21001,Acajete,Censo Pob 2020,72894,54.187,Medio,0.8485
+21002,Acateno,Censo Pob 2020,9170,51.5051,Alto,0.8065
+21003,Acatlán,Censo Pob 2020,37955,53.9813,Medio,0.8453
+21004,Acatzingo,Censo Pob 2020,63743,54.304,Medio,0.8503
+21005,Acteopan,Censo Pob 2020,3070,47.1914,Muy alto,0.739
+21006,Ahuacatlán,Censo Pob 2020,14542,49.9004,Alto,0.7814
+21007,Ahuatlán,Censo Pob 2020,3162,51.5294,Alto,0.8069
+21008,Ahuazotepec,Censo Pob 2020,11439,55.363,Bajo,0.8669
+21009,Ahuehuetitla,Censo Pob 2020,2207,52.0867,Alto,0.8156
+21010,Ajalpan,Censo Pob 2020,74768,49.5227,Alto,0.7755
+21011,Albino Zertuche,Censo Pob 2020,1885,53.155,Medio,0.8323
+21012,Aljojuca,Censo Pob 2020,6591,54.4015,Medio,0.8519
+21013,Altepexi,Censo Pob 2020,22629,54.6388,Bajo,0.8556
+21014,Amixtlán,Censo Pob 2020,4812,49.8822,Alto,0.7811
+21015,Amozoc,Censo Pob 2020,125876,56.5769,Muy bajo,0.8859
+21016,Aquixtla,Censo Pob 2020,9021,52.8768,Medio,0.828
+21017,Atempan,Censo Pob 2020,29742,53.9876,Medio,0.8454
+21018,Atexcal,Censo Pob 2020,3859,53.0098,Medio,0.8301
+21019,Atlixco,Censo Pob 2020,141793,56.6301,Muy bajo,0.8867
+21020,Atoyatempan,Censo Pob 2020,7704,55.4477,Bajo,0.8682
+21021,Atzala,Censo Pob 2020,1512,54.4,Medio,0.8518
+21022,Atzitzihuacán,Censo Pob 2020,12857,52.8578,Medio,0.8277
+21023,Atzitzintla,Censo Pob 2020,9051,51.671,Alto,0.8091
+21024,Axutla,Censo Pob 2020,976,52.9334,Medio,0.8289
+21025,Ayotoxco de Guerrero,Censo Pob 2020,8208,52.4809,Alto,0.8218
+21026,Calpan,Censo Pob 2020,15271,54.3972,Medio,0.8518
+21027,Caltepec,Censo Pob 2020,4128,51.4002,Alto,0.8049
+21028,Camocuautla,Censo Pob 2020,2758,50.5805,Alto,0.792
+21029,Caxhuacan,Censo Pob 2020,3811,51.9725,Alto,0.8138
+21030,Coatepec,Censo Pob 2020,772,52.1095,Alto,0.816
+21031,Coatzingo,Censo Pob 2020,2820,51.766,Alto,0.8106
+21032,Cohetzala,Censo Pob 2020,1382,53.0128,Medio,0.8301
+21033,Cohuecan,Censo Pob 2020,5403,52.7507,Medio,0.826
+21034,Coronango,Censo Pob 2020,46836,57.2454,Muy bajo,0.8964
+21035,Coxcatlán,Censo Pob 2020,20653,53.8094,Medio,0.8426
+21036,Coyomeapan,Censo Pob 2020,14806,48.7014,Muy alto,0.7626
+21037,Coyotepec,Censo Pob 2020,2334,54.162,Medio,0.8481
+21038,Cuapiaxtla de Madero,Censo Pob 2020,10542,54.3849,Medio,0.8516
+21039,Cuautempan,Censo Pob 2020,9837,52.3646,Alto,0.82
+21040,Cuautinchán,Censo Pob 2020,12340,52.1251,Alto,0.8162
+21041,Cuautlancingo,Censo Pob 2020,137435,59.8907,Muy bajo,0.9378
+21042,Cuayuca de Andrade,Censo Pob 2020,3315,51.1132,Alto,0.8004
+21043,Cuetzalan del Progreso,Censo Pob 2020,49864,51.003,Alto,0.7986
+21044,Cuyoaco,Censo Pob 2020,17139,54.4737,Medio,0.853
+21045,Chalchicomula de Sesma,Censo Pob 2020,47410,55.413,Bajo,0.8677
+21046,Chapulco,Censo Pob 2020,8193,54.838,Bajo,0.8587
+21047,Chiautla,Censo Pob 2020,21699,54.4931,Medio,0.8533
+21048,Chiautzingo,Censo Pob 2020,22039,55.8222,Bajo,0.8741
+21049,Chiconcuautla,Censo Pob 2020,17382,48.8918,Alto,0.7656
+21050,Chichiquila,Censo Pob 2020,26928,49.2873,Alto,0.7718
+21051,Chietla,Censo Pob 2020,37030,55.0571,Bajo,0.8621
+21052,Chigmecatitlán,Censo Pob 2020,1215,51.9459,Alto,0.8134
+21053,Chignahuapan,Censo Pob 2020,66464,54.8358,Bajo,0.8587
+21054,Chignautla,Censo Pob 2020,35223,53.6994,Medio,0.8409
+21055,Chila,Censo Pob 2020,5082,51.4707,Alto,0.806
+21056,Chila de la Sal,Censo Pob 2020,1317,53.1187,Medio,0.8318
+21057,Honey,Censo Pob 2020,6687,52.2545,Alto,0.8182
+21058,Chilchotla,Censo Pob 2020,21002,51.6092,Alto,0.8081
+21059,Chinantla,Censo Pob 2020,2846,51.2862,Alto,0.8031
+21060,Domingo Arenas,Censo Pob 2020,7982,55.0794,Bajo,0.8625
+21061,Eloxochitlán,Censo Pob 2020,14461,45.8768,Muy alto,0.7184
+21062,Epatlán,Censo Pob 2020,4943,53.8196,Medio,0.8427
+21063,Esperanza,Censo Pob 2020,14766,55.3545,Bajo,0.8668
+21064,Francisco Z. Mena,Censo Pob 2020,17824,51.4758,Alto,0.806
+21065,General Felipe Ángeles,Censo Pob 2020,22694,54.5078,Medio,0.8535
+21066,Guadalupe,Censo Pob 2020,6451,51.6632,Alto,0.809
+21067,Guadalupe Victoria,Censo Pob 2020,18784,54.9963,Bajo,0.8612
+21068,Hermenegildo Galeana,Censo Pob 2020,7011,49.9632,Alto,0.7824
+21069,Huaquechula,Censo Pob 2020,29233,53.264,Medio,0.834
+21070,Huatlatlauca,Censo Pob 2020,6111,50.7069,Alto,0.794
+21071,Huauchinango,Censo Pob 2020,103946,55.6599,Bajo,0.8716
+21072,Huehuetla,Censo Pob 2020,17082,47.7544,Muy alto,0.7478
+21073,Huehuetlán el Chico,Censo Pob 2020,9760,53.7192,Medio,0.8412
+21074,Huejotzingo,Censo Pob 2020,90794,57.2878,Muy bajo,0.897
+21075,Hueyapan,Censo Pob 2020,13080,53.7123,Medio,0.8411
+21076,Hueytamalco,Censo Pob 2020,27600,52.9064,Medio,0.8284
+21077,Hueytlalpan,Censo Pob 2020,5951,46.7655,Muy alto,0.7323
+21078,Huitzilan de Serdán,Censo Pob 2020,15928,49.5319,Alto,0.7756
+21079,Huitziltepec,Censo Pob 2020,5782,54.3189,Medio,0.8506
+21080,Atlequizayan,Censo Pob 2020,2633,51.2718,Alto,0.8028
+21081,Ixcamilpa de Guerrero,Censo Pob 2020,4065,49.6206,Alto,0.777
+21082,Ixcaquixtla,Censo Pob 2020,8804,55.9753,Bajo,0.8765
+21083,Ixtacamaxtitlán,Censo Pob 2020,25319,52.4373,Alto,0.8211
+21084,Ixtepec,Censo Pob 2020,6950,48.7532,Alto,0.7634
+21085,Izúcar de Matamoros,Censo Pob 2020,82809,55.9804,Bajo,0.8766
+21086,Jalpan,Censo Pob 2020,12050,50.0478,Alto,0.7837
+21087,Jolalpan,Censo Pob 2020,13308,51.4368,Alto,0.8054
+21088,Jonotla,Censo Pob 2020,4457,51.3817,Alto,0.8046
+21089,Jopala,Censo Pob 2020,12131,50.9711,Alto,0.7981
+21090,Juan C. Bonilla,Censo Pob 2020,23783,57.2795,Muy bajo,0.8969
+21091,Juan Galindo,Censo Pob 2020,9828,57.6355,Muy bajo,0.9025
+21092,Juan N. Méndez,Censo Pob 2020,5293,52.0315,Alto,0.8147
+21093,Lafragua,Censo Pob 2020,7650,53.2466,Medio,0.8338
+21094,Libres,Censo Pob 2020,37257,55.7247,Bajo,0.8726
+21095,La Magdalena Tlatlauquitepec,Censo Pob 2020,650,55.7065,Bajo,0.8723
+21096,Mazapiltepec de Juárez,Censo Pob 2020,3176,54.8423,Bajo,0.8588
+21097,Mixtla,Censo Pob 2020,2668,56.1029,Bajo,0.8785
+21098,Molcaxac,Censo Pob 2020,6668,53.5957,Medio,0.8392
+21099,Cañada Morelos,Censo Pob 2020,20659,52.2034,Alto,0.8174
+21100,Naupan,Censo Pob 2020,9310,50.5501,Alto,0.7915
+21101,Nauzontla,Censo Pob 2020,3317,52.6611,Medio,0.8246
+21102,Nealtican,Censo Pob 2020,14075,56.6531,Muy bajo,0.8871
+21103,Nicolás Bravo,Censo Pob 2020,6644,52.5364,Alto,0.8226
+21104,Nopalucan,Censo Pob 2020,32772,55.8217,Bajo,0.8741
+21105,Ocotepec,Censo Pob 2020,5077,53.3652,Medio,0.8356
+21106,Ocoyucan,Censo Pob 2020,42669,55.9892,Bajo,0.8767
+21107,Olintla,Censo Pob 2020,11993,43.6857,Muy alto,0.6841
+21108,Oriental,Censo Pob 2020,19903,55.4971,Bajo,0.869
+21109,Pahuatlán,Censo Pob 2020,20274,51.6955,Alto,0.8095
+21110,Palmar de Bravo,Censo Pob 2020,50226,53.2714,Medio,0.8342
+21111,Pantepec,Censo Pob 2020,18528,49.963,Alto,0.7824
+21112,Petlalcingo,Censo Pob 2020,9350,52.0673,Alto,0.8153
+21113,Piaxtla,Censo Pob 2020,4627,52.1133,Alto,0.816
+21114,Puebla,Censo Pob 2020,1692181,59.4645,Muy bajo,0.9311
+21115,Quecholac,Censo Pob 2020,57992,53.3908,Medio,0.836
+21116,Quimixtlán,Censo Pob 2020,22855,50.9674,Alto,0.7981
+21117,Rafael Lara Grajales,Censo Pob 2020,15952,56.9627,Muy bajo,0.892
+21118,Los Reyes de Juárez,Censo Pob 2020,30021,54.8766,Bajo,0.8593
+21119,San Andrés Cholula,Censo Pob 2020,154448,59.9366,Muy bajo,0.9385
+21120,San Antonio Cañada,Censo Pob 2020,5938,50.1661,Alto,0.7855
+21121,San Diego la Mesa Tochimiltzingo,Censo Pob 2020,1270,52.4073,Alto,0.8206
+21122,San Felipe Teotlalcingo,Censo Pob 2020,11063,56.2779,Bajo,0.8812
+21123,San Felipe Tepatlán,Censo Pob 2020,3793,49.0901,Alto,0.7687
+21124,San Gabriel Chilac,Censo Pob 2020,15954,54.336,Medio,0.8508
+21125,San Gregorio Atzompa,Censo Pob 2020,9671,57.9782,Muy bajo,0.9079
+21126,San Jerónimo Tecuanipan,Censo Pob 2020,6597,53.428,Medio,0.8366
+21127,San Jerónimo Xayacatlán,Censo Pob 2020,3606,52.5505,Alto,0.8229
+21128,San José Chiapa,Censo Pob 2020,10443,56.2186,Bajo,0.8803
+21129,San José Miahuatlán,Censo Pob 2020,14018,53.7825,Medio,0.8422
+21130,San Juan Atenco,Censo Pob 2020,3604,54.1647,Medio,0.8481
+21131,San Juan Atzompa,Censo Pob 2020,975,54.4551,Medio,0.8527
+21132,San Martín Texmelucan,Censo Pob 2020,155738,58.2204,Muy bajo,0.9117
+21133,San Martín Totoltepec,Censo Pob 2020,692,54.2494,Medio,0.8495
+21134,San Matías Tlalancaleca,Censo Pob 2020,20974,56.6225,Muy bajo,0.8866
+21135,San Miguel Ixitlán,Censo Pob 2020,526,53.9091,Medio,0.8441
+21136,San Miguel Xoxtla,Censo Pob 2020,12461,58.6899,Muy bajo,0.919
+21137,San Nicolás Buenos Aires,Censo Pob 2020,10464,53.1798,Medio,0.8327
+21138,San Nicolás de los Ranchos,Censo Pob 2020,11780,54.8181,Bajo,0.8584
+21139,San Pablo Anicano,Censo Pob 2020,3759,52.6481,Medio,0.8244
+21140,San Pedro Cholula,Censo Pob 2020,138433,59.0793,Muy bajo,0.9251
+21141,San Pedro Yeloixtlahuaca,Censo Pob 2020,3488,52.8638,Medio,0.8278
+21142,San Salvador el Seco,Censo Pob 2020,30639,55.4521,Bajo,0.8683
+21143,San Salvador el Verde,Censo Pob 2020,34880,56.8429,Muy bajo,0.8901
+21144,San Salvador Huixcolotla,Censo Pob 2020,16790,53.8076,Medio,0.8426
+21145,San Sebastián Tlacotepec,Censo Pob 2020,13189,47.7344,Muy alto,0.7475
+21146,Santa Catarina Tlaltempan,Censo Pob 2020,749,52.3966,Alto,0.8205
+21147,Santa Inés Ahuatempan,Censo Pob 2020,6341,50.7785,Alto,0.7951
+21148,Santa Isabel Cholula,Censo Pob 2020,11498,51.6305,Alto,0.8085
+21149,Santiago Miahuatlán,Censo Pob 2020,30309,53.4987,Medio,0.8377
+21150,Huehuetlán el Grande,Censo Pob 2020,6105,52.0689,Alto,0.8153
+21151,Santo Tomás Hueyotlipan,Censo Pob 2020,9315,56.0821,Bajo,0.8782
+21152,Soltepec,Censo Pob 2020,12631,55.0714,Bajo,0.8623
+21153,Tecali de Herrera,Censo Pob 2020,23625,55.5035,Bajo,0.8691
+21154,Tecamachalco,Censo Pob 2020,80771,55.8088,Bajo,0.8739
+21155,Tecomatlán,Censo Pob 2020,6830,53.2446,Medio,0.8337
+21156,Tehuacán,Censo Pob 2020,327312,57.1736,Muy bajo,0.8953
+21157,Tehuitzingo,Censo Pob 2020,12672,52.2174,Alto,0.8177
+21158,Tenampulco,Censo Pob 2020,6743,50.1497,Alto,0.7853
+21159,Teopantlán,Censo Pob 2020,3836,48.736,Alto,0.7631
+21160,Teotlalco,Censo Pob 2020,3689,53.4744,Medio,0.8373
+21161,Tepanco de López,Censo Pob 2020,22218,54.8046,Bajo,0.8582
+21162,Tepango de Rodríguez,Censo Pob 2020,4155,47.9911,Muy alto,0.7515
+21163,Tepatlaxco de Hidalgo,Censo Pob 2020,18854,55.974,Bajo,0.8765
+21164,Tepeaca,Censo Pob 2020,84270,55.574,Bajo,0.8702
+21165,Tepemaxalco,Censo Pob 2020,1216,49.8345,Alto,0.7803
+21166,Tepeojuma,Censo Pob 2020,8918,54.5752,Medio,0.8546
+21167,Tepetzintla,Censo Pob 2020,10373,48.9275,Alto,0.7661
+21168,Tepexco,Censo Pob 2020,7523,50.5402,Alto,0.7914
+21169,Tepexi de Rodríguez,Censo Pob 2020,22331,52.6198,Alto,0.824
+21170,Tepeyahualco,Censo Pob 2020,19200,53.9554,Medio,0.8449
+21171,Tepeyahualco de Cuauhtémoc,Censo Pob 2020,3851,55.4531,Bajo,0.8683
+21172,Tetela de Ocampo,Censo Pob 2020,27216,52.9692,Medio,0.8294
+21173,Teteles de Ávila Castillo,Censo Pob 2020,6653,57.8375,Muy bajo,0.9057
+21174,Teziutlán,Censo Pob 2020,103583,57.5212,Muy bajo,0.9007
+21175,Tianguismanalco,Censo Pob 2020,14432,54.6743,Bajo,0.8561
+21176,Tilapa,Censo Pob 2020,9664,54.4456,Medio,0.8525
+21177,Tlacotepec de Benito Juárez,Censo Pob 2020,54757,52.9059,Medio,0.8284
+21178,Tlacuilotepec,Censo Pob 2020,15977,49.8871,Alto,0.7812
+21179,Tlachichuca,Censo Pob 2020,31639,53.9961,Medio,0.8455
+21180,Tlahuapan,Censo Pob 2020,41547,55.7092,Bajo,0.8723
+21181,Tlaltenango,Censo Pob 2020,7425,56.9621,Muy bajo,0.8919
+21182,Tlanepantla,Censo Pob 2020,5390,55.2548,Bajo,0.8652
+21183,Tlaola,Censo Pob 2020,20433,49.3741,Alto,0.7731
+21184,Tlapacoya,Censo Pob 2020,6422,50.8921,Alto,0.7969
+21185,Tlapanalá,Censo Pob 2020,10344,53.3067,Medio,0.8347
+21186,Tlatlauquitepec,Censo Pob 2020,55576,54.8353,Bajo,0.8586
+21187,Tlaxco,Censo Pob 2020,4934,50.0122,Alto,0.7831
+21188,Tochimilco,Censo Pob 2020,19315,52.5502,Alto,0.8229
+21189,Tochtepec,Censo Pob 2020,22454,55.0301,Bajo,0.8617
+21190,Totoltepec de Guerrero,Censo Pob 2020,1187,53.8374,Medio,0.843
+21191,Tulcingo,Censo Pob 2020,9871,52.3668,Alto,0.82
+21192,Tuzamapan de Galeana,Censo Pob 2020,5924,53.13,Medio,0.8319
+21193,Tzicatlacoyan,Censo Pob 2020,6476,52.2511,Alto,0.8182
+21194,Venustiano Carranza,Censo Pob 2020,28395,53.2053,Medio,0.8331
+21195,Vicente Guerrero,Censo Pob 2020,26559,47.9615,Muy alto,0.751
+21196,Xayacatlán de Bravo,Censo Pob 2020,1570,53.5318,Medio,0.8382
+21197,Xicotepec,Censo Pob 2020,80591,54.8333,Bajo,0.8586
+21198,Xicotlán,Censo Pob 2020,1312,47.3106,Muy alto,0.7408
+21199,Xiutetelco,Censo Pob 2020,42943,53.3024,Medio,0.8346
+21200,Xochiapulco,Censo Pob 2020,3443,51.7115,Alto,0.8097
+21201,Xochiltepec,Censo Pob 2020,3375,53.5895,Medio,0.8391
+21202,Xochitlán de Vicente Suárez,Censo Pob 2020,13025,50.3628,Alto,0.7886
+21203,Xochitlán Todos Santos,Censo Pob 2020,7178,53.7539,Medio,0.8417
+21204,Yaonáhuac,Censo Pob 2020,7926,55.0249,Bajo,0.8616
+21205,Yehualtepec,Censo Pob 2020,26392,54.6532,Bajo,0.8558
+21206,Zacapala,Censo Pob 2020,4647,51.2382,Alto,0.8023
+21207,Zacapoaxtla,Censo Pob 2020,57887,53.7487,Medio,0.8416
+21208,Zacatlán,Censo Pob 2020,87361,55.4249,Bajo,0.8679
+21209,Zapotitlán,Censo Pob 2020,8595,53.1391,Medio,0.8321
+21210,Zapotitlán de Méndez,Censo Pob 2020,5675,52.8592,Medio,0.8277
+21211,Zaragoza,Censo Pob 2020,16752,57.2524,Muy bajo,0.8965
+21212,Zautla,Censo Pob 2020,20717,51.1929,Alto,0.8016
+21213,Zihuateutla,Censo Pob 2020,11967,51.1223,Alto,0.8005
+21214,Zinacatepec,Censo Pob 2020,18359,54.4523,Medio,0.8526
+21215,Zongozotla,Censo Pob 2020,4539,52.1304,Alto,0.8163
+21216,Zoquiapan,Censo Pob 2020,2452,50.7778,Alto,0.7951
+21217,Zoquitlán,Censo Pob 2020,20335,48.1038,Muy alto,0.7532
