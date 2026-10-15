@@ -8,11 +8,7 @@ import estado
 import ficha_bd as fb
 import tema
 
-# Anclas con nombre fijo en el mapa; "Cholula" agrupa San Pedro y San Andrés para no encimarse.
-ETIQUETAS = {"21140": "Cholula", "21119": None}
-# Posición del texto respecto al centroide para separar anclas vecinas.
-POSICION = {"21109": "middle left", "21197": "top right", "21140": "middle left", "21114": "bottom right",
-            "21208": "middle left", "21053": "bottom left", "21186": "bottom right", "21071": "top center"}
+from mapas import ETIQUETAS, POSICION  # alias y posiciones compartidos con el resto de mapas
 
 
 def render():

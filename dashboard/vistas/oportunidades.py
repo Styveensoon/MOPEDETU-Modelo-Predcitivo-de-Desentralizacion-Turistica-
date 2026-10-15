@@ -34,7 +34,7 @@ def render():
     if metrica == "cl_actividad":
         actividad = c2.selectbox("Actividad", act.index, format_func=lambda k: f"{act.icono[k]} {act.nombre[k]}")
     flag = c2.selectbox("Resaltar flag", ["Ninguno"] + list(motor.FLAGS)) if metrica != "cl_actividad" else "Ninguno"
-    columnas_3d = c3.toggle("Columnas 3D", value=False, help="Altura = personal ocupado turístico")
+    burbujas = c3.toggle("Burbujas de empleo", value=False, help="Tamaño = personal ocupado turístico")
     nombres_fijos = c4.toggle("🏷️ Todos los nombres", value=False,
                               help="Apagado: nombres principales y el resto aparece al hacer zoom.")
 
@@ -49,33 +49,30 @@ def render():
         lambda r: f"<b>{r.nombre}</b> · {r.region}<br/>{titulo}: <b>{fmt.format(r[metrica])}</b><br/>"
                   f"Líder: {r.icono_lider} {r.actividad_lider}<br/>Índice: {r.indice_oportunidad:.2f} · Flags: {r.num_flags}", axis=1)
     vmax = df[metrica].quantile(0.97) if metrica in ("po_actual", "menciones", "inversion_reciente_mdp") else None
-    capas = [mapas.capa_municipios(d.geo, df, metrica, df.set_index("cve_geo").tt, paleta=paleta,
-                                   vmax=vmax, resaltar=resaltar,
-                                   cuantiles=metrica in ("indice_oportunidad", "po_actual", "menciones"))]
-    vista = mapas.VISTA_PUEBLA
-    if columnas_3d:
-        capas.append(mapas.capa_columnas(df, "po_actual", escala_altura=25))
-        vista = mapas.pdk.ViewState(latitude=19.0, longitude=-97.9, zoom=7.6, pitch=50, bearing=-15)
-    destacados = set(df.nlargest(12, metrica).cve_geo) | set(df[df.es_ancla].cve_geo)
-    capas += mapas.capas_nombres(df, destacados, fijos=nombres_fijos)
+    m = mapas.Mapa(d.geo, alto=640).municipios(
+        df, metrica, df.set_index("cve_geo").tt, paleta=paleta, vmax=vmax, resaltar=resaltar,
+        cuantiles=metrica in ("indice_oportunidad", "po_actual", "menciones"),
+        seleccionado=st.session_state.get("op_cve"))
+    if burbujas:
+        b = df[df.po_actual > 0].copy()
+        b["tam"] = 4 + 26 * (b.po_actual / b.po_actual.max()) ** 0.5
+        m.puntos(b, tema.AMARILLO, "tam", "tt")
+    destacados = df[df.cve_geo.isin(set(df.nlargest(12, metrica).cve_geo) | set(df[df.es_ancla].cve_geo))]
+    m.nombres(destacados, tamano=10)
+    if nombres_fijos:
+        m.nombres(df[~df.cve_geo.isin(destacados.cve_geo)], tamano=8, color="#14213D", separacion=0)
 
     mapa, panel = st.columns([2, 1])
     with mapa:
-        evento = st.pydeck_chart(mapas.deck(capas, vista), height=640, on_select="rerun",
-                                 selection_mode="single-object", key="mapa_op")
+        seleccion = mapas.mostrar(m, "op_mapa", "op_cve")
         mapas.leyenda(titulo, "bajo", "alto", paleta)
         if resaltar:
             st.caption(f"Contorno guinda: {len(resaltar)} municipios con **{flag}** — {motor.FLAGS[flag]}")
 
-    seleccion = None
-    try:
-        objs = evento.selection.objects.get("municipios", [])
-        if objs:
-            seleccion = objs[0]["cve_geo"]
-    except Exception:
-        pass
-
     with panel:
+        if seleccion and st.button("✕ Cerrar detalle", key="op_cerrar"):
+            st.session_state["op_cve"] = None
+            st.rerun()
         if seleccion:
             r = df.set_index("cve_geo").loc[seleccion]
             st.markdown(f"### {r.nombre}")

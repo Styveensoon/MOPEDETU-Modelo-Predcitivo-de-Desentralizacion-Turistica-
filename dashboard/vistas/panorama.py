@@ -44,16 +44,17 @@ def render():
                       f"Líder: {r.icono_lider} {r.actividad_lider}<br/>Flags: {r.num_flags}"
                       + ("<br/>⚓ Destino consolidado" if r.es_ancla else ""), axis=1)
         fuera = set(mp.cve_geo) - set(estado.filtrar_region(mp).cve_geo)
-        capas = [mapas.capa_municipios(d.geo, mp, "indice_oportunidad", tt, cuantiles=True, atenuar=fuera)]
+        m = mapas.Mapa(d.geo, alto=600).municipios(mp, "indice_oportunidad", tt, cuantiles=True, atenuar=fuera)
         anclas = mp[mp.es_ancla].copy()
-        anclas["tt"] = "<b>⚓ " + anclas.nombre + "</b><br/>Destino consolidado"
-        if rutas:
-            capas.append(mapas.capa_arcos(_arcos(rutas)))
-        capas.append(mapas.capa_puntos(anclas, [14, 42, 92, 255], 2800))
-        destacados = set(anclas.cve_geo) | set(estado.filtrar_region(mp[~mp.es_ancla]).nlargest(5, "indice_oportunidad").cve_geo)
-        capas += mapas.capas_nombres(mp, destacados)
-        st.pydeck_chart(mapas.deck(capas), height=600)
-        mapas.leyenda("Índice de oportunidad (percentil estatal)", "bajo", "alto")
+        anclas["tt"] = "<b>⚓ " + anclas.nombre + "</b><br>Destino consolidado"
+        for t in (_arcos(rutas).to_dict("records") if rutas else []):
+            m.trayecto([t["lon_a"], t["lon_b"]], [t["lat_a"], t["lat_b"]], tema.AMARILLO, t["ancho"], t["tt"])
+        m.puntos(anclas, tema.COBALTO_OSC, 11, "tt")
+        emergentes = estado.filtrar_region(mp[~mp.es_ancla]).nlargest(5, "indice_oportunidad")
+        m.nombres(anclas, tamano=11).nombres(emergentes, tamano=10, color=tema.GUINDA)
+        mapas.mostrar(m, "pan_mapa")
+        mapas.leyenda("Índice de oportunidad (percentil estatal) · ⚓ anclas · nombres guinda = top emergentes",
+                      "bajo", "alto")
 
     with der:
         st.markdown("#### 🌱 Top municipios emergentes")
@@ -110,5 +111,5 @@ def _arcos(rutas) -> pd.DataFrame:
             filas.append(dict(lon_a=a["lon"], lat_a=a["lat"], lon_b=b["lon"], lat_b=b["lat"],
                               color_a=[14, 42, 92, 230], color_b=[232, 177, 13, 240],
                               ancho=2 + 4 * r.score_norm,
-                              tt=f"<b>{r.nombre}</b><br/>{a['nombre']} → {b['nombre']}<br/>{b['min_desde_anterior']:.0f} min"))
+                              tt=f"<b>{r.nombre}</b><br>{a['nombre']} → {b['nombre']}<br>{b['min_desde_anterior']:.0f} min"))
     return pd.DataFrame(filas)

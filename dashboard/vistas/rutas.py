@@ -37,28 +37,24 @@ def render():
     with mapa:
         base = mp.copy()
         tt = base.set_index("cve_geo").apply(
-            lambda r: f"<b>{r.nombre}</b><br/>Índice {r.indice_oportunidad:.2f}<br/>{r.icono_lider} {r.actividad_lider}", axis=1)
-        capas = [mapas.capa_municipios(d.geo, base, "indice_oportunidad", tt, paleta=tema.SEQ_TALAVERA[:3], cuantiles=True)]
+            lambda r: f"<b>{r.nombre}</b><br>Índice {r.indice_oportunidad:.2f}<br>{r.icono_lider} {r.actividad_lider}", axis=1)
+        m = mapas.Mapa(d.geo, alto=620).municipios(base, "indice_oportunidad", tt, paleta=tema.SEQ_TALAVERA[:3],
+                                                   cuantiles=True)
         paradas = []
         for i in idx:
             r = rutas[i]
-            color = tema.hex_rgb(COLORES_RUTA[i % len(COLORES_RUTA)])
-            capas.append(mapas.capa_trayecto(pd.DataFrame([{
-                "path": [[p["lon"], p["lat"]] for p in r.paradas],
-                "tt": f"<b>{r.nombre}</b><br/>{len(r.paradas)} paradas · {r.minutos / 60:.1f} h"}]), color))
+            color = COLORES_RUTA[i % len(COLORES_RUTA)]
+            m.trayecto([p["lon"] for p in r.paradas], [p["lat"] for p in r.paradas], color, 4,
+                       f"<b>{r.nombre}</b><br>{len(r.paradas)} paradas · {r.minutos / 60:.1f} h")
             for k, p in enumerate(r.paradas):
                 paradas.append(dict(lon=p["lon"], lat=p["lat"], etiqueta=f"{k + 1}. {p['nombre']}",
-                                    color=[14, 42, 92, 255] if p["es_ancla"] else color + [255],
-                                    tt=f"<b>{k + 1}. {p['nombre']}</b><br/>{p['iconos']}<br/>"
+                                    color=tema.COBALTO_OSC if p["es_ancla"] else color,
+                                    tt=f"<b>{k + 1}. {p['nombre']}</b><br>{p['iconos']}<br>"
                                        + ("⚓ Ancla" if p["es_ancla"] else f"🌱 Emergente · score {p['score']:.2f}")))
-        pdf = pd.DataFrame(paradas)
-        capas.append(mapas.pdk.Layer("ScatterplotLayer", pdf, get_position=["lon", "lat"], get_fill_color="color",
-                                     get_radius=2600, radius_min_pixels=7, stroked=True, get_line_color=[255, 255, 255],
-                                     line_width_min_pixels=2, pickable=True))
-        capas += mapas.capas_nombres(mp[~mp.cve_geo.isin({p["cve_geo"] for i in idx for p in rutas[i].paradas})], todos=True)
-        capas.append(mapas.capa_texto(pdf.drop_duplicates(["lon", "lat"]), "etiqueta", 12))
-        vista = mapas.vista_ajustada(pdf.lat, pdf.lon, ancho=740, alto=620, margen=1.3)
-        st.pydeck_chart(mapas.deck(capas, vista), height=620)
+        pdf = pd.DataFrame(paradas).drop_duplicates(["lon", "lat"])
+        m.puntos(pdf, "color", 12, "tt", texto="etiqueta")
+        m.encuadre(pdf.lat, pdf.lon, margen=0.15, aspecto=1.15)
+        mapas.mostrar(m, "rutas_mapa")
 
     with lista:
         for i, r in enumerate(rutas):
