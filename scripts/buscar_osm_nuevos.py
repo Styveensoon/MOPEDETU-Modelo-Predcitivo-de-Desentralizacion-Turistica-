@@ -73,6 +73,10 @@ RX_BALNEARIO = re.compile(r"balneario|parque acu[aá]tico|aguas termales|alberca
 RX_ECOPARQUE = re.compile(r"eco ?parque|ecotur|tirolesa|parque recreativo|centro recreativo|aventura", re.I)
 RX_CABANAS = re.compile(r"caba[nñ]as?\b", re.I)
 RX_BOTANICO = re.compile(r"jard[ií]n bot[aá]nico", re.I)
+# No son oferta turística aunque OSM los etiquete como alojamiento o espectáculo: albergues
+# sociales, residencias de estudiantes, eventos temporales, cerrados y nombres de prueba.
+RX_EXCLUIR = re.compile(r"(?:desamparad|migrante|indigente|student|estudiante|housing|mi ubicaci[oó]n"
+                        r"|\bferia\b|cerrado (?:permanente|definitiva))", re.I)
 
 
 def _cocina(t: dict) -> str:
@@ -262,10 +266,11 @@ ALIAS = {"kfc": "kentucky fried chicken", "mcdonald s": "mcdonalds", "mc donalds
          "mc donald s": "mcdonalds", "samborns": "sanborns", "7 eleven": "seven eleven"}
 
 
+RX_ALIAS = re.compile(r"\b(" + "|".join(map(re.escape, ALIAS)) + r")\b")
+
+
 def nucleo(s: str) -> str:
-    n = normalizar(s)
-    for a, b in ALIAS.items():
-        n = re.sub(rf"{a}", b, n)
+    n = RX_ALIAS.sub(lambda m: ALIAS[m.group(1)], normalizar(s))
     tokens = [w for w in n.split() if w not in STOP]
     return " ".join(tokens) or n
 
@@ -280,7 +285,8 @@ def similitud(a: str, b: str) -> float:
         return 0.0
     ta, tb = set(a.split()), set(b.split())
     corto = ta if len(ta) <= len(tb) else tb
-    contenido = (ta <= tb or tb <= ta) and len(" ".join(corto)) >= 4         and any(w not in GENERICAS for w in corto)
+    contenido = ((ta <= tb or tb <= ta) and len(" ".join(corto)) >= 4
+                 and any(w not in GENERICAS for w in corto))
     return max(SequenceMatcher(None, a, b).ratio(), 0.9 if contenido else 0.0)
 
 
@@ -292,7 +298,11 @@ def main():
     osm, corte = leer_osm(args.descargar)
     osm["codigo_act"] = osm["tags"].map(clasificar)
     print(f"OSM con nombre: {len(osm):,}; de la tipología: {osm['codigo_act'].notna().sum():,}")
-    osm = osm[osm["codigo_act"].notna()].copy()
+    nombres = osm["tags"].str["name"]
+    excluir = nombres.str.contains(RX_EXCLUIR) | (nombres.map(normalizar).str.len() < 3)
+    print(f"Excluidos por nombre (albergues sociales, estudiantes, ferias...): "
+          f"{int((excluir & osm['codigo_act'].notna()).sum())}")
+    osm = osm[osm["codigo_act"].notna() & ~excluir].copy()
     osm = pd.concat([osm.drop(columns="tags"), pd.DataFrame(osm["tags"].map(atributos).tolist(),
                                                             index=osm.index)], axis=1)
 
@@ -303,13 +313,18 @@ def main():
     g = g.rename(columns={"NOMGEO": "municipio"}).drop(columns="index_right").to_crs(CRS_METROS)
 
     # 1) Duplicados dentro de OSM (mismo lugar como nodo y como polígono, etc.): mismo núcleo de
-    #    nombre a menos de 150 m -> se queda el que tiene más atributos llenos.
+    #    nombre a menos de 150 m, o nombre largo sin marca (no es sucursal de una cadena) a menos
+    #    de 1 km -> se queda el que tiene más atributos llenos.
     g["nucleo"] = g["nombre"].map(nucleo)
     g["n_atributos"] = g.drop(columns="geometry").notna().sum(axis=1)
     g = g.sort_values("n_atributos", ascending=False)
-    pares = gpd.sjoin(g[["nucleo", "geometry"]], g[["nucleo", "geometry"]],
-                      predicate="dwithin", distance=150)
-    pares = pares[(pares.index != pares["index_right"]) & (pares["nucleo_left"] == pares["nucleo_right"])]
+    pares = gpd.sjoin(g[["nucleo", "marca", "geometry"]], g[["nucleo", "geometry"]],
+                      predicate="dwithin", distance=1000)
+    pares["dist"] = g.geometry.loc[pares.index].distance(
+        g.geometry.loc[pares["index_right"]].set_axis(pares.index))
+    pares = pares[(pares.index != pares["index_right"]) & (pares["nucleo_left"] == pares["nucleo_right"])
+                  & ((pares["dist"] <= 150)
+                     | (pares["marca"].isna() & (pares["nucleo_left"].str.len() >= 12)))]
     orden = {ix: i for i, ix in enumerate(g.index)}
     quitar = {ix for ix, r in pares.iterrows() if orden[ix] > orden[r["index_right"]]}
     g = g.drop(index=list(quitar))
@@ -330,9 +345,15 @@ def main():
     cerca = gpd.sjoin(g[["nucleo", "codigo_act", "generico", "geometry"]],
                       d[["id", "n_nom", "n_raz", "codigo_act", "geometry"]],
                       predicate="dwithin", distance=1000, how="inner")
-    gx = g.geometry
-    cerca["dist_m"] = [gx.loc[i].distance(d.geometry.iloc[j]) for i, j in
-                       zip(cerca.index, d.index.get_indexer(cerca["index_right"]))]
+    cerca["dist_m"] = g.geometry.loc[cerca.index].distance(
+        d.geometry.loc[cerca["index_right"]].set_axis(cerca.index))
+    # Más allá de 150 m solo cuenta un nombre parecido: se compara únicamente si comparten el
+    # inicio de alguna palabra (evita millones de comparaciones en la zona metropolitana).
+    raices = lambda s: {w[:4] for w in s.split() if len(w) >= 3} if isinstance(s, str) else set()
+    comparar = (cerca["dist_m"] <= 150) | pd.Series(
+        [bool(raices(a) & (raices(b) | raices(c)))
+         for a, b, c in zip(cerca["nucleo"], cerca["n_nom"], cerca["n_raz"])], index=cerca.index)
+    cerca = cerca[comparar].copy()
     cerca["sim"] = [max(similitud(a, b), similitud(a, c)) for a, b, c in
                     zip(cerca["nucleo"], cerca["n_nom"], cerca["n_raz"])]
     mismo_subsector = cerca["codigo_act_left"].str[:3] == cerca["codigo_act_right"].str[:3]
