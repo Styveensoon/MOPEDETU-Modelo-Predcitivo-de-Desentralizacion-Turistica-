@@ -867,220 +867,220 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 133,potencial,gris,,,Pendiente: predicción de crecimiento (Rol B),21133,San Martín Totoltepec
 95,potencial,gris,,,Pendiente: predicción de crecimiento (Rol B),21095,La Magdalena Tlatlauquitepec
 214,potencial,gris,,,Pendiente: predicción de crecimiento (Rol B),21214,Zinacatepec
-15,social,verde,0.2537,0.1336,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21015,Amozoc
-25,social,amarillo,0.4925,0.5023,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21026,Calpan
-5,social,rojo,0.7768,0.8894,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21005,Acteopan
-7,social,rojo,0.5835,0.6774,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21007,Ahuatlán
-19,social,verde,0.193,0.0737,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21019,Atlixco
-21,social,amarillo,0.47,0.4516,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21022,Atzitzihuacán
-3,social,verde,0.4124,0.3272,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21003,Acatlán
-9,social,amarillo,0.4916,0.4977,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21009,Ahuehuetitla
-18,social,amarillo,0.5003,0.523,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21018,Atexcal
-23,social,verde,0.4032,0.3088,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21024,Axutla
-10,social,rojo,0.8805,0.9493,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21010,Ajalpan
-13,social,verde,0.4205,0.3456,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21013,Altepexi
-6,social,rojo,0.7961,0.9217,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21006,Ahuacatlán
-8,social,verde,0.2771,0.1567,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21008,Ahuazotepec
-14,social,rojo,0.7849,0.8986,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21014,Amixtlán
-16,social,rojo,0.6132,0.7005,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21016,Aquixtla
-2,social,rojo,0.6429,0.7558,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21002,Acateno
-17,social,rojo,0.6083,0.6889,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21017,Atempan
-24,social,rojo,0.5789,0.6636,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21025,Ayotoxco de Guerrero
-4,social,amarillo,0.4868,0.4908,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21004,Acatzingo
-12,social,verde,0.3286,0.1982,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21012,Aljojuca
-22,social,rojo,0.7126,0.8341,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21023,Atzitzintla
-29,social,rojo,0.6843,0.8111,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21029,Caxhuacan
-58,social,rojo,0.744,0.8525,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21058,Chilchotla
-60,social,amarillo,0.4804,0.4654,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21060,Domingo Arenas
-59,social,amarillo,0.5343,0.5806,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21059,Chinantla
-61,social,rojo,0.966,0.9954,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21061,Eloxochitlán
-54,social,rojo,0.6204,0.7097,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21054,Chignautla
-33,social,rojo,0.5749,0.659,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21033,Cohuecan
-31,social,amarillo,0.5248,0.5392,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21031,Coatzingo
-32,social,amarillo,0.4738,0.4562,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21032,Cohetzala
-57,social,rojo,0.6454,0.765,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21057,Honey
-37,social,verde,0.4289,0.3641,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21037,Coyotepec
-55,social,rojo,0.6063,0.682,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21055,Chila
-56,social,verde,0.3183,0.1866,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21056,Chila de la Sal
-35,social,amarillo,0.5256,0.5461,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21035,Coxcatlán
-36,social,rojo,0.8934,0.9539,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21036,Coyomeapan
-39,social,rojo,0.6492,0.7788,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21039,Cuautempan
-49,social,rojo,0.7926,0.9147,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21049,Chiconcuautla
-53,social,verde,0.415,0.341,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21053,Chignahuapan
-43,social,rojo,0.7707,0.8825,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21043,Cuetzalan del Progreso
-44,social,verde,0.4073,0.3134,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21044,Cuyoaco
-45,social,verde,0.3952,0.2903,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21045,Chalchicomula de Sesma
-50,social,rojo,0.8715,0.9447,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21050,Chichiquila
-40,social,rojo,0.6083,0.6889,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21040,Cuautinchán
-41,social,verde,0.0187,0.0046,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21041,Cuautlancingo
-48,social,verde,0.2828,0.1613,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21048,Chiautzingo
-51,social,verde,0.3142,0.1705,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21051,Chietla
-42,social,rojo,0.6244,0.7258,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21042,Cuayuca de Andrade
-47,social,amarillo,0.4525,0.4009,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21047,Chiautla
-52,social,amarillo,0.5426,0.5991,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21052,Chigmecatitlán
-46,social,verde,0.4499,0.3963,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21046,Chapulco
-140,social,verde,0.0743,0.0276,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21140,San Pedro Cholula
-139,social,amarillo,0.5323,0.576,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21139,San Pablo Anicano
-77,social,rojo,0.9424,0.9908,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21077,Hueytlalpan
-78,social,rojo,0.7926,0.9147,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21078,Huitzilan de Serdán
-79,social,verde,0.3453,0.2304,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21079,Huitziltepec
-96,social,verde,0.345,0.2258,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21096,Mazapiltepec de Juárez
-123,social,rojo,0.8085,0.9332,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21123,San Felipe Tepatlán
-119,social,verde,0.0703,0.0138,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21119,San Andrés Cholula
-122,social,verde,0.2566,0.1382,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21122,San Felipe Teotlalcingo
-121,social,verde,0.4424,0.3871,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21121,San Diego la Mesa Tochimiltzingo
-120,social,rojo,0.8085,0.9332,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21120,San Antonio Cañada
-124,social,amarillo,0.4844,0.4793,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21124,San Gabriel Chilac
-172,social,rojo,0.6218,0.7143,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21172,Tetela de Ocampo
-178,social,rojo,0.7667,0.871,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21178,Tlacuilotepec
-173,social,verde,0.244,0.1106,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21173,Teteles de Ávila Castillo
-174,social,verde,0.1161,0.0369,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21174,Teziutlán
-204,social,amarillo,0.4608,0.424,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21204,Yaonáhuac
-179,social,amarillo,0.5256,0.5461,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21179,Tlachichuca
-180,social,verde,0.2494,0.129,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21180,Tlahuapan
-175,social,verde,0.3597,0.2488,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21175,Tianguismanalco
-176,social,verde,0.3177,0.1751,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21176,Tilapa
-203,social,amarillo,0.5403,0.5945,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21203,Xochitlán Todos Santos
-177,social,rojo,0.6846,0.8157,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21177,Tlacotepec de Benito Juárez
-26,social,rojo,0.6282,0.7373,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21027,Caltepec
-64,social,rojo,0.6103,0.6959,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21064,Francisco Z. Mena
-68,social,rojo,0.7621,0.8664,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21068,Hermenegildo Galeana
-71,social,verde,0.3978,0.2949,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21071,Huauchinango
-72,social,rojo,0.913,0.9816,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21072,Huehuetla
-75,social,rojo,0.6181,0.7051,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21075,Hueyapan
-76,social,rojo,0.5619,0.6452,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21076,Hueytamalco
-63,social,verde,0.3606,0.2535,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21063,Esperanza
-65,social,amarillo,0.4545,0.4147,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21065,General Felipe Ángeles
-67,social,verde,0.4257,0.3594,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21067,Guadalupe Victoria
-74,social,verde,0.1671,0.0507,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21074,Huejotzingo
-62,social,verde,0.3347,0.212,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21062,Epatlán
-69,social,verde,0.3773,0.2742,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21069,Huaquechula
-66,social,amarillo,0.5288,0.553,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21066,Guadalupe
-70,social,rojo,0.6247,0.7327,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21070,Huatlatlauca
-73,social,amarillo,0.5363,0.5853,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21073,Huehuetlán el Chico
-102,social,verde,0.21,0.0876,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21102,Nealtican
-104,social,verde,0.3681,0.2673,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21104,Nopalucan
-98,social,amarillo,0.4672,0.4424,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21098,Molcaxac
-100,social,rojo,0.7304,0.8479,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21100,Naupan
-107,social,rojo,0.9718,1.0,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21107,Olintla
-109,social,rojo,0.6789,0.7972,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21109,Pahuatlán
-111,social,rojo,0.7854,0.9032,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21111,Pantepec
-101,social,amarillo,0.5063,0.53,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21101,Nauzontla
-99,social,rojo,0.5685,0.6544,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21099,Cañada Morelos
-105,social,amarillo,0.4991,0.5161,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21105,Ocotepec
-108,social,verde,0.3773,0.2742,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21108,Oriental
-110,social,rojo,0.6434,0.7604,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21110,Palmar de Bravo
-115,social,rojo,0.5639,0.6498,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21115,Quecholac
-106,social,verde,0.2586,0.1429,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21106,Ocoyucan
-114,social,verde,0.0737,0.023,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21114,Puebla
-112,social,rojo,0.5513,0.6129,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21112,Petlalcingo
-113,social,amarillo,0.4654,0.4378,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21113,Piaxtla
-103,social,rojo,0.6334,0.7512,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21103,Nicolás Bravo
-84,social,rojo,0.8983,0.9631,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21084,Ixtepec
-88,social,rojo,0.6457,0.7719,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21088,Jonotla
-116,social,rojo,0.7558,0.8594,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21116,Quimixtlán
-85,social,verde,0.2405,0.1014,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21085,Izúcar de Matamoros
-81,social,rojo,0.682,0.8065,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21081,Ixcamilpa de Guerrero
-82,social,verde,0.3353,0.2166,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21082,Ixcaquixtla
-87,social,rojo,0.6861,0.8249,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21087,Jolalpan
-142,social,amarillo,0.4784,0.4608,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21142,San Salvador el Seco
-1,social,amarillo,0.5311,0.5645,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21001,Acajete
-143,social,verde,0.1803,0.0599,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21143,San Salvador el Verde
-11,social,amarillo,0.4533,0.4055,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21011,Albino Zertuche
-141,social,amarillo,0.483,0.47,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21141,San Pedro Yeloixtlahuaca
-93,social,verde,0.4147,0.3341,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21093,Lafragua
-94,social,verde,0.3531,0.2396,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21094,Libres
-92,social,rojo,0.631,0.7419,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21092,Juan N. Méndez
-125,social,verde,0.0432,0.0092,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21125,San Gregorio Atzompa
-128,social,verde,0.318,0.1797,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21128,San José Chiapa
-130,social,verde,0.3381,0.2212,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21130,San Juan Atenco
-132,social,verde,0.0847,0.0323,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21132,San Martín Texmelucan
-126,social,verde,0.4251,0.3548,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21126,San Jerónimo Tecuanipan
-127,social,amarillo,0.4839,0.4747,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21127,San Jerónimo Xayacatlán
-131,social,verde,0.2448,0.1152,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21131,San Juan Atzompa
-129,social,amarillo,0.4585,0.4194,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21129,San José Miahuatlán
-134,social,verde,0.1676,0.0553,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21134,San Matías Tlalancaleca
-135,social,verde,0.3468,0.235,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21135,San Miguel Ixitlán
-181,social,verde,0.2471,0.1244,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21181,Tlaltenango
-148,social,amarillo,0.4856,0.4839,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21148,Santa Isabel Cholula
-146,social,amarillo,0.5305,0.5576,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21146,Santa Catarina Tlaltempan
-147,social,rojo,0.6711,0.7926,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21147,Santa Inés Ahuatempan
-150,social,rojo,0.5524,0.6221,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21150,Huehuetlán el Grande
-145,social,rojo,0.909,0.9724,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21145,San Sebastián Tlacotepec
-149,social,rojo,0.6244,0.7258,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21149,Santiago Miahuatlán
-162,social,rojo,0.9211,0.9862,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21162,Tepango de Rodríguez
-158,social,rojo,0.6221,0.7189,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21158,Tenampulco
-199,social,rojo,0.5553,0.6359,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21199,Xiutetelco
-202,social,rojo,0.8067,0.9263,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21202,Xochitlán de Vicente Suárez
-152,social,amarillo,0.4539,0.4101,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21152,Soltepec
-154,social,verde,0.3344,0.2074,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21154,Tecamachalco
-170,social,verde,0.4147,0.3341,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21170,Tepeyahualco
-153,social,verde,0.2756,0.1521,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21153,Tecali de Herrera
-163,social,verde,0.4398,0.3825,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21163,Tepatlaxco de Hidalgo
-159,social,rojo,0.663,0.788,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21159,Teopantlán
-165,social,rojo,0.6924,0.8295,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21165,Tepemaxalco
-166,social,verde,0.3301,0.2028,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21166,Tepeojuma
-168,social,rojo,0.7707,0.8825,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21168,Tepexco
-201,social,verde,0.3183,0.1866,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21201,Xochiltepec
-155,social,amarillo,0.4683,0.447,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21155,Tecomatlán
-157,social,rojo,0.5576,0.6406,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21157,Tehuitzingo
-160,social,verde,0.3908,0.2857,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21160,Teotlalco
-169,social,rojo,0.5518,0.6175,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21169,Tepexi de Rodríguez
-198,social,rojo,0.5541,0.6267,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21198,Xicotlán
-156,social,verde,0.2212,0.0922,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21156,Tehuacán
-161,social,verde,0.3796,0.2811,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21161,Tepanco de López
-206,social,rojo,0.5821,0.6728,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21206,Zacapala
-205,social,amarillo,0.4651,0.4332,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21205,Yehualtepec
-208,social,verde,0.4317,0.3687,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21208,Zacatlán
-213,social,rojo,0.7673,0.8756,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21213,Zihuateutla
-207,social,rojo,0.5801,0.6682,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21207,Zacapoaxtla
-210,social,rojo,0.5444,0.6037,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21210,Zapotitlán de Méndez
-211,social,verde,0.1924,0.0691,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21211,Zaragoza
-212,social,rojo,0.7831,0.894,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21212,Zautla
-209,social,rojo,0.5446,0.6083,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21209,Zapotitlán
-183,social,rojo,0.8306,0.9401,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21183,Tlaola
-192,social,amarillo,0.4868,0.4908,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21192,Tuzamapan de Galeana
-189,social,verde,0.3998,0.2995,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21189,Tochtepec
-185,social,verde,0.3652,0.2627,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21185,Tlapanalá
-188,social,rojo,0.555,0.6313,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21188,Tochimilco
-190,social,verde,0.3551,0.2442,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21190,Totoltepec de Guerrero
-191,social,amarillo,0.5081,0.5346,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21191,Tulcingo
-193,social,amarillo,0.5003,0.523,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21193,Tzicatlacoyan
-196,social,verde,0.4219,0.3502,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21196,Xayacatlán de Bravo
-195,social,rojo,0.9032,0.9677,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21195,Vicente Guerrero
-217,social,rojo,0.894,0.9585,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21217,Zoquitlán
-197,social,amarillo,0.496,0.5115,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21197,Xicotepec
-186,social,verde,0.4335,0.3779,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21186,Tlatlauquitepec
-28,social,rojo,0.6852,0.8203,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21028,Camocuautla
-30,social,amarillo,0.5377,0.5899,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21030,Coatepec
-83,social,rojo,0.6803,0.8018,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21083,Ixtacamaxtitlán
-86,social,rojo,0.7558,0.8594,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21086,Jalpan
-89,social,rojo,0.7212,0.8433,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21089,Jopala
-91,social,verde,0.1175,0.0415,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21091,Juan Galindo
-167,social,rojo,0.9113,0.977,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21167,Tepetzintla
-184,social,rojo,0.7183,0.8387,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21184,Tlapacoya
-187,social,rojo,0.7892,0.9078,"Carencias muy alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21187,Tlaxco
-194,social,amarillo,0.5311,0.5645,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21194,Venustiano Carranza
-200,social,rojo,0.6328,0.7465,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21200,Xochiapulco
-215,social,amarillo,0.5317,0.5714,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21215,Zongozotla
-80,social,rojo,0.6457,0.7719,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21080,Atlequizayan
-216,social,rojo,0.6567,0.7834,"Carencias alta (proxy Censo 2020: analfabetismo, servicios y vivienda)",21216,Zoquiapan
-38,social,amarillo,0.4646,0.4286,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21038,Cuapiaxtla de Madero
-117,social,verde,0.1901,0.0645,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21117,Rafael Lara Grajales
-97,social,verde,0.2031,0.0783,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21097,Mixtla
-118,social,verde,0.4078,0.318,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21118,Los Reyes de Juárez
-137,social,verde,0.4329,0.3733,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21137,San Nicolás Buenos Aires
-144,social,amarillo,0.4931,0.5069,"Carencias media (proxy Censo 2020: analfabetismo, servicios y vivienda)",21144,San Salvador Huixcolotla
-136,social,verde,0.0723,0.0184,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21136,San Miguel Xoxtla
-138,social,verde,0.4012,0.3041,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21138,San Nicolás de los Ranchos
-27,social,verde,0.3612,0.2581,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21020,Atoyatempan
-34,social,verde,0.2051,0.0829,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21034,Coronango
-90,social,verde,0.1645,0.0461,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21090,Juan C. Bonilla
-151,social,verde,0.3278,0.1935,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21151,Santo Tomás Hueyotlipan
-164,social,verde,0.3001,0.1659,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21164,Tepeaca
-171,social,verde,0.2425,0.106,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21171,Tepeyahualco de Cuauhtémoc
-182,social,verde,0.4441,0.3917,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21182,Tlanepantla
-20,social,verde,0.2638,0.1475,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21021,Atzala
-133,social,verde,0.2468,0.1198,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21133,San Martín Totoltepec
-95,social,verde,0.2252,0.0968,"Carencias muy baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21095,La Magdalena Tlatlauquitepec
-214,social,verde,0.4113,0.3226,"Carencias baja (proxy Censo 2020: analfabetismo, servicios y vivienda)",21214,Zinacatepec
+15,social,verde,,,Marginación muy bajo (CONAPO 2020),21015,Amozoc
+25,social,amarillo,,,Marginación medio (CONAPO 2020),21026,Calpan
+5,social,rojo,,,Marginación muy alto (CONAPO 2020),21005,Acteopan
+7,social,rojo,,,Marginación alto (CONAPO 2020),21007,Ahuatlán
+19,social,verde,,,Marginación muy bajo (CONAPO 2020),21019,Atlixco
+21,social,amarillo,,,Marginación medio (CONAPO 2020),21022,Atzitzihuacán
+3,social,amarillo,,,Marginación medio (CONAPO 2020),21003,Acatlán
+9,social,rojo,,,Marginación alto (CONAPO 2020),21009,Ahuehuetitla
+18,social,amarillo,,,Marginación medio (CONAPO 2020),21018,Atexcal
+23,social,amarillo,,,Marginación medio (CONAPO 2020),21024,Axutla
+10,social,rojo,,,Marginación alto (CONAPO 2020),21010,Ajalpan
+13,social,verde,,,Marginación bajo (CONAPO 2020),21013,Altepexi
+6,social,rojo,,,Marginación alto (CONAPO 2020),21006,Ahuacatlán
+8,social,verde,,,Marginación bajo (CONAPO 2020),21008,Ahuazotepec
+14,social,rojo,,,Marginación alto (CONAPO 2020),21014,Amixtlán
+16,social,amarillo,,,Marginación medio (CONAPO 2020),21016,Aquixtla
+2,social,rojo,,,Marginación alto (CONAPO 2020),21002,Acateno
+17,social,amarillo,,,Marginación medio (CONAPO 2020),21017,Atempan
+24,social,rojo,,,Marginación alto (CONAPO 2020),21025,Ayotoxco de Guerrero
+4,social,amarillo,,,Marginación medio (CONAPO 2020),21004,Acatzingo
+12,social,amarillo,,,Marginación medio (CONAPO 2020),21012,Aljojuca
+22,social,rojo,,,Marginación alto (CONAPO 2020),21023,Atzitzintla
+29,social,rojo,,,Marginación alto (CONAPO 2020),21029,Caxhuacan
+58,social,rojo,,,Marginación alto (CONAPO 2020),21058,Chilchotla
+60,social,verde,,,Marginación bajo (CONAPO 2020),21060,Domingo Arenas
+59,social,rojo,,,Marginación alto (CONAPO 2020),21059,Chinantla
+61,social,rojo,,,Marginación muy alto (CONAPO 2020),21061,Eloxochitlán
+54,social,amarillo,,,Marginación medio (CONAPO 2020),21054,Chignautla
+33,social,amarillo,,,Marginación medio (CONAPO 2020),21033,Cohuecan
+31,social,rojo,,,Marginación alto (CONAPO 2020),21031,Coatzingo
+32,social,amarillo,,,Marginación medio (CONAPO 2020),21032,Cohetzala
+57,social,rojo,,,Marginación alto (CONAPO 2020),21057,Honey
+37,social,amarillo,,,Marginación medio (CONAPO 2020),21037,Coyotepec
+55,social,rojo,,,Marginación alto (CONAPO 2020),21055,Chila
+56,social,amarillo,,,Marginación medio (CONAPO 2020),21056,Chila de la Sal
+35,social,amarillo,,,Marginación medio (CONAPO 2020),21035,Coxcatlán
+36,social,rojo,,,Marginación muy alto (CONAPO 2020),21036,Coyomeapan
+39,social,rojo,,,Marginación alto (CONAPO 2020),21039,Cuautempan
+49,social,rojo,,,Marginación alto (CONAPO 2020),21049,Chiconcuautla
+53,social,verde,,,Marginación bajo (CONAPO 2020),21053,Chignahuapan
+43,social,rojo,,,Marginación alto (CONAPO 2020),21043,Cuetzalan del Progreso
+44,social,amarillo,,,Marginación medio (CONAPO 2020),21044,Cuyoaco
+45,social,verde,,,Marginación bajo (CONAPO 2020),21045,Chalchicomula de Sesma
+50,social,rojo,,,Marginación alto (CONAPO 2020),21050,Chichiquila
+40,social,rojo,,,Marginación alto (CONAPO 2020),21040,Cuautinchán
+41,social,verde,,,Marginación muy bajo (CONAPO 2020),21041,Cuautlancingo
+48,social,verde,,,Marginación bajo (CONAPO 2020),21048,Chiautzingo
+51,social,verde,,,Marginación bajo (CONAPO 2020),21051,Chietla
+42,social,rojo,,,Marginación alto (CONAPO 2020),21042,Cuayuca de Andrade
+47,social,amarillo,,,Marginación medio (CONAPO 2020),21047,Chiautla
+52,social,rojo,,,Marginación alto (CONAPO 2020),21052,Chigmecatitlán
+46,social,verde,,,Marginación bajo (CONAPO 2020),21046,Chapulco
+140,social,verde,,,Marginación muy bajo (CONAPO 2020),21140,San Pedro Cholula
+139,social,amarillo,,,Marginación medio (CONAPO 2020),21139,San Pablo Anicano
+77,social,rojo,,,Marginación muy alto (CONAPO 2020),21077,Hueytlalpan
+78,social,rojo,,,Marginación alto (CONAPO 2020),21078,Huitzilan de Serdán
+79,social,amarillo,,,Marginación medio (CONAPO 2020),21079,Huitziltepec
+96,social,verde,,,Marginación bajo (CONAPO 2020),21096,Mazapiltepec de Juárez
+123,social,rojo,,,Marginación alto (CONAPO 2020),21123,San Felipe Tepatlán
+119,social,verde,,,Marginación muy bajo (CONAPO 2020),21119,San Andrés Cholula
+122,social,verde,,,Marginación bajo (CONAPO 2020),21122,San Felipe Teotlalcingo
+121,social,rojo,,,Marginación alto (CONAPO 2020),21121,San Diego la Mesa Tochimiltzingo
+120,social,rojo,,,Marginación alto (CONAPO 2020),21120,San Antonio Cañada
+124,social,amarillo,,,Marginación medio (CONAPO 2020),21124,San Gabriel Chilac
+172,social,amarillo,,,Marginación medio (CONAPO 2020),21172,Tetela de Ocampo
+178,social,rojo,,,Marginación alto (CONAPO 2020),21178,Tlacuilotepec
+173,social,verde,,,Marginación muy bajo (CONAPO 2020),21173,Teteles de Ávila Castillo
+174,social,verde,,,Marginación muy bajo (CONAPO 2020),21174,Teziutlán
+204,social,verde,,,Marginación bajo (CONAPO 2020),21204,Yaonáhuac
+179,social,amarillo,,,Marginación medio (CONAPO 2020),21179,Tlachichuca
+180,social,verde,,,Marginación bajo (CONAPO 2020),21180,Tlahuapan
+175,social,verde,,,Marginación bajo (CONAPO 2020),21175,Tianguismanalco
+176,social,amarillo,,,Marginación medio (CONAPO 2020),21176,Tilapa
+203,social,amarillo,,,Marginación medio (CONAPO 2020),21203,Xochitlán Todos Santos
+177,social,amarillo,,,Marginación medio (CONAPO 2020),21177,Tlacotepec de Benito Juárez
+26,social,rojo,,,Marginación alto (CONAPO 2020),21027,Caltepec
+64,social,rojo,,,Marginación alto (CONAPO 2020),21064,Francisco Z. Mena
+68,social,rojo,,,Marginación alto (CONAPO 2020),21068,Hermenegildo Galeana
+71,social,verde,,,Marginación bajo (CONAPO 2020),21071,Huauchinango
+72,social,rojo,,,Marginación muy alto (CONAPO 2020),21072,Huehuetla
+75,social,amarillo,,,Marginación medio (CONAPO 2020),21075,Hueyapan
+76,social,amarillo,,,Marginación medio (CONAPO 2020),21076,Hueytamalco
+63,social,verde,,,Marginación bajo (CONAPO 2020),21063,Esperanza
+65,social,amarillo,,,Marginación medio (CONAPO 2020),21065,General Felipe Ángeles
+67,social,verde,,,Marginación bajo (CONAPO 2020),21067,Guadalupe Victoria
+74,social,verde,,,Marginación muy bajo (CONAPO 2020),21074,Huejotzingo
+62,social,amarillo,,,Marginación medio (CONAPO 2020),21062,Epatlán
+69,social,amarillo,,,Marginación medio (CONAPO 2020),21069,Huaquechula
+66,social,rojo,,,Marginación alto (CONAPO 2020),21066,Guadalupe
+70,social,rojo,,,Marginación alto (CONAPO 2020),21070,Huatlatlauca
+73,social,amarillo,,,Marginación medio (CONAPO 2020),21073,Huehuetlán el Chico
+102,social,verde,,,Marginación muy bajo (CONAPO 2020),21102,Nealtican
+104,social,verde,,,Marginación bajo (CONAPO 2020),21104,Nopalucan
+98,social,amarillo,,,Marginación medio (CONAPO 2020),21098,Molcaxac
+100,social,rojo,,,Marginación alto (CONAPO 2020),21100,Naupan
+107,social,rojo,,,Marginación muy alto (CONAPO 2020),21107,Olintla
+109,social,rojo,,,Marginación alto (CONAPO 2020),21109,Pahuatlán
+111,social,rojo,,,Marginación alto (CONAPO 2020),21111,Pantepec
+101,social,amarillo,,,Marginación medio (CONAPO 2020),21101,Nauzontla
+99,social,rojo,,,Marginación alto (CONAPO 2020),21099,Cañada Morelos
+105,social,amarillo,,,Marginación medio (CONAPO 2020),21105,Ocotepec
+108,social,verde,,,Marginación bajo (CONAPO 2020),21108,Oriental
+110,social,amarillo,,,Marginación medio (CONAPO 2020),21110,Palmar de Bravo
+115,social,amarillo,,,Marginación medio (CONAPO 2020),21115,Quecholac
+106,social,verde,,,Marginación bajo (CONAPO 2020),21106,Ocoyucan
+114,social,verde,,,Marginación muy bajo (CONAPO 2020),21114,Puebla
+112,social,rojo,,,Marginación alto (CONAPO 2020),21112,Petlalcingo
+113,social,rojo,,,Marginación alto (CONAPO 2020),21113,Piaxtla
+103,social,rojo,,,Marginación alto (CONAPO 2020),21103,Nicolás Bravo
+84,social,rojo,,,Marginación alto (CONAPO 2020),21084,Ixtepec
+88,social,rojo,,,Marginación alto (CONAPO 2020),21088,Jonotla
+116,social,rojo,,,Marginación alto (CONAPO 2020),21116,Quimixtlán
+85,social,verde,,,Marginación bajo (CONAPO 2020),21085,Izúcar de Matamoros
+81,social,rojo,,,Marginación alto (CONAPO 2020),21081,Ixcamilpa de Guerrero
+82,social,verde,,,Marginación bajo (CONAPO 2020),21082,Ixcaquixtla
+87,social,rojo,,,Marginación alto (CONAPO 2020),21087,Jolalpan
+142,social,verde,,,Marginación bajo (CONAPO 2020),21142,San Salvador el Seco
+1,social,amarillo,,,Marginación medio (CONAPO 2020),21001,Acajete
+143,social,verde,,,Marginación muy bajo (CONAPO 2020),21143,San Salvador el Verde
+11,social,amarillo,,,Marginación medio (CONAPO 2020),21011,Albino Zertuche
+141,social,amarillo,,,Marginación medio (CONAPO 2020),21141,San Pedro Yeloixtlahuaca
+93,social,amarillo,,,Marginación medio (CONAPO 2020),21093,Lafragua
+94,social,verde,,,Marginación bajo (CONAPO 2020),21094,Libres
+92,social,rojo,,,Marginación alto (CONAPO 2020),21092,Juan N. Méndez
+125,social,verde,,,Marginación muy bajo (CONAPO 2020),21125,San Gregorio Atzompa
+128,social,verde,,,Marginación bajo (CONAPO 2020),21128,San José Chiapa
+130,social,amarillo,,,Marginación medio (CONAPO 2020),21130,San Juan Atenco
+132,social,verde,,,Marginación muy bajo (CONAPO 2020),21132,San Martín Texmelucan
+126,social,amarillo,,,Marginación medio (CONAPO 2020),21126,San Jerónimo Tecuanipan
+127,social,rojo,,,Marginación alto (CONAPO 2020),21127,San Jerónimo Xayacatlán
+131,social,amarillo,,,Marginación medio (CONAPO 2020),21131,San Juan Atzompa
+129,social,amarillo,,,Marginación medio (CONAPO 2020),21129,San José Miahuatlán
+134,social,verde,,,Marginación muy bajo (CONAPO 2020),21134,San Matías Tlalancaleca
+135,social,amarillo,,,Marginación medio (CONAPO 2020),21135,San Miguel Ixitlán
+181,social,verde,,,Marginación muy bajo (CONAPO 2020),21181,Tlaltenango
+148,social,rojo,,,Marginación alto (CONAPO 2020),21148,Santa Isabel Cholula
+146,social,rojo,,,Marginación alto (CONAPO 2020),21146,Santa Catarina Tlaltempan
+147,social,rojo,,,Marginación alto (CONAPO 2020),21147,Santa Inés Ahuatempan
+150,social,rojo,,,Marginación alto (CONAPO 2020),21150,Huehuetlán el Grande
+145,social,rojo,,,Marginación muy alto (CONAPO 2020),21145,San Sebastián Tlacotepec
+149,social,amarillo,,,Marginación medio (CONAPO 2020),21149,Santiago Miahuatlán
+162,social,rojo,,,Marginación muy alto (CONAPO 2020),21162,Tepango de Rodríguez
+158,social,rojo,,,Marginación alto (CONAPO 2020),21158,Tenampulco
+199,social,amarillo,,,Marginación medio (CONAPO 2020),21199,Xiutetelco
+202,social,rojo,,,Marginación alto (CONAPO 2020),21202,Xochitlán de Vicente Suárez
+152,social,verde,,,Marginación bajo (CONAPO 2020),21152,Soltepec
+154,social,verde,,,Marginación bajo (CONAPO 2020),21154,Tecamachalco
+170,social,amarillo,,,Marginación medio (CONAPO 2020),21170,Tepeyahualco
+153,social,verde,,,Marginación bajo (CONAPO 2020),21153,Tecali de Herrera
+163,social,verde,,,Marginación bajo (CONAPO 2020),21163,Tepatlaxco de Hidalgo
+159,social,rojo,,,Marginación alto (CONAPO 2020),21159,Teopantlán
+165,social,rojo,,,Marginación alto (CONAPO 2020),21165,Tepemaxalco
+166,social,amarillo,,,Marginación medio (CONAPO 2020),21166,Tepeojuma
+168,social,rojo,,,Marginación alto (CONAPO 2020),21168,Tepexco
+201,social,amarillo,,,Marginación medio (CONAPO 2020),21201,Xochiltepec
+155,social,amarillo,,,Marginación medio (CONAPO 2020),21155,Tecomatlán
+157,social,rojo,,,Marginación alto (CONAPO 2020),21157,Tehuitzingo
+160,social,amarillo,,,Marginación medio (CONAPO 2020),21160,Teotlalco
+169,social,rojo,,,Marginación alto (CONAPO 2020),21169,Tepexi de Rodríguez
+198,social,rojo,,,Marginación muy alto (CONAPO 2020),21198,Xicotlán
+156,social,verde,,,Marginación muy bajo (CONAPO 2020),21156,Tehuacán
+161,social,verde,,,Marginación bajo (CONAPO 2020),21161,Tepanco de López
+206,social,rojo,,,Marginación alto (CONAPO 2020),21206,Zacapala
+205,social,verde,,,Marginación bajo (CONAPO 2020),21205,Yehualtepec
+208,social,verde,,,Marginación bajo (CONAPO 2020),21208,Zacatlán
+213,social,rojo,,,Marginación alto (CONAPO 2020),21213,Zihuateutla
+207,social,amarillo,,,Marginación medio (CONAPO 2020),21207,Zacapoaxtla
+210,social,amarillo,,,Marginación medio (CONAPO 2020),21210,Zapotitlán de Méndez
+211,social,verde,,,Marginación muy bajo (CONAPO 2020),21211,Zaragoza
+212,social,rojo,,,Marginación alto (CONAPO 2020),21212,Zautla
+209,social,amarillo,,,Marginación medio (CONAPO 2020),21209,Zapotitlán
+183,social,rojo,,,Marginación alto (CONAPO 2020),21183,Tlaola
+192,social,amarillo,,,Marginación medio (CONAPO 2020),21192,Tuzamapan de Galeana
+189,social,verde,,,Marginación bajo (CONAPO 2020),21189,Tochtepec
+185,social,amarillo,,,Marginación medio (CONAPO 2020),21185,Tlapanalá
+188,social,rojo,,,Marginación alto (CONAPO 2020),21188,Tochimilco
+190,social,amarillo,,,Marginación medio (CONAPO 2020),21190,Totoltepec de Guerrero
+191,social,rojo,,,Marginación alto (CONAPO 2020),21191,Tulcingo
+193,social,rojo,,,Marginación alto (CONAPO 2020),21193,Tzicatlacoyan
+196,social,amarillo,,,Marginación medio (CONAPO 2020),21196,Xayacatlán de Bravo
+195,social,rojo,,,Marginación muy alto (CONAPO 2020),21195,Vicente Guerrero
+217,social,rojo,,,Marginación muy alto (CONAPO 2020),21217,Zoquitlán
+197,social,verde,,,Marginación bajo (CONAPO 2020),21197,Xicotepec
+186,social,verde,,,Marginación bajo (CONAPO 2020),21186,Tlatlauquitepec
+28,social,rojo,,,Marginación alto (CONAPO 2020),21028,Camocuautla
+30,social,rojo,,,Marginación alto (CONAPO 2020),21030,Coatepec
+83,social,rojo,,,Marginación alto (CONAPO 2020),21083,Ixtacamaxtitlán
+86,social,rojo,,,Marginación alto (CONAPO 2020),21086,Jalpan
+89,social,rojo,,,Marginación alto (CONAPO 2020),21089,Jopala
+91,social,verde,,,Marginación muy bajo (CONAPO 2020),21091,Juan Galindo
+167,social,rojo,,,Marginación alto (CONAPO 2020),21167,Tepetzintla
+184,social,rojo,,,Marginación alto (CONAPO 2020),21184,Tlapacoya
+187,social,rojo,,,Marginación alto (CONAPO 2020),21187,Tlaxco
+194,social,amarillo,,,Marginación medio (CONAPO 2020),21194,Venustiano Carranza
+200,social,rojo,,,Marginación alto (CONAPO 2020),21200,Xochiapulco
+215,social,rojo,,,Marginación alto (CONAPO 2020),21215,Zongozotla
+80,social,rojo,,,Marginación alto (CONAPO 2020),21080,Atlequizayan
+216,social,rojo,,,Marginación alto (CONAPO 2020),21216,Zoquiapan
+38,social,amarillo,,,Marginación medio (CONAPO 2020),21038,Cuapiaxtla de Madero
+117,social,verde,,,Marginación muy bajo (CONAPO 2020),21117,Rafael Lara Grajales
+97,social,verde,,,Marginación bajo (CONAPO 2020),21097,Mixtla
+118,social,verde,,,Marginación bajo (CONAPO 2020),21118,Los Reyes de Juárez
+137,social,amarillo,,,Marginación medio (CONAPO 2020),21137,San Nicolás Buenos Aires
+144,social,amarillo,,,Marginación medio (CONAPO 2020),21144,San Salvador Huixcolotla
+136,social,verde,,,Marginación muy bajo (CONAPO 2020),21136,San Miguel Xoxtla
+138,social,verde,,,Marginación bajo (CONAPO 2020),21138,San Nicolás de los Ranchos
+27,social,verde,,,Marginación bajo (CONAPO 2020),21020,Atoyatempan
+34,social,verde,,,Marginación muy bajo (CONAPO 2020),21034,Coronango
+90,social,verde,,,Marginación muy bajo (CONAPO 2020),21090,Juan C. Bonilla
+151,social,verde,,,Marginación bajo (CONAPO 2020),21151,Santo Tomás Hueyotlipan
+164,social,verde,,,Marginación bajo (CONAPO 2020),21164,Tepeaca
+171,social,verde,,,Marginación bajo (CONAPO 2020),21171,Tepeyahualco de Cuauhtémoc
+182,social,verde,,,Marginación bajo (CONAPO 2020),21182,Tlanepantla
+20,social,amarillo,,,Marginación medio (CONAPO 2020),21021,Atzala
+133,social,amarillo,,,Marginación medio (CONAPO 2020),21133,San Martín Totoltepec
+95,social,verde,,,Marginación bajo (CONAPO 2020),21095,La Magdalena Tlatlauquitepec
+214,social,amarillo,,,Marginación medio (CONAPO 2020),21214,Zinacatepec
