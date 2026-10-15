@@ -295,6 +295,42 @@ def proponer_rutas(d: Datos, pred: pd.DataFrame, dias: int = 2, region: str | No
     return unicas
 
 
+def ruta_personalizada(d: Datos, pred: pd.DataFrame, inicio: str, destinos: list[str] | None = None,
+                       dias: int = 2, max_paradas: int = 6) -> Ruta | None:
+    """Ruta que sale de cualquier municipio. Con `destinos` visita esos municipios en el orden más
+    corto (2-opt con el inicio fijo); sin ellos la completa con la misma heurística de las rutas
+    sugeridas (presupuesto de `dias` × 9 h). None si no hay suficientes municipios alcanzables."""
+    act = d.actividades.set_index("clave")
+    nodos = _nodos(d, pred)
+    mun = d.municipios
+    fila = mun[mun.cve_geo == inicio].iloc[0]
+    por_cve = nodos.set_index("cve_geo")
+
+    def parada(cve):
+        if cve in por_cve.index:
+            n = por_cve.loc[cve].copy()
+            n["cve_geo"] = cve
+            return _parada(n, None, False)
+        m = mun[mun.cve_geo == cve].iloc[0]
+        p = _parada(None, m, True)  # municipio sin actividades destacadas
+        p.update(es_ancla=bool(m.es_ancla), iconos="⚓" if m.es_ancla else "📍", social=float(m.indice_marginacion))
+        return p
+
+    if destinos:
+        paradas = _dos_opt([parada(inicio)] + [parada(c) for c in dict.fromkeys(destinos) if c != inicio], d.tiempos)
+    else:
+        hecha = _construir(fila, nodos, d.tiempos, dias * 9 * 60, max_paradas, set())
+        if not hecha:
+            return None
+        paradas = hecha[0]
+        paradas[0] = {**parada(inicio), "min_desde_anterior": 0.0}
+    if len(paradas) < 2:
+        return None
+    minutos = sum(p["min_desde_anterior"] for p in paradas) + sum(180 if p["es_ancla"] else 150 for p in paradas)
+    score = sum(p["score"] for p in paradas[1:])
+    return Ruta(_nombre(paradas, act), _tema(paradas, act), paradas, minutos, score, 1.0)
+
+
 def _construir(ancla, nodos, T, presupuesto, max_paradas, prohibidos):
     estancia = lambda n: 180 if n.es_ancla else 150  # noqa: E731
     fila_ancla = nodos[nodos.cve_geo == ancla.cve_geo]
@@ -374,8 +410,9 @@ def _nombre(paradas, act) -> str:
 # --- Circuitos municipales -------------------------------------------------------
 
 def circuito_municipal(d: Datos, cve_geo: str, actividades: list[str] | None,
-                       horas: float = 6, variado: bool = True) -> pd.DataFrame:
-    """Circuito dentro del municipio: vecino más cercano sobre puntos de interés."""
+                       horas: float = 6, variado: bool = True, kmh: float = 25) -> pd.DataFrame:
+    """Circuito dentro del municipio: vecino más cercano sobre puntos de interés. `kmh` = velocidad
+    media de traslado (25 en auto por calles de pueblo, ~4.5 a pie)."""
     mun = d.municipios.set_index("cve_geo").loc[cve_geo]
     p = d.poi[d.poi.cve_geo == cve_geo].copy()
     if actividades:
@@ -392,7 +429,7 @@ def circuito_municipal(d: Datos, cve_geo: str, actividades: list[str] | None,
     pendientes = p.copy()
     while not pendientes.empty:
         dist = _km(actual[0], actual[1], pendientes.lat.to_numpy(), pendientes.lon.to_numpy())
-        viaje = dist * 1.4 / 25 * 60
+        viaje = dist * 1.4 / kmh * 60
         if variado:  # alterna actividades para que el circuito sea diverso
             penal = pendientes.actividad.map(usadas).fillna(0).to_numpy() * 8
         else:
