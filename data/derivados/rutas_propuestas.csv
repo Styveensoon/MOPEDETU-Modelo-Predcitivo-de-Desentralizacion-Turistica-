@@ -1,6 +1,6 @@
 ruta_sk,nombre,recorrido,puntaje,minutos,novedad
-45,Gastronomía tradicional · Zacatlán → Jopala (propuesta 1),Zacatlán → Zapotitlán de Méndez → Jonotla → Huehuetla → Olintla → Jopala,8.221778262620687,137.0,nueva
-46,Café · Tlatlauquitepec → Jonotla (propuesta 2),Tlatlauquitepec → Zacapoaxtla → Xochitlán de Vicente Suárez → Zapotitlán de Méndez → Zoquiapan → Jonotla,8.093742168029394,79.2,nueva
-47,Volcanes y alta montaña · San Pedro Cholula → Huaquechula (propuesta 3),San Pedro Cholula → Nealtican → Calpan → Tochimilco → Atzitzihuacán → Huaquechula,6.819921962007967,115.5,parcialmente_existente
-48,Gastronomía tradicional · Tehuacán → Zacapala (propuesta 4),Tehuacán → San Gabriel Chilac → Zapotitlán → Atexcal → Coyotepec → Zacapala,6.198109839589909,177.6,nueva
-49,Turismo comunitario · Atlixco → Acajete (propuesta 5),Atlixco → San Salvador el Verde → San Matías Tlalancaleca → Coronango → Amozoc → Acajete,5.4129700197242805,226.0,nueva
+75,Café · Xicotepec → Naupan (propuesta 1),Xicotepec → Jopala → Zihuateutla → Tlacuilotepec → Tlaxco → Naupan,8.979528049554894,136.2,nueva
+76,Talavera y artesanías · Chignahuapan → Tuzamapan de Galeana (propuesta 2),Chignahuapan → Aquixtla → Zautla → Zacapoaxtla → Jonotla → Tuzamapan de Galeana,8.763724997392703,173.6,nueva
+77,Volcanes y alta montaña · San Pedro Cholula → Huaquechula (propuesta 3),San Pedro Cholula → Nealtican → Calpan → Tochimilco → Atzitzihuacán → Huaquechula,8.217230887632917,115.5,parcialmente_existente
+78,Turismo religioso y conventos · Puebla → Tecamachalco (propuesta 4),Puebla → Cuautinchán → Tecali de Herrera → Acatzingo → Quecholac → Tecamachalco,6.991142408234242,149.6,parcialmente_existente
+79,Mezcal y destilados · Puebla → Ixcaquixtla (propuesta 5),Puebla → Huehuetlán el Grande → Tzicatlacoyan → Tecali de Herrera → Molcaxac → Ixcaquixtla,6.4021991365705135,180.5,parcialmente_existente

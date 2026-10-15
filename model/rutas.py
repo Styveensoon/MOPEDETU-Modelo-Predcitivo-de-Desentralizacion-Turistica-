@@ -8,9 +8,12 @@ y reordenamiento 2-opt con el ancla fija al inicio.
 Restricciones: 3-6 paradas · tramo ≤ 75 min · recorrido ≤ 240 min · inicia en un ancla y el resto no son anclas
                · ≥ 2 municipios con bandera activa · todos con el tema presente (o reconocido en catálogo)
                · al menos un mes de temporada compartido por la mayoría de las paradas (bono)
-Selección: las 5 mejores por puntaje con diversidad (≤ 50 % de municipios compartidos), anclas distintas y
-           primero una ruta por región del ancla (descentralizar también entre regiones).
-Tema:      solo cuenta presencia fuerte (alta, muy alta o reconocida en catálogo oficial).
+Selección: búsqueda exhaustiva (con poda) de la mejor combinación de 5 rutas, lexicográfica: primero el
+           máximo de regiones beneficiadas distintas, luego Σ puntaje + 1.0 por cada tema distinto. Región de la ruta = la que predomina entre sus
+           paradas (donde llega el beneficio, no la del ancla). Restricciones: ≤ 50 % de municipios compartidos,
+           ≤ 2 rutas por tema, ≤ 2 rutas por ancla (Puebla es la puerta de entrada del estado).
+Tema:      solo cuenta presencia fuerte (alta, muy alta o reconocida en catálogo oficial). Especificidad: el
+           puntaje se multiplica de ×0.85 (tema más común, p. ej. gastronomía) a ×1.15 (tema más distintivo).
 Escribe dim_ruta / fact_ruta_parada (origen = 'propuesta_modelo') y fact_ruta_evaluacion; reporta v_novedad_ruta.
 Uso: python model/rutas.py
 """
@@ -26,8 +29,54 @@ from base import EJES, RAIZ, pct
 MAX_TRAMO, MAX_TOTAL, MIN_PARADAS, MAX_PARADAS = 75, 240, 3, 6
 N_RUTAS, MAX_SOLAPE = 5, 0.5
 ESTANCIA = {True: 3.0, False: 2.0}  # horas sugeridas: ancla / municipio emergente
+# "comunitario" queda fuera: se detecta por palabras como "cooperativa" o "ejido" en el nombre del negocio y
+# esa señal es ruidosa (restaurantes, cooperativas escolares). Se reincorpora con un catálogo de cooperativas turísticas.
 TEMAS = ["cafe", "mezcal", "ecoturismo", "gastronomia", "artesanias", "bebidas_tradicionales", "religioso",
-         "balnearios", "flores_viveros", "comunitario", "museos", "arqueologia", "volcanes"]
+         "balnearios", "flores_viveros", "museos", "arqueologia", "volcanes"]
+# Criterio lexicográfico: primero el número de regiones beneficiadas distintas (descentralizar es el objetivo),
+# luego la calidad. BONO_REGION es mayor que cualquier diferencia posible de puntajes, así que una región más
+# siempre gana; BONO_TEMA premia la variedad de temas.
+BONO_REGION, BONO_TEMA = 100.0, 1.0
+MAX_POR_ANCLA = 2                   # Puebla y otras anclas pueden ser puerta de entrada de hasta 2 rutas
+
+
+def seleccionar(candidatas: list) -> list:
+    """Mejor combinación de N_RUTAS rutas (búsqueda exhaustiva con poda):
+    máx. Σ puntaje + BONO_REGION·(regiones beneficiadas distintas) + BONO_TEMA·(temas distintos)
+    s.a. ≤ 50 % de municipios compartidos entre dos rutas, ≤ 2 rutas por tema, ≤ MAX_POR_ANCLA por ancla."""
+    n = len(candidatas)
+    conj = [set(e["ruta"]) for e in candidatas]
+    compat = [[len(conj[i] & conj[j]) / min(len(conj[i]), len(conj[j])) <= MAX_SOLAPE for j in range(n)]
+              for i in range(n)]
+    cota = sorted((e["puntaje"] for e in candidatas), reverse=True)
+    mejor = {"valor": -np.inf, "sel": []}
+
+    def valor(sel):
+        es = [candidatas[i] for i in sel]
+        return (sum(e["puntaje"] for e in es) + BONO_REGION * len({e["region"] for e in es})
+                + BONO_TEMA * len({e["tema"] for e in es}))
+
+    def buscar(inicio, sel, suma):
+        if len(sel) == N_RUTAS:
+            v = valor(sel)
+            if v > mejor["valor"]:
+                mejor.update(valor=v, sel=list(sel))
+            return
+        faltan = N_RUTAS - len(sel)
+        if suma + sum(cota[:faltan]) + (BONO_REGION + BONO_TEMA) * N_RUTAS <= mejor["valor"]:
+            return  # poda: ni con las mejores restantes se supera la mejor combinación
+        for i in range(inicio, n):
+            e = candidatas[i]
+            if not all(compat[i][j] for j in sel):
+                continue
+            if sum(candidatas[j]["tema"] == e["tema"] for j in sel) >= 2:
+                continue
+            if sum(candidatas[j]["ruta"][0] == e["ruta"][0] for j in sel) >= MAX_POR_ANCLA:
+                continue
+            buscar(i + 1, sel + [i], suma + e["puntaje"])
+
+    buscar(0, [], 0.0)
+    return [candidatas[i] for i in mejor["sel"]]
 
 
 def datos(b: base.Base):
@@ -76,7 +125,7 @@ def main():
 
     def valor(mk, tema):
         r = mejor.loc[mk]
-        return (r.indice_oportunidad * (1 + 0.35 * (mk in con_flag)) * (1 + 0.20 * social.get(mk, 0))
+        return (r.indice_oportunidad * (1 + 0.35 * (mk in con_flag)) * (1 + 0.40 * social.get(mk, 0))
                 * (1 + 0.25 * (mk in presente.get(tema, set()))))
 
     def recorrido(ruta):
@@ -107,6 +156,11 @@ def main():
             ruta.append(max(opciones)[1])
         return dos_opt(ruta)
 
+    # Especificidad del tema: un tema presente en pocos municipios (mezcal, café, volcanes) distingue y vende
+    # más que uno casi universal (gastronomía tradicional). Factor de ×0.85 (más común) a ×1.15 (más raro).
+    n_tema = pd.Series({t: len(presente.get(t, set())) for t in TEMAS})
+    especificidad = (0.85 + 0.30 * (1 - (n_tema - n_tema.min()) / max(1, n_tema.max() - n_tema.min()))).to_dict()
+
     def evaluar(ruta, tema):
         resto = ruta[1:]
         emerg = [x for x in resto if x in con_flag]
@@ -117,30 +171,32 @@ def main():
         enl_medio = np.mean([pe_pct.get((a, c), 0) for a, c in zip(ruta, ruta[1:])])
         tramos_nuevos = np.mean([frozenset((a, c)) not in oficiales for a, c in zip(ruta, ruta[1:])])
         puntaje = (sum(valor(x, tema) for x in resto) * (0.7 + 0.3 * enl_medio) * (1 + 0.2 * tramos_nuevos)
-                   * (1 + 0.1 * bool(meses_comunes)) - 0.15 * recorrido(ruta) / MAX_TOTAL)
+                   * (1 + 0.1 * bool(meses_comunes)) * especificidad[tema] - 0.15 * recorrido(ruta) / MAX_TOTAL)
         return dict(ruta=ruta, tema=tema, puntaje=puntaje, emergentes=emerg, meses_comunes=meses_comunes,
                     enlace_medio=enl_medio, tramos_nuevos=tramos_nuevos, minutos=recorrido(ruta))
 
-    candidatas = [e for a in anclas for t in TEMAS if (e := evaluar(construir(a, t), t))]
+    construidas = {(a, t): construir(a, t) for a in anclas for t in TEMAS}
+    candidatas = [e for (a, t), r in construidas.items() if (e := evaluar(r, t))]
     candidatas.sort(key=lambda e: -e["puntaje"])
-    # Descentralizar también entre regiones: primera pasada = una ruta por región del ancla; segunda = completar
-    elegidas, anclas_usadas, regiones_usadas = [], set(), set()
-    for una_por_region in (True, False):
-        for e in candidatas:
-            s, ancla = set(e["ruta"]), e["ruta"][0]
-            if e in elegidas or ancla in anclas_usadas or (una_por_region and m.region[ancla] in regiones_usadas):
-                continue
-            if sum(o["tema"] == e["tema"] for o in elegidas) >= 2:  # variedad de temas: máximo 2 por tema
-                continue
-            if any(len(s & set(o["ruta"])) / min(len(s), len(o["ruta"])) > MAX_SOLAPE for o in elegidas):
-                continue
-            elegidas.append(e)
-            anclas_usadas.add(ancla)
-            regiones_usadas.add(m.region[ancla])
-            if len(elegidas) == N_RUTAS:
-                break
-        if len(elegidas) == N_RUTAS:
-            break
+    # Diagnóstico: todas las combinaciones ancla × tema, factibles o no y por qué
+    diag = []
+    for (a, t), r in construidas.items():
+        e = evaluar(r, t)
+        diag.append(dict(ancla=m.nombre[a], tema=t, paradas=len(r), recorrido=" → ".join(m.nombre[x] for x in r),
+                         emergentes=sum(x in con_flag for x in r[1:]), factible=e is not None,
+                         puntaje=round(e["puntaje"], 3) if e else None,
+                         candidatos_tema=len(presente.get(t, set()) - set(anclas)),
+                         necesidad_social=round(float(np.mean([social[x] for x in r[1:]])), 2) if len(r) > 1 else None))
+    pd.DataFrame(diag).sort_values(["tema", "puntaje"], ascending=[True, False]).to_csv(
+        RAIZ / "data" / "derivados" / "rutas_candidatas.csv", index=False)
+    # Selección voraz por puntaje AJUSTADO: si la región del ancla o el tema ya tienen ruta, el puntaje se
+    # multiplica por PENAL_REGION / PENAL_TEMA (penaliza, no excluye: una ruta mucho mejor sigue entrando).
+    # Restricciones duras: anclas distintas, máximo 2 rutas por tema y ≤ 50 % de municipios compartidos.
+    # Región de una ruta = región que predomina entre sus paradas (donde llega el beneficio), no la del ancla:
+    # p. ej. la ruta del mezcal sale de Puebla (Angelópolis) pero sus paradas están en la Mixteca.
+    for e in candidatas:
+        e["region"] = m.region.reindex(e["ruta"][1:]).mode().iat[0]
+    elegidas = seleccionar(candidatas)
     print(f"Candidatas factibles: {len(candidatas)} (anclas × temas) · elegidas: {len(elegidas)}")
 
     # --- escritura

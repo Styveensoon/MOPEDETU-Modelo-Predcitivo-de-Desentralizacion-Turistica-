@@ -91,18 +91,24 @@ La tasa base es 0.93 %. **SHAP:** distancia (30 %), turismo actual de los dos mu
 - 3 a 6 paradas, tramos ≤ 75 min y recorrido ≤ 240 min.
 - Empieza en un ancla y lleva ≥ 2 municipios con bandera.
 - Tema con presencia fuerte (alta, muy alta o reconocida).
-- Dos rutas no comparten más del 50 % de sus municipios.
-- Primero una ruta por región; máximo 2 por tema.
+- Dos rutas no comparten más del 50 % de sus municipios; máximo 2 rutas por tema y 2 por ancla.
 
-| # | Ruta | Recorrido | Novedad |
-|---|---|---|---|
-| 1 | Gastronomía tradicional · Zacatlán → Jopala | Zacatlán → Zapotitlán de Méndez → Jonotla → Huehuetla → Olintla → Jopala (137 min) | nueva |
-| 2 | Café · Tlatlauquitepec → Jonotla | Tlatlauquitepec → Zacapoaxtla → Xochitlán de V. S. → Zapotitlán de Méndez → Zoquiapan → Jonotla (79 min) | nueva |
-| 3 | Volcanes y alta montaña · San Pedro Cholula → Huaquechula | Cholula → Nealtican → Calpan → Tochimilco → Atzitzihuacán → Huaquechula (116 min) | parcialmente existente (20 % de tramos) |
-| 4 | Gastronomía tradicional · Tehuacán → Zacapala | Tehuacán → San Gabriel Chilac → Zapotitlán → Atexcal → Coyotepec → Zacapala (178 min) | nueva |
-| 5 | Turismo comunitario · Atlixco → Acajete | Atlixco → San Salvador el Verde → San Matías Tlalancaleca → Coronango → Amozoc → Acajete (226 min) | nueva |
+**Selección:**
+- Búsqueda exhaustiva de la mejor combinación de 5 rutas.
+- Criterio lexicográfico: primero el **número de regiones beneficiadas** distintas y después la calidad.
+- La región de una ruta es la que predomina entre sus paradas (donde llega el beneficio), no la del ancla.
+- **Especificidad del tema:** un tema distintivo (mezcal, café, volcanes) vale hasta ×1.15; uno casi universal (gastronomía tradicional), ×0.85.
+- El tema "comunitario" queda fuera hasta tener un catálogo confiable: la señal por nombre ("cooperativa", "ejido") es ruidosa.
 
-Las 5 rutas salen de 5 regiones distintas y llevan de 3 a 5 municipios emergentes cada una. Cada ruta tiene en `descripcion` el porqué: banderas, crecimiento esperado, tramos nuevos y temporada compartida.
+| # | Ruta | Recorrido | Región beneficiada | Novedad |
+|---|---|---|---|---|
+| 1 | ☕ Café · Xicotepec → Naupan | Xicotepec → Jopala → Zihuateutla → Tlacuilotepec → Tlaxco → Naupan (136 min) | Sierra Norte | nueva |
+| 2 | 🏺 Talavera y artesanías · Chignahuapan → Tuzamapan | Chignahuapan → Aquixtla → Zautla → Zacapoaxtla → Jonotla → Tuzamapan de Galeana (174 min) | Sierra Nororiental | nueva |
+| 3 | 🌋 Volcanes · San Pedro Cholula → Huaquechula | Cholula → Nealtican → Calpan → Tochimilco → Atzitzihuacán → Huaquechula (116 min) | Valle de Atlixco y Matamoros | parcialmente existente (20 %) |
+| 4 | ⛪ Conventos · Puebla → Tecamachalco | Puebla → Cuautinchán → Tecali de Herrera → Acatzingo → Quecholac → Tecamachalco (150 min) | Valle de Serdán | parcialmente existente (60 %) |
+| 5 | 🥃 Mezcal · Puebla → Ixcaquixtla | Puebla → Huehuetlán el Grande → Tzicatlacoyan → Tecali de Herrera → Molcaxac → Ixcaquixtla (180 min) | Mixteca | parcialmente existente (40 %): extiende la Ruta del Mezcal Legado de la Mixteca hasta Ixcaquixtla |
+
+Las rutas benefician a 5 regiones distintas y llevan de 4 a 5 municipios emergentes cada una. Cada ruta tiene en `descripcion` el porqué: banderas, crecimiento esperado, tramos nuevos y temporada compartida. El diagnóstico de todas las candidatas (ancla × tema) está en `data/derivados/rutas_candidatas.csv`.
 
 ## Validaciones (docs/modelo_predictivo_anillos.md §5)
 
@@ -114,8 +120,8 @@ Las 5 rutas salen de 5 regiones distintas y llevan de 3 a 5 municipios emergente
 | V4 | El modelo de crecimiento gana a las líneas base | ✅ En MAE, Spearman y top 20 %. Validación entre municipios; no hay segundo periodo temporal porque el CE 2014 no tiene descarga |
 | V5 | El modelo de enlaces gana a la distancia | ✅ AUC 0.879 vs 0.856; AP 2× |
 | V6 | Sensibilidad del índice a ±20 % en los pesos | Pendiente |
-| V7 | Al menos 1 ruta nueva y 1 parcialmente existente | ✅ 4 nuevas, 1 parcialmente existente |
-| V8 | Concentración del turismo | Hoy HHI 1,306 (top 5 = 51.9 %) → tendencial 1,132 (49.1 %) → **con rutas, hipotético** 1,093 (48.2 %). Supuesto: los emergentes de las rutas alcanzan el límite superior de su intervalo |
+| V7 | Al menos 1 ruta nueva y 1 parcialmente existente | ✅ 2 nuevas, 3 parcialmente existentes (extienden circuitos oficiales a municipios emergentes) |
+| V8 | Concentración del turismo | Hoy HHI 1,306 (top 5 = 51.9 %) → tendencial 1,132 (49.1 %) → **con rutas, hipotético** 1,076 (47.8 %). Supuesto: los emergentes de las rutas alcanzan el límite superior de su intervalo |
 | V9 | Proxy de turismo contra DATATUR | Pendiente |
 
 ## Limitaciones (para el jurado)
