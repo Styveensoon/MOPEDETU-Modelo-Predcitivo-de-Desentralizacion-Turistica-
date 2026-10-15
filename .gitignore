@@ -6,6 +6,9 @@ venv/
 .env
 .ipynb_checkpoints/
 
+# Node
+node_modules/
+
 # Datos pesados / modelos
 data/raw/*
 !data/raw/.gitkeep
@@ -17,3 +20,6 @@ data/raw/*
 Thumbs.db
 .vscode/
 .idea/
+
+# Credenciales locales
+.credenciales_roles.txt
