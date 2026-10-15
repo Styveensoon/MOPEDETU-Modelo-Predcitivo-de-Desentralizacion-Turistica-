@@ -64,12 +64,17 @@ rut AS (
            jsonb_agg(DISTINCT r.nombre) FILTER (WHERE r.origen <> 'existente') AS rutas_propuestas
     FROM dw.fact_ruta_parada p JOIN dw.dim_ruta r USING (ruta_sk)
     GROUP BY p.municipio_sk),
+-- Banderas de la versión vigente del índice (la más reciente), una por tipo con sus motivos por eje
 ban AS (
-    SELECT f.municipio_sk,
-           jsonb_agg(jsonb_build_object('codigo', t.codigo, 'motivo', f.motivo)) AS banderas
-    FROM dw.fact_flag_oportunidad f JOIN dw.dim_tipo_flag t USING (tipo_flag_sk)
-    WHERE f.flag_activo
-    GROUP BY f.municipio_sk)
+    SELECT municipio_sk,
+           jsonb_agg(jsonb_build_object('codigo', codigo, 'motivo', motivos) ORDER BY prioridad, codigo) AS banderas
+    FROM (
+        SELECT f.municipio_sk, t.codigo, t.prioridad, string_agg(DISTINCT f.motivo, ' · ') AS motivos
+        FROM dw.fact_flag_oportunidad f
+        JOIN dw.dim_tipo_flag t USING (tipo_flag_sk)
+        WHERE f.flag_activo AND f.version_sk = (SELECT max(version_sk) FROM dw.fact_flag_oportunidad)
+        GROUP BY f.municipio_sk, t.codigo, t.prioridad) x
+    GROUP BY municipio_sk)
 SELECT m.municipio_sk, m.cve_geo, m.nombre, m.region, m.es_pueblo_magico, m.es_ancla, m.superficie_km2,
        round(extensions.st_x(m.centroide)::numeric, 5) AS lon,
        round(extensions.st_y(m.centroide)::numeric, 5) AS lat,
