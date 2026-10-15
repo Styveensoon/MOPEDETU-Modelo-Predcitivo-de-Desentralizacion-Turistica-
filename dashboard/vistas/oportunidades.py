@@ -49,7 +49,7 @@ def render():
         lambda r: f"<b>{r.nombre}</b> · {r.region}<br/>{titulo}: <b>{fmt.format(r[metrica])}</b><br/>"
                   f"Líder: {r.icono_lider} {r.actividad_lider}<br/>Índice: {r.indice_oportunidad:.2f} · Flags: {r.num_flags}", axis=1)
     vmax = df[metrica].quantile(0.97) if metrica in ("po_actual", "menciones", "inversion_reciente_mdp") else None
-    m = mapas.Mapa(d.geo, alto=640).municipios(
+    m = mapas.Mapa(d.geo, alto=640, fondo=mapas.FONDO_ESTADO).municipios(
         df, metrica, df.set_index("cve_geo").tt, paleta=paleta, vmax=vmax, resaltar=resaltar,
         cuantiles=metrica in ("indice_oportunidad", "po_actual", "menciones"),
         seleccionado=st.session_state.get("op_cve"))

@@ -44,7 +44,7 @@ def render():
                       f"Líder: {r.icono_lider} {r.actividad_lider}<br/>Flags: {r.num_flags}"
                       + ("<br/>⚓ Destino consolidado" if r.es_ancla else ""), axis=1)
         fuera = set(mp.cve_geo) - set(estado.filtrar_region(mp).cve_geo)
-        m = mapas.Mapa(d.geo, alto=600).municipios(mp, "indice_oportunidad", tt, cuantiles=True, atenuar=fuera)
+        m = mapas.Mapa(d.geo, alto=600, fondo=mapas.FONDO_ESTADO).municipios(mp, "indice_oportunidad", tt, cuantiles=True, atenuar=fuera)
         anclas = mp[mp.es_ancla].copy()
         anclas["tt"] = "<b>⚓ " + anclas.nombre + "</b><br>Destino consolidado"
         for t in (_arcos(rutas).to_dict("records") if rutas else []):
