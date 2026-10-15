@@ -10,11 +10,10 @@ import streamlit as st
 import tema
 
 LIMITES_PUEBLA = dict(lat=(17.86, 20.84), lon=(-99.07, -96.72))
-TOOLTIP = {
-    "html": "{tt}",
-    "style": {"backgroundColor": "#0E2A5C", "color": "white", "fontSize": "12px",
-              "borderRadius": "8px", "padding": "8px 10px", "maxWidth": "320px"},
-}
+# El estilo real del tooltip vive en tema.CSS (.deck-tooltip): Streamlit no aplica "style".
+TOOLTIP = {"html": "{tt}"}
+# Resaltado al pasar el cursor: aclara el municipio en lugar de taparlo con una sombra oscura.
+RESALTADO = [255, 255, 255, 90]
 
 # Juego de caracteres explícito para TextLayer (incluye acentos, ñ y números)
 # (pydeck convierte cadenas y listas en expresiones; pdk.types.String las deja literales)
@@ -65,7 +64,7 @@ def capa_municipios(geo: dict, df: pd.DataFrame, valor: str, tooltip: pd.Series,
         "PolygonLayer", p, id=capa_id, get_polygon="poly", get_fill_color="color",
         get_line_color="borde", get_line_width="ancho", line_width_units=PIXELES,
         stroked=True, filled=True, pickable=True, auto_highlight=True,
-        highlight_color=[232, 177, 13, 230],
+        highlight_color=RESALTADO,
     )
 
 
@@ -143,14 +142,21 @@ def capa_trayecto(df: pd.DataFrame, color=(138, 21, 56)) -> pdk.Layer:
     )
 
 
+def _mercator_y(lat: float) -> float:
+    """Latitud → coordenada Web Mercator en 'grados equivalentes' (misma escala que la longitud)."""
+    return np.degrees(np.log(np.tan(np.pi / 4 + np.radians(lat) / 2)))
+
+
 def vista_ajustada(lats, lons, ancho=900, alto=600, margen=1.35, zoom_max=10.5, pitch=0) -> pdk.ViewState:
-    """Centra y ajusta el zoom para que todos los puntos quepan en el mapa."""
+    """Centra y ajusta el zoom para que todos los puntos quepan en el mapa (Web Mercator, mundo de 512 px)."""
     lat0, lat1, lon0, lon1 = float(min(lats)), float(max(lats)), float(min(lons)), float(max(lons))
+    y0, y1 = _mercator_y(lat0), _mercator_y(lat1)
     span_lon = max((lon1 - lon0) * margen, 0.05)
-    span_lat = max((lat1 - lat0) * margen, 0.05)
-    z = min(np.log2(ancho * 360 / (256 * span_lon)), np.log2(alto * 360 / (256 * span_lat * 1.06)))
-    return pdk.ViewState(latitude=(lat0 + lat1) / 2, longitude=(lon0 + lon1) / 2,
-                         zoom=float(np.clip(z, 6.5, zoom_max)), pitch=pitch)
+    span_y = max((y1 - y0) * margen, 0.05)
+    z = min(np.log2(ancho * 360 / (512 * span_lon)), np.log2(alto * 360 / (512 * span_y)))
+    lat_c = float(np.degrees(2 * np.arctan(np.exp(np.radians((y0 + y1) / 2))) - np.pi / 2))
+    return pdk.ViewState(latitude=lat_c, longitude=(lon0 + lon1) / 2,
+                         zoom=float(np.clip(z, 5.5, zoom_max)), pitch=pitch)
 
 
 VISTA_PUEBLA = vista_ajustada(LIMITES_PUEBLA["lat"], LIMITES_PUEBLA["lon"], ancho=950, alto=600, margen=1.06)

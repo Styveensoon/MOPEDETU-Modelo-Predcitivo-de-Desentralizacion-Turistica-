@@ -13,7 +13,8 @@ ACTIVIDADES = [
     # clave, nombre, icono, eje (dim_eje.codigo), descripción
     ("cafe", "Café", "☕", "turismo", "Fincas, beneficios y tostadores de café de altura"),
     ("mezcal", "Mezcal y destilados", "🥃", "turismo", "Palenques y elaboración de mezcal y otros destilados de agave"),
-    ("bebidas_tradicionales", "Pulque y sidra", "🍎", "alimentos", "Pulquerías, sidra y bebidas fermentadas tradicionales"),
+    ("bebidas_tradicionales", "Vinos, licores y bebidas tradicionales", "🍷", "alimentos",
+     "Licores y vinos de frutas de la sierra, sidra, pulque y otras bebidas fermentadas (SCIAN 312139, 312132)"),
     ("artesanias", "Talavera y artesanías", "🏺", "comercio_turistico", "Talavera, alfarería, ónix y tiendas de artesanías"),
     ("gastronomia", "Gastronomía tradicional", "🍲", "alimentos", "Moles, antojitos, barbacoa y cocina tradicional"),
     ("museos", "Museos y cultura", "🏛️", "turismo", "Museos públicos y privados"),
@@ -39,8 +40,11 @@ REGLAS = {
                  nombre_en=SCIAN_TURISTICO, catalogo=("cafe",)),
     "mezcal": dict(scian=("312145", "312149"), nombre=r"mezcal|mexcal|palenque",
                    nombre_en=("3121", "4612", "7224", "7225", "4659"), catalogo=("mezcal",)),
-    "bebidas_tradicionales": dict(scian=("312132", "312139"), nombre=r"pulque|sidra|tlachiquer",
-                                  nombre_en=SCIAN_TURISTICO, catalogo=()),
+    # 312139 = "Elaboración de sidra y otras bebidas fermentadas": INEGI agrupa ahí los vinos y licores de frutas.
+    # "licor" y "vino" solo cuentan en elaboración (3121); en comercio (4612) serían vinaterías.
+    "bebidas_tradicionales": dict(scian=("312132", "312139"),
+                                  nombre=r"pulque|sidra|tlachiquer|licor|vino de fruta|vinos de fruta|rompope",
+                                  nombre_en=("3121",), catalogo=()),
     "artesanias": dict(scian=("327111", "465915"), nombre=r"talavera|artesania|alfarer|\bonix\b|barro brunido",
                        nombre_en=SCIAN_TURISTICO, catalogo=()),
     "gastronomia": dict(scian=(),
@@ -85,7 +89,7 @@ def nivel_predominancia(cl: float, unidades: float, catalogo: bool) -> str:
         return "reconocida_sin_registro" if catalogo else "sin_oferta"
     if cl >= 2 and unidades >= 3:
         return "muy_alta"
-    if cl >= 1.25:
+    if cl >= 1.25 and unidades >= 2:  # un solo establecimiento no hace especialización
         return "alta"
     if cl >= 0.75:
         return "media"

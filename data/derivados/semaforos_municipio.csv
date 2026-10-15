@@ -433,223 +433,223 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 133,turismo_actual,amarillo,0.4741,0.6498,36.1 empleos turísticos por mil hab. · 0 hospedajes · 0 rutas oficiales,21133,San Martín Totoltepec
 95,turismo_actual,amarillo,0.4003,0.5484,23.1 empleos turísticos por mil hab. · 0 hospedajes · 0 rutas oficiales,21095,La Magdalena Tlatlauquitepec
 214,turismo_actual,rojo,0.6576,0.8894,30.1 empleos turísticos por mil hab. · 4 hospedajes · 1 rutas oficiales,21214,Zinacatepec
-1,oferta,verde,4.375,,"Especializada en Talavera y artesanías, Turismo comunitario, Pulque y sidra",21001,Acajete
+1,oferta,verde,4.375,,"Especializada en Talavera y artesanías, Turismo comunitario",21001,Acajete
 2,oferta,verde,4.03,,Especializada en Gastronomía tradicional,21002,Acateno
 3,oferta,verde,2.872,,Especializada en Talavera y artesanías,21003,Acatlán
 4,oferta,amarillo,0.933,,"Oferta diversa sin especialización: Gastronomía tradicional, Turismo religioso y conventos",21004,Acatzingo
 5,oferta,verde,132.878,,Especializada en Talavera y artesanías,21005,Acteopan
-6,oferta,verde,4.051,,Especializada en Café,21006,Ahuacatlán
+6,oferta,amarillo,4.051,,Oferta diversa sin especialización: Café,21006,Ahuacatlán
 7,oferta,rojo,1.143,,Oferta mínima: Talavera y artesanías,21007,Ahuatlán
 8,oferta,verde,1.308,,Especializada en Gastronomía tradicional,21008,Ahuazotepec
 9,oferta,verde,4.315,,Especializada en Gastronomía tradicional,21009,Ahuehuetitla
 10,oferta,amarillo,0.759,,Oferta diversa sin especialización: Gastronomía tradicional,21010,Ajalpan
 11,oferta,rojo,0.95,,Oferta mínima: Gastronomía tradicional,21011,Albino Zertuche
-12,oferta,verde,7.984,,Especializada en Pulque y sidra,21012,Aljojuca
+12,oferta,amarillo,0.762,,"Oferta diversa sin especialización: Zonas arqueológicas, Gastronomía tradicional",21012,Aljojuca
 13,oferta,amarillo,1.193,,Oferta diversa sin especialización: Museos y cultura,21013,Altepexi
 14,oferta,verde,42.301,,"Especializada en Café, Gastronomía tradicional",21014,Amixtlán
 15,oferta,verde,1.627,,Especializada en Turismo comunitario,21015,Amozoc
 16,oferta,verde,1.516,,Especializada en Talavera y artesanías,21016,Aquixtla
-17,oferta,verde,1.409,,Especializada en Pulque y sidra,21017,Atempan
+17,oferta,amarillo,2.982,,"Oferta diversa sin especialización: Vinos, licores y bebidas tradicionales",21017,Atempan
 18,oferta,verde,1.447,,Especializada en Gastronomía tradicional,21018,Atexcal
 19,oferta,verde,12.89,,"Especializada en Flores y viveros, Mezcal y destilados, Balnearios y aguas termales",21019,Atlixco
 20,oferta,gris,0.0,,Sin oferta turística registrada,21021,Atzala
-21,oferta,verde,4.052,,"Especializada en Talavera y artesanías, Café, Pulque y sidra",21022,Atzitzihuacán
-22,oferta,verde,8.006,,"Especializada en Pulque y sidra, Flores y viveros",21023,Atzitzintla
+21,oferta,verde,7.738,,Especializada en Talavera y artesanías,21022,Atzitzihuacán
+22,oferta,amarillo,1.557,,"Oferta diversa sin especialización: Flores y viveros, Gastronomía tradicional, Ecoturismo y aventura",21023,Atzitzintla
 23,oferta,gris,0.0,,Sin oferta turística registrada,21024,Axutla
 24,oferta,verde,3.507,,Especializada en Gastronomía tradicional,21025,Ayotoxco de Guerrero
 25,oferta,amarillo,0.552,,Oferta diversa sin especialización: Turismo religioso y conventos,21026,Calpan
 26,oferta,amarillo,0.86,,"Oferta diversa sin especialización: Gastronomía tradicional, Mezcal y destilados",21027,Caltepec
-27,oferta,verde,12.143,,"Especializada en Café, Balnearios y aguas termales, Turismo comunitario",21020,Atoyatempan
-28,oferta,verde,46.202,,Especializada en Café,21028,Camocuautla
+27,oferta,verde,12.143,,"Especializada en Café, Gastronomía tradicional",21020,Atoyatempan
+28,oferta,rojo,46.202,,Oferta mínima: Café,21028,Camocuautla
 29,oferta,verde,3.892,,Especializada en Gastronomía tradicional,21029,Caxhuacan
 30,oferta,rojo,1.045,,Oferta mínima: Gastronomía tradicional,21030,Coatepec
-31,oferta,verde,29.186,,"Especializada en Balnearios y aguas termales, Mezcal y destilados, Gastronomía tradicional",21031,Coatzingo
+31,oferta,verde,29.186,,"Especializada en Balnearios y aguas termales, Gastronomía tradicional",21031,Coatzingo
 32,oferta,gris,0.0,,Sin oferta turística registrada,21032,Cohetzala
 33,oferta,verde,118.34,,Especializada en Talavera y artesanías,21033,Cohuecan
-34,oferta,verde,1.757,,"Especializada en Turismo comunitario, Pulque y sidra",21034,Coronango
-35,oferta,verde,2.723,,"Especializada en Turismo comunitario, Café",21035,Coxcatlán
-36,oferta,verde,66.87,,"Especializada en Mezcal y destilados, Ecoturismo y aventura, Gastronomía tradicional",21036,Coyomeapan
+34,oferta,verde,1.757,,Especializada en Turismo comunitario,21034,Coronango
+35,oferta,amarillo,2.723,,"Oferta diversa sin especialización: Gastronomía tradicional, Café",21035,Coxcatlán
+36,oferta,verde,107.584,,Especializada en Gastronomía tradicional,21036,Coyomeapan
 37,oferta,verde,2.663,,Especializada en Gastronomía tradicional,21037,Coyotepec
 38,oferta,verde,10.838,,"Especializada en Flores y viveros, Gastronomía tradicional",21038,Cuapiaxtla de Madero
-39,oferta,verde,23.984,,"Especializada en Café, Ecoturismo y aventura",21039,Cuautempan
+39,oferta,amarillo,23.984,,"Oferta diversa sin especialización: Ecoturismo y aventura, Café, Gastronomía tradicional",21039,Cuautempan
 40,oferta,verde,2.634,,Especializada en Gastronomía tradicional,21040,Cuautinchán
-41,oferta,verde,7.591,,Especializada en Volcanes y alta montaña,21041,Cuautlancingo
+41,oferta,amarillo,7.591,,"Oferta diversa sin especialización: Gastronomía tradicional, Volcanes y alta montaña",21041,Cuautlancingo
 42,oferta,verde,1.594,,Especializada en Talavera y artesanías,21042,Cuayuca de Andrade
 43,oferta,verde,23.335,,"Especializada en Café, Ecoturismo y aventura, Agencias y operadores turísticos",21043,Cuetzalan del Progreso
-44,oferta,verde,17.024,,"Especializada en Balnearios y aguas termales, Café, Pulque y sidra",21044,Cuyoaco
-45,oferta,verde,30.755,,"Especializada en Volcanes y alta montaña, Pulque y sidra, Agencias y operadores turísticos",21045,Chalchicomula de Sesma
-46,oferta,verde,5.414,,"Especializada en Pulque y sidra, Flores y viveros",21046,Chapulco
+44,oferta,verde,17.024,,Especializada en Balnearios y aguas termales,21044,Cuyoaco
+45,oferta,amarillo,30.755,,"Oferta diversa sin especialización: Agencias y operadores turísticos, Volcanes y alta montaña",21045,Chalchicomula de Sesma
+46,oferta,verde,2.106,,Especializada en Flores y viveros,21046,Chapulco
 47,oferta,verde,27.937,,"Especializada en Balnearios y aguas termales, Flores y viveros, Gastronomía tradicional",21047,Chiautla
-48,oferta,verde,3.381,,"Especializada en Pulque y sidra, Balnearios y aguas termales, Turismo comunitario",21048,Chiautzingo
-49,oferta,verde,5.572,,"Especializada en Café, Pulque y sidra",21049,Chiconcuautla
+48,oferta,amarillo,2.675,,"Oferta diversa sin especialización: Balnearios y aguas termales, Ecoturismo y aventura, Turismo comunitario",21048,Chiautzingo
+49,oferta,amarillo,5.572,,Oferta diversa sin especialización: Café,21049,Chiconcuautla
 50,oferta,rojo,0.408,,Oferta mínima: —,21050,Chichiquila
-51,oferta,verde,1.875,,"Especializada en Balnearios y aguas termales, Gastronomía tradicional",21051,Chietla
+51,oferta,verde,1.875,,Especializada en Gastronomía tradicional,21051,Chietla
 52,oferta,verde,2.249,,Especializada en Talavera y artesanías,21052,Chigmecatitlán
-53,oferta,verde,25.689,,"Especializada en Balnearios y aguas termales, Ecoturismo y aventura, Talavera y artesanías",21053,Chignahuapan
-54,oferta,verde,2.372,,Especializada en Pulque y sidra,21054,Chignautla
+53,oferta,verde,25.689,,"Especializada en Ecoturismo y aventura, Talavera y artesanías, Mezcal y destilados",21053,Chignahuapan
+54,oferta,amarillo,2.51,,"Oferta diversa sin especialización: Vinos, licores y bebidas tradicionales",21054,Chignautla
 55,oferta,rojo,0.629,,Oferta mínima: —,21055,Chila
 56,oferta,gris,0.0,,Sin oferta turística registrada,21056,Chila de la Sal
 57,oferta,verde,1.514,,Especializada en Gastronomía tradicional,21057,Honey
 58,oferta,verde,18.466,,"Especializada en Agencias y operadores turísticos, Ecoturismo y aventura, Flores y viveros",21058,Chilchotla
 59,oferta,verde,1.469,,Especializada en Gastronomía tradicional,21059,Chinantla
-60,oferta,verde,6.764,,Especializada en Pulque y sidra,21060,Domingo Arenas
+60,oferta,rojo,0.646,,Oferta mínima: —,21060,Domingo Arenas
 61,oferta,rojo,0.0,,Oferta mínima: Café,21061,Eloxochitlán
 62,oferta,verde,2.533,,Especializada en Gastronomía tradicional,21062,Epatlán
-63,oferta,verde,2.438,,"Especializada en Pulque y sidra, Ecoturismo y aventura, Gastronomía tradicional",21063,Esperanza
+63,oferta,verde,1.621,,Especializada en Gastronomía tradicional,21063,Esperanza
 64,oferta,verde,4.415,,"Especializada en Agencias y operadores turísticos, Gastronomía tradicional",21064,Francisco Z. Mena
-65,oferta,verde,7.021,,"Especializada en Museos y cultura, Agencias y operadores turísticos, Pulque y sidra",21065,General Felipe Ángeles
-66,oferta,verde,2.054,,"Especializada en Gastronomía tradicional, Flores y viveros",21066,Guadalupe
+65,oferta,verde,7.021,,Especializada en Agencias y operadores turísticos,21065,General Felipe Ángeles
+66,oferta,verde,2.054,,Especializada en Gastronomía tradicional,21066,Guadalupe
 67,oferta,amarillo,0.994,,"Oferta diversa sin especialización: Zonas arqueológicas, Gastronomía tradicional, Agencias y operadores turísticos",21067,Guadalupe Victoria
 68,oferta,gris,0.0,,Sin oferta turística registrada,21068,Hermenegildo Galeana
 69,oferta,amarillo,1.14,,"Oferta diversa sin especialización: Turismo religioso y conventos, Gastronomía tradicional, Ecoturismo y aventura",21069,Huaquechula
 70,oferta,rojo,0.36,,Oferta mínima: —,21070,Huatlatlauca
 71,oferta,verde,21.332,,"Especializada en Flores y viveros, Agencias y operadores turísticos, Café",21071,Huauchinango
-72,oferta,verde,12.399,,"Especializada en Café, Balnearios y aguas termales, Mezcal y destilados",21072,Huehuetla
-73,oferta,verde,3.705,,"Especializada en Turismo comunitario, Gastronomía tradicional, Ecoturismo y aventura",21073,Huehuetlán el Chico
-74,oferta,verde,6.607,,"Especializada en Pulque y sidra, Mezcal y destilados",21074,Huejotzingo
-75,oferta,verde,2.477,,"Especializada en Mezcal y destilados, Pulque y sidra, Ecoturismo y aventura",21075,Hueyapan
-76,oferta,verde,2.33,,Especializada en Café,21076,Hueytamalco
-77,oferta,verde,17.702,,"Especializada en Mezcal y destilados, Café",21077,Hueytlalpan
+72,oferta,verde,12.399,,Especializada en Gastronomía tradicional,21072,Huehuetla
+73,oferta,verde,3.705,,Especializada en Gastronomía tradicional,21073,Huehuetlán el Chico
+74,oferta,verde,11.46,,"Especializada en Vinos, licores y bebidas tradicionales, Mezcal y destilados",21074,Huejotzingo
+75,oferta,amarillo,3.985,,"Oferta diversa sin especialización: Vinos, licores y bebidas tradicionales, Ecoturismo y aventura",21075,Hueyapan
+76,oferta,amarillo,2.33,,"Oferta diversa sin especialización: Gastronomía tradicional, Café",21076,Hueytamalco
+77,oferta,amarillo,28.481,,"Oferta diversa sin especialización: Vinos, licores y bebidas tradicionales, Mezcal y destilados, Café",21077,Hueytlalpan
 78,oferta,verde,28.886,,"Especializada en Café, Gastronomía tradicional",21078,Huitzilan de Serdán
-79,oferta,verde,6.106,,"Especializada en Ecoturismo y aventura, Gastronomía tradicional",21079,Huitziltepec
+79,oferta,verde,6.106,,Especializada en Gastronomía tradicional,21079,Huitziltepec
 80,oferta,verde,2.261,,Especializada en Gastronomía tradicional,21080,Atlequizayan
 81,oferta,rojo,0.462,,Oferta mínima: —,21081,Ixcamilpa de Guerrero
-82,oferta,verde,9.365,,"Especializada en Mezcal y destilados, Agencias y operadores turísticos",21082,Ixcaquixtla
-83,oferta,verde,6.423,,Especializada en Pulque y sidra,21083,Ixtacamaxtitlán
-84,oferta,verde,5.507,,"Especializada en Café, Gastronomía tradicional",21084,Ixtepec
+82,oferta,verde,9.365,,Especializada en Mezcal y destilados,21082,Ixcaquixtla
+83,oferta,amarillo,0.734,,Oferta diversa sin especialización: —,21083,Ixtacamaxtitlán
+84,oferta,verde,5.507,,Especializada en Gastronomía tradicional,21084,Ixtepec
 85,oferta,verde,1.578,,Especializada en Gastronomía tradicional,21085,Izúcar de Matamoros
-86,oferta,verde,23.976,,Especializada en Café,21086,Jalpan
-87,oferta,verde,5.629,,"Especializada en Balnearios y aguas termales, Turismo comunitario",21087,Jolalpan
-88,oferta,verde,29.861,,"Especializada en Café, Ecoturismo y aventura, Pulque y sidra",21088,Jonotla
+86,oferta,rojo,23.976,,Oferta mínima: Café,21086,Jalpan
+87,oferta,amarillo,5.629,,"Oferta diversa sin especialización: Balnearios y aguas termales, Turismo comunitario",21087,Jolalpan
+88,oferta,verde,35.568,,"Especializada en Café, Talavera y artesanías, Gastronomía tradicional",21088,Jonotla
 89,oferta,verde,12.446,,"Especializada en Café, Turismo comunitario, Gastronomía tradicional",21089,Jopala
-90,oferta,verde,3.581,,Especializada en Pulque y sidra,21090,Juan C. Bonilla
-91,oferta,verde,2.855,,"Especializada en Gastronomía tradicional, Flores y viveros, Pulque y sidra",21091,Juan Galindo
-92,oferta,verde,3.637,,"Especializada en Pulque y sidra, Talavera y artesanías",21092,Juan N. Méndez
+90,oferta,amarillo,0.952,,"Oferta diversa sin especialización: Gastronomía tradicional, Ecoturismo y aventura",21090,Juan C. Bonilla
+91,oferta,verde,2.855,,"Especializada en Gastronomía tradicional, Flores y viveros",21091,Juan Galindo
+92,oferta,verde,15.396,,Especializada en Talavera y artesanías,21092,Juan N. Méndez
 93,oferta,gris,0.0,,Sin oferta turística registrada,21093,Lafragua
-94,oferta,verde,3.906,,"Especializada en Turismo comunitario, Mezcal y destilados, Pulque y sidra",21094,Libres
+94,oferta,verde,3.906,,"Especializada en Turismo comunitario, Mezcal y destilados",21094,Libres
 95,oferta,gris,0.0,,Sin oferta turística registrada,21095,La Magdalena Tlatlauquitepec
 96,oferta,gris,0.0,,Sin oferta turística registrada,21096,Mazapiltepec de Juárez
 97,oferta,rojo,0.48,,Oferta mínima: —,21097,Mixtla
 98,oferta,amarillo,1.101,,"Oferta diversa sin especialización: Talavera y artesanías, Gastronomía tradicional, Mezcal y destilados",21098,Molcaxac
-99,oferta,verde,4.175,,"Especializada en Turismo comunitario, Gastronomía tradicional, Agencias y operadores turísticos",21099,Cañada Morelos
+99,oferta,verde,4.175,,Especializada en Gastronomía tradicional,21099,Cañada Morelos
 100,oferta,amarillo,0.697,,Oferta diversa sin especialización: Café,21100,Naupan
-101,oferta,verde,8.994,,"Especializada en Pulque y sidra, Gastronomía tradicional, Flores y viveros",21101,Nauzontla
-102,oferta,verde,4.048,,"Especializada en Pulque y sidra, Balnearios y aguas termales, Mezcal y destilados",21102,Nealtican
-103,oferta,verde,13.851,,"Especializada en Pulque y sidra, Gastronomía tradicional",21103,Nicolás Bravo
-104,oferta,verde,4.52,,"Especializada en Pulque y sidra, Balnearios y aguas termales, Museos y cultura",21104,Nopalucan
-105,oferta,verde,6.192,,Especializada en Pulque y sidra,21105,Ocotepec
-106,oferta,verde,1.417,,"Especializada en Mezcal y destilados, Turismo comunitario",21106,Ocoyucan
+101,oferta,verde,4.578,,Especializada en Gastronomía tradicional,21101,Nauzontla
+102,oferta,amarillo,3.428,,"Oferta diversa sin especialización: Gastronomía tradicional, Balnearios y aguas termales",21102,Nealtican
+103,oferta,verde,14.661,,Especializada en Gastronomía tradicional,21103,Nicolás Bravo
+104,oferta,verde,4.086,,Especializada en Balnearios y aguas termales,21104,Nopalucan
+105,oferta,rojo,1.182,,Oferta mínima: Gastronomía tradicional,21105,Ocotepec
+106,oferta,amarillo,1.417,,Oferta diversa sin especialización: Mezcal y destilados,21106,Ocoyucan
 107,oferta,verde,13.332,,"Especializada en Café, Gastronomía tradicional",21107,Olintla
 108,oferta,verde,1.86,,"Especializada en Gastronomía tradicional, Flores y viveros",21108,Oriental
 109,oferta,verde,7.374,,"Especializada en Ecoturismo y aventura, Balnearios y aguas termales, Café",21109,Pahuatlán
-110,oferta,verde,3.325,,Especializada en Pulque y sidra,21110,Palmar de Bravo
+110,oferta,verde,3.52,,"Especializada en Vinos, licores y bebidas tradicionales",21110,Palmar de Bravo
 111,oferta,verde,6.289,,Especializada en Café,21111,Pantepec
 112,oferta,verde,2.095,,Especializada en Gastronomía tradicional,21112,Petlalcingo
 113,oferta,verde,1.388,,Especializada en Gastronomía tradicional,21113,Piaxtla
 114,oferta,verde,2.401,,"Especializada en Museos y cultura, Agencias y operadores turísticos",21114,Puebla
-115,oferta,verde,7.706,,"Especializada en Flores y viveros, Turismo comunitario, Pulque y sidra",21115,Quecholac
+115,oferta,verde,7.706,,"Especializada en Flores y viveros, Turismo comunitario",21115,Quecholac
 116,oferta,amarillo,0.545,,Oferta diversa sin especialización: —,21116,Quimixtlán
-117,oferta,verde,3.495,,"Especializada en Pulque y sidra, Turismo comunitario, Museos y cultura",21117,Rafael Lara Grajales
-118,oferta,verde,8.89,,"Especializada en Agencias y operadores turísticos, Flores y viveros",21118,Los Reyes de Juárez
+117,oferta,verde,2.897,,Especializada en Turismo comunitario,21117,Rafael Lara Grajales
+118,oferta,verde,8.89,,Especializada en Flores y viveros,21118,Los Reyes de Juárez
 119,oferta,amarillo,1.067,,"Oferta diversa sin especialización: Ecoturismo y aventura, Turismo religioso y conventos",21119,San Andrés Cholula
 120,oferta,gris,0.0,,Sin oferta turística registrada,21120,San Antonio Cañada
 121,oferta,verde,1161.615,,Especializada en Mezcal y destilados,21121,San Diego la Mesa Tochimiltzingo
-122,oferta,verde,16.978,,"Especializada en Balnearios y aguas termales, Flores y viveros, Ecoturismo y aventura",21122,San Felipe Teotlalcingo
+122,oferta,verde,16.978,,Especializada en Flores y viveros,21122,San Felipe Teotlalcingo
 123,oferta,gris,0.0,,Sin oferta turística registrada,21123,San Felipe Tepatlán
 124,oferta,verde,2.378,,Especializada en Gastronomía tradicional,21124,San Gabriel Chilac
-125,oferta,verde,14.042,,"Especializada en Turismo comunitario, Mezcal y destilados",21125,San Gregorio Atzompa
-126,oferta,verde,12.791,,"Especializada en Pulque y sidra, Gastronomía tradicional, Flores y viveros",21126,San Jerónimo Tecuanipan
+125,oferta,amarillo,14.042,,Oferta diversa sin especialización: Turismo comunitario,21125,San Gregorio Atzompa
+126,oferta,verde,3.255,,Especializada en Gastronomía tradicional,21126,San Jerónimo Tecuanipan
 127,oferta,rojo,0.91,,Oferta mínima: Gastronomía tradicional,21127,San Jerónimo Xayacatlán
-128,oferta,verde,6.778,,Especializada en Pulque y sidra,21128,San José Chiapa
+128,oferta,rojo,0.575,,Oferta mínima: —,21128,San José Chiapa
 129,oferta,verde,3.191,,Especializada en Café,21129,San José Miahuatlán
 130,oferta,rojo,0.713,,Oferta mínima: —,21130,San Juan Atenco
 131,oferta,rojo,0.791,,Oferta mínima: Gastronomía tradicional,21131,San Juan Atzompa
-132,oferta,amarillo,1.001,,"Oferta diversa sin especialización: Gastronomía tradicional, Pulque y sidra",21132,San Martín Texmelucan
+132,oferta,amarillo,1.001,,Oferta diversa sin especialización: Gastronomía tradicional,21132,San Martín Texmelucan
 133,oferta,gris,0.0,,Sin oferta turística registrada,21133,San Martín Totoltepec
-134,oferta,verde,3.554,,"Especializada en Turismo comunitario, Pulque y sidra",21134,San Matías Tlalancaleca
+134,oferta,verde,3.554,,Especializada en Turismo comunitario,21134,San Matías Tlalancaleca
 135,oferta,gris,0.0,,Sin oferta turística registrada,21135,San Miguel Ixitlán
 136,oferta,amarillo,1.102,,Oferta diversa sin especialización: Gastronomía tradicional,21136,San Miguel Xoxtla
-137,oferta,verde,8.1,,"Especializada en Pulque y sidra, Gastronomía tradicional",21137,San Nicolás Buenos Aires
-138,oferta,verde,109.553,,"Especializada en Volcanes y alta montaña, Pulque y sidra",21138,San Nicolás de los Ranchos
-139,oferta,verde,14.486,,"Especializada en Turismo comunitario, Talavera y artesanías, Gastronomía tradicional",21139,San Pablo Anicano
-140,oferta,verde,2.966,,"Especializada en Pulque y sidra, Agencias y operadores turísticos, Café",21140,San Pedro Cholula
+137,oferta,verde,2.577,,Especializada en Gastronomía tradicional,21137,San Nicolás Buenos Aires
+138,oferta,amarillo,109.553,,"Oferta diversa sin especialización: Gastronomía tradicional, Volcanes y alta montaña, Museos y cultura",21138,San Nicolás de los Ranchos
+139,oferta,verde,14.486,,"Especializada en Talavera y artesanías, Gastronomía tradicional",21139,San Pablo Anicano
+140,oferta,verde,5.253,,"Especializada en Vinos, licores y bebidas tradicionales, Agencias y operadores turísticos, Café",21140,San Pedro Cholula
 141,oferta,amarillo,1.003,,Oferta diversa sin especialización: Gastronomía tradicional,21141,San Pedro Yeloixtlahuaca
-142,oferta,verde,2.78,,"Especializada en Talavera y artesanías, Pulque y sidra",21142,San Salvador el Seco
-143,oferta,verde,4.996,,"Especializada en Ecoturismo y aventura, Turismo comunitario, Pulque y sidra",21143,San Salvador el Verde
+142,oferta,verde,2.78,,Especializada en Talavera y artesanías,21142,San Salvador el Seco
+143,oferta,verde,4.996,,"Especializada en Turismo comunitario, Balnearios y aguas termales",21143,San Salvador el Verde
 144,oferta,amarillo,1.138,,"Oferta diversa sin especialización: Talavera y artesanías, Agencias y operadores turísticos",21144,San Salvador Huixcolotla
 145,oferta,verde,1.494,,Especializada en Gastronomía tradicional,21145,San Sebastián Tlacotepec
 146,oferta,gris,0.0,,Sin oferta turística registrada,21146,Santa Catarina Tlaltempan
-147,oferta,verde,34.143,,Especializada en Turismo comunitario,21147,Santa Inés Ahuatempan
+147,oferta,amarillo,34.143,,Oferta diversa sin especialización: Turismo comunitario,21147,Santa Inés Ahuatempan
 148,oferta,verde,4.906,,Especializada en Flores y viveros,21148,Santa Isabel Cholula
-149,oferta,verde,1.704,,Especializada en Pulque y sidra,21149,Santiago Miahuatlán
-150,oferta,verde,45.924,,"Especializada en Balnearios y aguas termales, Ecoturismo y aventura",21150,Huehuetlán el Grande
-151,oferta,verde,11.224,,"Especializada en Turismo comunitario, Museos y cultura",21151,Santo Tomás Hueyotlipan
-152,oferta,verde,6.465,,Especializada en Pulque y sidra,21152,Soltepec
-153,oferta,verde,17.926,,"Especializada en Talavera y artesanías, Mezcal y destilados, Museos y cultura",21153,Tecali de Herrera
-154,oferta,amarillo,1.057,,"Oferta diversa sin especialización: Turismo religioso y conventos, Gastronomía tradicional",21154,Tecamachalco
-155,oferta,verde,69.464,,"Especializada en Turismo comunitario, Flores y viveros",21155,Tecomatlán
+149,oferta,amarillo,1.059,,"Oferta diversa sin especialización: Gastronomía tradicional, Flores y viveros, Turismo comunitario",21149,Santiago Miahuatlán
+150,oferta,amarillo,45.924,,"Oferta diversa sin especialización: Balnearios y aguas termales, Ecoturismo y aventura",21150,Huehuetlán el Grande
+151,oferta,amarillo,11.224,,"Oferta diversa sin especialización: Museos y cultura, Turismo comunitario, Flores y viveros",21151,Santo Tomás Hueyotlipan
+152,oferta,rojo,0.411,,Oferta mínima: —,21152,Soltepec
+153,oferta,verde,17.926,,"Especializada en Talavera y artesanías, Mezcal y destilados",21153,Tecali de Herrera
+154,oferta,verde,2.829,,"Especializada en Vinos, licores y bebidas tradicionales",21154,Tecamachalco
+155,oferta,verde,69.464,,Especializada en Turismo comunitario,21155,Tecomatlán
 156,oferta,amarillo,1.201,,"Oferta diversa sin especialización: Gastronomía tradicional, Mezcal y destilados, Agencias y operadores turísticos",21156,Tehuacán
 157,oferta,verde,1.366,,Especializada en Talavera y artesanías,21157,Tehuitzingo
 158,oferta,verde,6.705,,"Especializada en Gastronomía tradicional, Talavera y artesanías",21158,Tenampulco
 159,oferta,amarillo,0.725,,Oferta diversa sin especialización: —,21159,Teopantlán
 160,oferta,verde,2.482,,Especializada en Gastronomía tradicional,21160,Teotlalco
-161,oferta,verde,6.647,,"Especializada en Turismo comunitario, Pulque y sidra",21161,Tepanco de López
-162,oferta,verde,5.865,,"Especializada en Ecoturismo y aventura, Pulque y sidra",21162,Tepango de Rodríguez
-163,oferta,verde,6.041,,"Especializada en Balnearios y aguas termales, Turismo comunitario, Gastronomía tradicional",21163,Tepatlaxco de Hidalgo
+161,oferta,verde,6.647,,Especializada en Turismo comunitario,21161,Tepanco de López
+162,oferta,amarillo,18.676,,"Oferta diversa sin especialización: Vinos, licores y bebidas tradicionales, Ecoturismo y aventura, Gastronomía tradicional",21162,Tepango de Rodríguez
+163,oferta,verde,6.041,,"Especializada en Balnearios y aguas termales, Gastronomía tradicional",21163,Tepatlaxco de Hidalgo
 164,oferta,verde,3.571,,"Especializada en Ecoturismo y aventura, Gastronomía tradicional, Mezcal y destilados",21164,Tepeaca
 165,oferta,gris,0.0,,Sin oferta turística registrada,21165,Tepemaxalco
-166,oferta,verde,3.255,,"Especializada en Ecoturismo y aventura, Pulque y sidra",21166,Tepeojuma
+166,oferta,amarillo,3.255,,"Oferta diversa sin especialización: Ecoturismo y aventura, Gastronomía tradicional",21166,Tepeojuma
 167,oferta,gris,0.0,,Sin oferta turística registrada,21167,Tepetzintla
 168,oferta,amarillo,0.655,,Oferta diversa sin especialización: —,21168,Tepexco
 169,oferta,amarillo,1.014,,"Oferta diversa sin especialización: Zonas arqueológicas, Gastronomía tradicional",21169,Tepexi de Rodríguez
-170,oferta,verde,5.54,,"Especializada en Pulque y sidra, Mezcal y destilados, Gastronomía tradicional",21170,Tepeyahualco
+170,oferta,verde,2.916,,Especializada en Gastronomía tradicional,21170,Tepeyahualco
 171,oferta,amarillo,1.083,,Oferta diversa sin especialización: Flores y viveros,21171,Tepeyahualco de Cuauhtémoc
-172,oferta,verde,5.694,,"Especializada en Pulque y sidra, Mezcal y destilados, Ecoturismo y aventura",21172,Tetela de Ocampo
-173,oferta,verde,5.771,,"Especializada en Mezcal y destilados, Gastronomía tradicional",21173,Teteles de Ávila Castillo
+172,oferta,verde,4.994,,"Especializada en Mezcal y destilados, Ecoturismo y aventura",21172,Tetela de Ocampo
+173,oferta,verde,5.771,,Especializada en Gastronomía tradicional,21173,Teteles de Ávila Castillo
 174,oferta,verde,2.2,,Especializada en Café,21174,Teziutlán
-175,oferta,verde,11.447,,"Especializada en Mezcal y destilados, Pulque y sidra",21175,Tianguismanalco
+175,oferta,verde,11.447,,Especializada en Mezcal y destilados,21175,Tianguismanalco
 176,oferta,amarillo,0.743,,Oferta diversa sin especialización: —,21176,Tilapa
 177,oferta,verde,1.96,,"Especializada en Balnearios y aguas termales, Mezcal y destilados",21177,Tlacotepec de Benito Juárez
 178,oferta,verde,1.439,,Especializada en Gastronomía tradicional,21178,Tlacuilotepec
-179,oferta,verde,173.655,,"Especializada en Volcanes y alta montaña, Pulque y sidra",21179,Tlachichuca
-180,oferta,verde,9.748,,"Especializada en Turismo comunitario, Ecoturismo y aventura, Balnearios y aguas termales",21180,Tlahuapan
-181,oferta,verde,7.235,,"Especializada en Turismo comunitario, Pulque y sidra",21181,Tlaltenango
+179,oferta,verde,173.655,,Especializada en Volcanes y alta montaña,21179,Tlachichuca
+180,oferta,amarillo,9.748,,"Oferta diversa sin especialización: Gastronomía tradicional, Turismo comunitario, Ecoturismo y aventura",21180,Tlahuapan
+181,oferta,amarillo,7.235,,"Oferta diversa sin especialización: Turismo comunitario, Flores y viveros, Gastronomía tradicional",21181,Tlaltenango
 182,oferta,rojo,0.441,,Oferta mínima: —,21182,Tlanepantla
-183,oferta,verde,5.669,,"Especializada en Flores y viveros, Pulque y sidra, Gastronomía tradicional",21183,Tlaola
+183,oferta,verde,5.669,,"Especializada en Flores y viveros, Gastronomía tradicional",21183,Tlaola
 184,oferta,verde,208.176,,Especializada en Café,21184,Tlapacoya
 185,oferta,verde,1.63,,Especializada en Gastronomía tradicional,21185,Tlapanalá
 186,oferta,verde,5.02,,"Especializada en Agencias y operadores turísticos, Café, Turismo comunitario",21186,Tlatlauquitepec
 187,oferta,verde,25.438,,"Especializada en Café, Gastronomía tradicional",21187,Tlaxco
-188,oferta,verde,3.815,,"Especializada en Mezcal y destilados, Turismo comunitario, Ecoturismo y aventura",21188,Tochimilco
-189,oferta,verde,2.427,,Especializada en Balnearios y aguas termales,21189,Tochtepec
+188,oferta,amarillo,3.815,,"Oferta diversa sin especialización: Turismo religioso y conventos, Talavera y artesanías, Ecoturismo y aventura",21188,Tochimilco
+189,oferta,amarillo,2.427,,"Oferta diversa sin especialización: Gastronomía tradicional, Balnearios y aguas termales",21189,Tochtepec
 190,oferta,rojo,0.844,,Oferta mínima: Gastronomía tradicional,21190,Totoltepec de Guerrero
-191,oferta,verde,2.896,,Especializada en Turismo comunitario,21191,Tulcingo
+191,oferta,amarillo,2.896,,"Oferta diversa sin especialización: Talavera y artesanías, Gastronomía tradicional, Turismo comunitario",21191,Tulcingo
 192,oferta,verde,1.45,,Especializada en Talavera y artesanías,21192,Tuzamapan de Galeana
 193,oferta,rojo,0.0,,Oferta mínima: Mezcal y destilados,21193,Tzicatlacoyan
-194,oferta,verde,2.056,,"Especializada en Gastronomía tradicional, Agencias y operadores turísticos",21194,Venustiano Carranza
-195,oferta,verde,1.965,,"Especializada en Ecoturismo y aventura, Agencias y operadores turísticos, Pulque y sidra",21195,Vicente Guerrero
+194,oferta,verde,2.056,,Especializada en Gastronomía tradicional,21194,Venustiano Carranza
+195,oferta,amarillo,1.965,,"Oferta diversa sin especialización: Ecoturismo y aventura, Agencias y operadores turísticos",21195,Vicente Guerrero
 196,oferta,rojo,0.647,,Oferta mínima: —,21196,Xayacatlán de Bravo
 197,oferta,verde,26.045,,"Especializada en Café, Gastronomía tradicional",21197,Xicotepec
 198,oferta,gris,0.0,,Sin oferta turística registrada,21198,Xicotlán
-199,oferta,verde,1.315,,Especializada en Mezcal y destilados,21199,Xiutetelco
-200,oferta,verde,37.45,,"Especializada en Mezcal y destilados, Turismo comunitario",21200,Xochiapulco
+199,oferta,amarillo,2.116,,Oferta diversa sin especialización: Gastronomía tradicional,21199,Xiutetelco
+200,oferta,verde,37.45,,Especializada en Mezcal y destilados,21200,Xochiapulco
 201,oferta,gris,0.0,,Sin oferta turística registrada,21201,Xochiltepec
 202,oferta,verde,9.747,,"Especializada en Mezcal y destilados, Ecoturismo y aventura",21202,Xochitlán de Vicente Suárez
 203,oferta,verde,1.331,,Especializada en Gastronomía tradicional,21203,Xochitlán Todos Santos
 204,oferta,amarillo,1.095,,Oferta diversa sin especialización: Flores y viveros,21204,Yaonáhuac
-205,oferta,verde,2.174,,Especializada en Turismo comunitario,21205,Yehualtepec
+205,oferta,amarillo,2.174,,Oferta diversa sin especialización: Gastronomía tradicional,21205,Yehualtepec
 206,oferta,verde,1.646,,Especializada en Gastronomía tradicional,21206,Zacapala
 207,oferta,verde,5.46,,"Especializada en Café, Turismo comunitario, Talavera y artesanías",21207,Zacapoaxtla
-208,oferta,verde,7.281,,"Especializada en Ecoturismo y aventura, Turismo comunitario, Pulque y sidra",21208,Zacatlán
-209,oferta,verde,6.358,,"Especializada en Mezcal y destilados, Turismo comunitario, Ecoturismo y aventura",21209,Zapotitlán
-210,oferta,verde,38.552,,"Especializada en Café, Ecoturismo y aventura, Mezcal y destilados",21210,Zapotitlán de Méndez
-211,oferta,verde,1.883,,"Especializada en Turismo comunitario, Gastronomía tradicional",21211,Zaragoza
+208,oferta,verde,12.179,,"Especializada en Vinos, licores y bebidas tradicionales, Ecoturismo y aventura, Turismo comunitario",21208,Zacatlán
+209,oferta,verde,6.358,,"Especializada en Gastronomía tradicional, Flores y viveros",21209,Zapotitlán
+210,oferta,verde,38.552,,"Especializada en Café, Gastronomía tradicional",21210,Zapotitlán de Méndez
+211,oferta,verde,1.883,,Especializada en Gastronomía tradicional,21211,Zaragoza
 212,oferta,verde,78.147,,Especializada en Talavera y artesanías,21212,Zautla
-213,oferta,verde,34.521,,"Especializada en Café, Mezcal y destilados, Gastronomía tradicional",21213,Zihuateutla
-214,oferta,verde,3.876,,"Especializada en Balnearios y aguas termales, Mezcal y destilados",21214,Zinacatepec
-215,oferta,verde,19.388,,"Especializada en Café, Ecoturismo y aventura, Gastronomía tradicional",21215,Zongozotla
-216,oferta,verde,9.027,,Especializada en Pulque y sidra,21216,Zoquiapan
-217,oferta,verde,2.613,,Especializada en Pulque y sidra,21217,Zoquitlán
+213,oferta,verde,34.521,,"Especializada en Café, Gastronomía tradicional",21213,Zihuateutla
+214,oferta,verde,3.876,,Especializada en Balnearios y aguas termales,21214,Zinacatepec
+215,oferta,verde,19.388,,"Especializada en Café, Gastronomía tradicional",21215,Zongozotla
+216,oferta,amarillo,38.218,,"Oferta diversa sin especialización: Vinos, licores y bebidas tradicionales, Café",21216,Zoquiapan
+217,oferta,amarillo,5.531,,"Oferta diversa sin especialización: Vinos, licores y bebidas tradicionales, Café",21217,Zoquitlán
 15,potencial,gris,,,Pendiente: predicción de crecimiento (Rol B),21015,Amozoc
 25,potencial,gris,,,Pendiente: predicción de crecimiento (Rol B),21026,Calpan
 5,potencial,gris,,,Pendiente: predicción de crecimiento (Rol B),21005,Acteopan

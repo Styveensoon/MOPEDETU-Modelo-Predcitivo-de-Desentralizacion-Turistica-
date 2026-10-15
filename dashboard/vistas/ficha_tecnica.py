@@ -1,13 +1,18 @@
 import html
 
 import pandas as pd
-import pydeck as pdk
+import plotly.graph_objects as go
 import streamlit as st
 
 import estado
 import ficha_bd as fb
-import mapas
 import tema
+
+# Anclas con nombre fijo en el mapa; "Cholula" agrupa San Pedro y San Andrés para no encimarse.
+ETIQUETAS = {"21140": "Cholula", "21119": None}
+# Posición del texto respecto al centroide para separar anclas vecinas.
+POSICION = {"21109": "middle left", "21197": "top right", "21140": "middle left", "21114": "bottom right",
+            "21208": "middle left", "21053": "bottom left", "21186": "bottom right", "21071": "top center"}
 
 
 def render():
@@ -27,57 +32,104 @@ def render():
                                format_func=lambda k: " ".join(fb.DIMENSIONES[k]), key="ft_dim") or "turismo_actual"
     nombres_fijos = c2.toggle("🏷️ Todos los nombres", value=False, key="ft_nombres")
 
-    geo = estado.datos().geo
-    props = pd.DataFrame([f["properties"] for f in geo["features"]])
-    fichas = df.set_index("cve_geo")
+    if not st.session_state.get("ft_cve"):
+        st.session_state["ft_cve"] = df.loc[df.nombre == "Cuetzalan del Progreso", "cve_geo"].iloc[0]
+    actual = st.session_state["ft_cve"]
 
     mapa, panel = st.columns([1.55, 1])
     with mapa:
-        p = mapas.poligonos(geo).copy()
-        niveles = {c: fb.nivel(f, dim) for c, f in fichas.iterrows()}
-        p["color"] = p.cve_geo.map(lambda c: list(fb.COLOR[niveles.get(c, "gris")]) + [225])
-        p["tt"] = p.cve_geo.map(lambda c: _tooltip(fichas.loc[c]) if c in fichas.index else "")
-        sel_prev = st.session_state.get("ft_cve")
-        p["borde"] = p.cve_geo.map(lambda c: [14, 42, 92, 255] if c == sel_prev else [255, 255, 255, 220])
-        p["ancho"] = p.cve_geo.map(lambda c: 3.5 if c == sel_prev else 0.8)
-        capa = pdk.Layer("PolygonLayer", p, id="ficha_municipios", get_polygon="poly", get_fill_color="color",
-                         get_line_color="borde", get_line_width="ancho", line_width_units=mapas.PIXELES,
-                         stroked=True, filled=True, pickable=True, auto_highlight=True,
-                         highlight_color=[14, 42, 92, 120])
-        anclas = set(df[df.es_ancla].cve_geo)
-        capas = [capa] + mapas.capas_nombres(props, anclas, fijos=nombres_fijos)
-        vista = mapas.vista_ajustada(mapas.LIMITES_PUEBLA["lat"], mapas.LIMITES_PUEBLA["lon"],
-                                     ancho=760, alto=620, margen=1.12)
-        evento = st.pydeck_chart(mapas.deck(capas, vista), height=620, on_select="rerun",
-                                 selection_mode="single-object", key="ft_mapa")
+        # La llave incluye el municipio elegido: cada selección crea un mapa nuevo, sin estado de selección
+        # previo en Plotly (si no, los clics alternaban entre seleccionar y deseleccionar).
+        evento = st.plotly_chart(_figura(df, dim, actual, nombres_fijos), on_select="rerun",
+                                 selection_mode="points", key=f"ft_mapa_{actual}_{dim}_{nombres_fijos}",
+                                 config={"displayModeBar": False, "scrollZoom": True})
         _leyenda(dim)
 
-    try:
-        objs = evento.selection.objects.get("ficha_municipios", [])
-        if objs:
-            st.session_state["ft_cve"] = objs[0]["cve_geo"]
-    except Exception:
-        pass
+    puntos = [p for p in (evento.selection.points if evento else []) if p.get("curve_number", 0) == 0]
+    if puntos:
+        clic = puntos[0].get("location") or df.cve_geo.iloc[puntos[0]["point_index"]]
+        if clic != actual:
+            st.session_state["ft_cve"] = clic
+            st.rerun()  # redibuja ya con el contorno y la ficha del municipio clicado
+    fichas = df.set_index("cve_geo")
 
     with panel:
         orden = df.sort_values("nombre")
         cves = orden.cve_geo.tolist()
-        actual = st.session_state.get("ft_cve") or df.loc[df.nombre == "Cuetzalan del Progreso", "cve_geo"].iloc[0]
         cve = st.selectbox("🔎 Municipio", cves, index=cves.index(actual),
                            format_func=dict(zip(orden.cve_geo, orden.nombre)).get, key=f"ft_sel_{actual}")
-        st.session_state["ft_cve"] = cve
+        if cve != actual:
+            st.session_state["ft_cve"] = cve
+            st.rerun()
         _ficha(fichas.loc[cve], df)
 
 
 # ---------------------------------------------------------------- piezas
-def _tooltip(f) -> str:
+CORTO = {"turismo_actual": "Turismo", "infraestructura": "Infra", "oferta": "Oferta", "potencial": "Potencial",
+         "social": "Social"}
+
+
+def _hover(f) -> str:
+    """Texto del hover nativo de Plotly (admite <b>, <br> y <span style=color>)."""
     marcas = (" ✨" if f.es_pueblo_magico else "") + (" ⚓" if f.es_ancla else "")
-    acts = " · ".join(f"{a['icono']} {html.escape(a['nombre'])}" for a in (f.actividades_principales or [])[:3]) \
-        or "Sin actividad principal"
-    sem = "  ".join(f"{fb.DIMENSIONES[d][0]}{fb.EMOJI[fb.nivel(f, d)]}" for d in fb.DIMENSIONES)
+    acts = "<br>".join(f"{a['icono']} {html.escape(a['nombre'])}" for a in (f.actividades_principales or [])[:3]) \
+        or "Sin actividad principal registrada"
+    sem = "<br>".join(
+        f"<span style='color:rgb{fb.COLOR[fb.nivel(f, d)]};font-size:15px'>⬤</span> <b>{CORTO[d]}</b>: "
+        f"{fb.LECTURA[d][fb.nivel(f, d)]}" for d in fb.DIMENSIONES)
     meses = " · ".join(fb.MESES_LARGO[m - 1] for m in (f.meses_fuertes or [])) or "sin temporada propia"
-    return (f"<b>{html.escape(f.nombre)}</b>{marcas}<br/><span style='opacity:.8'>{f.region}</span><br/>"
-            f"{acts}<br/>{sem}<br/>📅 {meses}")
+    return (f"<b>{html.escape(f.nombre)}</b>{marcas}<br><span style='color:#c9d6ee'>{f.region}</span>"
+            f"<br><br>{acts}<br><br>{sem}<br><br><span style='color:#c9d6ee'>📅 Meses fuertes: {meses}</span>")
+
+
+def _figura(df: pd.DataFrame, dim: str, seleccion: str | None, nombres_fijos: bool) -> go.Figure:
+    geo = estado.datos().geo
+    props = pd.DataFrame([f["properties"] for f in geo["features"]]).set_index("cve_geo")
+    niveles = list(fb.COLOR)  # verde, amarillo, rojo, gris → 0..3
+    z = [niveles.index(fb.nivel(f, dim)) for _, f in df.iterrows()]
+    escala = []
+    for i, n in enumerate(niveles):  # escala discreta: un color sólido por nivel
+        c = f"rgb{fb.COLOR[n]}"
+        escala += [[i / len(niveles), c], [(i + 1) / len(niveles), c]]
+    borde = ["#0E2A5C" if c == seleccion else "white" for c in df.cve_geo]
+    ancho = [3 if c == seleccion else 0.6 for c in df.cve_geo]
+
+    fig = go.Figure(go.Choropleth(
+        geojson=geo, featureidkey="properties.cve_geo", locations=df.cve_geo, z=z,
+        # zmin/zmax desplazados medio nivel: cada valor queda al centro de su franja de color, no en la frontera.
+        zmin=-0.5, zmax=len(niveles) - 0.5, colorscale=escala, showscale=False,
+        marker=dict(line=dict(color=borde, width=ancho), opacity=1),
+        text=[_hover(f) for _, f in df.iterrows()], hovertemplate="%{text}<extra></extra>",
+        # La selección de Plotly no debe pintar nada (atenuaba a los demás municipios);
+        # el municipio elegido se marca solo con el contorno azul de `borde`.
+        selected=dict(marker=dict(opacity=1)), unselected=dict(marker=dict(opacity=1)),
+    ))
+
+    # Nombres: anclas siempre; todos los municipios con el interruptor.
+    # (selected = unselected para que Plotly no atenúe los nombres al seleccionar un municipio)
+    if nombres_fijos:
+        t = props.loc[df.cve_geo]
+        f8 = dict(size=8, color="#14213D")
+        fig.add_trace(go.Scattergeo(lon=t.lon, lat=t.lat, text=t.nombre, mode="text", hoverinfo="skip",
+                                    textfont=f8, selected=dict(textfont=dict(color=f8["color"])),
+                                    unselected=dict(textfont=dict(color=f8["color"]))))
+    anc = props.loc[df[df.es_ancla].cve_geo].copy()
+    anc["nombre"] = [ETIQUETAS.get(c, n) for c, n in zip(anc.index, anc.nombre)]
+    anc = anc[anc.nombre.notna()]
+    fig.add_trace(go.Scattergeo(lon=anc.lon, lat=anc.lat, text=anc.nombre, mode="text", hoverinfo="skip",
+                                textfont=dict(size=12, color="#0E2A5C", family="Arial Black, Source Sans Pro"),
+                                textposition=[POSICION.get(c, "middle center") for c in anc.index],
+                                selected=dict(textfont=dict(color="#0E2A5C")),
+                                unselected=dict(textfont=dict(color="#0E2A5C"))))
+
+    fig.update_geos(fitbounds="locations", visible=False, projection_type="mercator", bgcolor="rgba(0,0,0,0)")
+    fig.update_layout(
+        height=700, margin=dict(l=0, r=0, t=0, b=0), paper_bgcolor="rgba(0,0,0,0)", showlegend=False,
+        dragmode="pan",
+        hoverlabel=dict(bgcolor="#0E2A5C", bordercolor="#E8B10D", align="left",
+                        font=dict(color="white", size=13, family="Source Sans Pro, Segoe UI, Arial")),
+    )
+    return fig
 
 
 def _leyenda(dim: str):
