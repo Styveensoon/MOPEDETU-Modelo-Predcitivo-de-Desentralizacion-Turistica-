@@ -20,3 +20,6 @@ data/raw/*
 Thumbs.db
 .vscode/
 .idea/
+
+# Credenciales locales
+.credenciales_roles.txt
