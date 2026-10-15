@@ -43,6 +43,32 @@ def cargar() -> pd.DataFrame | None:
     return df
 
 
+@st.cache_data(ttl=600, show_spinner="Leyendo rutas de Supabase…")
+def rutas() -> pd.DataFrame | None:
+    """Una fila por parada (dw.v_ruta_parada): rutas oficiales y propuestas por el modelo."""
+    if not supabase_cliente.configurado():
+        return None
+    try:
+        df = supabase_cliente.leer("v_ruta_parada", "dw")
+    except Exception:
+        return None
+    df["cve_geo"] = df.cve_geo.str.strip()
+    return df.sort_values(["ruta_sk", "orden_parada"])
+
+
+@st.cache_data(ttl=600, show_spinner=False)
+def indice() -> pd.DataFrame | None:
+    """Índice de oportunidad vigente por municipio (dw.v_indice_municipio)."""
+    if not supabase_cliente.configurado():
+        return None
+    try:
+        df = supabase_cliente.leer("v_indice_municipio", "dw")
+    except Exception:
+        return None
+    df["cve_geo"] = df.cve_geo.str.strip()
+    return df
+
+
 def nivel(fila, dimension: str) -> str:
     s = fila["semaforos"] or {}
     return (s.get(dimension) or {}).get("nivel", "gris")

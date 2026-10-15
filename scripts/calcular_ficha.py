@@ -88,7 +88,7 @@ def leer_bd():
     paradas = paradas[paradas.ruta_sk.isin({r["ruta_sk"] for r in rutas})]
     social = sb.leer("fact_contexto_social", "dw", "municipio_sk,grado_marginacion,indice_marginacion", secreta=True)
     pred = sb.leer("fact_prediccion_crecimiento", "dw", "municipio_sk,crecimiento_pred_pct,intervalo_inf_pct,"
-                   "intervalo_sup_pct", secreta=True)
+                   "intervalo_sup_pct,personal_base", secreta=True)
     return mun, act.merge(cat, on="actividad_sk"), paradas, social, pred
 
 
@@ -272,11 +272,16 @@ def semaforos(mun, infra, act, paradas, social, pred):
             filas.append(dict(municipio_sk=m, dimension="potencial", nivel="gris", valor=None, percentil=None,
                               motivo="Pendiente: predicción de crecimiento (Rol B)"))
             continue
-        v, lo = g.crecimiento_pred_pct.max(), g.intervalo_inf_pct.max()
-        med = pred.groupby("municipio_sk").crecimiento_pred_pct.max().median()
+        # Promedio de los ejes ponderado por su empleo: el máximo lo inflaba un eje con 3 negocios
+        peso = g.personal_base.fillna(0).clip(lower=1)
+        v = float(np.average(g.crecimiento_pred_pct, weights=peso))
+        lo = float(np.average(g.intervalo_inf_pct, weights=peso))
+        med = pred.groupby("municipio_sk").apply(
+            lambda x: np.average(x.crecimiento_pred_pct, weights=x.personal_base.fillna(0).clip(lower=1))).median()
         n = "verde" if v > med and lo > 0 else ("amarillo" if v > 0 else "rojo")
         filas.append(dict(municipio_sk=m, dimension="potencial", nivel=n, valor=round(float(v), 2), percentil=None,
-                          motivo=f"Crecimiento predicho {v:+.1f} % (límite inferior {lo:+.1f} %)"))
+                          motivo=f"Crecimiento predicho de la oferta turística a 5 años {v:+.1f} % "
+                                 f"(límite inferior del intervalo de 80 %: {lo:+.1f} %)"))
 
     # Necesidad social: CONAPO si ya está en fact_contexto_social; si no, índice de carencias del Censo 2020.
     grado = dict(zip(social.municipio_sk, social.grado_marginacion)) if len(social) else {}
@@ -287,7 +292,7 @@ def semaforos(mun, infra, act, paradas, social, pred):
             gm = str(grado[m]).lower()
             n = "rojo" if "alto" in gm else ("amarillo" if "medio" in gm else "verde")
             filas.append(dict(municipio_sk=m, dimension="social", nivel=n, valor=None, percentil=None,
-                              motivo=f"Marginación {gm} (CONAPO 2020)"))
+                              motivo=f"Grado de marginación {gm} (CONAPO 2020)"))
         else:
             etiqueta = ["muy baja", "baja", "media", "alta", "muy alta"][min(4, int(q[m] * 5))]
             n = "rojo" if q[m] >= 0.6 else ("amarillo" if q[m] >= 0.4 else "verde")

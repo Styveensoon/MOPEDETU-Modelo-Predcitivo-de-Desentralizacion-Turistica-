@@ -1,0 +1,20 @@
+{
+  "lgbm": {
+    "mae": 0.2456,
+    "spearman": 0.476,
+    "precision_top20": 0.536
+  },
+  "b1_media_eje": {
+    "mae": 0.2728,
+    "spearman": 0.333,
+    "precision_top20": 0.339
+  },
+  "b2_ridge": {
+    "mae": 0.2829,
+    "spearman": 0.329,
+    "precision_top20": 0.454
+  },
+  "cobertura_intervalo_80": 0.799,
+  "semiancho_intervalo_log": 0.374,
+  "n_entrenamiento": 482
+}
