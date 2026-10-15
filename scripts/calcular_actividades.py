@@ -32,6 +32,7 @@ TOP_PRINCIPALES = 3
 PESO_CL, PESO_VOLUMEN, PESO_CATALOGO = 0.5, 0.3, 0.2
 # Actividades que el DENUE no registra: una zona INAH abierta es atractivo principal; el patrimonio religioso, secundario.
 SCORE_SOLO_CATALOGO = {"arqueologia": 0.9, "religioso": 0.6}
+SENAL_OSM = {"religioso", "ecoturismo", "volcanes"}
 
 
 def sin_acentos(s: pd.Series) -> pd.Series:
@@ -64,6 +65,14 @@ def senales_catalogo(buscar) -> dict:
                 out[(cve, act)] = True
     for cve in ZONAS_ARQUEOLOGICAS:
         out[(cve, "arqueologia")] = True
+    # Lugares sin negocio detrás (El Peñón de Jonotla): el catálogo curado cuenta completo; de OSM solo
+    # santuarios, naturaleza y volcanes (museos y zonas arqueológicas ya vienen del DENUE y del INAH).
+    lugares = RAIZ / "data" / "derivados" / "atractivos_lugares.csv"
+    if lugares.exists():
+        for r in pd.read_csv(lugares, dtype=str).fillna("").itertuples():
+            for act in filter(None, r.actividades.split("|")):
+                if act in REGLAS and (r.origen == "catalogo_curado" or act in SENAL_OSM):
+                    out[(r.cve_geo, act)] = True
     return out
 
 

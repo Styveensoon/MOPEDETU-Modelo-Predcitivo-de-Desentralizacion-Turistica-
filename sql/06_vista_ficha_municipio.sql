@@ -64,6 +64,13 @@ rut AS (
            jsonb_agg(DISTINCT r.nombre) FILTER (WHERE r.origen <> 'existente') AS rutas_propuestas
     FROM dw.fact_ruta_parada p JOIN dw.dim_ruta r USING (ruta_sk)
     GROUP BY p.municipio_sk),
+-- Atractivos con nombre: primero el catálogo curado, luego OpenStreetMap (sql/08)
+atr AS (
+    SELECT municipio_sk,
+           jsonb_agg(jsonb_build_object('nombre', nombre, 'categoria', categoria, 'actividades', to_jsonb(actividades),
+                                        'descripcion', descripcion, 'url', url, 'origen', origen)
+                     ORDER BY (origen = 'catalogo_curado') DESC, nombre) AS atractivos
+    FROM dw.fact_atractivo_lugar GROUP BY municipio_sk),
 -- Banderas de la versión vigente del índice (la más reciente), una por tipo con sus motivos por eje
 ban AS (
     SELECT municipio_sk,
@@ -89,7 +96,8 @@ SELECT m.municipio_sk, m.cve_geo, m.nombre, m.region, m.es_pueblo_magico, m.es_a
        coalesce(eve.eventos, '[]') AS eventos,
        coalesce(rut.rutas_existentes, '[]') AS rutas_existentes,
        coalesce(rut.rutas_propuestas, '[]') AS rutas_propuestas,
-       coalesce(ban.banderas, '[]') AS banderas
+       coalesce(ban.banderas, '[]') AS banderas,
+       coalesce(atr.atractivos, '[]') AS atractivos
 FROM dw.dim_municipio m
 LEFT JOIN sem  USING (municipio_sk)
 LEFT JOIN act  USING (municipio_sk)
@@ -97,7 +105,8 @@ LEFT JOIN inf  USING (municipio_sk)
 LEFT JOIN tira USING (municipio_sk)
 LEFT JOIN eve  USING (municipio_sk)
 LEFT JOIN rut  USING (municipio_sk)
-LEFT JOIN ban  USING (municipio_sk);
+LEFT JOIN ban  USING (municipio_sk)
+LEFT JOIN atr  USING (municipio_sk);
 
 COMMENT ON VIEW dw.v_ficha_municipio IS
   'Ficha técnica municipal MOPEDETU: identidad, semáforos, actividades, infraestructura, temporadas, rutas y banderas.';

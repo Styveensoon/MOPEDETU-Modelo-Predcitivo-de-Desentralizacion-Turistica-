@@ -180,6 +180,22 @@ def _ficha(f, todos: pd.DataFrame):
         if f.oferta_sin_registro:
             st.warning("🚩 Oferta reconocida por la Secretaría sin registro en el DENUE: "
                        + ", ".join(f.oferta_sin_registro))
+        atractivos = getattr(f, "atractivos", None) or []
+        if atractivos:
+            st.markdown("**📍 Lugares para visitar**")
+            filas = []
+            for a in atractivos[:12]:
+                nom = html.escape(a["nombre"])
+                nom = f"<a href='{html.escape(a['url'])}' target='_blank'>{nom}</a>" if a.get("url") else nom
+                desc = html.escape(a.get("descripcion") or "")
+                sello = " ✅" if a.get("origen") == "catalogo_curado" else ""
+                filas.append(f"<li>{nom} <span class='mope-tag'>{html.escape(a['categoria'])}</span>{sello}"
+                             + (f"<br/><small style='opacity:.7'>{desc}</small>" if desc else "") + "</li>")
+            st.markdown(f"<div class='mope-card'><ul style='margin:0'>{''.join(filas)}</ul></div>",
+                        unsafe_allow_html=True)
+            if len(atractivos) > 12:
+                st.caption(f"…y {len(atractivos) - 12} más (OpenStreetMap).")
+            st.caption("✅ revisado a mano con fuente · el resto viene de OpenStreetMap")
     with t2:
         i = f.infraestructura or {}
         ancla = todos.set_index("municipio_sk").nombre.get(int(i.get("ancla_cercana_sk") or 0), "—")

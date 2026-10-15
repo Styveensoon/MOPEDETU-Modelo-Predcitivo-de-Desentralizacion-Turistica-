@@ -79,9 +79,9 @@ Mejores oportunidades fuera de las anclas: Jonotla, Huehuetla, Jalpan, Zacapoaxt
 
 | Modelo | AUC | Precisión media (AP) |
 |---|---|---|
-| **LightGBM** | **0.879** | **0.083** |
+| **LightGBM** | **0.881** | **0.096** |
 | Línea base: solo distancia | 0.856 | 0.042 |
-| Línea base: solo similitud | 0.686 | 0.019 |
+| Línea base: solo similitud | 0.699 | 0.019 |
 
 La tasa base es 0.93 %. **SHAP:** distancia (30 %), turismo actual de los dos municipios (25 %), actividades compartidas (9 %), atractivos (7 %).
 
@@ -108,7 +108,7 @@ La tasa base es 0.93 %. **SHAP:** distancia (30 %), turismo actual de los dos mu
 | 4 | ⛪ Conventos · Puebla → Tecamachalco | Puebla → Cuautinchán → Tecali de Herrera → Acatzingo → Quecholac → Tecamachalco (150 min) | Valle de Serdán | parcialmente existente (60 %) |
 | 5 | 🥃 Mezcal · Puebla → Ixcaquixtla | Puebla → Huehuetlán el Grande → Tzicatlacoyan → Tecali de Herrera → Molcaxac → Ixcaquixtla (180 min) | Mixteca | parcialmente existente (40 %): extiende la Ruta del Mezcal Legado de la Mixteca hasta Ixcaquixtla |
 
-Las rutas benefician a 5 regiones distintas y llevan de 4 a 5 municipios emergentes cada una. Cada ruta tiene en `descripcion` el porqué: banderas, crecimiento esperado, tramos nuevos y temporada compartida. El diagnóstico de todas las candidatas (ancla × tema) está en `data/derivados/rutas_candidatas.csv`.
+Las rutas benefician a 4 regiones distintas y llevan de 4 a 5 municipios emergentes cada una. Cada ruta tiene en `descripcion` el porqué: banderas, crecimiento esperado, tramos nuevos y temporada compartida. El diagnóstico de todas las candidatas (ancla × tema) está en `data/derivados/rutas_candidatas.csv`.
 
 ## Validaciones (docs/modelo_predictivo_anillos.md §5)
 
@@ -118,10 +118,10 @@ Las rutas benefician a 5 regiones distintas y llevan de 4 a 5 municipios emergen
 | V2 | Anclas con intensidad turística ≥ P50 (sin forzar) | ✅ 12/12 |
 | V3 | El DENUE detecta la actividad en los municipios de su ruta oficial | Café 66 %, mezcal 50 %. La brecha es la bandera OFERTA_INVISIBLE (29) |
 | V4 | El modelo de crecimiento gana a las líneas base | ✅ En MAE, Spearman y top 20 %. Validación entre municipios; no hay segundo periodo temporal porque el CE 2014 no tiene descarga |
-| V5 | El modelo de enlaces gana a la distancia | ✅ AUC 0.879 vs 0.856; AP 2× |
+| V5 | El modelo de enlaces gana a la distancia | ✅ AUC 0.881 vs 0.856; AP 2.3× |
 | V6 | Sensibilidad del índice a ±20 % en los pesos | Pendiente |
-| V7 | Al menos 1 ruta nueva y 1 parcialmente existente | ✅ 2 nuevas, 3 parcialmente existentes (extienden circuitos oficiales a municipios emergentes) |
-| V8 | Concentración del turismo | Hoy HHI 1,306 (top 5 = 51.9 %) → tendencial 1,132 (49.1 %) → **con rutas, hipotético** 1,076 (47.8 %). Supuesto: los emergentes de las rutas alcanzan el límite superior de su intervalo |
+| V7 | Al menos 1 ruta nueva y 1 parcialmente existente | ✅ 3 nuevas, 2 parcialmente existentes (extienden circuitos oficiales a municipios emergentes) |
+| V8 | Concentración del turismo | Hoy HHI 1,306 (top 5 = 51.9 %) → tendencial 1,132 (49.1 %) → **con rutas, hipotético** 1,103 (48.5 %). Supuesto: los emergentes de las rutas alcanzan el límite superior de su intervalo |
 | V9 | Proxy de turismo contra DATATUR | Pendiente |
 
 ## Integración con el trabajo del equipo (merge en `main`)
@@ -139,7 +139,7 @@ Las rutas benefician a 5 regiones distintas y llevan de 4 a 5 municipios emergen
 - **Tablero:**
   - La página de Rutas combina **"🧠 Rutas del modelo"**, que lee las rutas reales de Supabase (Rol C), con **"🛠️ Arma tu ruta"** de Raúl.
   - Cada ruta propuesta se puede **recorrer por carretera real** (OSRM) con el navegador satelital de Raúl.
-- **Hallazgo al recorrer por carretera real:** los tiempos de `fact_accesibilidad` se estiman con 1.8 min por km en línea recta y **subestiman la sierra**. La ruta del café Xicotepec → Naupan son 2.3 h estimadas contra 5.8 h por carretera (227 km). Próxima mejora: recalcular `fact_accesibilidad` con tiempos de OSRM y volver a correr el optimizador con el límite de 75 min por tramo sobre tiempos reales.
+- **Hallazgo al recorrer por carretera real:** los tiempos de `fact_accesibilidad` se estiman con 1.8 min por km en línea recta y **subestiman la sierra**. La primera ruta del café (Xicotepec → Naupan, versión anterior) eran 2.3 h estimadas contra 5.8 h por carretera (227 km). Próxima mejora: recalcular `fact_accesibilidad` con tiempos de OSRM y volver a correr el optimizador con el límite de 75 min por tramo sobre tiempos reales.
 
 ## Limitaciones (para el jurado)
 
@@ -147,3 +147,17 @@ Las rutas benefician a 5 regiones distintas y llevan de 4 a 5 municipios emergen
 - Hay un solo periodo censal (2019-2024, con la pandemia incluida).
 - El modelo de enlaces aprende cómo arma rutas la Secretaría, con sesgo hacia anclas. Por eso el optimizador combina su probabilidad con el índice y las banderas para llevar las rutas a municipios emergentes.
 - Las rutas son **hipótesis de trabajo**: el siguiente paso es validarlas con las comunidades.
+
+## Atractivos sin negocio detrás (`dw.fact_atractivo_lugar`, `scripts/cargar_atractivos.py`)
+
+- **Problema:** El Peñón de Jonotla (santuario a la Virgen de Guadalupe tallada en la roca y mirador de 360°) no aparecía. El DENUE solo registra negocios, lo religioso salía únicamente de las rutas oficiales y OSM no tiene el lugar.
+- **Solución:**
+  - Catálogo curado con fuente (`data/catalogos/atractivos.csv`): 8 lugares de Jonotla y las Cascadas de Zoquiapan.
+  - Más 572 atractivos con nombre de OpenStreetMap (santuarios, cascadas, grutas, manantiales, miradores, volcanes, museos y zonas arqueológicas), asignados a su municipio por polígono INEGI.
+  - Cuentan como **señal de catálogo** en A1: el curado completo; de OSM solo religioso, ecoturismo y volcanes, para no inflar actividades.
+  - La Fiesta de la Virgen del Peñón (22 de octubre) entra en las temporadas.
+- **Efecto:**
+  - Jonotla pasa a tener turismo religioso y ecoturismo como actividades principales.
+  - Es la **oportunidad número 1 del índice** (0.86).
+  - Entra en dos de las cinco rutas: café y gastronomía, ambas desde Cuetzalan.
+  - La ficha técnica lista sus lugares para visitar.

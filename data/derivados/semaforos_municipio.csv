@@ -444,7 +444,7 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 9,oferta,verde,4.315,,Especializada en Gastronomía tradicional,21009,Ahuehuetitla
 10,oferta,amarillo,0.759,,Oferta diversa sin especialización: Gastronomía tradicional,21010,Ajalpan
 11,oferta,rojo,0.95,,Oferta mínima: Gastronomía tradicional,21011,Albino Zertuche
-12,oferta,amarillo,0.762,,"Oferta diversa sin especialización: Zonas arqueológicas, Gastronomía tradicional",21012,Aljojuca
+12,oferta,amarillo,0.762,,"Oferta diversa sin especialización: Zonas arqueológicas, Gastronomía tradicional, Volcanes y alta montaña",21012,Aljojuca
 13,oferta,amarillo,1.193,,Oferta diversa sin especialización: Museos y cultura,21013,Altepexi
 14,oferta,verde,42.301,,"Especializada en Café, Gastronomía tradicional",21014,Amixtlán
 15,oferta,verde,1.627,,Especializada en Turismo comunitario,21015,Amozoc
@@ -477,7 +477,7 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 42,oferta,verde,1.594,,Especializada en Talavera y artesanías,21042,Cuayuca de Andrade
 43,oferta,verde,23.335,,"Especializada en Café, Ecoturismo y aventura, Agencias y operadores turísticos",21043,Cuetzalan del Progreso
 44,oferta,verde,17.024,,Especializada en Balnearios y aguas termales,21044,Cuyoaco
-45,oferta,amarillo,30.755,,"Oferta diversa sin especialización: Agencias y operadores turísticos, Volcanes y alta montaña",21045,Chalchicomula de Sesma
+45,oferta,amarillo,30.755,,"Oferta diversa sin especialización: Turismo religioso y conventos, Volcanes y alta montaña, Agencias y operadores turísticos",21045,Chalchicomula de Sesma
 46,oferta,verde,2.106,,Especializada en Flores y viveros,21046,Chapulco
 47,oferta,verde,27.937,,"Especializada en Balnearios y aguas termales, Flores y viveros, Gastronomía tradicional",21047,Chiautla
 48,oferta,amarillo,2.675,,"Oferta diversa sin especialización: Balnearios y aguas termales, Ecoturismo y aventura, Turismo comunitario",21048,Chiautzingo
@@ -582,7 +582,7 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 147,oferta,amarillo,34.143,,Oferta diversa sin especialización: Turismo comunitario,21147,Santa Inés Ahuatempan
 148,oferta,verde,4.906,,Especializada en Flores y viveros,21148,Santa Isabel Cholula
 149,oferta,amarillo,1.059,,"Oferta diversa sin especialización: Gastronomía tradicional, Flores y viveros, Turismo comunitario",21149,Santiago Miahuatlán
-150,oferta,amarillo,45.924,,"Oferta diversa sin especialización: Balnearios y aguas termales, Ecoturismo y aventura",21150,Huehuetlán el Grande
+150,oferta,amarillo,45.924,,"Oferta diversa sin especialización: Ecoturismo y aventura, Balnearios y aguas termales",21150,Huehuetlán el Grande
 151,oferta,amarillo,11.224,,"Oferta diversa sin especialización: Museos y cultura, Turismo comunitario, Flores y viveros",21151,Santo Tomás Hueyotlipan
 152,oferta,rojo,0.411,,Oferta mínima: —,21152,Soltepec
 153,oferta,verde,17.926,,"Especializada en Talavera y artesanías, Mezcal y destilados",21153,Tecali de Herrera
@@ -612,7 +612,7 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 177,oferta,verde,1.96,,"Especializada en Balnearios y aguas termales, Mezcal y destilados",21177,Tlacotepec de Benito Juárez
 178,oferta,verde,1.439,,Especializada en Gastronomía tradicional,21178,Tlacuilotepec
 179,oferta,verde,173.655,,Especializada en Volcanes y alta montaña,21179,Tlachichuca
-180,oferta,amarillo,9.748,,"Oferta diversa sin especialización: Gastronomía tradicional, Turismo comunitario, Ecoturismo y aventura",21180,Tlahuapan
+180,oferta,amarillo,9.748,,"Oferta diversa sin especialización: Gastronomía tradicional, Turismo religioso y conventos, Turismo comunitario",21180,Tlahuapan
 181,oferta,amarillo,7.235,,"Oferta diversa sin especialización: Turismo comunitario, Flores y viveros, Gastronomía tradicional",21181,Tlaltenango
 182,oferta,rojo,0.441,,Oferta mínima: —,21182,Tlanepantla
 183,oferta,verde,5.669,,"Especializada en Flores y viveros, Gastronomía tradicional",21183,Tlaola
@@ -625,7 +625,7 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 190,oferta,rojo,0.844,,Oferta mínima: Gastronomía tradicional,21190,Totoltepec de Guerrero
 191,oferta,amarillo,2.896,,"Oferta diversa sin especialización: Talavera y artesanías, Gastronomía tradicional, Turismo comunitario",21191,Tulcingo
 192,oferta,verde,1.45,,Especializada en Talavera y artesanías,21192,Tuzamapan de Galeana
-193,oferta,rojo,0.0,,Oferta mínima: Mezcal y destilados,21193,Tzicatlacoyan
+193,oferta,amarillo,0.0,,"Oferta diversa sin especialización: Mezcal y destilados, Ecoturismo y aventura",21193,Tzicatlacoyan
 194,oferta,verde,2.056,,Especializada en Gastronomía tradicional,21194,Venustiano Carranza
 195,oferta,amarillo,1.965,,"Oferta diversa sin especialización: Ecoturismo y aventura, Agencias y operadores turísticos",21195,Vicente Guerrero
 196,oferta,rojo,0.647,,Oferta mínima: —,21196,Xayacatlán de Bravo
@@ -648,7 +648,7 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 213,oferta,verde,34.521,,"Especializada en Café, Gastronomía tradicional",21213,Zihuateutla
 214,oferta,verde,3.876,,Especializada en Balnearios y aguas termales,21214,Zinacatepec
 215,oferta,verde,19.388,,"Especializada en Café, Gastronomía tradicional",21215,Zongozotla
-216,oferta,amarillo,38.218,,"Oferta diversa sin especialización: Vinos, licores y bebidas tradicionales, Café",21216,Zoquiapan
+216,oferta,amarillo,38.218,,"Oferta diversa sin especialización: Vinos, licores y bebidas tradicionales, Café, Ecoturismo y aventura",21216,Zoquiapan
 217,oferta,amarillo,5.531,,"Oferta diversa sin especialización: Vinos, licores y bebidas tradicionales, Café",21217,Zoquitlán
 15,potencial,verde,51.7,,Crecimiento predicho de la oferta turística a 5 años +51.7 % (límite inferior del intervalo de 80 %: +4.4 %),21015,Amozoc
 25,potencial,amarillo,29.1,,Crecimiento predicho de la oferta turística a 5 años +29.1 % (límite inferior del intervalo de 80 %: -11.2 %),21026,Calpan

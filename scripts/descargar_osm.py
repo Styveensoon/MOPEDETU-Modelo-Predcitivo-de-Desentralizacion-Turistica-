@@ -18,8 +18,16 @@ CONSULTAS = {
     "puntos.json": AREA + """(
       nwr(area.a)["amenity"~"^(fuel|atm|bank|hospital|clinic|pharmacy|bus_station)$"];
       nwr(area.a)["tourism"~"^(hotel|motel|guest_house|hostel|camp_site|attraction|museum|viewpoint|information)$"];
-      nwr(area.a)["historic"~"^(archaeological_site|monument|church|monastery|ruins)$"];
+      nwr(area.a)["historic"~"^(archaeological_site|monument|church|monastery|ruins|wayside_shrine|castle)$"];
       nwr(area.a)["leisure"~"^(nature_reserve|park|water_park)$"];
+    );out tags center;""",
+    # Atractivos naturales y religiosos con nombre (santuarios, peñas, grutas, cascadas, manantiales):
+    # sin ellos el modelo no veía lugares como El Peñón de Jonotla, que no tienen un negocio detrás.
+    "atractivos.json": AREA + """(
+      nwr(area.a)["amenity"="place_of_worship"]["name"~"[Ss]antuario|[Ee]rmita|[Cc]onvento|[Bb]as[ií]lica|[Cc]atedral|[Pp]arroquia|[Tt]emplo"];
+      nwr(area.a)["natural"~"^(peak|cliff|cave_entrance|waterfall|rock|spring|gorge|volcano)$"]["name"];
+      nwr(area.a)["waterway"="waterfall"]["name"];
+      nwr(area.a)["tourism"~"^(viewpoint|attraction)$"]["name"];
     );out tags center;""",
 }
 

@@ -1,0 +1,782 @@
+cve_geo,nombre,categoria,actividades,descripcion,lat,lon,origen,fuente_sk,url
+21088,Santuario y Mirador del Peñón,santuario_mirador,religioso|ecoturismo,"Santuario a la Virgen de Guadalupe tallada en la roca del Peñón (unos 12 m); mirador de 360° conocido como el ""Balcón de la Sierra"", desde donde en días despejados se ve territorio veracruzano. Lugar sagrado náhuatl y totonaca; peregrinaciones cada año.",,,catalogo_curado,17,https://www.adn40.mx/ciudad/como-llegar-mirador-del-penon-jonotla-desde-el-que-puedes-ver-mar-veracruz/
+21088,Mirador Tonacatecutl y puente colgante Las Dos Culturas,mirador,ecoturismo,Mirador sobre la Sierra Madre Oriental al que se llega por una escalinata y un puente colgante.,,,catalogo_curado,17,https://www.mexicodesconocido.com.mx/jonotla-montanas-puebla.html
+21088,Templo de San Juan Bautista,templo,religioso,Iglesia con torre exenta separada del cuerpo principal.,,,catalogo_curado,17,https://www.mexicodesconocido.com.mx/jonotla-montanas-puebla.html
+21088,Poza del Ocho (río Tozán),poza,ecoturismo,Alberca natural que forma el río Tozán.,,,catalogo_curado,17,https://www.mexicodesconocido.com.mx/jonotla-montanas-puebla.html
+21088,Cascada Velo de Novia,cascada,ecoturismo,Cascada con acceso al río.,,,catalogo_curado,17,https://www.mexicodesconocido.com.mx/jonotla-montanas-puebla.html
+21088,Cueva del Arenal,gruta,ecoturismo,Gruta con estalactitas y estalagmitas detrás de una cortina de lianas.,,,catalogo_curado,17,https://www.mexicodesconocido.com.mx/jonotla-montanas-puebla.html
+21088,Aldea del Tozán,comunidad_artesanal,artesanias,Comunidad nahua de artesanos que trabajan la fibra del jonote.,,,catalogo_curado,17,https://www.mexicodesconocido.com.mx/jonotla-montanas-puebla.html
+21216,Cascadas de Zoquiapan,cascada,ecoturismo,Caídas de agua rodeadas de flores y árboles frutales.,,,catalogo_curado,17,https://www.mexicodesconocido.com.mx/jonotla-montanas-puebla.html
+21188,Popocatépetl,volcán,volcanes,Active stratovolcano. Last erupted 2007,19.023405,-98.623437,osm,14,https://www.openstreetmap.org/node/58989127
+21143,Iztaccíhuatl,volcán,volcanes,,19.170205,-98.637591,osm,14,https://www.openstreetmap.org/node/58991090
+21074,Ex Convento Franciscano,santuario,religioso,,19.158693,-98.404299,osm,14,https://www.openstreetmap.org/node/292219067
+21074,Parroquia San Miguel Arcanguel,templo,,,19.158121,-98.408651,osm,14,https://www.openstreetmap.org/node/292219104
+21132,Cerro Coxtocan,cerro,,,19.240879,-98.434765,osm,14,https://www.openstreetmap.org/node/302216717
+21132,Cerro Mendocinas,cerro,,,19.2378,-98.469269,osm,14,https://www.openstreetmap.org/node/302216811
+21114,Cerro de Amalucan,cerro,,,19.051084,-98.139541,osm,14,https://www.openstreetmap.org/node/352821704
+21094,La Cantera,cerro,,,19.441667,-97.730278,osm,14,https://www.openstreetmap.org/node/459380550
+21083,El Mirador,cerro,,,19.665833,-98.035278,osm,14,https://www.openstreetmap.org/node/459380910
+21180,Las Águilas,cerro,,,19.453056,-98.558889,osm,14,https://www.openstreetmap.org/node/459381049
+21132,Totolqueme,cerro,,,19.326944,-98.441944,osm,14,https://www.openstreetmap.org/node/459381367
+21126,Tecajete,volcán,volcanes,,19.070189,-98.396143,osm,14,https://www.openstreetmap.org/node/1573898647
+21074,Cerro Ocotepec,cerro,,,19.166878,-98.485503,osm,14,https://www.openstreetmap.org/node/1585957755
+21074,Cerro Paxtepec,cerro,,,19.161972,-98.469183,osm,14,https://www.openstreetmap.org/node/1589787587
+21143,Parroquia de San Salvador,templo,,,19.270055,-98.514947,osm,14,https://www.openstreetmap.org/node/1606681050
+21153,Parroquia de San Santiago Apostol,templo,,,18.900462,-97.968628,osm,14,https://www.openstreetmap.org/node/1667526951
+21153,Parroquia Padre Jesús de Nazareth (Santuario del Barrio de Analco),santuario,religioso,,18.90117,-97.981352,osm,14,https://www.openstreetmap.org/node/1667543807
+21182,Cerro Altamira Chico,cerro,,,18.850291,-97.875009,osm,14,https://www.openstreetmap.org/node/1807953422
+21151,Cerro Astoyo,cerro,,,18.870893,-97.86712,osm,14,https://www.openstreetmap.org/node/1807953432
+21189,Cerro Ometepec,cerro,,,18.863348,-97.853338,osm,14,https://www.openstreetmap.org/node/1807953447
+21097,Cerro Coatepec,cerro,,,18.912598,-97.881723,osm,14,https://www.openstreetmap.org/node/1807953452
+21189,Cerro Zapotlán,cerro,,,18.829699,-97.848038,osm,14,https://www.openstreetmap.org/node/1807953456
+21151,Cerro Colorado,cerro,,,18.884213,-97.884179,osm,14,https://www.openstreetmap.org/node/1807953469
+21043,Santuario de Nuestra Señora de Guadalupe - Iglesia de los Jarritos,santuario,religioso,,20.017784,-97.526108,osm,14,https://www.openstreetmap.org/node/1849938297
+21043,El Salto,cascada,ecoturismo,,20.005565,-97.508959,osm,14,https://www.openstreetmap.org/node/1851589216
+21043,Las Brisas,cascada,ecoturismo,,20.006034,-97.50847,osm,14,https://www.openstreetmap.org/node/1851589229
+21043,Los Corales,gruta,ecoturismo,,20.002706,-97.541991,osm,14,https://www.openstreetmap.org/node/1854644381
+21019,Cerro San Miguel,cerro,,,18.912766,-98.438021,osm,14,https://www.openstreetmap.org/node/1944029364
+21047,Parroquia de San Aguistin,templo,,,18.297795,-98.603266,osm,14,https://www.openstreetmap.org/node/1944455071
+21207,Parroquia a la Virgen de Guadalupe,templo,,,19.872237,-97.587759,osm,14,https://www.openstreetmap.org/node/1958412411
+21189,Cerro Grande,cerro,,,18.779574,-97.825016,osm,14,https://www.openstreetmap.org/node/2062509428
+21079,Cerro Tlachicho,cerro,,,18.761773,-97.837891,osm,14,https://www.openstreetmap.org/node/2062509431
+21189,Cerro El Águila,cerro,,,18.829218,-97.810429,osm,14,https://www.openstreetmap.org/node/2062509438
+21189,Cerro Huyicanetl,cerro,,,18.782577,-97.853503,osm,14,https://www.openstreetmap.org/node/2062509440
+21189,Cerro Cruz Lamatzi,cerro,,,18.782715,-97.831805,osm,14,https://www.openstreetmap.org/node/2062509444
+21171,Cerro Tepeyahualco,cerro,,,18.807847,-97.874961,osm,14,https://www.openstreetmap.org/node/2062509447
+21171,Cerro Huilotépetl,cerro,,,18.785994,-97.862172,osm,14,https://www.openstreetmap.org/node/2062509457
+21153,Mesa del Espinero,cerro,,,18.843267,-97.92599,osm,14,https://www.openstreetmap.org/node/2063923311
+21153,Loma de la Ciénega,cerro,,,18.863003,-97.933843,osm,14,https://www.openstreetmap.org/node/2063923583
+21114,"Parroquia Nuestra Señora del Sagrado Corazón ""El Cielo""",templo,,,19.055523,-98.226915,osm,14,https://www.openstreetmap.org/node/2316543220
+21153,Cerro Chicomultepec,cerro,,,18.883952,-98.026502,osm,14,https://www.openstreetmap.org/node/2355667415
+21153,Cerro Zoyatepel,cerro,,,18.88785,-98.014143,osm,14,https://www.openstreetmap.org/node/2355667422
+21153,Cerro El Mirador,cerro,,,18.891342,-98.044825,osm,14,https://www.openstreetmap.org/node/2355667438
+21114,Cerro Toluquilla,cerro,,,18.921024,-98.149196,osm,14,https://www.openstreetmap.org/node/2358049068
+21193,Cerro Tepanco,cerro,,,18.888096,-98.124516,osm,14,https://www.openstreetmap.org/node/2358049103
+21193,Cerro El Jagüey,cerro,,,18.888098,-98.107741,osm,14,https://www.openstreetmap.org/node/2358049113
+21193,Mesa La Espinera,cerro,,,18.905922,-98.131601,osm,14,https://www.openstreetmap.org/node/2358049143
+21114,Cerro Tecorral,cerro,,,18.894191,-98.141816,osm,14,https://www.openstreetmap.org/node/2358049144
+21193,Cerro Las Palmas,cerro,,,18.889197,-98.135335,osm,14,https://www.openstreetmap.org/node/2358049146
+21040,Cerro Cuanalapa,cerro,,,18.926668,-98.098706,osm,14,https://www.openstreetmap.org/node/2358049151
+21193,Cerro Tepeyolo,cerro,,,18.904421,-98.110551,osm,14,https://www.openstreetmap.org/node/2358049167
+21114,Lomas Tlaltepec,cerro,,,18.960314,-98.144305,osm,14,https://www.openstreetmap.org/node/2358049180
+21193,Loma San Bernardo,cerro,,,18.895975,-98.115461,osm,14,https://www.openstreetmap.org/node/2358049195
+21114,Loma Los Olivos,cerro,,,18.946172,-98.144926,osm,14,https://www.openstreetmap.org/node/2358049209
+21040,Mesa Calderón,cerro,,,18.960233,-98.122332,osm,14,https://www.openstreetmap.org/node/2358049210
+21114,Ex-Aviario,atractivo,,,19.024945,-98.188135,osm,14,https://www.openstreetmap.org/node/2435523294
+21053,Cerro de Apapasco,cerro,,,19.85174,-98.044281,osm,14,https://www.openstreetmap.org/node/2440596013
+21053,Cerro Amanalco,cerro,,,19.833064,-98.056089,osm,14,https://www.openstreetmap.org/node/2440597835
+21053,Cerro El Tecolote,cerro,,,19.843512,-98.059134,osm,14,https://www.openstreetmap.org/node/2440598903
+21045,Pico de Orizaba,volcán,volcanes,,19.030326,-97.269819,osm,14,https://www.openstreetmap.org/node/2441934796
+21121,Fabrica Mezcal Milagro de San Diego,atractivo,,,18.814235,-98.330492,osm,14,https://www.openstreetmap.org/node/2615200190
+21019,Parroquia de San Jeronimo Coyula,templo,,,18.890211,-98.517345,osm,14,https://www.openstreetmap.org/node/2813337334
+21001,Parroquia de Santa María de la Asunción,templo,,,19.103809,-97.951187,osm,14,https://www.openstreetmap.org/node/3033931634
+21114,Templo de Nuestra Señora de Guadalupe,templo,,,19.050991,-98.157295,osm,14,https://www.openstreetmap.org/node/3035292732
+21102,Teoton,cerro,,,19.079274,-98.461124,osm,14,https://www.openstreetmap.org/node/3035329582
+21114,Parroquia de Nuestra Señora del Rosario,templo,,,19.005414,-98.226615,osm,14,https://www.openstreetmap.org/node/3054645551
+21039,Parroquia San Esteban Cuautempan,templo,,,19.913114,-97.795814,osm,14,https://www.openstreetmap.org/node/3117694782
+21170,Pizarro,cerro,,,19.508832,-97.436324,osm,14,https://www.openstreetmap.org/node/3265710325
+21114,Convento de las Hermanas Dominicas de la Inmaculada Concepción,santuario,religioso,,19.05504,-98.201696,osm,14,https://www.openstreetmap.org/node/3375202381
+21045,Sierra Negra,cerro,,,18.986214,-97.315102,osm,14,https://www.openstreetmap.org/node/4001080127
+21156,Manantial San Lorenzo,atractivo,,,18.473738,-97.436641,osm,14,https://www.openstreetmap.org/node/4109130598
+21108,Cerro Pinto,cerro,,,19.368397,-97.500718,osm,14,https://www.openstreetmap.org/node/4184530489
+21067,Cerro Siete Cuevas,cerro,,,19.365379,-97.41573,osm,14,https://www.openstreetmap.org/node/4184530490
+21067,Cerro Derrumbadas,cerro,,,19.301754,-97.470121,osm,14,https://www.openstreetmap.org/node/4184530491
+21137,Cerro Derrumbadas,cerro,,,19.264522,-97.447398,osm,14,https://www.openstreetmap.org/node/4184530492
+21108,Cerro Bermejo,cerro,,,19.34134,-97.561345,osm,14,https://www.openstreetmap.org/node/4184530787
+21108,Loma La Colorinera,cerro,,,19.329046,-97.543795,osm,14,https://www.openstreetmap.org/node/4184530788
+21170,Cerro Tezontepec,cerro,,,19.524518,-97.494966,osm,14,https://www.openstreetmap.org/node/4184535689
+21044,Cerro Las Águilas,cerro,,,19.554048,-97.510103,osm,14,https://www.openstreetmap.org/node/4184535690
+21114,Templo Moisés Elías,templo,,,19.057736,-98.191516,osm,14,https://www.openstreetmap.org/node/4226133789
+21180,Santuario de las luciernagas,santuario,religioso,,19.329414,-98.602727,osm,14,https://www.openstreetmap.org/node/4279517250
+21140,Parroquia Santiago Momoxpan,templo,,,19.071347,-98.26739,osm,14,https://www.openstreetmap.org/node/4408684897
+21140,zócalo Santiago Momoxpan,atractivo,,,19.071459,-98.267601,osm,14,https://www.openstreetmap.org/node/4408686599
+21140,Cerro Los Tepoztecos,atractivo,,,19.081421,-98.336713,osm,14,https://www.openstreetmap.org/node/4438556489
+21157,santuario de Santa Cruz Tejalpa,santuario,religioso,,18.360834,-98.36029,osm,14,https://www.openstreetmap.org/node/4562015193
+21140,Cerro Zapotecas,cerro,,,19.075151,-98.346073,osm,14,https://www.openstreetmap.org/node/4564445749
+21186,Cerro Cabezón,atractivo,,,19.8322,-97.52077,osm,14,https://www.openstreetmap.org/node/4665832198
+21116,Cerro Ocoteni,cerro,,,19.295139,-97.04663,osm,14,https://www.openstreetmap.org/node/4700029394
+21116,Cerro La Cruz de la Misión,cerro,,,19.279632,-97.027035,osm,14,https://www.openstreetmap.org/node/4700029395
+21019,Videojuegos Mundo Z,atractivo,,,18.90325,-98.437994,osm,14,https://www.openstreetmap.org/node/4727976496
+21156,La Cruz,cerro,,,18.479541,-97.337812,osm,14,https://www.openstreetmap.org/node/4827318939
+21093,Cerro Cuecuello,cerro,,,19.348382,-97.278856,osm,14,https://www.openstreetmap.org/node/4841928783
+21001,El Pinal,cerro,,,19.141035,-97.906683,osm,14,https://www.openstreetmap.org/node/5060470379
+21114,Los Secretos de Puebla - Puenta de Bubas,atractivo,,,19.042043,-98.192299,osm,14,https://www.openstreetmap.org/node/5077746222
+21114,Secretos de Puebla - Pasaje Historic 5 de Mayo - Tunnel Entrance,atractivo,,,19.052507,-98.191175,osm,14,https://www.openstreetmap.org/node/5077746225
+21019,Cerro El Charro,cerro,,,18.926134,-98.475664,osm,14,https://www.openstreetmap.org/node/5141807034
+21175,Cerro Tlapaltepec,cerro,,,18.943527,-98.464749,osm,14,https://www.openstreetmap.org/node/5141807035
+21175,Cerro Corona,cerro,,,18.949256,-98.449045,osm,14,https://www.openstreetmap.org/node/5141807036
+21175,Cerro Nanacase,cerro,,,18.954089,-98.431111,osm,14,https://www.openstreetmap.org/node/5141807037
+21019,Cerro Tecuitlacuelo,cerro,,,18.941397,-98.418002,osm,14,https://www.openstreetmap.org/node/5141807038
+21019,Cerro El Pochote,cerro,,,18.938157,-98.418371,osm,14,https://www.openstreetmap.org/node/5141807039
+21019,Loma La Calera,cerro,,,18.935666,-98.418517,osm,14,https://www.openstreetmap.org/node/5141807040
+21019,Cerro Tecoloche,cerro,,,18.909826,-98.426238,osm,14,https://www.openstreetmap.org/node/5142085209
+21019,Cerro Chiquihuite,cerro,,,18.913825,-98.424698,osm,14,https://www.openstreetmap.org/node/5142085210
+21019,Cerro Crustepetl,cerro,,,18.862953,-98.510664,osm,14,https://www.openstreetmap.org/node/5146373583
+21019,Cerro Xochilecatl,cerro,,,18.848802,-98.51007,osm,14,https://www.openstreetmap.org/node/5146373584
+21069,Cerro Cuauhjotle,cerro,,,18.800973,-98.423912,osm,14,https://www.openstreetmap.org/node/5146373585
+21069,Cerro El Tepemecate,cerro,,,18.829338,-98.395916,osm,14,https://www.openstreetmap.org/node/5146390138
+21019,Cerro El Chiquihuite,cerro,,,18.854879,-98.402219,osm,14,https://www.openstreetmap.org/node/5146390139
+21069,Cerro San Loenzo,cerro,,,18.846006,-98.409321,osm,14,https://www.openstreetmap.org/node/5146390140
+21069,Cerro Guadalupe,cerro,,,18.83924,-98.431851,osm,14,https://www.openstreetmap.org/node/5146390141
+21019,Cerro Zoapiltepec,cerro,,,18.847506,-98.377149,osm,14,https://www.openstreetmap.org/node/5146405637
+21019,Cerro Texistle,cerro,,,18.871632,-98.350476,osm,14,https://www.openstreetmap.org/node/5146405638
+21019,La Cuatillera,cerro,,,18.822784,-98.346329,osm,14,https://www.openstreetmap.org/node/5146405639
+21166,Cerro Temascaltepec,cerro,,,18.770681,-98.387659,osm,14,https://www.openstreetmap.org/node/5146414568
+21166,Cerro Tenayo,cerro,,,18.767925,-98.438158,osm,14,https://www.openstreetmap.org/node/5146422527
+21166,Cerri El Vigilante,cerro,,,18.757346,-98.415685,osm,14,https://www.openstreetmap.org/node/5146422528
+21069,Cerro El Gordo,cerro,,,18.768882,-98.484045,osm,14,https://www.openstreetmap.org/node/5146434764
+21069,Cerro Cohello,cerro,,,18.771421,-98.516144,osm,14,https://www.openstreetmap.org/node/5146434765
+21069,Cerro Santa Maria,cerro,,,18.783013,-98.556599,osm,14,https://www.openstreetmap.org/node/5146454210
+21069,Cerros Los Pelones,cerro,,,18.762529,-98.577435,osm,14,https://www.openstreetmap.org/node/5146454211
+21069,Cerro El Rancho,cerro,,,18.754702,-98.577449,osm,14,https://www.openstreetmap.org/node/5146454212
+21069,Cerro Tlasicho,cerro,,,18.77356,-98.571271,osm,14,https://www.openstreetmap.org/node/5146454213
+21069,Cerro Tenistepec,cerro,,,18.795859,-98.542236,osm,14,https://www.openstreetmap.org/node/5146462894
+21069,Cerro Cuatecoma,cerro,,,18.795653,-98.549546,osm,14,https://www.openstreetmap.org/node/5146462895
+21069,Loma Larga,cerro,,,18.783332,-98.526836,osm,14,https://www.openstreetmap.org/node/5146465918
+21069,Cerro Tlacotepetl,cerro,,,18.804052,-98.565959,osm,14,https://www.openstreetmap.org/node/5146477403
+21069,Cerro Aguayo,cerro,,,18.801627,-98.566759,osm,14,https://www.openstreetmap.org/node/5146477404
+21022,Cerro Cuauhtepetl,cerro,,,18.82009,-98.569069,osm,14,https://www.openstreetmap.org/node/5146483775
+21022,Cerro El Molino,cerro,,,18.828768,-98.574094,osm,14,https://www.openstreetmap.org/node/5146506202
+21022,Cerro Tenistepec,cerro,,,18.830185,-98.55546,osm,14,https://www.openstreetmap.org/node/5146506203
+21022,Cerro Aguayo,cerro,,,18.828843,-98.565708,osm,14,https://www.openstreetmap.org/node/5146506204
+21022,Cerro Tepecolhuexo,cerro,,,18.828331,-98.596271,osm,14,https://www.openstreetmap.org/node/5146512065
+21175,Cerro Tepoahustle,cerro,,,18.976134,-98.464109,osm,14,https://www.openstreetmap.org/node/5148763956
+21175,Cerro El Peñon,cerro,,,18.941437,-98.446713,osm,14,https://www.openstreetmap.org/node/5149494557
+21106,Cerro Cuixua,cerro,,,18.98068,-98.336076,osm,14,https://www.openstreetmap.org/node/5150841417
+21148,Cerro Nixconxe,cerro,,,18.969545,-98.399105,osm,14,https://www.openstreetmap.org/node/5150856218
+21188,Cerros El Campanario,cerro,,,18.938696,-98.569903,osm,14,https://www.openstreetmap.org/node/5151034421
+21188,Cerro Campanatepetl,cerro,,,18.915718,-98.586686,osm,14,https://www.openstreetmap.org/node/5151034422
+21188,Cerros Las Mesas,cerro,,,18.922528,-98.610809,osm,14,https://www.openstreetmap.org/node/5151034423
+21188,Cerro Aguatepetl,cerro,,,18.923599,-98.638126,osm,14,https://www.openstreetmap.org/node/5151034424
+21188,Cerro Tencualacapan,cerro,,,18.901951,-98.69395,osm,14,https://www.openstreetmap.org/node/5151040441
+21188,Cerro Xilotepetl,cerro,,,18.895661,-98.642114,osm,14,https://www.openstreetmap.org/node/5151049898
+21071,Santuario de Jesús en Santo Entierro,santuario,religioso,,20.175586,-98.053162,osm,14,https://www.openstreetmap.org/node/5258681425
+21114,Fuente SCT,manantial,ecoturismo,Fuente de agua,19.055028,-98.232765,osm,14,https://www.openstreetmap.org/node/5265961039
+21114,Cuasi Parroquia del señor de la Divina Misericordia,templo,,,18.981381,-98.226829,osm,14,https://www.openstreetmap.org/node/5341900540
+21161,Parroquia San Juan Bautista,templo,,,18.555124,-97.55963,osm,14,https://www.openstreetmap.org/node/5382013422
+21161,Salon Parroquial,templo,,,18.554547,-97.559351,osm,14,https://www.openstreetmap.org/node/5382013423
+21092,Fuente,manantial,ecoturismo,,18.481938,-97.760205,osm,14,https://www.openstreetmap.org/node/5408997589
+21161,Fuente 2,manantial,ecoturismo,,18.555117,-97.560024,osm,14,https://www.openstreetmap.org/node/5409015163
+21161,Fuente 1,manantial,ecoturismo,,18.554896,-97.560083,osm,14,https://www.openstreetmap.org/node/5409015164
+21114,Fuente de casa II,manantial,ecoturismo,,19.048805,-98.191852,osm,14,https://www.openstreetmap.org/node/5599535199
+21138,Cascada de Apatlaco,cascada,ecoturismo,,19.10764,-98.626097,osm,14,https://www.openstreetmap.org/node/5620506051
+21208,Cascada de San Pedro,cascada,ecoturismo,,19.918689,-97.954708,osm,14,https://www.openstreetmap.org/node/5673952322
+21043,Voladores de Cuetzalan,atractivo,,,20.018836,-97.521066,osm,14,https://www.openstreetmap.org/node/5702918128
+21010,parque,atractivo,,,18.377498,-97.257691,osm,14,https://www.openstreetmap.org/node/5781048105
+21106,Templo Evangelico Esmirna,templo,,,18.975094,-98.33847,osm,14,https://www.openstreetmap.org/node/5939560616
+21140,Parroquia De San Pedro Cholula,templo,,,19.06362,-98.306327,osm,14,https://www.openstreetmap.org/node/5977140485
+21114,Calle de los dulces,atractivo,,,19.046502,-98.196836,osm,14,https://www.openstreetmap.org/node/6403104787
+21164,Del Santuario,santuario,religioso,,18.957347,-97.905356,osm,14,https://www.openstreetmap.org/node/6412336646
+21172,Cascadas Aconco,naturaleza,ecoturismo,,19.885457,-97.83506,osm,14,https://www.openstreetmap.org/node/6414657797
+21180,Cerro El Mirto,cerro,,,19.336604,-98.648974,osm,14,https://www.openstreetmap.org/node/6615022878
+21180,Cerro Gordo,cerro,,,19.341058,-98.642451,osm,14,https://www.openstreetmap.org/node/6615022879
+21180,Cerro El Mirador,cerro,,,19.319135,-98.644192,osm,14,https://www.openstreetmap.org/node/6615022880
+21180,Cerro La Borcelana,cerro,,,19.314851,-98.635656,osm,14,https://www.openstreetmap.org/node/6615022881
+21180,Cerro Tlatlachelo,cerro,,,19.311061,-98.645668,osm,14,https://www.openstreetmap.org/node/6615022882
+21180,Cerro Humistlahua,cerro,,,19.306654,-98.642829,osm,14,https://www.openstreetmap.org/node/6615022883
+21180,Cerro Temalacayo,cerro,,,19.300783,-98.640475,osm,14,https://www.openstreetmap.org/node/6615022884
+21180,Cerro el Curato,cerro,,,19.286026,-98.634497,osm,14,https://www.openstreetmap.org/node/6615099585
+21180,Mesa El Carbonero,cerro,,,19.273211,-98.616406,osm,14,https://www.openstreetmap.org/node/6615099586
+21143,Cerro Chicalo,cerro,,,19.243717,-98.624732,osm,14,https://www.openstreetmap.org/node/6615099587
+21143,Cerro Cuatlatilo,cerro,,,19.234844,-98.617157,osm,14,https://www.openstreetmap.org/node/6615099588
+21143,Cerro Hielosochio,cerro,,,19.230224,-98.604154,osm,14,https://www.openstreetmap.org/node/6615099589
+21143,Cerro Tehuistle,cerro,,,19.215817,-98.614395,osm,14,https://www.openstreetmap.org/node/6615099590
+21143,Loma Larga,cerro,,,19.210772,-98.606287,osm,14,https://www.openstreetmap.org/node/6615099591
+21143,Cerro Tehuicocone,cerro,,,19.20806,-98.63535,osm,14,https://www.openstreetmap.org/node/6615099592
+21138,villa ecoturistica,atractivo,,,19.091636,-98.606078,osm,14,https://www.openstreetmap.org/node/6677558785
+21208,Valle de las Piedras Encimadas,atractivo,,,20.036592,-98.047342,osm,14,https://www.openstreetmap.org/node/6781490997
+21015,Ecosantuario La luz Del Mundo,santuario,religioso,,19.050593,-98.028427,osm,14,https://www.openstreetmap.org/node/6844757566
+21143,Pecho Iztaccíhuatl (Cumbre),cerro,,,19.176251,-98.64064,osm,14,https://www.openstreetmap.org/node/6855718203
+21074,Primera Rodilla Iztaccíhuatl,cerro,,,19.162438,-98.637084,osm,14,https://www.openstreetmap.org/node/6855718790
+21193,Cascada de San Agustín Ahuehuetla,naturaleza,ecoturismo,,18.819057,-98.150789,osm,14,https://www.openstreetmap.org/node/6896937786
+21150,Cascadas de Ahuehuetla,naturaleza,ecoturismo,,18.798703,-98.168612,osm,14,https://www.openstreetmap.org/node/6896937885
+21114,Parroquia de San Judas Tadeo,templo,,,18.970237,-98.239331,osm,14,https://www.openstreetmap.org/node/7033852955
+21138,Segundo Portillo,mirador,ecoturismo,,19.145288,-98.639239,osm,14,https://www.openstreetmap.org/node/7114940623
+21054,Cerro Hilillo,cerro,,,19.721996,-97.418703,osm,14,https://www.openstreetmap.org/node/7231303814
+21054,Cerro de Chignautla,cerro,,,19.829577,-97.402599,osm,14,https://www.openstreetmap.org/node/7231322149
+21174,Templo Expiatorio Guadalupano de Texaxaca,templo,,,19.787127,-97.355314,osm,14,https://www.openstreetmap.org/node/7231913573
+21180,Cerro Tlatzala,cerro,,,19.291401,-98.629749,osm,14,https://www.openstreetmap.org/node/7403394671
+21074,Laguna 3,manantial,ecoturismo,,19.165489,-98.609754,osm,14,https://www.openstreetmap.org/node/7695769737
+21024,La Gran Peña,cerro,,"La Gran Peña (the great rock) is the entire mount, including two peaks. Numerious rock carvings on and near the mount, attributed to the Zapotecs.",18.157454,-98.371783,osm,14,https://www.openstreetmap.org/node/7737812996
+21114,Parroquia San Pablo Xochimehuacan,templo,,,19.090713,-98.199761,osm,14,https://www.openstreetmap.org/node/7891327847
+21109,Pahuatlán del Valle,atractivo,,Pueblo mágico,20.27564,-98.150634,osm,14,https://www.openstreetmap.org/node/8374423724
+21019,Atlixco,atractivo,,Pueblo mágico,18.909717,-98.434192,osm,14,https://www.openstreetmap.org/node/8374429993
+21057,Cerro Flojo,cerro,,,20.282789,-98.241423,osm,14,https://www.openstreetmap.org/node/8439464975
+21057,Parque Ecoturístico Arcoiris,atractivo,,,20.259524,-98.24664,osm,14,https://www.openstreetmap.org/node/8439518212
+21208,Cascada Monumental,cascada,ecoturismo,,19.872731,-97.980021,osm,14,https://www.openstreetmap.org/node/8443969150
+21109,Cerro Toxtla,cerro,,,20.262933,-98.178617,osm,14,https://www.openstreetmap.org/node/8592654279
+21109,Cascada Pahuatlán,cascada,ecoturismo,,20.261935,-98.148607,osm,14,https://www.openstreetmap.org/node/8592664557
+21114,Callejón de los sapos,mirador,ecoturismo,,19.041337,-98.195547,osm,14,https://www.openstreetmap.org/node/8883702217
+21057,Cerro Chalma,cerro,,,20.234614,-98.268977,osm,14,https://www.openstreetmap.org/node/8907849200
+21057,Cerro Cuarco,cerro,,,20.293422,-98.252341,osm,14,https://www.openstreetmap.org/node/8907849201
+21074,Segunda Rodilla Iztaccíhuatl,cerro,,,19.164156,-98.638205,osm,14,https://www.openstreetmap.org/node/9450917865
+21074,Monte de Venus Iztaccíhuatl,cerro,,,19.166666,-98.637935,osm,14,https://www.openstreetmap.org/node/9450917866
+21143,Peña “El ombligo”,peña,ecoturismo,,19.170773,-98.637416,osm,14,https://www.openstreetmap.org/node/9450917867
+21143,Peña Ordoñez,cerro,,,19.17317,-98.640899,osm,14,https://www.openstreetmap.org/node/9450917868
+21074,Tumbaburros,atractivo,,,19.159151,-98.636576,osm,14,https://www.openstreetmap.org/node/9450917873
+21143,Peña Aguilera,peña,ecoturismo,,19.167817,-98.639907,osm,14,https://www.openstreetmap.org/node/9451077439
+21125,Monte Grappa,cerro,,,19.004033,-98.330879,osm,14,https://www.openstreetmap.org/node/9464797355
+21172,La cumbre,mirador,ecoturismo,,19.818688,-97.774436,osm,14,https://www.openstreetmap.org/node/9896460518
+21077,La garganta del diablo,mirador,ecoturismo,,20.017373,-97.724424,osm,14,https://www.openstreetmap.org/node/9896460519
+21179,Volcan Jalapasquillo,volcán,volcanes,,19.22372,-97.429583,osm,14,https://www.openstreetmap.org/node/10040784058
+21137,Cerro Tecajete,cerro,,,19.238634,-97.513767,osm,14,https://www.openstreetmap.org/node/10040784059
+21140,Los Portales,atractivo,,,19.063571,-98.306886,osm,14,https://www.openstreetmap.org/node/10299673002
+21140,Portal Guerrero,atractivo,,,19.063757,-98.307056,osm,14,https://www.openstreetmap.org/node/10299687379
+21114,Parroquia María Madre de Dios,templo,,,19.055553,-98.167392,osm,14,https://www.openstreetmap.org/node/10313966287
+21019,Escalera larga,atractivo,,,18.910567,-98.438498,osm,14,https://www.openstreetmap.org/node/10612999305
+21185,Ojo Del Carbon Balneario,atractivo,,,18.700688,-98.552882,osm,14,https://www.openstreetmap.org/node/10702968205
+21188,cascada las minas,naturaleza,ecoturismo,,18.947284,-98.674191,osm,14,https://www.openstreetmap.org/node/10797251791
+21020,Parroquia De Santa María Magdalena,templo,,,18.820673,-97.913142,osm,14,https://www.openstreetmap.org/node/10903703589
+21020,Templo Rosa De Saron,templo,,,18.821299,-97.912499,osm,14,https://www.openstreetmap.org/node/10903703594
+21020,"Templo Evangelico ""Eben-Ezer"" MIEPI",templo,,,18.818537,-97.913116,osm,14,https://www.openstreetmap.org/node/10925401823
+21020,Xochitlan,manantial,ecoturismo,"Lugar con afluente de agua potable a nivel de suelo, que ademas cuenta con un pozo, estanque cerrado y bomba de agua; para la distribución sobre la red municipal",18.769957,-97.916542,osm,14,https://www.openstreetmap.org/node/10925434221
+21020,Parroquia de la Virgen de la Pobeda,templo,,,18.766226,-97.911489,osm,14,https://www.openstreetmap.org/node/10925442119
+21138,Ombligo del Popocatepetl,peña,ecoturismo,,19.035433,-98.605597,osm,14,https://www.openstreetmap.org/node/10947974030
+21110,Parroquia San Sebastián Mártir,templo,,,18.817417,-97.511255,osm,14,https://www.openstreetmap.org/node/11093491854
+21209,Salinas de la barranca,atractivo,,,18.322927,-97.451367,osm,14,https://www.openstreetmap.org/node/11421710269
+21175,Ahuehuete,atractivo,,,18.988882,-98.481594,osm,14,https://www.openstreetmap.org/node/11520142269
+21045,Cerro el Resbaladero,volcán,volcanes,,18.978337,-97.462442,osm,14,https://www.openstreetmap.org/node/11853239481
+21045,Mesa Tetechales,volcán,volcanes,,18.97678,-97.489514,osm,14,https://www.openstreetmap.org/node/11853239483
+21045,Cerro Grande,volcán,volcanes,,18.964377,-97.468244,osm,14,https://www.openstreetmap.org/node/11853239484
+21045,Cerro Huizolo,volcán,volcanes,,18.964149,-97.472182,osm,14,https://www.openstreetmap.org/node/11853239485
+21045,Borrego,volcán,volcanes,,18.96139,-97.463841,osm,14,https://www.openstreetmap.org/node/11853239486
+21045,Crater San Isidro,volcán,volcanes,,18.978555,-97.374892,osm,14,https://www.openstreetmap.org/node/11853239487
+21045,Zompantepec,volcán,volcanes,,18.99401,-97.372615,osm,14,https://www.openstreetmap.org/node/11853239488
+21045,Cerro Mirador,cerro,,,18.977433,-97.429701,osm,14,https://www.openstreetmap.org/node/11867100611
+21045,Cerro Ahuatepec,cerro,,,19.047213,-97.41916,osm,14,https://www.openstreetmap.org/node/11867148013
+21045,Crater de San Miguel Ocotenco,volcán,volcanes,,19.080145,-97.465384,osm,14,https://www.openstreetmap.org/node/11867148018
+21012,Crater San Antonio Jalapasco,volcán,volcanes,,19.093296,-97.476381,osm,14,https://www.openstreetmap.org/node/11867148019
+21012,Cráter Caxcantla 3,volcán,volcanes,,19.091408,-97.504226,osm,14,https://www.openstreetmap.org/node/11867148020
+21012,Volcán Tlamacaxco,volcán,volcanes,,19.091737,-97.510212,osm,14,https://www.openstreetmap.org/node/11867148021
+21012,Cráter Caxcantla 1,volcán,volcanes,,19.091037,-97.513643,osm,14,https://www.openstreetmap.org/node/11867148022
+21012,Cráter San Miguel Tecuitlapa,volcán,volcanes,,19.126423,-97.54052,osm,14,https://www.openstreetmap.org/node/11867148023
+21142,Volcan Coatepec,volcán,volcanes,,19.13814,-97.582196,osm,14,https://www.openstreetmap.org/node/11867148024
+21142,Cerro el Brujo,cerro,,,19.127161,-97.586396,osm,14,https://www.openstreetmap.org/node/11867148025
+21045,Cerro El Morrillo,cerro,,,19.007539,-97.430026,osm,14,https://www.openstreetmap.org/node/11879936269
+21045,Cubo de Agua,cerro,,,18.999137,-97.436068,osm,14,https://www.openstreetmap.org/node/11879936270
+21045,Cerro el Barrio Nuevo,cerro,,,18.986502,-97.431114,osm,14,https://www.openstreetmap.org/node/11879936271
+21045,Metlapiltepec,cerro,,,18.993793,-97.406297,osm,14,https://www.openstreetmap.org/node/11879936272
+21045,Loma Burro,cerro,,,19.014777,-97.403249,osm,14,https://www.openstreetmap.org/node/11879936273
+21045,Loma Tetele,cerro,,,19.003847,-97.368141,osm,14,https://www.openstreetmap.org/node/11879936275
+21045,Cerro Lomatel,cerro,,,18.989268,-97.377223,osm,14,https://www.openstreetmap.org/node/11879936276
+21045,Cerro San Juantepec,cerro,,,18.985032,-97.383601,osm,14,https://www.openstreetmap.org/node/11879936277
+21045,Cerro Chipes,cerro,,,19.003524,-97.346832,osm,14,https://www.openstreetmap.org/node/11879936278
+21045,Loma Banco,cerro,,,18.992653,-97.349288,osm,14,https://www.openstreetmap.org/node/11879936279
+21045,Cerro Colorado,cerro,,,19.015299,-97.302662,osm,14,https://www.openstreetmap.org/node/11879936280
+21179,Cerro los Jarros,cerro,,,19.148815,-97.428402,osm,14,https://www.openstreetmap.org/node/11879936281
+21179,Cerro los Arcos,cerro,,,19.184129,-97.419432,osm,14,https://www.openstreetmap.org/node/11879936282
+21045,San Jeronimo,cerro,,,18.968783,-97.478736,osm,14,https://www.openstreetmap.org/node/11879936284
+21045,Huizcolotla,cerro,,,18.956769,-97.450288,osm,14,https://www.openstreetmap.org/node/11879936285
+21179,Mesa Llano Grande,cerro,,,19.125352,-97.281504,osm,14,https://www.openstreetmap.org/node/11880036127
+21179,Cerro El Mirador,cerro,,,19.105364,-97.288678,osm,14,https://www.openstreetmap.org/node/11880036129
+21179,Cerro Sillatepec,cerro,,,19.096801,-97.291795,osm,14,https://www.openstreetmap.org/node/11880036130
+21051,Cerro Prieto,cerro,,,18.586395,-98.657902,osm,14,https://www.openstreetmap.org/node/11946507624
+21063,Cabús 44445,atractivo,,,18.859864,-97.379495,osm,14,https://www.openstreetmap.org/node/12087634215
+21004,Parroquia de la santísima virgen inmaculada,templo,,,18.958173,-97.803068,osm,14,https://www.openstreetmap.org/node/12509977028
+21208,Cerro Tlaloc,cerro,,,19.928346,-97.910019,osm,14,https://www.openstreetmap.org/node/12512780971
+21167,Cerro Tinampol,cerro,,,19.933107,-97.899191,osm,14,https://www.openstreetmap.org/node/12512780972
+21167,Cerro Tenampulco,cerro,,,19.938631,-97.893641,osm,14,https://www.openstreetmap.org/node/12512780973
+21167,Cerro Titcalane,cerro,,,19.944734,-97.895862,osm,14,https://www.openstreetmap.org/node/12512780974
+21167,Cerro Chicnahuimazatl,cerro,,,19.956143,-97.899727,osm,14,https://www.openstreetmap.org/node/12512780975
+21006,Cerro Xoxoquitepetl,cerro,,,19.966389,-97.895886,osm,14,https://www.openstreetmap.org/node/12512780976
+21006,Cerro Nepopualco,cerro,,,19.985811,-97.90557,osm,14,https://www.openstreetmap.org/node/12512780977
+21167,Cerro El Venado,cerro,,,19.953877,-97.856952,osm,14,https://www.openstreetmap.org/node/12512780978
+21167,Cerro Moxonco,cerro,,,19.900547,-97.848337,osm,14,https://www.openstreetmap.org/node/12512780979
+21208,Cerro el Potrito,cerro,,,19.888597,-97.887541,osm,14,https://www.openstreetmap.org/node/12512780980
+21208,Cerro Ecacalco,cerro,,,19.902454,-97.920014,osm,14,https://www.openstreetmap.org/node/12512780981
+21208,Cerro Peña Blanca,cerro,,,19.878847,-97.944982,osm,14,https://www.openstreetmap.org/node/12512780982
+21208,Cerro Atzompachil,cerro,,,19.864234,-97.902497,osm,14,https://www.openstreetmap.org/node/12512780983
+21208,Cerro Texis,cerro,,,19.857221,-97.897257,osm,14,https://www.openstreetmap.org/node/12512780984
+21208,Cerro Matlalcoexin,cerro,,,19.84914,-97.914461,osm,14,https://www.openstreetmap.org/node/12512780985
+21053,Cerro Quexnol,cerro,,,19.823573,-97.966418,osm,14,https://www.openstreetmap.org/node/12512780986
+21208,Manzana Gigante,atractivo,,,19.932525,-97.960636,osm,14,https://www.openstreetmap.org/node/12577828259
+21018,Casa de los Fosiles,atractivo,,,18.398548,-97.737122,osm,14,https://www.openstreetmap.org/node/12691461211
+21018,Huellas de Dinosaurio,atractivo,,,18.399471,-97.741916,osm,14,https://www.openstreetmap.org/node/12691461225
+21138,Peñas El Manzano,cerro,,,19.14633,-98.637689,osm,14,https://www.openstreetmap.org/node/12748295325
+21138,Amacuilecatl,cerro,,,19.146365,-98.633351,osm,14,https://www.openstreetmap.org/node/12748295326
+21138,Peñasco del Lirio,cerro,,,19.14575,-98.629245,osm,14,https://www.openstreetmap.org/node/12748295327
+21012,Cráter Aljoluca,volcán,volcanes,,19.091216,-97.533909,osm,14,https://www.openstreetmap.org/node/14016644133
+21119,Zona arqueológica de Cholula,zona_arqueologica,arqueologia,,19.057481,-98.301907,osm,14,https://www.openstreetmap.org/way/26643862
+21169,Tepexi el Viejo,atractivo,,,18.597357,-97.983696,osm,14,https://www.openstreetmap.org/way/26645607
+21053,Aguas Termales,atractivo,,,19.837112,-97.993127,osm,14,https://www.openstreetmap.org/way/99815970
+21074,Ex Convento de Huejotzingo,santuario,religioso,,19.158593,-98.404407,osm,14,https://www.openstreetmap.org/way/145921063
+21170,Cantona,zona_arqueologica,arqueologia,,19.551937,-97.485771,osm,14,https://www.openstreetmap.org/way/157026335
+21188,Convento de la Asunción de Nuestra Señora,santuario,religioso,,18.89293,-98.572935,osm,14,https://www.openstreetmap.org/way/203338269
+21053,Parroquia de Santiago Apóstol,templo,,,19.838842,-98.030986,osm,14,https://www.openstreetmap.org/way/237137137
+21010,Parroquia San Juan Bautista,templo,,,18.376672,-97.25783,osm,14,https://www.openstreetmap.org/way/297234435
+21114,Parroquia de la Divina Providencia,templo,,,19.043753,-98.163123,osm,14,https://www.openstreetmap.org/way/298184961
+21114,Parroquia  Madre Admirable,templo,,"ARQUIDIÓCESIS DE PUEBLA
+ZONA URBANA
+D7P6
+Deca 7: Volcanes
+Parr 6
+Parroquia Madre Admirable Puebla
+
+
+D7P6
+Parroquia Madre Admirable
+C550_PRADOS AGUA AZUL
+CP 72430
+proyecto raika
+Autor: Movimiento Bonum Commune",19.025332,-98.217342,osm,14,https://www.openstreetmap.org/way/298459944
+21174,Parroquia del Sagrario Santa Iglesia Catedral,templo,,,19.817536,-97.360086,osm,14,https://www.openstreetmap.org/way/306133754
+21094,Parroquia San Juan Bautista,templo,,,19.464142,-97.686571,osm,14,https://www.openstreetmap.org/way/311676655
+21074,Santuario de la Preciosa Sangre de Cristo.,santuario,religioso,,19.197947,-98.440617,osm,14,https://www.openstreetmap.org/way/336016698
+21067,Parroquia Santa María de Guadalupe,templo,,,19.291924,-97.343026,osm,14,https://www.openstreetmap.org/way/346624766
+21058,Parroquia San Pedro Apóstol,templo,,,19.25505,-97.182537,osm,14,https://www.openstreetmap.org/way/346640478
+21094,La cabaña del León,atractivo,,,19.509321,-97.750633,osm,14,https://www.openstreetmap.org/way/356386922
+21199,Zona arqueológica de San Juan Xiutetelco,zona_arqueologica,arqueologia,,19.792568,-97.328054,osm,14,https://www.openstreetmap.org/way/369854510
+21045,Parroquia de San Andrés,templo,,,18.987949,-97.446653,osm,14,https://www.openstreetmap.org/way/369939456
+21094,Cristo Rey (En construcción),atractivo,,,19.478582,-97.69259,osm,14,https://www.openstreetmap.org/way/378223045
+21108,Hacienda Santiago Texmelucan,atractivo,,,19.356113,-97.560073,osm,14,https://www.openstreetmap.org/way/380901462
+21020,Parroquia del Divino Salvador,templo,,,18.822625,-97.912509,osm,14,https://www.openstreetmap.org/way/411540905
+21140,Convento Franciscano de San Gabriel Arcángel,santuario,religioso,,19.062292,-98.304377,osm,14,https://www.openstreetmap.org/way/466724324
+21138,Parroquia de San Nicolás de bari,templo,,,19.072664,-98.485334,osm,14,https://www.openstreetmap.org/way/519477908
+21114,Santuario de Nuestra Señora de Guadalupe,santuario,religioso,,19.048763,-98.206612,osm,14,https://www.openstreetmap.org/way/525435120
+21019,Parroquia Santa Maria de la Natividad,templo,,,18.909535,-98.433425,osm,14,https://www.openstreetmap.org/way/526296922
+21019,Convento de San Francisco,santuario,religioso,,18.911014,-98.43742,osm,14,https://www.openstreetmap.org/way/526640963
+21114,La Estrella de Puebla,atractivo,,,19.034443,-98.232307,osm,14,https://www.openstreetmap.org/way/529054210
+21085,Santuario Santiago Apostol,santuario,religioso,,18.607271,-98.464025,osm,14,https://www.openstreetmap.org/way/530234077
+21085,Parroquia Santa María la Asunción,templo,,,18.602491,-98.464986,osm,14,https://www.openstreetmap.org/way/539375254
+21015,Parroquia de Amozoc de Mota .,templo,,,19.044974,-98.045175,osm,14,https://www.openstreetmap.org/way/544441273
+21015,Ex-convento Franciscano de Amozo de Mota.,santuario,religioso,,19.044455,-98.0432,osm,14,https://www.openstreetmap.org/way/550732564
+21161,Parroquia San Juan Tepanco,templo,,,18.554818,-97.5596,osm,14,https://www.openstreetmap.org/way/550736822
+21015,Parroquia Divino Salvador,templo,,,19.047218,-98.095002,osm,14,https://www.openstreetmap.org/way/551000442
+21114,Parroquia María Reina,templo,,"Arquidiócesis de Puebla
+ZU Zona Urbana
+D5 Decanato 5< María Reina
+P6 Parroquia 6, María Reina
+Mapa Territorial  raika
+Autor> Movimiento Bonum Commune",19.008965,-98.199594,osm,14,https://www.openstreetmap.org/way/561121976
+21043,Parroquia de San Francisco de Asis,templo,,,20.018831,-97.520603,osm,14,https://www.openstreetmap.org/way/599430486
+21207,Patio  de la Jacaranda,atractivo,,,19.882042,-97.54401,osm,14,https://www.openstreetmap.org/way/612072405
+21207,Kiosko,atractivo,,,19.882264,-97.544303,osm,14,https://www.openstreetmap.org/way/612073311
+21058,Templo Sagrado Corazon de Jesus,templo,,Templo en honor al sagrado corazon de Jesus,19.258409,-97.181183,osm,14,https://www.openstreetmap.org/way/648307128
+21208,Ex-Convento Franciscano,santuario,religioso,,19.931317,-97.960524,osm,14,https://www.openstreetmap.org/way/664313622
+21114,Parroquia de San Martín de Porres,templo,,,19.040412,-98.152465,osm,14,https://www.openstreetmap.org/way/681324999
+21143,Castillo de Chautla,atractivo,,,19.317066,-98.470669,osm,14,https://www.openstreetmap.org/way/879509991
+21119,Parroquia de San Andrés Apostol,templo,,,19.049513,-98.298817,osm,14,https://www.openstreetmap.org/way/905163622
+21119,Parroquia San Andrés,templo,,,19.049816,-98.298597,osm,14,https://www.openstreetmap.org/way/905166617
+21114,Parroquia de San Francisco,templo,,,18.96819,-98.185828,osm,14,https://www.openstreetmap.org/way/988737032
+21114,Parroquia del Alto,templo,,,19.046155,-98.187753,osm,14,https://www.openstreetmap.org/way/991610630
+21125,Parroquia de la Inmaculada Concepción,templo,,,19.005615,-98.331209,osm,14,https://www.openstreetmap.org/way/1026567226
+21188,Cráter externo del Popocatépetl,peña,ecoturismo,,19.023629,-98.624587,osm,14,https://www.openstreetmap.org/way/1034717479
+21188,Cráter interno del Popocatépetl,peña,ecoturismo,,19.023561,-98.622439,osm,14,https://www.openstreetmap.org/way/1034717481
+21045,"Templo de Nuestra Señora de Los Dolores ""Barrio de Dolores""",templo,,,18.98716,-97.44847,osm,14,https://www.openstreetmap.org/way/1050851112
+21045,El Santuario,santuario,religioso,,18.99141,-97.447987,osm,14,https://www.openstreetmap.org/way/1050853217
+21114,BARRANCA,peña,ecoturismo,,19.090352,-98.139896,osm,14,https://www.openstreetmap.org/way/1051590114
+21164,Santuario del Santo Niño Doctor,santuario,religioso,,18.965515,-97.905608,osm,14,https://www.openstreetmap.org/way/1080416446
+21040,Parroquia,templo,,,18.956376,-98.016517,osm,14,https://www.openstreetmap.org/way/1080658515
+21114,Parroquia de Ntra Sra del Perpetuo Socorro,templo,,"Arquidiócesis de Puebla 
+(ZU) Zona Urbana
+(D7) Decanato 7, Volcanes
+(P3) Parroquia 3, Ntra Sra del Perpetuo Socorro 
+Mapa territorial RAIKA, Autor  Mov. Bonum Commune",19.034766,-98.205858,osm,14,https://www.openstreetmap.org/way/1087800286
+21164,Parroquia de San Hipolito Xochiltenango,templo,,,18.937973,-97.874769,osm,14,https://www.openstreetmap.org/way/1146046255
+21020,Santuario del Divino Salvador,santuario,religioso,,18.822441,-97.912573,osm,14,https://www.openstreetmap.org/way/1180049999
+21020,"Templo Evangelico ""Eben-Ezer""",templo,,,18.818521,-97.91306,osm,14,https://www.openstreetmap.org/way/1180050002
+21142,Parroquia del Divino Salvador,templo,,,19.134121,-97.640814,osm,14,https://www.openstreetmap.org/way/1181486730
+21179,Parroquia de la Inmaculada Concepcion,templo,,,19.114727,-97.418531,osm,14,https://www.openstreetmap.org/way/1181488659
+21137,Parroquia de San Nicolás de Tolentino,templo,,,19.161797,-97.547814,osm,14,https://www.openstreetmap.org/way/1181489508
+21012,Parroquia de San Jerónimo,templo,,,19.099954,-97.531208,osm,14,https://www.openstreetmap.org/way/1181490434
+21130,Parroquia de San Juan Bautista,templo,,,19.089295,-97.540369,osm,14,https://www.openstreetmap.org/way/1181490762
+21023,Parroquia de San Antonio de Padua,templo,,,18.896687,-97.327263,osm,14,https://www.openstreetmap.org/way/1181505846
+21002,Iglesia de la Parroquia de San José Acateno,templo,,,20.129703,-97.209896,osm,14,https://www.openstreetmap.org/way/1184492874
+21093,Parroquia San José,templo,,,19.296399,-97.298626,osm,14,https://www.openstreetmap.org/way/1191320905
+21197,Parroquia San Juan Bautista,templo,,,20.275646,-97.958132,osm,14,https://www.openstreetmap.org/way/1192197145
+21177,Parroquia de la Santa Cruz Tlacotepec de Benito Juárez,templo,,,18.682415,-97.6532,osm,14,https://www.openstreetmap.org/way/1194329087
+21205,Parroquia de San Simón y San Judas Tadeo,templo,,,18.794668,-97.662171,osm,14,https://www.openstreetmap.org/way/1194329765
+21115,Ex Convento Franciscano S.XVI y Parroquia de Santa Maria Magdalena,santuario,religioso,,18.955901,-97.65955,osm,14,https://www.openstreetmap.org/way/1194332829
+21115,Ruinas Parroquia de la Merced,templo,,,18.957199,-97.661367,osm,14,https://www.openstreetmap.org/way/1194332830
+21144,Parroquia Del Divino Salvador,templo,,,18.920305,-97.770631,osm,14,https://www.openstreetmap.org/way/1194335188
+21118,Parroquia de Los Santos Reyes,templo,,,18.945911,-97.812519,osm,14,https://www.openstreetmap.org/way/1194335911
+21004,Parroquia de San Juan Evangelista,templo,,,18.981967,-97.784166,osm,14,https://www.openstreetmap.org/way/1194337264
+21114,Parroquia Nuestra Señora. de Fátima,templo,,"Arquidiócesis de Puebla
+ZU Zona Urbana 
+D6 Mayorazgo
+P7 Nuestra Señora de Fátima
+Proyecto raika
+Autor. Movimiento Bonum Commune",18.989313,-98.235328,osm,14,https://www.openstreetmap.org/way/1256721152
+21114,Parroquia Ntra. Sra. de la Candelaria,templo,,"ZONA URBANA ARQUIDIÒCESIS DE PUEBLA
+D5P10
+Deca 5: Ma Reina
+Parr 10
+Parroquia Sra de la Candelaria (Loma Linda) Puebla
+
+
+D5P10
+Parroquia Ntra. Sra. de la Candelaria
+C274_LOMA LINDA
+CP 72477
+proyecto raika
+Autor Bonum Commune",19.001779,-98.211436,osm,14,https://www.openstreetmap.org/way/1257599205
+21114,Parroquia La Sagrada Familia (Tres Cruces),templo,,"ARQUIDIÓCESIS DE PUEBLA
+ZONA URBANA
+D5P11
+Deca 5: Ma Reina
+Parr 11
+Parroquia La Sagrada Familia (Tres Cruces) Puebla
+
+
+D5P11
+Parroquia La Sagrada Familia (Tres Cruces)
+C278_TRES CRUCES
+CP 72595
+proyecto raika
+autor Bonum Commune",18.991846,-98.189278,osm,14,https://www.openstreetmap.org/way/1257957995
+21114,Parroquia San Baltasar,templo,,"ARQUIDIÓCESIS DE UEBLA
+ZONA URBANA
+D5P5
+Deca 5: Ma Reina
+Parr 5
+Parroquia San Baltasar Puebla
+
+
+D5P5
+Parroquia San Baltasar
+C213_SAN BALTAZAR CAMPECHE
+CP 72550
+proyecto raika
+Autor; Movmiento Bonum ommune",19.024288,-98.207002,osm,14,https://www.openstreetmap.org/way/1258069081
+21114,Parroquia La Preciosa Sangre de Cristo,templo,,"ARQUIDIÓCESIS DE PUEBLA
+ZONA URBANA
+D5P13
+Deca 5: Ma Reina
+Parr 13
+Parroquia Preciosa Sangre de Cristo Puebla
+
+
+D5P13
+Parroquia La Preciosa Sangre de Cristo
+C296_SAN JOSE XILOTZINGO
+CP 72590
+proyecto raika
+Autor: Movimiento Bonum Commune",18.982527,-98.208512,osm,14,https://www.openstreetmap.org/way/1258260439
+21114,Parroquia de San Isidro,templo,,"ARQUIDIÓCESIS DE PUEBLA
+ZONA URBANA
+D5P12
+Deca 5: Ma Reina
+Parr 12
+Parroquia Iglesia de San Isidro
+
+
+D5P12
+Parroquia de San Isidro
+C285_GRANJAS SAN ISIDRO
+CP 72587
+proyecto raika
+Autor: Movimiento Bonum Commune",18.992012,-98.214056,osm,14,https://www.openstreetmap.org/way/1259113244
+21114,Parroquia Ntra. Sra. del Rosario (La Margarita),templo,,"ARQUIDIÓCESIS DE PUEBLA
+ZONA URANA
+D5P8
+Deca 5: Ma Reina
+Parr 8
+Parroquia de Nuestra Señora del Rosario (La Margarita) Puebla
+
+
+D5P8
+Parroquia Ntra. Sra. del Rosario (La Margarita)
+C247_LA MARGARITA
+CP 72560
+proyecto raika
+Autor: Movimiento Bonum Commune",18.997772,-98.186566,osm,14,https://www.openstreetmap.org/way/1261917300
+21114,Parroquia San Miguel Arcángel,templo,,"ARQUIDIÓCESIS DE PUEBLA
+ZONA URBANA
+D5P9
+Deca 5: Ma Reina
+Parr 9
+Parroquia San Miguel Arcángel Puebla
+
+
+D5P9
+Parroquia San Miguel Arcángel
+C270_LOMAS DE SAN MIGUEL
+CP 72573
+D5P9
+Deca 5: Ma Reina
+Parr 9
+Parroquia San Miguel Arcángel Puebla
+
+
+D5P9
+Parroquia",18.996459,-98.178793,osm,14,https://www.openstreetmap.org/way/1262249410
+21114,Parroquia San José (La Hacienda),templo,,"ARQUIDIÓESIS DE PUEBLA
+ZONA URBANA
+D5P7
+Deca 5: Ma Reina
+Parr 7
+Parroquia San José (La Hacienda)
+
+
+D5P7
+Parroquia San José (La Hacienda)
+C245_LA HACIENDA
+CP 72570
+proyecto raika
+Autor: Movimiento Bonum Commune",19.008462,-98.191064,osm,14,https://www.openstreetmap.org/way/1262831615
+21114,Parroquia Cristo Rey (Valle del Sol),templo,,"ARQUIDIÓCESIS DE PUEBLA
+ZONA URBANA
+D5P3
+Deca 5: Ma Reina
+Parr 3
+Parroquia Cristo Rey (Valle del Sol)
+
+
+D5P3
+Parroquia Cristo Rey (Valle del Sol)
+C194_VALLE DEL SOL
+CP 72565
+proyecto raika
+Autor: Bonum Commune",19.014627,-98.185632,osm,14,https://www.openstreetmap.org/way/1263254355
+21114,Parroquia San Ramón Nonato (Hnos. Mercedarios),templo,,"ARQUIDIÓCESIS DE PUEBLA
+ZONA URBANA
+D5P4
+Deca 5: Ma Reina
+Parr 4
+Parroquia San Ramón Nonato Puebla
+
+
+D5P4
+Parroquia San Ramón Nonato (Hnos. Mercedarios)
+C201_GRAL IGNACIO ZARAGOZA
+CP 72380
+Proyecto raika
+Autor: Movimiento Bonum Commune",19.026636,-98.181467,osm,14,https://www.openstreetmap.org/way/1263515638
+21114,Parroquia Jesús Divino Maestro,templo,,"ARQUIDIÓCESIS DE PUEBLA
+ZONA URBANA
+D3P1
+Deca 3: Amalucan
+Parr 1
+Parroquia Jesús Divino Maestro (Mex 68)
+
+
+D3P1
+Parroquia Jesús Divino Maestro
+C73_UNIDAD MAGISTERIAL MEXICO 68
+CP 72300
+proyecto raika
+Autor: Movimiento Bonum Commune",19.053091,-98.162392,osm,14,https://www.openstreetmap.org/way/1264346446
+21114,Parroquia La Medalla Milagrosa (Padres de la Misión),templo,,"ARQUIDIÓCESIS DE PUEBLA
+ZONA URBANA
+D5P1
+Deca 5: Ma Reina
+Parr 1
+Parroquia La Medalla Milagrosa Puebla
+
+
+D5P1
+Parroquia La Medalla Milagrosa (Padres de la Misión)
+C173_BELLA VISTA
+CP 72500
+proyecto raika
+Autor: Movimiento Bonum Commune",19.030543,-98.192643,osm,14,https://www.openstreetmap.org/way/1267723376
+21114,Parroquia San Vicente de Paul,templo,,"ARQUIDIÓCESIS DE PUEBLA
+ZONA URBANA
+D5P2
+Deca 5: Ma Reina
+Parr 2
+Parroquia San Vicente de Paul Puebla
+
+
+D5P2
+Parroquia San Vicente de Paul
+C186_SEIS DE ENERO
+CP 72510
+Proyecto raika
+Autor: Movimiento Bonum Commune",19.020483,-98.186122,osm,14,https://www.openstreetmap.org/way/1270229662
+21115,Parroquia Jesús de las Maravillas,templo,,,18.902828,-97.634417,osm,14,https://www.openstreetmap.org/way/1281859495
+21202,Templo Testigos de Jehová,templo,,,19.918584,-97.636183,osm,14,https://www.openstreetmap.org/way/1303539048
+21114,"Templo de Puebla, México",templo,,,19.085081,-98.235613,osm,14,https://www.openstreetmap.org/way/1328920592
+21208,Reloj Floral,atractivo,,,19.931683,-97.960244,osm,14,https://www.openstreetmap.org/way/1358945048
+21053,Basilica Menor de la Inmaculada Concepción,santuario,religioso,,19.840677,-98.0306,osm,14,https://www.openstreetmap.org/way/1360728477
+21079,Ermita de Nuestra Señora de Guadalupe,santuario,religioso,,18.786306,-97.891265,osm,14,https://www.openstreetmap.org/way/1391542965
+21114,Los Pericos,peña,ecoturismo,,18.913735,-98.151877,osm,14,https://www.openstreetmap.org/way/1422940409
+21154,Parroquia de San Mateo,templo,,,18.913253,-97.735484,osm,14,https://www.openstreetmap.org/way/1423423197
+21194,Parroquia de Santa María de Guadalupe,templo,,,20.505471,-97.668276,osm,14,https://www.openstreetmap.org/way/1431013285
+21114,Mirador Fuerte de Guadalupe,mirador,ecoturismo,,19.052396,-98.180843,osm,14,https://www.openstreetmap.org/way/1451701125
+21005,Templo de la Purisima Concepción,templo,,,18.777616,-98.703818,osm,14,https://www.openstreetmap.org/way/1500253603
+21185,Zona Arqueológica de Tepapayeca,zona_arqueologica,arqueologia,,18.67398,-98.531121,osm,14,https://www.openstreetmap.org/relation/13817523
+21132,Monumento a Hidalgo,atractivo,,,19.282876,-98.435134,osm,14,https://www.openstreetmap.org/node/995703348
+21169,Tepeji el Viejo,zona_arqueologica,arqueologia,,18.597859,-97.983391,osm,14,https://www.openstreetmap.org/node/1175203312
+21132,Tepatlaxco,zona_arqueologica,arqueologia,,19.314211,-98.445418,osm,14,https://www.openstreetmap.org/node/1192445983
+21140,Museo de Sitio de Cholula,museo,museos,,19.059659,-98.300723,osm,14,https://www.openstreetmap.org/node/1473457917
+21114,Monumento a la China Poblana,atractivo,,,19.064911,-98.191217,osm,14,https://www.openstreetmap.org/node/1639504005
+21114,Monumento a los Hermanos Serdan,atractivo,,,19.06323,-98.221789,osm,14,https://www.openstreetmap.org/node/1656330734
+21153,Quiosco,atractivo,,,18.900325,-97.969784,osm,14,https://www.openstreetmap.org/node/1667637623
+21153,Aljibe de Tecali de Herrera,atractivo,,,18.899472,-97.966082,osm,14,https://www.openstreetmap.org/node/1667637628
+21153,Antiguo Hospital de Tecali de Herrera,atractivo,,,18.900142,-97.966265,osm,14,https://www.openstreetmap.org/node/1667637633
+21153,Ex-Convento Franciscano,santuario,religioso,,18.899432,-97.967852,osm,14,https://www.openstreetmap.org/node/1667637648
+21153,Torre del Centinela,atractivo,,,18.90034,-97.970326,osm,14,https://www.openstreetmap.org/node/1667637654
+21114,Museo Regional INAH,zona_arqueologica,arqueologia,,19.056269,-98.182823,osm,14,https://www.openstreetmap.org/node/1667849970
+21114,Fuente de los Frailes,atractivo,,,19.053791,-98.222624,osm,14,https://www.openstreetmap.org/node/1959939216
+21124,Capilla Guadalupe,atractivo,,,18.334962,-97.342426,osm,14,https://www.openstreetmap.org/node/2006718205
+21124,Museo del Agua,museo,museos,,18.316599,-97.361202,osm,14,https://www.openstreetmap.org/node/2006800434
+21124,Parroquia San Gabriel,atractivo,,,18.317284,-97.346792,osm,14,https://www.openstreetmap.org/node/2006849922
+21124,Iglesia Cristo Rey,atractivo,,,18.326705,-97.351105,osm,14,https://www.openstreetmap.org/node/2006849925
+21156,Bandera Monumental,atractivo,,,18.473747,-97.427638,osm,14,https://www.openstreetmap.org/node/2022053395
+21049,Tlaxco,zona_arqueologica,arqueologia,,20.058165,-97.961236,osm,14,https://www.openstreetmap.org/node/2424804738
+21114,Capilla del Arte,museo,museos,,19.044194,-98.196729,osm,14,https://www.openstreetmap.org/node/2960170291
+21170,Pirámides Cantona,zona_arqueologica,arqueologia,,19.550891,-97.496813,osm,14,https://www.openstreetmap.org/node/3210108494
+21156,Rotonda de la Sarabia,atractivo,,,18.472352,-97.391453,osm,14,https://www.openstreetmap.org/node/4109095591
+21156,Monumento a la madre,atractivo,,,18.470925,-97.39398,osm,14,https://www.openstreetmap.org/node/4109102489
+21114,Museo del Barroco,museo,museos,,19.018706,-98.246358,osm,14,https://www.openstreetmap.org/node/4320037892
+21114,Museo del Ejercito y Fuerza Aérea Mexicanos,museo,museos,,19.04841,-98.207841,osm,14,https://www.openstreetmap.org/node/4320083590
+21114,La Constancia luz obrera,museo,museos,,19.092684,-98.23488,osm,14,https://www.openstreetmap.org/node/4444992991
+21114,La constancia,museo,museos,,19.092813,-98.234852,osm,14,https://www.openstreetmap.org/node/4484677293
+21114,Museo de la Evolución,museo,museos,,19.05794,-98.181626,osm,14,https://www.openstreetmap.org/node/4589641062
+21114,Ángel Custodio,atractivo,,,19.041124,-98.193105,osm,14,https://www.openstreetmap.org/node/4768572998
+21156,Museo de la evolución,museo,museos,,18.477382,-97.440199,osm,14,https://www.openstreetmap.org/node/4782957521
+21114,La Casa Del Mendrugo,museo,museos,,19.041647,-98.196233,osm,14,https://www.openstreetmap.org/node/4929484523
+21114,Monumento a los fundadores de Puebla,atractivo,,,19.045472,-98.189905,osm,14,https://www.openstreetmap.org/node/5122921110
+21207,Obelisco,atractivo,,,19.879703,-97.588731,osm,14,https://www.openstreetmap.org/node/5270787175
+21207,Museo Xolapancalli,museo,museos,,19.873191,-97.58938,osm,14,https://www.openstreetmap.org/node/5271136532
+21132,Cristo rey,atractivo,,,19.283602,-98.433137,osm,14,https://www.openstreetmap.org/node/5277991444
+21156,Obelisco,atractivo,,,18.461974,-97.40542,osm,14,https://www.openstreetmap.org/node/5326712845
+21071,Museo de atuendos indígenas de la región,museo,museos,,20.176514,-98.054144,osm,14,https://www.openstreetmap.org/node/5614463444
+21156,Monumento Ferrocarril,atractivo,,,18.463003,-97.401333,osm,14,https://www.openstreetmap.org/node/5683129356
+21043,Museo de sitio de Cuetzalan,museo,museos,,20.019385,-97.523308,osm,14,https://www.openstreetmap.org/node/5702918139
+21156,Coapeña,atractivo,,,18.435912,-97.402394,osm,14,https://www.openstreetmap.org/node/5752472596
+21156,Virgen,atractivo,,,18.459655,-97.404596,osm,14,https://www.openstreetmap.org/node/5766579639
+21156,HONOR A MEXICO,atractivo,,,18.490079,-97.375402,osm,14,https://www.openstreetmap.org/node/5776277861
+21010,Monumento a Miguel Hidalgo,atractivo,,,18.377505,-97.257947,osm,14,https://www.openstreetmap.org/node/5781048110
+21207,Cristo Redentor,atractivo,,,19.885419,-97.541667,osm,14,https://www.openstreetmap.org/node/5794514040
+21207,Santísima Virgen,atractivo,,,19.883375,-97.542543,osm,14,https://www.openstreetmap.org/node/5794514041
+21207,San Martín Caballero de Tour,atractivo,,,19.882183,-97.543921,osm,14,https://www.openstreetmap.org/node/5794514042
+21156,Quetlzalcoatl,atractivo,,,18.465232,-97.382544,osm,14,https://www.openstreetmap.org/node/5830260036
+21114,Fuente de los muñecos,atractivo,,,19.0474,-98.18318,osm,14,https://www.openstreetmap.org/node/5835083789
+21114,La Estatua de Benito Juárez,atractivo,,,19.051396,-98.217877,osm,14,https://www.openstreetmap.org/node/5876233705
+21114,Monumento a la Independencia,atractivo,,,19.049027,-98.213217,osm,14,https://www.openstreetmap.org/node/5876928646
+21114,Constitución De Apatzingan 1814,atractivo,,,19.051836,-98.223995,osm,14,https://www.openstreetmap.org/node/5897302903
+21106,campanario de Cristo Rey,atractivo,,,18.964139,-98.339903,osm,14,https://www.openstreetmap.org/node/5939703160
+21156,Virgen Con Luces,atractivo,,,18.459293,-97.405811,osm,14,https://www.openstreetmap.org/node/5962870710
+21156,Virgen Abarrotes Vargas,atractivo,,,18.463389,-97.407055,osm,14,https://www.openstreetmap.org/node/5962870712
+21156,Virgen Infonavit,atractivo,,,18.458344,-97.403734,osm,14,https://www.openstreetmap.org/node/5962870745
+21156,Virgen Granada,atractivo,,,18.457578,-97.406552,osm,14,https://www.openstreetmap.org/node/5994128891
+21124,Antigua Casa de Adobe,museo,museos,,18.324237,-97.3525,osm,14,https://www.openstreetmap.org/node/5994318906
+21156,Virgen de los 5 pinos,atractivo,,,18.459217,-97.408943,osm,14,https://www.openstreetmap.org/node/6008855972
+21114,La Victoria,atractivo,,,19.050712,-98.138019,osm,14,https://www.openstreetmap.org/node/6018466844
+21156,Virgen Andador Puerto de Acapulco,atractivo,,,18.457375,-97.405855,osm,14,https://www.openstreetmap.org/node/6196356745
+21156,VIRGEN EN PARED Venustiano Carranza,atractivo,,,18.459368,-97.413512,osm,14,https://www.openstreetmap.org/node/6202116999
+21114,Museo del automóvil Puebla,museo,museos,,19.039805,-98.203623,osm,14,https://www.openstreetmap.org/node/6322223286
+21114,Museo de Arte Religioso Ex Convento de Santa Mónica,santuario,religioso,,19.051447,-98.195136,osm,14,https://www.openstreetmap.org/node/6564763193
+21016,Hacienda La Almeya,atractivo,,,19.739017,-97.905953,osm,14,https://www.openstreetmap.org/node/7045308401
+21119,AMOR Y GALERIA,museo,museos,,19.049673,-98.299659,osm,14,https://www.openstreetmap.org/node/8500777738
+21197,Monumental Vírgen de gualupe,atractivo,,,20.285183,-97.953905,osm,14,https://www.openstreetmap.org/node/8581086122
+21114,Arco,atractivo,,,18.969165,-98.184946,osm,14,https://www.openstreetmap.org/node/9138785389
+21114,Museo Talavera Casa Uriarte,museo,museos,,19.049162,-98.204036,osm,14,https://www.openstreetmap.org/node/9758534418
+21155,Museo Mixtecayotl,museo,museos,,18.12414,-98.309697,osm,14,https://www.openstreetmap.org/node/10076933699
+21140,Foro San Pedro,museo,museos,,19.063718,-98.307015,osm,14,https://www.openstreetmap.org/node/10299687378
+21114,Monumento a las Madres,atractivo,,,19.04346,-98.178869,osm,14,https://www.openstreetmap.org/node/10608700064
+21114,Mosaicosy Placa Humboldt,atractivo,,,19.043374,-98.179094,osm,14,https://www.openstreetmap.org/node/10608700096
+21114,Museo Interactivo de la batalla 5 de Mayo,museo,museos,,19.054899,-98.180486,osm,14,https://www.openstreetmap.org/node/10609098505
+21140,museo casa del caballero aguila,museo,museos,,19.063419,-98.305873,osm,14,https://www.openstreetmap.org/node/10749559287
+21020,Puente de Viga,atractivo,,,18.804394,-97.925447,osm,14,https://www.openstreetmap.org/node/10905561962
+21110,Museo Comunitario de Cuacnopalan,museo,museos,,18.823696,-97.502161,osm,14,https://www.openstreetmap.org/node/11093491826
+21114,Museo Casa de Alfeñique,museo,museos,,19.043787,-98.193238,osm,14,https://www.openstreetmap.org/node/11331567471
+21169,Museo de Paleontología de Tlayua,museo,museos,,18.592663,-97.91911,osm,14,https://www.openstreetmap.org/node/11367007383
+21161,Museo Comunitario Tlamayocan,museo,museos,,18.601219,-97.559344,osm,14,https://www.openstreetmap.org/node/11384851076
+21209,Museo comunitario paleontologico,museo,museos,,18.313591,-97.617281,osm,14,https://www.openstreetmap.org/node/11395097669
+21074,Refugio,atractivo,,,19.162288,-98.636816,osm,14,https://www.openstreetmap.org/node/11879674985
+21208,Fuerza Aérea Mexicana Avioneta,atractivo,,,19.93169,-97.956461,osm,14,https://www.openstreetmap.org/node/12588064395
+21156,Museo de Sitio de Tehuacán,museo,museos,,18.446059,-97.350238,osm,14,https://www.openstreetmap.org/node/12926588656
+21114,Monument to industry,atractivo,,,19.042192,-98.19081,osm,14,https://www.openstreetmap.org/node/12952171301
+21114,Museo urbano interactivo,museo,museos,,19.043362,-98.195518,osm,14,https://www.openstreetmap.org/node/12952969901
+21209,Zona arqueológica de cuthá,zona_arqueologica,arqueologia,,18.33484,-97.447414,osm,14,https://www.openstreetmap.org/node/13092500201
+21050,Parroquia San Francisco De Asis,atractivo,,,19.172942,-97.074284,osm,14,https://www.openstreetmap.org/node/14184012302
+21043,Yohualichan,zona_arqueologica,arqueologia,,20.061404,-97.502816,osm,14,https://www.openstreetmap.org/way/26706438
+21114,Museo Nacional de los Ferrocarriles Mexicanos,museo,museos,,19.054157,-98.204366,osm,14,https://www.openstreetmap.org/way/107612545
+21180,Tlalancaleca,zona_arqueologica,arqueologia,,19.313391,-98.536536,osm,14,https://www.openstreetmap.org/way/145774095
+21114,Museo Evolución,museo,museos,,19.057924,-98.181479,osm,14,https://www.openstreetmap.org/way/151396073
+21114,Planetario,museo,museos,,19.057021,-98.181638,osm,14,https://www.openstreetmap.org/way/151396075
+21119,La Gran Pirámide de Cholula,zona_arqueologica,arqueologia,,19.058101,-98.302153,osm,14,https://www.openstreetmap.org/way/157402817
+21140,Cerro Cocoyoc,zona_arqueologica,arqueologia,,19.059386,-98.304805,osm,14,https://www.openstreetmap.org/way/183432311
+21140,Cerrito de Acozac,zona_arqueologica,arqueologia,,19.057922,-98.307203,osm,14,https://www.openstreetmap.org/way/183432312
+21074,Piramide de Coyotzingo,zona_arqueologica,arqueologia,,19.197516,-98.439992,osm,14,https://www.openstreetmap.org/way/336016699
+21074,Ex-Hacienda San Esteban Tepetzingo,atractivo,,,19.190688,-98.462116,osm,14,https://www.openstreetmap.org/way/336016700
+21174,Logo Tec,atractivo,,,19.882647,-97.393488,osm,14,https://www.openstreetmap.org/way/337136215
+21174,Capsula del tiempo 2010 - 2060,atractivo,,,19.882714,-97.393522,osm,14,https://www.openstreetmap.org/way/337136216
+21199,La Pirámide,zona_arqueologica,arqueologia,,19.795686,-97.326387,osm,14,https://www.openstreetmap.org/way/371571433
+21119,MIRATOYAC,museo,museos,,19.030463,-98.225728,osm,14,https://www.openstreetmap.org/way/380432875
+21114,San Pedro Museo de Arte,museo,museos,,19.044295,-98.195275,osm,14,https://www.openstreetmap.org/way/418870598
+21114,Museo Monseñor Ramón Ibarra y González,museo,museos,,19.043068,-98.200313,osm,14,https://www.openstreetmap.org/way/419375545
+21114,Casa del Deán,museo,museos,,19.042426,-98.199928,osm,14,https://www.openstreetmap.org/way/419755084
+21114,Casa de la Memoria Universitaria,museo,museos,,19.046269,-98.202742,osm,14,https://www.openstreetmap.org/way/419978316
+21119,Museo Regional de Cholula,museo,museos,,19.057895,-98.30034,osm,14,https://www.openstreetmap.org/way/466093654
+21119,Patio de Los Altares (Zona Arqueológica de Cholula),zona_arqueologica,arqueologia,,19.05668,-98.302981,osm,14,https://www.openstreetmap.org/way/466134806
+21140,Escalinata (Edificio Rojo),atractivo,,,19.05893,-98.29984,osm,14,https://www.openstreetmap.org/way/466158226
+21140,Edificio Rojo (Zona Arqueológica de Cholula),zona_arqueologica,arqueologia,,19.059121,-98.299757,osm,14,https://www.openstreetmap.org/way/466158227
+21114,Sitio Arqueológico de Manzanilla,zona_arqueologica,arqueologia,,19.087022,-98.133475,osm,14,https://www.openstreetmap.org/way/469156785
+21138,Museo Teoton,museo,museos,,19.075033,-98.480549,osm,14,https://www.openstreetmap.org/way/519156303
+21114,Museo Internacional Barroco,museo,museos,,19.018727,-98.246336,osm,14,https://www.openstreetmap.org/way/524277395
+21114,Museo Regional de Puebla,museo,museos,,19.05625,-98.182737,osm,14,https://www.openstreetmap.org/way/525307599
+21114,Monumento a la Victoria,atractivo,,,19.054252,-98.181214,osm,14,https://www.openstreetmap.org/way/525307601
+21114,La Manta,atractivo,,,19.056433,-98.187961,osm,14,https://www.openstreetmap.org/way/525307603
+21085,Convento De Santo Domingo De Guzman,santuario,religioso,,18.599153,-98.464443,osm,14,https://www.openstreetmap.org/way/530231155
+21015,Ruinas San Lorenzo,atractivo,,,19.051248,-98.103655,osm,14,https://www.openstreetmap.org/way/550948266
+21132,Ex-hacienda de San Damián,atractivo,,,19.284628,-98.422495,osm,14,https://www.openstreetmap.org/way/551477862
+21114,Sitio Arqueológico de Amalucan (Grupo II),zona_arqueologica,arqueologia,,19.050633,-98.139563,osm,14,https://www.openstreetmap.org/way/583783754
+21083,Iglesia de San Cosme y San Damián,atractivo,,,19.622431,-97.809281,osm,14,https://www.openstreetmap.org/way/599925220
+21083,Iglesia del barrio de Santiago Apóstol,atractivo,,,19.62147,-97.813875,osm,14,https://www.openstreetmap.org/way/599925225
+21083,Puente Enterrado,atractivo,,,19.62295,-97.812077,osm,14,https://www.openstreetmap.org/way/599925226
+21083,Museo Comunitario de Ixtacamaxtitlan,museo,museos,,19.625468,-97.815353,osm,14,https://www.openstreetmap.org/way/599925227
+21114,"Sitio Arqueológico ""Flor del Bosque""",zona_arqueologica,arqueologia,,19.030259,-98.12049,osm,14,https://www.openstreetmap.org/way/638652329
+21114,De estomatologia,museo,museos,,19.038845,-98.214995,osm,14,https://www.openstreetmap.org/way/657419381
+21114,Casa del Puente de Bubas,museo,museos,,19.041989,-98.192256,osm,14,https://www.openstreetmap.org/way/728193643
+21114,Fonoteca Fototeca Juan C. Mendez,museo,museos,,19.091991,-98.231933,osm,14,https://www.openstreetmap.org/way/747139762
+21114,Museo UPAEP,museo,museos,,19.048268,-98.215431,osm,14,https://www.openstreetmap.org/way/776094677
+21199,Museo Comunitario,museo,museos,,19.796021,-97.325777,osm,14,https://www.openstreetmap.org/way/887877927
+21114,Museo del Automóvi de Puebla,museo,museos,,19.092473,-98.233634,osm,14,https://www.openstreetmap.org/way/889585830
+21114,Sitio Arqueológico de Amalucan (Grupo I),zona_arqueologica,arqueologia,,19.046876,-98.126025,osm,14,https://www.openstreetmap.org/way/890252766
+21114,"Poligonal de Protección de Sitio Arqueológico ""San Francisco Totimehuacán""",zona_arqueologica,arqueologia,,18.976261,-98.178791,osm,14,https://www.openstreetmap.org/way/890252767
+21114,"Sitio Arqueológico ""Tres Cerritos"" (Puebla)",zona_arqueologica,arqueologia,,19.001805,-98.253169,osm,14,https://www.openstreetmap.org/way/890252769
+21093,Apizaquito,zona_arqueologica,arqueologia,,19.204971,-97.305928,osm,14,https://www.openstreetmap.org/way/1020384341
+21164,Casa de Cortés,museo,museos,,18.966627,-97.905105,osm,14,https://www.openstreetmap.org/way/1080416454
+21164,El Rollo,atractivo,,,18.965266,-97.904919,osm,14,https://www.openstreetmap.org/way/1080416624
+21154,Convento,santuario,religioso,,18.886089,-97.729973,osm,14,https://www.openstreetmap.org/way/1080432274
+21040,Ex-Convento,santuario,religioso,,18.956289,-98.017455,osm,14,https://www.openstreetmap.org/way/1080658529
+21071,Museo Etnologico Huasteco,museo,museos,,20.161724,-98.084803,osm,14,https://www.openstreetmap.org/way/1084538580
+21140,corredor,museo,museos,,19.063422,-98.305679,osm,14,https://www.openstreetmap.org/way/1155917522
+21153,Puente del rio Seco,atractivo,,,18.877442,-97.937,osm,14,https://www.openstreetmap.org/way/1156828040
+21177,Teteles de Santo Nombre,zona_arqueologica,arqueologia,,18.628724,-97.718741,osm,14,https://www.openstreetmap.org/way/1182148109
+21177,Museo de sitio de Teteles de Santo Nombre,museo,museos,,18.630256,-97.720598,osm,14,https://www.openstreetmap.org/way/1182149042
+21155,Cuna De Antorcha Campesina Y Atenas De La Mixteca,atractivo,,,18.124091,-98.309723,osm,14,https://www.openstreetmap.org/way/1191899666
+21140,Basamento piramidal Cholula,zona_arqueologica,arqueologia,,19.063735,-98.330241,osm,14,https://www.openstreetmap.org/way/1219814349
+21013,Zona Arqueológica de Quachilolco,zona_arqueologica,arqueologia,,18.344953,-97.292586,osm,14,https://www.openstreetmap.org/way/1227701290
+21161,Zona arqueológica de Temalayuca,zona_arqueologica,arqueologia,,18.598803,-97.547615,osm,14,https://www.openstreetmap.org/way/1227702021
+21114,Monumento a Ignacio Zaragoza,atractivo,,,19.060441,-98.184585,osm,14,https://www.openstreetmap.org/way/1284452441
+21114,Museo Universitario,museo,museos,,19.040496,-98.192244,osm,14,https://www.openstreetmap.org/way/1304377880
+21208,Museo de la Relojeria,museo,museos,,19.932398,-97.957855,osm,14,https://www.openstreetmap.org/way/1359210408
+21034,Basamento 1 de Coronango,zona_arqueologica,arqueologia,,19.11217,-98.294449,osm,14,https://www.openstreetmap.org/way/1372256533
+21034,Sitio Arqueológico de Coronango,zona_arqueologica,arqueologia,,19.111878,-98.29431,osm,14,https://www.openstreetmap.org/way/1372256534
+21114,"Tepalcayo ""1""",zona_arqueologica,arqueologia,,18.978233,-98.180956,osm,14,https://www.openstreetmap.org/way/1372257361
+21114,"Tepalcayo ""3""",zona_arqueologica,arqueologia,,18.975925,-98.181547,osm,14,https://www.openstreetmap.org/way/1372257362
+21114,"Tepalcayo ""4""",zona_arqueologica,arqueologia,,18.97502,-98.180907,osm,14,https://www.openstreetmap.org/way/1372257363
+21114,"Tepalcayo ""5""",zona_arqueologica,arqueologia,,18.97444,-98.181011,osm,14,https://www.openstreetmap.org/way/1372257364
+21114,"Tepalcayo ""6""",zona_arqueologica,arqueologia,,18.974098,-98.181451,osm,14,https://www.openstreetmap.org/way/1372257365
+21114,"Tepalcayo ""3a""",zona_arqueologica,arqueologia,,18.975626,-98.180833,osm,14,https://www.openstreetmap.org/way/1372257366
+21114,Basamento 1,zona_arqueologica,arqueologia,,19.001642,-98.253592,osm,14,https://www.openstreetmap.org/way/1372257927
+21114,Basamento 2,zona_arqueologica,arqueologia,,19.000149,-98.253123,osm,14,https://www.openstreetmap.org/way/1372257928
+21114,"Sitio Arqueológico ""San Sebastián Aparicio""",zona_arqueologica,arqueologia,,19.0991,-98.156513,osm,14,https://www.openstreetmap.org/way/1372258581
+21114,Juego de Pelota de Manzanilla,zona_arqueologica,arqueologia,,19.087175,-98.133648,osm,14,https://www.openstreetmap.org/way/1372259338
+21114,"Sitio Arqueológico ""Ignacio Romero Vargas""",zona_arqueologica,arqueologia,,19.079637,-98.248045,osm,14,https://www.openstreetmap.org/way/1372260777
+21114,Cerro de Cristo Rey,zona_arqueologica,arqueologia,,19.079826,-98.247564,osm,14,https://www.openstreetmap.org/way/1372260778
+21015,"Sitio Arqueológico ""Capulac-Concepción""",zona_arqueologica,arqueologia,,19.064703,-98.041024,osm,14,https://www.openstreetmap.org/way/1372261910
+21015,"Restos de Juego de Pelota ""Capulac-Concepción""",zona_arqueologica,arqueologia,,19.065488,-98.040953,osm,14,https://www.openstreetmap.org/way/1372261911
+21015,Túmulo 6 (Concepción-Capulac,zona_arqueologica,arqueologia,,19.064847,-98.042282,osm,14,https://www.openstreetmap.org/way/1372261912
+21015,Túmulo 2,zona_arqueologica,arqueologia,,19.062573,-98.041995,osm,14,https://www.openstreetmap.org/way/1372261913
+21015,Túmulo 5 (Concepción-Capulac),zona_arqueologica,arqueologia,,19.064144,-98.040833,osm,14,https://www.openstreetmap.org/way/1372261914
+21114,"Montículo ""A"" de Sitio Arqueológico Amalucan",zona_arqueologica,arqueologia,,19.051061,-98.139567,osm,14,https://www.openstreetmap.org/way/1372279844
+21114,"Montículo ""B"" de Sitio Arqueológico Amalucan",zona_arqueologica,arqueologia,,19.051285,-98.138982,osm,14,https://www.openstreetmap.org/way/1372279845
+21114,"Montículo ""C"" de Sitio Arqueológico Amalucan",zona_arqueologica,arqueologia,,19.050692,-98.140195,osm,14,https://www.openstreetmap.org/way/1372279846
+21119,Patio de las Calaveras Talladas,zona_arqueologica,arqueologia,,19.058745,-98.301068,osm,14,https://www.openstreetmap.org/way/1372281482
+21140,"Sitio Arqueológico ""San Francisco Coapan""",zona_arqueologica,arqueologia,,19.060498,-98.359263,osm,14,https://www.openstreetmap.org/way/1372285838
+21114,"Sitio Arqueológico ""Los Teteles"" (Manzanilla)",zona_arqueologica,arqueologia,,19.083178,-98.12382,osm,14,https://www.openstreetmap.org/way/1373478046
+21114,Juego de Pelota (Los teteles),zona_arqueologica,arqueologia,,19.082866,-98.123465,osm,14,https://www.openstreetmap.org/way/1373478047
+21114,Montículo (Los Teteles),zona_arqueologica,arqueologia,,19.083649,-98.123015,osm,14,https://www.openstreetmap.org/way/1373478048
+21079,Museo Histórico de Huitziltepec,museo,museos,,18.769888,-97.881132,osm,14,https://www.openstreetmap.org/way/1391530841
+21156,Zona arqueológica Tehuacán Ndachjian,zona_arqueologica,arqueologia,,18.447988,-97.347462,osm,14,https://www.openstreetmap.org/way/1396688150
+21114,Casa del Alfenique,museo,museos,,19.043857,-98.193255,osm,14,https://www.openstreetmap.org/relation/2141123
+21114,Museo de Arte Popular,museo,museos,,19.050353,-98.197423,osm,14,https://www.openstreetmap.org/relation/7626270
+21114,Museo Universitario Casa de los Muñecos,museo,museos,,19.043817,-98.196795,osm,14,https://www.openstreetmap.org/relation/7895720
+21114,"Museo de la Revolución Mexicana, Casa de los Hermanos Serdán",museo,museos,,19.045939,-98.195208,osm,14,https://www.openstreetmap.org/relation/7895754
+21114,Museo Amparo,museo,museos,,19.040683,-98.19851,osm,14,https://www.openstreetmap.org/relation/7948398
