@@ -58,30 +58,24 @@ def render():
         k[2].metric("Traslados", f"{circ.min_desde_anterior.sum():.0f} min")
         k[3].metric("Valoración media", f"⭐ {circ.valoracion.mean():.1f}")
 
-        circ["tt"] = circ.apply(lambda r: f"<b>{r.orden}. {r.nombre}</b><br/>{act.icono[r.actividad]} "
-                                          f"{act.nombre[r.actividad]}<br/>⭐ {r.valoracion}", axis=1)
-        circ["color"] = circ.actividad.map(lambda a: list(act.color[a]) + [255])
+        circ["tt"] = circ.apply(lambda r: f"<b>{r.orden}. {r.nombre}</b><br>{act.icono[r.actividad]} "
+                                          f"{act.nombre[r.actividad]}<br>⭐ {r.valoracion}", axis=1)
+        circ["color"] = circ.actividad.map(lambda a: act.color[a])
         circ["etiqueta"] = circ.orden.astype(str)
-        trayecto = pd.DataFrame([{"path": [[m.lon, m.lat]] + circ[["lon", "lat"]].values.tolist(),
-                                  "tt": f"Circuito {tipo.lower()} · {m.nombre}"}])
         inicio = pd.DataFrame([{"lon": m.lon, "lat": m.lat, "tt": f"<b>Inicio: cabecera de {m.nombre}</b>",
                                 "etiqueta": "Inicio"}])
         otros = set(mp.cve_geo) - {cve}
-        capas = [
-            mapas.capa_municipios(d.geo, mp, "indice_oportunidad", mp.set_index("cve_geo").nombre,
-                                  paleta=[(255, 246, 214), (255, 246, 214)], atenuar=otros, resaltar={cve}),
-            mapas.capa_texto(mp[mp.cve_geo != cve], "nombre", 11, offset=(0, 0)),
-            mapas.capa_trayecto(trayecto, (14, 42, 92)),
-            mapas.pdk.Layer("ScatterplotLayer", circ, get_position=["lon", "lat"], get_fill_color="color",
-                            get_radius=250, radius_min_pixels=11, stroked=True, get_line_color=[255, 255, 255],
-                            line_width_min_pixels=2, pickable=True),
-            mapas.capa_puntos(inicio, [232, 177, 13, 255], 300),
-            mapas.capa_texto(circ[["lon", "lat", "etiqueta"]], "etiqueta", 13, offset=(0, 0)),
-            mapas.capa_texto(inicio[["lon", "lat", "etiqueta"]], "etiqueta", 13, offset=(0, -18)),
-        ]
-        vista = mapas.vista_ajustada(list(circ.lat) + [m.lat], list(circ.lon) + [m.lon], ancho=950, alto=520,
-                                     margen=1.6, zoom_max=14)
-        st.pydeck_chart(mapas.deck(capas, vista), height=520)
+        mapa = (mapas.Mapa(d.geo, alto=520)
+                .municipios(mp, None, mp.set_index("cve_geo").nombre, color_fijo=(255, 246, 214),
+                            atenuar=otros, resaltar={cve})
+                .nombres(mp[mp.cve_geo != cve], tamano=11)
+                .trayecto([m.lon] + circ.lon.tolist(), [m.lat] + circ.lat.tolist(), tema.COBALTO_OSC, 3,
+                          f"Circuito {tipo.lower()} · {m.nombre}")
+                .puntos(circ, "color", 24, "tt", texto="etiqueta", posicion_texto="middle center",
+                        color_texto="white", tamano_texto=12)
+                .puntos(inicio, tema.AMARILLO, 20, "tt", texto="etiqueta", simbolo="star", posicion_texto="bottom center")
+                .encuadre(list(circ.lat) + [m.lat], list(circ.lon) + [m.lon], margen=0.45, aspecto=1.7))
+        mapas.mostrar(mapa, "circ_mapa")
 
         st.markdown("#### 🗒️ Itinerario sugerido")
         reloj = 9 * 60

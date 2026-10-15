@@ -15,12 +15,14 @@ st.set_page_config(page_title="MOPEDETU · Puebla", page_icon="🗺️", layout=
 
 import estado  # noqa: E402
 import tema  # noqa: E402
-from vistas import alertas, circuitos, ficha, oportunidades, panorama, rutas, simulador  # noqa: E402
+from vistas import alertas, circuitos, ficha, ficha_tecnica, oportunidades, panorama, rutas, simulador  # noqa: E402
 
 tema.aplicar()
 
 paginas = {
     "panorama": st.Page(panorama.render, title="Panorama", icon="🏠", url_path="panorama", default=True),
+    "ficha_tecnica": st.Page(ficha_tecnica.render, title="Ficha técnica (datos reales)", icon="🏘️",
+                             url_path="ficha-tecnica"),
     "mapa": st.Page(oportunidades.render, title="Mapa de oportunidades", icon="🗺️", url_path="mapa"),
     "rutas": st.Page(rutas.render, title="Rutas", icon="🧭", url_path="rutas"),
     "circuitos": st.Page(circuitos.render, title="Circuitos", icon="🔁", url_path="circuitos"),
@@ -31,7 +33,7 @@ paginas = {
 st.session_state["paginas"] = paginas
 
 nav = st.navigation({
-    "Explorar": [paginas["panorama"], paginas["mapa"]],
+    "Explorar": [paginas["panorama"], paginas["ficha_tecnica"], paginas["mapa"]],
     "Predecir": [paginas["rutas"], paginas["circuitos"], paginas["simulador"]],
     "Detalle": [paginas["ficha"], paginas["alertas"]],
 })

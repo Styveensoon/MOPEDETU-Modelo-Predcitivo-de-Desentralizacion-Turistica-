@@ -28,14 +28,11 @@ REGION_COLORES = {
 CSS = f"""
 <style>
 .block-container {{ padding-top: 2.6rem; padding-bottom: 3rem; }}
-div[data-testid="stDeckGlJsonChart"] {{
+/* Mapas (Plotly geo): fondo suave y bordes redondeados */
+div[data-testid="stPlotlyChart"]:has(.geo) {{
   background: radial-gradient(ellipse at center, #F4F7FB 0%, #E3E9F2 100%);
   border-radius: 16px; overflow: hidden; border: 1px solid rgba(27,63,139,.12);
 }}
-/* Solo Puebla: se oculta el mapa base que Streamlit agrega por defecto */
-div[data-testid="stDeckGlJsonChart"] .mapboxgl-canvas,
-div[data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-bottom-left,
-div[data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-bottom-right {{ visibility: hidden !important; }}
 .mope-leyenda {{ font-size: .8rem; margin: 6px 2px 14px 2px; }}
 h4 {{ padding-top: .4rem !important; padding-bottom: .5rem !important; }}
 

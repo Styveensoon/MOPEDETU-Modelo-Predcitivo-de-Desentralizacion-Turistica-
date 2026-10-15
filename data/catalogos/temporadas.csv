@@ -1,0 +1,31 @@
+municipio,actividad,nombre,tipo,mes_inicio,mes_fin,intensidad,url,notas
+,,Semana Santa y Pascua,vacacional,3,4,3,https://www.sep.gob.mx/,Periodo vacacional del calendario escolar SEP (fecha móvil)
+,,Vacaciones de verano,vacacional,7,8,2,https://www.sep.gob.mx/,Periodo vacacional del calendario escolar SEP
+,,Día de Muertos,vacacional,10,11,2,,Puente de Todos Santos y Fieles Difuntos (1-2 de noviembre)
+,,Vacaciones de invierno,vacacional,12,1,2,https://www.sep.gob.mx/,Periodo vacacional del calendario escolar SEP
+,cafe,Cosecha de café en la sierra,actividad,11,3,2,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,Temporada de corte y beneficio en la Sierra Norte y Nororiental; recorridos en fincas
+,gastronomia,Temporada de chiles en nogada,actividad,8,9,2,https://visitpuebla.mx/rutas/chile-nogada,Granada y nuez de Castilla; Ruta Gastronómica del Chile en Nogada
+,volcanes,Temporada seca de alta montaña,actividad,11,3,2,,Mejor ventana para ascensos al Citlaltépetl e Iztaccíhuatl (menos lluvia)
+,mezcal,Visitas a palenques,actividad,1,12,1,https://visitpuebla.mx/rutas/mezcal,Producción todo el año; sin temporada marcada
+Huejotzingo,,Carnaval de Huejotzingo,festival,2,2,3,https://www.zonaturistica.com/eventos-en/puebla,Mediados de febrero (fecha móvil)
+Xicotepec,,Desafío en las Nubes,festival,2,2,1,https://www.zonaturistica.com/eventos-en/puebla,Evento deportivo de montaña
+Puebla,,Feria de Puebla,feria,4,5,3,https://etn.com.mx/blog/feria-de-puebla-2026-guia-completa/,Abril-mayo (2026: 23 abr-10 may)
+Cuautlancingo,,Feria patronal de Cuautlancingo,fiesta_patronal,6,6,1,https://www.dondehayferia.com/puebla,20-28 de junio (2026)
+Ajalpan,,Feria patronal de Ajalpan,fiesta_patronal,6,6,1,https://www.dondehayferia.com/puebla,20-28 de junio (2026)
+San Salvador el Verde,ecoturismo,Temporada de luciérnagas,natural,6,7,2,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,Santuario de Luciérnagas Ejido San Andrés Hueyacatitla (Ruta del Chile en Nogada)
+Zacatlán,,Feria de la Manzana,feria,8,8,3,https://www.zonaturistica.com/eventos-en/puebla,Principios de agosto
+Atlixco,,Huey Atlixcáyotl,festival,9,9,3,https://www.zonaturistica.com/eventos-en/puebla,Último domingo de septiembre; 11 regiones etnográficas de Puebla
+Cuetzalan del Progreso,,Feria Nacional del Café y el Huipil,feria,10,10,3,https://www.mexicodesconocido.com.mx/feria-de-cuetzalan-2026.html,2-11 de octubre (2026); 4 de octubre San Francisco de Asís
+Atlixco,,Popobike,festival,10,10,1,https://www.zonaturistica.com/eventos-en/puebla,24-25 de octubre (2026)
+Tehuacán,,Festival Cultural del Mole de Caderas,festival,10,11,3,https://www.zonaturistica.com/eventos-en/puebla,Temporada de matanza (oct-nov); fechas por confirmar
+Zacatlán,,Feria de los Muertos,festival,10,11,2,https://www.zonaturistica.com/eventos-en/puebla,23 oct-22 nov (2026)
+Chignahuapan,,Festival de la Luz y de la Vida,festival,10,11,3,https://www.zonaturistica.com/eventos-en/puebla,30 oct-2 nov (2026)
+Oriental,,Feria Agroferrocarrilera del Helado,feria,10,11,1,https://www.dondehayferia.com/puebla,25 oct-1 nov (2026)
+Yehualtepec,,Feria de Yehualtepec,feria,10,11,1,https://www.dondehayferia.com/puebla,28 oct-4 nov (2026)
+Huaquechula,religioso,Día de Muertos: ofrendas monumentales,festival,10,11,3,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,Ruta Religiosa de Día de Muertos
+Huejotzingo,religioso,Día de Muertos en Huejotzingo,festival,10,11,2,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,Ruta Religiosa de Día de Muertos
+Tochimilco,religioso,Día de Muertos en Tochimilco,festival,10,11,2,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,Ruta Religiosa de Día de Muertos
+San Martín Texmelucan,,Feria de San Martín Texmelucan,feria,11,11,2,https://www.dondehayferia.com/puebla,6-15 de noviembre (2026)
+Zacatlán,bebidas_tradicionales,Festival de la Sidra,festival,11,11,2,https://www.zonaturistica.com/eventos-en/puebla,14-22 nov (2026); dentro de la Feria de los Muertos
+Chignahuapan,,Feria Nacional del Árbol y la Esfera,feria,10,11,3,https://www.zonaturistica.com/eventos-en/puebla,Finales de octubre a noviembre
+Atlixco,,Brilla Fest,festival,11,1,2,https://www.zonaturistica.com/eventos-en/puebla,13 nov 2026-2 ene 2027

@@ -61,10 +61,10 @@ def render():
                                       f"Simulado: {r.po_proyectado_sim:,.0f}<br/><b>{r.delta_pct:+.1f} %</b>"
                                       f"<br/>Inversión: {r.inversion_simulada_mdp:,.1f} MDP", axis=1)
         tope = max(df.delta_pct.quantile(.97), 1)
-        capas = [mapas.capa_municipios(d.geo, df, "delta_pct", df.set_index("cve_geo").tt,
-                                       paleta=tema.SEQ_CRECIMIENTO, vmin=0, vmax=tope)]
-        capas += mapas.capas_nombres(d.municipios, set(df.nlargest(10, "delta_pct").cve_geo))
-        st.pydeck_chart(mapas.deck(capas), height=600)
+        m = mapas.Mapa(d.geo, alto=600).municipios(df, "delta_pct", df.set_index("cve_geo").tt,
+                                                   paleta=tema.SEQ_CRECIMIENTO, vmin=0, vmax=tope)
+        m.nombres(df.nlargest(10, "delta_pct"), tamano=10)
+        mapas.mostrar(m, "sim_mapa")
         mapas.leyenda("Cambio porcentual contra el escenario tendencial", "0 %", f"+{tope:.0f} %", tema.SEQ_CRECIMIENTO)
 
     with der:

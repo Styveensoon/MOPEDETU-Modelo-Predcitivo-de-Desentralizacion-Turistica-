@@ -1,0 +1,135 @@
+ruta_id,ruta,circuito,tema,tipo,es_monotematica,orden,municipio,localidad_mencionada,fuente,fuente_url,pagina
+1,Bioruta del Café · Circuito Sierra Norte,Sierra Norte,cafe,ruta_intermunicipal,true,1,Huauchinango,,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,3-4
+1,Bioruta del Café · Circuito Sierra Norte,Sierra Norte,cafe,ruta_intermunicipal,true,2,Naupan,,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,3-4
+1,Bioruta del Café · Circuito Sierra Norte,Sierra Norte,cafe,ruta_intermunicipal,true,3,Pahuatlán,,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,3-4
+1,Bioruta del Café · Circuito Sierra Norte,Sierra Norte,cafe,ruta_intermunicipal,true,4,Tlacuilotepec,,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,3-4
+1,Bioruta del Café · Circuito Sierra Norte,Sierra Norte,cafe,ruta_intermunicipal,true,5,Xicotepec,,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,3-4
+1,Bioruta del Café · Circuito Sierra Norte,Sierra Norte,cafe,ruta_intermunicipal,true,6,Zihuateutla,,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,3-4
+1,Bioruta del Café · Circuito Sierra Norte,Sierra Norte,cafe,ruta_intermunicipal,true,7,Zacatlán,,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,3-4
+2,Bioruta del Café · Circuito Sierra Nororiental,Sierra Nororiental,cafe,ruta_intermunicipal,true,1,Cuetzalan del Progreso,Cuetzalan,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,5-6
+2,Bioruta del Café · Circuito Sierra Nororiental,Sierra Nororiental,cafe,ruta_intermunicipal,true,2,Huitzilan de Serdán,Huitzilan,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,5-6
+2,Bioruta del Café · Circuito Sierra Nororiental,Sierra Nororiental,cafe,ruta_intermunicipal,true,3,Teziutlán,,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,5-6
+2,Bioruta del Café · Circuito Sierra Nororiental,Sierra Nororiental,cafe,ruta_intermunicipal,true,4,Tlatlauquitepec,,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,5-6
+2,Bioruta del Café · Circuito Sierra Nororiental,Sierra Nororiental,cafe,ruta_intermunicipal,true,5,Zapotitlán de Méndez,,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,5-6
+2,Bioruta del Café · Circuito Sierra Nororiental,Sierra Nororiental,cafe,ruta_intermunicipal,true,6,Zacapoaxtla,,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,5-6
+2,Bioruta del Café · Circuito Sierra Nororiental,Sierra Nororiental,cafe,ruta_intermunicipal,true,7,Zoquiapan,,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,5-6
+2,Bioruta del Café · Circuito Sierra Nororiental,Sierra Nororiental,cafe,ruta_intermunicipal,true,8,Xochitlán de Vicente Suárez,,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,5-6
+2,Bioruta del Café · Circuito Sierra Nororiental,Sierra Nororiental,cafe,ruta_intermunicipal,true,9,Zongozotla,,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,5-6
+2,Bioruta del Café · Circuito Sierra Nororiental,Sierra Nororiental,cafe,ruta_intermunicipal,true,10,Zautla,San Miguel Tenextatiloyan,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,5-6
+3,Bioruta del Café · Circuito Sierra Nevada,Sierra Nevada,cafe,ruta_intermunicipal,true,1,Puebla,,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,7
+3,Bioruta del Café · Circuito Sierra Nevada,Sierra Nevada,cafe,ruta_intermunicipal,true,2,San Andrés Cholula,,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,7
+3,Bioruta del Café · Circuito Sierra Nevada,Sierra Nevada,cafe,ruta_intermunicipal,true,3,San Pedro Cholula,,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,7
+3,Bioruta del Café · Circuito Sierra Nevada,Sierra Nevada,cafe,ruta_intermunicipal,true,4,San Gregorio Atzompa,Chipilo,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,7
+3,Bioruta del Café · Circuito Sierra Nevada,Sierra Nevada,cafe,ruta_intermunicipal,true,5,Atlixco,,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,7
+3,Bioruta del Café · Circuito Sierra Nevada,Sierra Nevada,cafe,ruta_intermunicipal,true,6,Tochimilco,,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,7
+4,Bioruta del Café · Circuito Sierra Negra,Sierra Negra,cafe,ruta_intermunicipal,true,1,Tehuacán,,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,7
+4,Bioruta del Café · Circuito Sierra Negra,Sierra Negra,cafe,ruta_intermunicipal,true,2,Ajalpan,,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,7
+4,Bioruta del Café · Circuito Sierra Negra,Sierra Negra,cafe,ruta_intermunicipal,true,3,Coxcatlán,,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,7
+4,Bioruta del Café · Circuito Sierra Negra,Sierra Negra,cafe,ruta_intermunicipal,true,4,Zoquitlán,,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,7
+4,Bioruta del Café · Circuito Sierra Negra,Sierra Negra,cafe,ruta_intermunicipal,true,5,Eloxochitlán,,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,7
+4,Bioruta del Café · Circuito Sierra Negra,Sierra Negra,cafe,ruta_intermunicipal,true,6,San Sebastián Tlacotepec,Tlacotepec de Díaz,bioruta_cafe,https://visitpuebla.mx/documents/BIORUTA%20DEL%20CAFE.pdf,7
+5,Ruta Héroes del Senderismo,Sierra Norte,senderismo,ruta_intermunicipal,true,1,Huauchinango,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,6
+5,Ruta Héroes del Senderismo,Sierra Norte,senderismo,ruta_intermunicipal,true,2,Pahuatlán,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,6
+5,Ruta Héroes del Senderismo,Sierra Norte,senderismo,ruta_intermunicipal,true,3,Zacatlán,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,6
+5,Ruta Héroes del Senderismo,Sierra Norte,senderismo,ruta_intermunicipal,true,4,Xicotepec,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,6
+5,Ruta Héroes del Senderismo,Sierra Norte,senderismo,ruta_intermunicipal,true,5,Honey,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,6
+5,Ruta Héroes del Senderismo,Sierra Norte,senderismo,ruta_intermunicipal,true,6,Chignahuapan,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,6
+5,Ruta Héroes del Senderismo,Sierra Norte,senderismo,ruta_intermunicipal,true,7,Tetela de Ocampo,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,6
+6,Ruta de los Pueblos Mágicos · 1.ª ruta,Sierra Norte,pueblos_magicos,ruta_intermunicipal,false,1,Xicotepec,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,7
+6,Ruta de los Pueblos Mágicos · 1.ª ruta,Sierra Norte,pueblos_magicos,ruta_intermunicipal,false,2,Pahuatlán,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,7
+6,Ruta de los Pueblos Mágicos · 1.ª ruta,Sierra Norte,pueblos_magicos,ruta_intermunicipal,false,3,Huauchinango,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,7
+7,Ruta de los Pueblos Mágicos · 2.ª ruta,Sierra Norte,pueblos_magicos,ruta_intermunicipal,false,1,Zacatlán,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,7
+7,Ruta de los Pueblos Mágicos · 2.ª ruta,Sierra Norte,pueblos_magicos,ruta_intermunicipal,false,2,Chignahuapan,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,7
+8,Ruta de los Pueblos Mágicos · 3.ª ruta,Sierra Norte,pueblos_magicos,ruta_intermunicipal,false,1,Cuetzalan del Progreso,Cuetzalan,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,7
+8,Ruta de los Pueblos Mágicos · 3.ª ruta,Sierra Norte,pueblos_magicos,ruta_intermunicipal,false,2,Tetela de Ocampo,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,7
+9,Ruta de los Pueblos Mágicos · 4.ª ruta,Sierra Norte,pueblos_magicos,ruta_intermunicipal,false,1,Tlatlauquitepec,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,7
+9,Ruta de los Pueblos Mágicos · 4.ª ruta,Sierra Norte,pueblos_magicos,ruta_intermunicipal,false,2,Teziutlán,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,7
+10,Ruta de los Pueblos Mágicos · 5.ª ruta,Sierra Norte,pueblos_magicos,ruta_intermunicipal,false,1,San Pedro Cholula,Cholula,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,7
+10,Ruta de los Pueblos Mágicos · 5.ª ruta,Sierra Norte,pueblos_magicos,ruta_intermunicipal,false,2,San Andrés Cholula,Cholula,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,7
+10,Ruta de los Pueblos Mágicos · 5.ª ruta,Sierra Norte,pueblos_magicos,ruta_intermunicipal,false,3,Huejotzingo,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,7
+10,Ruta de los Pueblos Mágicos · 5.ª ruta,Sierra Norte,pueblos_magicos,ruta_intermunicipal,false,4,Atlixco,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,7
+11,Ruta Religiosa Chignahuapan-Zacatlán,Sierra Norte,religioso,ruta_intermunicipal,true,1,Chignahuapan,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,8
+11,Ruta Religiosa Chignahuapan-Zacatlán,Sierra Norte,religioso,ruta_intermunicipal,true,2,Zacatlán,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,8
+12,Ruta Gastronómica del Chile en Nogada,De los Volcanes,gastronomia,ruta_intermunicipal,true,1,Tlahuapan,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,10
+12,Ruta Gastronómica del Chile en Nogada,De los Volcanes,gastronomia,ruta_intermunicipal,true,2,San Salvador el Verde,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,10
+12,Ruta Gastronómica del Chile en Nogada,De los Volcanes,gastronomia,ruta_intermunicipal,true,3,San Martín Texmelucan,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,10
+12,Ruta Gastronómica del Chile en Nogada,De los Volcanes,gastronomia,ruta_intermunicipal,true,4,Huejotzingo,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,10
+12,Ruta Gastronómica del Chile en Nogada,De los Volcanes,gastronomia,ruta_intermunicipal,true,5,Calpan,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,10
+12,Ruta Gastronómica del Chile en Nogada,De los Volcanes,gastronomia,ruta_intermunicipal,true,6,San Nicolás de los Ranchos,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,10
+13,Ruta del Mezcal y Fuego (Circuito Popocatépetl),De los Volcanes,mezcal,ruta_intermunicipal,true,1,Atlixco,,ruta_mezcal,https://visitpuebla.mx/documents/RUTA%20DEL%20MEZCAL.pdf,6
+13,Ruta del Mezcal y Fuego (Circuito Popocatépetl),De los Volcanes,mezcal,ruta_intermunicipal,true,2,San Diego la Mesa Tochimiltzingo,,ruta_mezcal,https://visitpuebla.mx/documents/RUTA%20DEL%20MEZCAL.pdf,6
+13,Ruta del Mezcal y Fuego (Circuito Popocatépetl),De los Volcanes,mezcal,ruta_intermunicipal,true,3,Tepeojuma,,ruta_mezcal,https://visitpuebla.mx/documents/RUTA%20DEL%20MEZCAL.pdf,6
+14,Ruta Religiosa Puebla-Cholula,De los Volcanes,religioso,ruta_intermunicipal,true,1,Puebla,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,12
+14,Ruta Religiosa Puebla-Cholula,De los Volcanes,religioso,ruta_intermunicipal,true,2,San Andrés Cholula,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,12
+14,Ruta Religiosa Puebla-Cholula,De los Volcanes,religioso,ruta_intermunicipal,true,3,San Pedro Cholula,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,12
+15,Ruta Nor-Oriental,De los Volcanes,arqueologia_naturaleza,ruta_intermunicipal,false,1,Tepeyahualco,Zona Arqueológica de Cantona,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,13
+15,Ruta Nor-Oriental,De los Volcanes,arqueologia_naturaleza,ruta_intermunicipal,false,2,Libres,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,13
+15,Ruta Nor-Oriental,De los Volcanes,arqueologia_naturaleza,ruta_intermunicipal,false,3,Oriental,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,13
+16,Ruta de los Volcanes,De los Volcanes,naturaleza_cultura,ruta_intermunicipal,false,1,San Andrés Cholula,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,14
+16,Ruta de los Volcanes,De los Volcanes,naturaleza_cultura,ruta_intermunicipal,false,2,San Pedro Cholula,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,14
+16,Ruta de los Volcanes,De los Volcanes,naturaleza_cultura,ruta_intermunicipal,false,3,Calpan,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,14
+16,Ruta de los Volcanes,De los Volcanes,naturaleza_cultura,ruta_intermunicipal,false,4,Atlixco,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,14
+16,Ruta de los Volcanes,De los Volcanes,naturaleza_cultura,ruta_intermunicipal,false,5,Tochimilco,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,14
+16,Ruta de los Volcanes,De los Volcanes,naturaleza_cultura,ruta_intermunicipal,false,6,Nealtican,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,14
+16,Ruta de los Volcanes,De los Volcanes,naturaleza_cultura,ruta_intermunicipal,false,7,Huaquechula,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,14
+16,Ruta de los Volcanes,De los Volcanes,naturaleza_cultura,ruta_intermunicipal,false,8,Atzitzihuacán,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,14
+16,Ruta de los Volcanes,De los Volcanes,naturaleza_cultura,ruta_intermunicipal,false,9,Cohuecan,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,14
+17,Ruta del Nopal y la Tuna,De los Volcanes,gastronomia,circuito_municipal,true,1,Acatzingo,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,15
+18,Ruta de los Ex Conventos,De los Volcanes,conventos,ruta_intermunicipal,true,1,Tepeaca,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,16
+18,Ruta de los Ex Conventos,De los Volcanes,conventos,ruta_intermunicipal,true,2,Acatzingo,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,16
+18,Ruta de los Ex Conventos,De los Volcanes,conventos,ruta_intermunicipal,true,3,Tecali de Herrera,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,16
+18,Ruta de los Ex Conventos,De los Volcanes,conventos,ruta_intermunicipal,true,4,Cuautinchán,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,16
+18,Ruta de los Ex Conventos,De los Volcanes,conventos,ruta_intermunicipal,true,5,Tecamachalco,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,16
+18,Ruta de los Ex Conventos,De los Volcanes,conventos,ruta_intermunicipal,true,6,Quecholac,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,16
+18,Ruta de los Ex Conventos,De los Volcanes,conventos,ruta_intermunicipal,true,7,Calpan,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,16
+18,Ruta de los Ex Conventos,De los Volcanes,conventos,ruta_intermunicipal,true,8,Huejotzingo,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,16
+18,Ruta de los Ex Conventos,De los Volcanes,conventos,ruta_intermunicipal,true,9,Tochimilco,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,16
+19,Ruta de los Antojitos Poblanos,De los Volcanes,gastronomia,circuito_municipal,true,1,Puebla,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,17
+20,Ruta de Cantona,De los Volcanes,arqueologia,ruta_intermunicipal,false,1,Tepeyahualco,Zona Arqueológica de Cantona,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,18
+20,Ruta de Cantona,De los Volcanes,arqueologia,ruta_intermunicipal,false,2,Guadalupe Victoria,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,18
+20,Ruta de Cantona,De los Volcanes,arqueologia,ruta_intermunicipal,false,3,Aljojuca,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,18
+21,Ruta del Mezcal Legado de la Mixteca,Valle Central de Puebla,mezcal,ruta_intermunicipal,true,1,Tepeaca,,ruta_mezcal,https://visitpuebla.mx/documents/RUTA%20DEL%20MEZCAL.pdf,7-8
+21,Ruta del Mezcal Legado de la Mixteca,Valle Central de Puebla,mezcal,ruta_intermunicipal,true,2,Tecali de Herrera,,ruta_mezcal,https://visitpuebla.mx/documents/RUTA%20DEL%20MEZCAL.pdf,7-8
+21,Ruta del Mezcal Legado de la Mixteca,Valle Central de Puebla,mezcal,ruta_intermunicipal,true,3,Tzicatlacoyan,,ruta_mezcal,https://visitpuebla.mx/documents/RUTA%20DEL%20MEZCAL.pdf,7-8
+21,Ruta del Mezcal Legado de la Mixteca,Valle Central de Puebla,mezcal,ruta_intermunicipal,true,4,Huehuetlán el Grande,,ruta_mezcal,https://visitpuebla.mx/documents/RUTA%20DEL%20MEZCAL.pdf,7-8
+21,Ruta del Mezcal Legado de la Mixteca,Valle Central de Puebla,mezcal,ruta_intermunicipal,true,5,Molcaxac,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,20
+21,Ruta del Mezcal Legado de la Mixteca,Valle Central de Puebla,mezcal,ruta_intermunicipal,true,6,Tepexi de Rodríguez,,ruta_mezcal,https://visitpuebla.mx/documents/RUTA%20DEL%20MEZCAL.pdf,7-8
+22,Ruta Gastronómica de los Moles Poblanos,Valle Central de Puebla,gastronomia,ruta_intermunicipal,true,1,Cuetzalan del Progreso,Cuetzalan,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,21
+22,Ruta Gastronómica de los Moles Poblanos,Valle Central de Puebla,gastronomia,ruta_intermunicipal,true,2,Puebla,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,21
+22,Ruta Gastronómica de los Moles Poblanos,Valle Central de Puebla,gastronomia,ruta_intermunicipal,true,3,San Andrés Cholula,Cholula,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,21
+22,Ruta Gastronómica de los Moles Poblanos,Valle Central de Puebla,gastronomia,ruta_intermunicipal,true,4,San Pedro Cholula,Cholula,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,21
+22,Ruta Gastronómica de los Moles Poblanos,Valle Central de Puebla,gastronomia,ruta_intermunicipal,true,5,Calpan,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,21
+22,Ruta Gastronómica de los Moles Poblanos,Valle Central de Puebla,gastronomia,ruta_intermunicipal,true,6,Atlixco,(solo en el mapa de la ruta),catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,21
+22,Ruta Gastronómica de los Moles Poblanos,Valle Central de Puebla,gastronomia,ruta_intermunicipal,true,7,Santiago Miahuatlán,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,21
+23,Ruta Religiosa de Día de Muertos,Valle Central de Puebla,religioso,ruta_intermunicipal,true,1,Huejotzingo,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,22
+23,Ruta Religiosa de Día de Muertos,Valle Central de Puebla,religioso,ruta_intermunicipal,true,2,Tochimilco,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,22
+23,Ruta Religiosa de Día de Muertos,Valle Central de Puebla,religioso,ruta_intermunicipal,true,3,Huaquechula,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,22
+24,Ruta del Queso,Valle Central de Puebla,gastronomia,ruta_intermunicipal,true,1,Tepeyahualco,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,23
+24,Ruta del Queso,Valle Central de Puebla,gastronomia,ruta_intermunicipal,true,2,Libres,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,23
+24,Ruta del Queso,Valle Central de Puebla,gastronomia,ruta_intermunicipal,true,3,Oriental,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,23
+24,Ruta del Queso,Valle Central de Puebla,gastronomia,ruta_intermunicipal,true,4,San Andrés Cholula,Santa María Tonantzintla,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,23
+24,Ruta del Queso,Valle Central de Puebla,gastronomia,ruta_intermunicipal,true,5,San Gregorio Atzompa,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,23
+24,Ruta del Queso,Valle Central de Puebla,gastronomia,ruta_intermunicipal,true,6,Atlixco,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,23
+25,Ruta Santuario del Mezcal (Circuito Reserva de la Biosfera),Tehuacán-Cuicatlán,mezcal,ruta_intermunicipal,true,1,Tehuacán,,ruta_mezcal,https://visitpuebla.mx/documents/RUTA%20DEL%20MEZCAL.pdf,5
+25,Ruta Santuario del Mezcal (Circuito Reserva de la Biosfera),Tehuacán-Cuicatlán,mezcal,ruta_intermunicipal,true,2,Zapotitlán,Zapotitlán Salinas,ruta_mezcal,https://visitpuebla.mx/documents/RUTA%20DEL%20MEZCAL.pdf,5
+25,Ruta Santuario del Mezcal (Circuito Reserva de la Biosfera),Tehuacán-Cuicatlán,mezcal,ruta_intermunicipal,true,3,Caltepec,,ruta_mezcal,https://visitpuebla.mx/documents/RUTA%20DEL%20MEZCAL.pdf,5
+26,Ruta del Mole de Caderas,Tehuacán-Cuicatlán,gastronomia,ruta_intermunicipal,true,1,Puebla,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,26
+26,Ruta del Mole de Caderas,Tehuacán-Cuicatlán,gastronomia,ruta_intermunicipal,true,2,Tehuacán,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,26
+26,Ruta del Mole de Caderas,Tehuacán-Cuicatlán,gastronomia,ruta_intermunicipal,true,3,Zapotitlán,Zapotitlán Salinas,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,26
+26,Ruta del Mole de Caderas,Tehuacán-Cuicatlán,gastronomia,ruta_intermunicipal,true,4,Santiago Miahuatlán,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,26
+26,Ruta del Mole de Caderas,Tehuacán-Cuicatlán,gastronomia,ruta_intermunicipal,true,5,San Gabriel Chilac,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,26
+26,Ruta del Mole de Caderas,Tehuacán-Cuicatlán,gastronomia,ruta_intermunicipal,true,6,Ajalpan,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,26
+26,Ruta del Mole de Caderas,Tehuacán-Cuicatlán,gastronomia,ruta_intermunicipal,true,7,Zinacatepec,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,26
+26,Ruta del Mole de Caderas,Tehuacán-Cuicatlán,gastronomia,ruta_intermunicipal,true,8,Altepexi,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,26
+26,Ruta del Mole de Caderas,Tehuacán-Cuicatlán,gastronomia,ruta_intermunicipal,true,9,Tlacotepec de Benito Juárez,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,26
+27,Ruta Ciclista,Tehuacán-Cuicatlán,ciclismo,ruta_intermunicipal,true,1,Puebla,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,27
+27,Ruta Ciclista,Tehuacán-Cuicatlán,ciclismo,ruta_intermunicipal,true,2,San Andrés Cholula,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,27
+27,Ruta Ciclista,Tehuacán-Cuicatlán,ciclismo,ruta_intermunicipal,true,3,San Pedro Cholula,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,27
+27,Ruta Ciclista,Tehuacán-Cuicatlán,ciclismo,ruta_intermunicipal,true,4,Zapotitlán,Zapotitlán Salinas,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,27
+27,Ruta Ciclista,Tehuacán-Cuicatlán,ciclismo,ruta_intermunicipal,true,5,Esperanza,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,27
+27,Ruta Ciclista,Tehuacán-Cuicatlán,ciclismo,ruta_intermunicipal,true,6,Atzitzintla,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,27
+27,Ruta Ciclista,Tehuacán-Cuicatlán,ciclismo,ruta_intermunicipal,true,7,Chalchicomula de Sesma,Ciudad Serdán,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,27
+27,Ruta Ciclista,Tehuacán-Cuicatlán,ciclismo,ruta_intermunicipal,true,8,Tlachichuca,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,27
+28,Ruta del Marisco,Tehuacán-Cuicatlán,gastronomia,circuito_municipal,true,1,Tepeaca,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,28
+29,Ruta de la Biósfera Tehuacán-Cuicatlán,Tehuacán-Cuicatlán,naturaleza,ruta_intermunicipal,false,1,Tehuacán,,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,29
+29,Ruta de la Biósfera Tehuacán-Cuicatlán,Tehuacán-Cuicatlán,naturaleza,ruta_intermunicipal,false,2,Zapotitlán,Zapotitlán Salinas,catalogo,https://visitpuebla.mx/documents/CATALOGO%20DE%20RUTAS.pdf,29

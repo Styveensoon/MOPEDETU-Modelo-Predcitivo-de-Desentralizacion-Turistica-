@@ -118,12 +118,13 @@ def render():
 
     vecinos = mp[(np.abs(mp.lat - m.lat) < 0.35) & (np.abs(mp.lon - m.lon) < 0.35)]
     tt = mp.set_index("cve_geo").apply(lambda r: f"<b>{r.nombre}</b><br/>Índice {r.indice_oportunidad:.2f}", axis=1)
-    capas = [mapas.capa_municipios(d.geo, mp, "indice_oportunidad", tt, cuantiles=True, resaltar={cve},
-                                   atenuar=set(mp.cve_geo) - set(vecinos.cve_geo)),
-             mapas.capa_texto(vecinos, "nombre", 11, offset=(0, 0))]
     st.markdown("#### 📍 Ubicación y vecinos")
-    st.pydeck_chart(mapas.deck(capas, mapas.vista_ajustada([m.lat - 0.3, m.lat + 0.3], [m.lon - 0.5, m.lon + 0.5], 1300, 380, margen=1.0)),
-                    height=380)
+    mapa = (mapas.Mapa(d.geo, alto=380)
+            .municipios(mp, "indice_oportunidad", tt, cuantiles=True, seleccionado=cve,
+                        atenuar=set(mp.cve_geo) - set(vecinos.cve_geo))
+            .nombres(vecinos, tamano=10)
+            .encuadre([m.lat - 0.3, m.lat + 0.3], [m.lon - 0.5, m.lon + 0.5], margen=0, aspecto=3.2))
+    mapas.mostrar(mapa, f"ficha_mapa_{cve}")
 
     st.download_button("⬇️ Descargar ficha (CSV)", filas.drop(columns=[c for c in filas if c.startswith("c::")])
                        .to_csv(index=False).encode("utf-8-sig"), f"ficha_{cve}.csv", "text/csv")
