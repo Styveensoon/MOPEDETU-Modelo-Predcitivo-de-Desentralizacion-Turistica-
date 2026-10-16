@@ -30,6 +30,9 @@ OBJETOS = {
     "dim_municipio": "municipio_sk,cve_geo,nombre,region,es_ancla,es_pueblo_magico,cabecera_nombre,"
                      "cabecera_lat,cabecera_lon",
     "v_lugar_circuito": "*", "fact_demanda_hotelera": "*", "v_aptitud_circuito": "*",
+    "dim_circuito": "*", "fact_circuito_parada": "*",
+    "fact_contexto_social": "municipio_sk,poblacion_total,indice_marginacion,grado_marginacion,pct_pobreza",
+    "fact_actividad_municipio": "municipio_sk,actividad_sk,unidades,cociente_localizacion,nivel_predominancia,es_principal",
 }
 
 
@@ -198,7 +201,34 @@ def lugares(municipio_sk: int) -> pd.DataFrame:
     return df.sort_values(["prioridad", "nombre"])
 
 
+@st.cache_resource(ttl=86400, show_spinner="Cargando las reglas de rutas (una vez al día)…")
+def insumos():
+    """Los MISMOS insumos que usa el optimizador del pipeline (model/insumos.py), con la publishable key.
+    Requieren conexión: no se guardan en la copia local."""
+    import insumos as ins_mod
+    try:
+        return ins_mod.cargar(secreta=False)
+    except Exception as e:  # noqa: BLE001
+        raise SinDatos(f"no se pudieron cargar las reglas de rutas ({e.__class__.__name__}); requieren conexión") from e
+
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def circuitos() -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Circuitos precalculados (dim_circuito) y sus paradas (fact_circuito_parada)."""
+    return _leer("dim_circuito"), _leer("fact_circuito_parada").sort_values(["circuito_sk", "orden"])
+
+
 @st.cache_data(ttl=3600, show_spinner=False)
 def aptitud_circuitos() -> pd.DataFrame:
     """Aptitud de cada municipio para un circuito (v_aptitud_circuito), por potencial."""
     return _cve(_leer("v_aptitud_circuito")).sort_values("potencial_circuito", ascending=False)
+
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def contexto() -> pd.DataFrame:
+    return _leer("fact_contexto_social").set_index("municipio_sk")
+
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def actividad_municipio() -> pd.DataFrame:
+    return _leer("fact_actividad_municipio").merge(actividades(), on="actividad_sk")

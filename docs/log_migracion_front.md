@@ -193,3 +193,70 @@ Leyenda: ✅ hecho y probado · ⚠️ hecho con salvedad · ❌ falló / no se 
 ### Cierre del corte P0
 - Pendiente del equipo (no es código): ensayar la demo con el recorrido de §12.7 y grabar el video de respaldo;
   abrir `docs/demo/mapa_mopedetu.html` en un navegador sin red para confirmarlo.
+
+## Corte P1 · Fase B (reglas compartidas)
+
+### §4.1 `model/insumos.py` ✅
+- `cargar(secreta: bool)`: índice, banderas, temas presentes, predicción en dominio, enlaces en percentil, tiempos
+  (libre y planeación), hospedaje, infraestructura roja, municipios con punto visitable, necesidad social, meses
+  fuertes, tramos oficiales y parámetros del optimizador, todo desde `dw` y `v_vigente`. Misma estructura para el
+  pipeline (secret key) y el tablero (publishable key).
+- ⚠️ Carga en 47 s (sobre todo los 46,872 pares de `v_tiempo_municipios` en páginas de 1,000). Se atiende en §12.3.
+
+### §4.2 `model/reglas_rutas.py` ✅ y no regresión §9.2 ✅
+- Extraídas sin cambiar la lógica: `valor`, `recorrido`, `dos_opt`, `candidatos`, `evaluar_ruta` (ya no devuelve
+  `None`: siempre trae `incumplimientos`), `seleccionar`; API pública `construir_ruta(ins, inicio, tema, destinos,
+  max_paradas, exigir_ancla)` y `optimizar_rutas(ins)`. "Sin tema" = cualquier tema presente.
+- `model/rutas.py` quedó en: `insumos.cargar(secreta=True)` → `optimizar_rutas` → escritura.
+- **No regresión:** contra `tests/fixtures/rutas_propuestas_antes_extraccion.csv` (generado justo antes, ya con
+  A2-A5): las 5 rutas y sus puntajes idénticos (diferencia < 1e-9), la misma descartada y las 144 combinaciones
+  ancla × tema con el mismo recorrido y puntaje.
+
+### §4.3 `model/reglas_circuitos.py` + A10 `model/circuitos.py` ✅ (`sql/27_circuitos.sql`)
+- Parámetros de §4.3 en `PARAMETROS` y en `dim_version_calculo` `circuitos_v1`. Determinista (empates por personal y
+  `lugar_id`).
+- **Ajustes encontrados al probar con datos reales:**
+  1. La prioridad multiplicativa (×1.25 por nivel) casi no pesaba frente a la distancia: elegía negocios contiguos del
+     centro en vez del museo o el santuario. Ahora es **aditiva** (+10 min por nivel de prioridad).
+  2. En 8 h no cabía la comida porque las visitas llenaban el tiempo: ahora se **reserva** el tiempo de comida si el
+     circuito cruza el mediodía.
+  3. El regreso a la cabecera no se limitaba al tramo máximo y el voraz podía no elegir ningún atractivo: ahora la
+     primera parada es un atractivo y toda parada queda a ≤ tramo máximo de la cabecera.
+  4. Aparecían negocios del DENUE registrados como "SIN NOMBRE": se excluyen en `v_lugar_circuito` (8,681 puntos;
+     antes 12,003).
+- `model/circuitos.py`: 398 circuitos (variados 4/8 h a pie y en auto + temáticos de 4 h en auto cuando hay ≥ 3 puntos
+  de la actividad y al menos un atractivo). Estándar = primer variado que cumple en el orden 4 h a pie → 4 h auto →
+  8 h a pie → 8 h auto; trazo OSRM (a pie o auto) guardado para los 96 estándar.
+- `v_aptitud_circuito` ahora distingue `apto_por_lugares` (conteo) de `apto` (hay estándar que cumple): **86 aptos**,
+  10 con lugares pero sin circuito que cumpla (motivo: pocas paradas dentro del radio o de categorías distintas), 121
+  sin lugares suficientes.
+- ⚠️ Los temáticos que no cumplen (9) quedan guardados con `cumple = false`; el tablero solo ofrece los que cumplen.
+- ⚠️ Con la exclusión de "SIN NOMBRE", una parada de las rutas publicadas se quedó sin punto visitable: se corrige al
+  volver a correr el pipeline (rutas).
+
+### A12 · `scripts/pipeline.py` ✅ (con dos fallas resueltas)
+- Orquestador con 15 pasos, `--desde` y `--solo`; se detiene ante el primer error.
+- ❌→✅ **Primera corrida falló en `rutas`**: `v_aptitud_circuito` (vistas encadenadas con subconsulta correlacionada)
+  excedía el `statement timeout` incluso con la secret key; tampoco se pudo crear como vista materializada dentro del
+  tiempo del conector (la base, en capa gratuita, quedó lenta tras el pipeline). Solución (`sql/28_lugares_aptitud_tablas.sql`):
+  lugares y aptitud se calculan en Python dentro del pipeline (`calcular_actividades.py::calcular_lugares`,
+  `circuitos.py::escribir_aptitud`) con la misma lógica de `sql/21` y `sql/25`, se guardan en
+  `fact_lugar_circuito` / `fact_aptitud_circuito` y las vistas solo los leen. Verificado: 8,681 lugares, igual que la vista.
+- ❌→✅ Lectura de `v_tiempo_municipios` por offsets en paralelo daba timeout: ahora `supabase_cliente.leer_por_bloques`
+  (por municipio de origen, sin offsets).
+- **Segunda corrida (`--desde rutas`) en verde, 7.4 min:** 5 rutas operables (talavera, volcanes, religioso, mezcal y
+  gastronomía Pahuatlán → Tlaxco; la descartada sigue siendo ecoturismo/Angelópolis), 398 circuitos, 86 municipios
+  aptos, 11 de 12 validaciones ✅ y V9 ⏳ (sin datos de DATATUR por destino).
+
+### Páginas P1 escritas (pendiente correr sus pruebas)
+- Rutas: modo **Arma tu ruta** con `reglas_rutas` (mismas reglas, checklist ✅/⚠️, motivo y qué cambiar).
+- **Circuitos** (estándar con trazo guardado, personalizar, no aptos con motivo y "Armar ruta desde aquí").
+- **Mapa de oportunidades**, **Alertas** (con lista de formalización), **Escenarios y sensibilidad** (usa
+  `model/indice.py::indice`, no copia la fórmula). Ficha técnica con aptitud y botón "Ver circuito". Navegación completa.
+
+## Pendiente
+- Correr `tests/test_tablero.py` sobre las páginas nuevas (y agregarles casos: Arma tu ruta, Circuitos apto/no apto).
+- Fase E: borrar `dashboard/datos.py`, `motor.py`, `vistas/ficha.py`, `vistas/simulador.py`, clase `mope-demo`.
+- §9.3 `tests/test_cobertura.py` (217 municipios), §9.5 `tests/test_congruencia.py`, §9.6 prueba manual.
+- §12.3 medir tiempos de carga, §12.5 semáforos, §12.6 resto (proveedores, línea base de impacto, query params), §12.8.
+- Fase F: actualizar `Context.md` y `Validations.md`; marcar `arquitectura_modelo_y_tablero.md` como histórico.

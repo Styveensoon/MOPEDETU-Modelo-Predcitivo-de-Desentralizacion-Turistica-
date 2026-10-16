@@ -62,6 +62,20 @@ def leer(tabla: str, esquema: str = "public", select: str = "*", secreta: bool =
         ini += 1000
 
 
+def leer_por_bloques(tabla: str, columna: str, valores: list, esquema: str = "public", select: str = "*",
+                     secreta: bool = False, por_bloque: int = 4, hilos: int = 6) -> pd.DataFrame:
+    """Lee una tabla grande por bloques de valores de `columna` (p. ej. municipio de origen), en paralelo.
+    Sin offsets: cada petición filtra por la llave y trae menos de 1000 filas, así no choca con el tiempo máximo
+    de consulta del rol público (con offsets altos, v_tiempo_municipios fallaba con 'statement timeout')."""
+    from concurrent.futures import ThreadPoolExecutor
+    bloques = [valores[i:i + por_bloque] for i in range(0, len(valores), por_bloque)]
+
+    def uno(b):
+        return leer(tabla, esquema, select, secreta, f"{columna}=in.({','.join(str(v) for v in b)})")
+    with ThreadPoolExecutor(max_workers=hilos) as ex:
+        return pd.concat(list(ex.map(uno, bloques)), ignore_index=True)
+
+
 def insertar(tabla: str, registros: list[dict], esquema: str = "public") -> None:
     """Upsert con la secret key (solo scripts de carga, nunca desde el tablero)."""
     for i in range(0, len(registros), 500):

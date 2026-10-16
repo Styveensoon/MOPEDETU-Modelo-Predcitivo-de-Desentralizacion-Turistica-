@@ -2,7 +2,7 @@
 -- tipo_parada: 'atractivo' | 'experiencia' | 'comida'. prioridad (§4.3, menor = mejor):
 --   1 curado (con URL) · 2 lugar OSM con actividad · 3 negocio SCIAN 712/713 de bridge_scian_eje ·
 --   4 experiencia por SCIAN · 5 experiencia por nombre · 6 lugar OSM sin actividad · 7 comida tradicional
--- Excluye negocios sin nombre o sin coordenadas y los duplicados (mismo nombre normalizado en ~50 m: rejilla de
+-- Excluye negocios sin nombre (o registrados como "SIN NOMBRE" en el DENUE) o sin coordenadas y los duplicados (mismo nombre normalizado en ~50 m: rejilla de
 -- 0.0005°), quedándose con el de mejor prioridad. Idempotente.
 CREATE OR REPLACE VIEW dw.v_lugar_circuito WITH (security_invoker = on) AS
 WITH den AS (
@@ -11,7 +11,7 @@ WITH den AS (
     FROM dw.dim_establecimiento d
     JOIN dw.dim_scian s ON s.scian_sk = d.scian_sk
     LEFT JOIN dw.dim_estrato_personal ep ON ep.estrato_sk = d.estrato_sk
-    WHERE d.nombre IS NOT NULL AND btrim(d.nombre) <> '' AND d.geom IS NOT NULL
+    WHERE d.nombre IS NOT NULL AND btrim(d.nombre) <> '' AND d.nombre !~* 'sin nombre' AND d.geom IS NOT NULL
 ), act AS (
     SELECT fa.establecimiento_sk, a.codigo, fa.senal
     FROM dw.fact_establecimiento_actividad fa JOIN dw.dim_actividad a ON a.actividad_sk = fa.actividad_sk

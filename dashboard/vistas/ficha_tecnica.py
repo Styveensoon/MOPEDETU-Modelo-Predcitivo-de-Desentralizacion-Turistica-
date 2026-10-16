@@ -330,6 +330,17 @@ def _indice_y_prediccion(f):
 
 
 def _que_visitar(f):
+    apt = bd.aptitud_circuitos().set_index("municipio_sk")
+    if f.municipio_sk in apt.index:
+        a = apt.loc[f.municipio_sk]
+        if bool(a.apto):
+            col1, col2 = st.columns([3, 1])
+            col1.success(f"🔁 Apto para circuito (potencial {float(a.potencial_circuito):.2f})")
+            if col2.button("Ver circuito", key=f"ft_circ_{f.municipio_sk}"):
+                st.session_state["ir_a_circuito"] = int(f.municipio_sk)
+                st.switch_page(st.session_state["paginas"]["circuitos"])
+        else:
+            st.info(f"🔁 Sin circuito: {a.motivo_no_apto}. Puede ser parada de una ruta intermunicipal.")
     lug = bd.lugares(int(f.municipio_sk))
     vis = lug[lug.tipo_parada.isin(["atractivo", "experiencia"])]
     com = lug[lug.tipo_parada == "comida"]

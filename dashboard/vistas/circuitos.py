@@ -1,136 +1,128 @@
+"""🔁 Circuitos: recorridos dentro de un municipio desde su cabecera (dw.dim_circuito y model/reglas_circuitos.py)."""
+import html
+
 import pandas as pd
 import streamlit as st
 
-import estado
-import motor
+import bd
 import navegacion
+import reglas_circuitos as rc
 import tema
+
+PERFIL = {"a_pie": "pie", "auto": "auto"}
+INCUMPLIMIENTO = {"pocas_paradas": "no hay suficientes lugares dentro del radio del circuito",
+                  "sin_atractivo": "ningún atractivo queda dentro del radio", "excede_duracion": "no cabe en el tiempo",
+                  "tramo_largo": "algún tramo es demasiado largo", "actividad_no_principal": "la actividad no es "
+                  "principal del municipio", "tematico_sin_actividad": "elige una actividad"}
 
 
 def render():
-    d = estado.datos()
-    ctx = estado.contexto()
-    act = d.actividades.set_index("clave")
-    pred, _ = estado.prediccion()
-
     tema.hero("🔁 Circuitos municipales",
-              "Recorridos de medio día o un día dentro de un municipio, de una sola actividad o variados, "
-              "armados con los establecimientos geolocalizados del DENUE.",
-              estado.chips())
-
-    if "Circuitos" not in ctx.predecir:
-        st.info("En el modo Concreto desactivaste la predicción de **Circuitos**. Actívala en la barra lateral.")
+              "Recorridos de medio día o un día dentro de un municipio, desde su cabecera, con lugares reales: "
+              "atractivos, experiencias (talleres, productores) y cocina tradicional.", [])
+    try:
+        apt, (circ, par), mun = bd.aptitud_circuitos(), bd.circuitos(), bd.municipios().set_index("municipio_sk")
+    except bd.SinDatos as e:
+        st.error(f"No se pudieron leer los circuitos: {e}")
         return
+    aptos = apt[apt.apto.astype(bool)].sort_values("potencial_circuito", ascending=False)
+    no_aptos = apt[~apt.apto.astype(bool)]
+    k = st.columns(3)
+    k[0].metric("Municipios aptos", len(aptos), "con un circuito que cumple las reglas", delta_color="off")
+    k[1].metric("Circuitos calculados", int(circ.cumple.astype(bool).sum()), "que cumplen", delta_color="off")
+    k[2].metric("Sin circuito", len(no_aptos), "con su motivo", delta_color="off")
 
-    ranking = motor.ranking_circuitos(estado.filtrar_region(pred), top=25)
-    potencial = motor.ranking_circuitos(pred, top=len(d.municipios)).set_index("cve_geo").potencial
+    nombres = dict(zip(aptos.municipio_sk, aptos.nombre))
+    pref = st.session_state.pop("ir_a_circuito", None)
+    opciones = list(nombres)
+    mk = st.selectbox("Municipio (ordenados por potencial de circuito)", opciones, format_func=nombres.get,
+                      index=opciones.index(pref) if pref in opciones else 0, key="ci_mun")
+    cab = (float(mun.cabecera_lat[mk]), float(mun.cabecera_lon[mk]))
 
-    # Cualquier municipio del estado; de inicio, el de mejor potencial con los filtros actuales.
-    mun = d.municipios.sort_values("nombre")
-    opciones, nombres = mun.cve_geo.tolist(), dict(zip(mun.cve_geo, mun.nombre))
-    inicial = ranking.cve_geo.iloc[0] if not ranking.empty else opciones[0]
-    with st.container(border=True):
-        c = st.columns([1.4, 1.1, 1.3, 1.1, 1.1])
-        cve = c[0].selectbox("📍 Municipio (escribe para buscar)", opciones, index=opciones.index(inicial),
-                             format_func=nombres.get, key="circ_mun")
-        tipo = c[1].segmented_control("Tipo de circuito", ["Variado", "Una actividad"], default="Variado",
-                                      key="circ_tipo") or "Variado"
-        acts_mun = sorted(d.poi[d.poi.cve_geo == cve].actividad.unique())
-        actividad = c[2].selectbox("Actividad", acts_mun, format_func=lambda k: f"{act.icono[k]} {act.nombre[k]}",
-                                   disabled=tipo != "Una actividad")
-        horas = c[3].select_slider("⏱️ Duración", [3, 4, 6, 8, 10], value=6, format_func=lambda h: f"{h} h")
-        modo = c[4].segmented_control("Recorrido", ["🚗 En auto", "🚶 A pie"], default="🚗 En auto",
-                                      key="circ_perfil") or "🚗 En auto"
-    perfil = "pie" if "pie" in modo else "auto"
+    c = st.columns([1, 1, 1, 1.4])
+    personalizar = c[0].toggle("Personalizar", value=False, key="ci_pers")
+    modalidad = c[1].segmented_control("Modalidad", ["a_pie", "auto"], default="a_pie", key="ci_mod",
+                                       format_func={"a_pie": "🚶 A pie", "auto": "🚗 En auto"}.get,
+                                       disabled=not personalizar) or "a_pie"
+    horas = c[2].slider("Horas", 3, 10, 4, key="ci_h", disabled=not personalizar)
+    ficha = bd.ficha().set_index("municipio_sk")
+    principales = {a["codigo"]: f"{a['icono']} {a['nombre']}" for a in (ficha.actividades_principales.get(mk) or [])}
+    tipo = c[3].selectbox("Tipo", ["variado"] + list(principales), key="ci_tipo", disabled=not personalizar,
+                          format_func=lambda t: "Variado" if t == "variado" else f"Temático: {principales[t]}")
 
-    if not acts_mun:
-        st.warning(f"{nombres[cve]} no tiene establecimientos turísticos geolocalizados en el DENUE para armar "
-                   "un circuito. Elige otro municipio.")
+    lugares = bd.lugares(mk)
+    if personalizar:
+        res = rc.armar_circuito(lugares, cab, modalidad, horas, "variado" if tipo == "variado" else "tematico",
+                                None if tipo == "variado" else tipo, set(principales))
+        paradas = pd.DataFrame(res["paradas"])
+        trazo, fuente = None, "personalizado"
+        if not res["cumple"]:
+            st.warning("Este circuito no cumple: " + "; ".join(INCUMPLIMIENTO.get(i, i) for i in res["incumplimientos"])
+                       + ". Prueba más horas, en auto o el circuito variado.")
+    else:
+        est = circ[(circ.municipio_sk == mk) & circ.es_estandar.astype(bool)].iloc[0]
+        paradas = par[par.circuito_sk == est.circuito_sk].copy()
+        res = dict(modalidad=est.modalidad, duracion_h=float(est.duracion_h), duracion_min=float(est.duracion_min),
+                   minutos_traslado=float(est.minutos_traslado))
+        modalidad = est.modalidad
+        trazo = est.geom_trazo if isinstance(est.geom_trazo, dict) else None
+        fuente = "estándar"
+        st.caption(f"Circuito estándar: {est.descripcion}.")
+    if paradas.empty:
+        st.info("Sin paradas para este circuito.")
         return
-    kmh = 4.5 if perfil == "pie" else 25
-    foco = [actividad] if tipo == "Una actividad" else (ctx.supuestos.actividades or None)
-    circ = motor.circuito_municipal(d, cve, foco, horas, tipo == "Variado", kmh=kmh)
-    if circ.empty and tipo == "Variado" and foco:  # el filtro de actividades no existe en este municipio
-        circ = motor.circuito_municipal(d, cve, None, horas, True, kmh=kmh)
-        if not circ.empty:
-            st.info(f"{nombres[cve]} no tiene oferta en las actividades filtradas en la barra lateral: "
-                    "el circuito usa todas sus actividades.")
-    m = d.municipios.set_index("cve_geo").loc[cve]
-    if circ.empty:
-        st.warning("Este municipio no tiene puntos de interés para esa selección"
-                   + (" a distancia caminable: prueba **En auto** o más horas." if perfil == "pie" else "."))
-        return
+    paradas = paradas.merge(lugares[["lugar_id", "url"]], on="lugar_id", how="left") if "url" not in paradas else paradas
 
-    puntos = tuple([(float(m.lat), float(m.lon))] + list(zip(circ.lat.astype(float), circ.lon.astype(float))))
-    r = navegacion.ruta(puntos, perfil)
-    if r is None:
-        r = navegacion.ruta_recta(puntos, circ.min_desde_anterior.tolist())
-    circ["traslado"] = [t["min"] for t in r["tramos"]]
-    circ["km"] = [t["km"] for t in r["tramos"]]
-    reloj, horas_llegada = 9 * 60, []
-    for t in circ.traslado:
-        reloj += t
-        horas_llegada.append(f"{int(reloj // 60):02d}:{int(reloj % 60):02d}")
-        reloj += 60
-    circ["hora"] = horas_llegada
-    fin = f"{int(reloj // 60):02d}:{int(reloj % 60):02d}"
-    if reloj - 9 * 60 > horas * 60 * 1.15:
-        st.warning(f"Con los traslados reales por calle el circuito dura **{(reloj - 9 * 60) / 60:.1f} h**, más de las "
-                   f"{horas} h elegidas" + (": a pie conviene recortar paradas o ir en auto." if perfil == "pie" else "."))
-
-    k = st.columns(5)
-    k[0].metric("Paradas", len(circ), f"{circ.actividad.nunique()} actividades", delta_color="off")
-    k[1].metric("Distancia por calles" if r["real"] else "Distancia en línea recta", f"{r['km']:.1f} km")
-    k[2].metric("Tiempo de traslado", f"{r['min']:.0f} min", f"{'en auto' if perfil == 'auto' else 'a pie'}",
+    puntos = tuple([cab] + [(float(a), float(o)) for a, o in zip(paradas.lat, paradas.lon)] + [cab])
+    mins = paradas.min_desde_anterior.astype(float).tolist() + [rc.minutos(puntos[-2], cab, modalidad)]
+    if trazo:
+        kms = [rc.km(a, b) * rc.PARAMETROS["factor_rodeo"] for a, b in zip(puntos, puntos[1:])]
+        r = navegacion.ruta_guardada(trazo, puntos, kms, mins)
+    else:
+        r = navegacion.ruta(puntos, PERFIL[modalidad]) or navegacion.ruta_recta(puntos, mins)
+    hora = lambda m: f"{int(m // 60):02d}:{int(m % 60):02d}"  # noqa: E731
+    k = st.columns(4)
+    k[0].metric("Paradas", len(paradas))
+    k[1].metric("Duración", f"{res['duracion_min'] / 60:.1f} h", f"de {res['duracion_h']:g} h", delta_color="off")
+    k[2].metric("Traslados", f"{res['minutos_traslado']:.0f} min", "estimados", delta_color="off")
+    k[3].metric("Por calle (OSRM)" if r["real"] else "En línea recta", f"{r['km']:.1f} km", f"{r['min']:.0f} min",
                 delta_color="off")
-    k[3].metric("Horario", f"09:00 – {fin}", "1 h por parada", delta_color="off")
-    k[4].metric("Valoración media", f"⭐ {circ.valoracion.mean():.1f}",
-                f"potencial {potencial[cve]:.2f}" if cve in potencial.index else None, delta_color="off",
-                help="Potencial del municipio = 0.6 × índice de oportunidad + 0.4 × diversidad de actividades.")
+    if r["real"] and r["min"] > 1.15 * res["minutos_traslado"]:
+        st.warning(f"Por calle real el traslado toma {r['min']:.0f} min, más de 15 % sobre lo estimado: deja margen.")
 
-    izq, der = st.columns([1.7, 1])
+    izq, der = st.columns([1.6, 1])
     with izq:
-        st.markdown(f"#### 🛰️ Circuito {tipo.lower()} en {m.nombre}")
-        paradas = [dict(lon=float(p.lon), lat=float(p.lat), nombre=p.nombre, actividad=act.nombre[p.actividad],
-                        icono=act.icono[p.actividad], color=list(act.color[p.actividad]),
-                        valoracion=float(p.valoracion), orden=int(p.orden), hora=p.hora) for p in circ.itertuples()]
-        limite = next((f["geometry"] for f in d.geo["features"] if f["properties"]["cve_geo"] == cve), None)
-        navegacion.mapa(dict(lon=float(m.lon), lat=float(m.lat), nombre=f"Cabecera de {m.nombre}"),
-                        paradas, r, limite, perfil, alto=640)
-        st.caption("**▶ Recorrer** sigue la ruta como en un navegador · arrastra con clic derecho para inclinar o "
-                   "girar · 🛰️/🗺️ cambia entre satélite y mapa de calles · clic en una parada para ver su ficha.")
-
+        color = tema.hex_rgb(tema.GUINDA)
+        pts = [dict(lon=float(p.lon), lat=float(p.lat), nombre=p.nombre,
+                    icono="🍽️" if p.tipo_parada == "comida" else ("🧑‍🎨" if p.tipo_parada == "experiencia" else "📍"),
+                    actividad=p.categoria, detalle=f"estancia {int(p.estancia_min)} min", color=color, orden=i + 1,
+                    hora=hora(float(p.llegada_min))) for i, p in enumerate(paradas.itertuples())]
+        limites = [f["geometry"] for f in bd.geo()["features"] if f["properties"]["cve_geo"] == mun.cve_geo[mk]]
+        navegacion.mapa(dict(lon=cab[1], lat=cab[0], nombre=f"Cabecera de {mun.nombre[mk]}",
+                             detalle="Salida 09:00 y regreso"), pts, r, limites, PERFIL[modalidad], alto=560)
     with der:
-        st.markdown("#### 🗒️ Itinerario sugerido")
-        filas = pd.DataFrame({"Hora": circ.hora, "#": circ.orden, "Lugar": circ.nombre,
-                              "Actividad": [f"{act.icono[a]} {act.nombre[a]}" for a in circ.actividad],
-                              "Traslado": [f"{t:.0f} min · {km:.1f} km" for t, km in zip(circ.traslado, circ.km)],
-                              "⭐": circ.valoracion})
-        st.dataframe(filas, hide_index=True, width="stretch")
+        tabla = pd.DataFrame({
+            "Llegada": [hora(float(x)) for x in paradas.llegada_min], "Lugar": paradas.nombre,
+            "Tipo": paradas.tipo_parada, "Categoría": paradas.categoria,
+            "Estancia (min)": paradas.estancia_min.astype(int),
+            "Fuente": paradas.origen.map({"curado": "✅ curado", "osm": "OpenStreetMap", "denue": "DENUE"})})
+        st.dataframe(tabla, hide_index=True, width="stretch")
+        st.download_button("⬇️ Itinerario (CSV)", tabla.to_csv(index=False).encode("utf-8-sig"),
+                           f"circuito_{mun.nombre[mk]}.csv", "text/csv", width="stretch")
+        curados = paradas[paradas.origen == "curado"]
+        for p in curados.itertuples():
+            if isinstance(p.url, str):
+                st.markdown(f"✅ [{html.escape(p.nombre)}]({p.url})")
+        st.caption(f"Circuito {fuente}. Velocidades {rc.PARAMETROS['velocidad_kmh']['a_pie']} km/h a pie y "
+                   f"{rc.PARAMETROS['velocidad_kmh']['auto']} km/h en auto con rodeo ×{rc.PARAMETROS['factor_rodeo']}.")
 
-        b = st.columns(2)
-        b[0].link_button("🗺️ Abrir en Google Maps", navegacion.enlace_google(puntos, perfil), width="stretch")
-        b[1].link_button("🚙 Ir a la parada 1 en Waze", navegacion.enlace_waze(*puntos[1]), width="stretch")
-
-        if r["pasos"]:
-            with st.expander(f"🧭 Indicaciones paso a paso ({len(r['pasos'])})"):
-                for tramo, grupo in pd.DataFrame(r["pasos"]).groupby("tramo"):
-                    p = circ.iloc[tramo]
-                    st.markdown(f"**{'Cabecera' if tramo == 0 else f'Parada {tramo}'} → parada {tramo + 1}: "
-                                f"{p.nombre}** · {p.traslado:.0f} min")
-                    st.markdown("\n".join(f"- {s.flecha} {s.texto}" + (f" · {s.km * 1000:.0f} m" if s.km < 1 and s.km > 0
-                                                                     else f" · {s.km:.1f} km" if s.km >= 1 else "")
-                                          for s in grupo.itertuples()))
-
-        st.markdown("#### 🏆 Sugerencias: mejor potencial")
-        st.caption("Con los filtros actuales. Puedes elegir cualquier otro municipio arriba.")
-        st.dataframe(ranking[["nombre", "actividades", "potencial"]], hide_index=True,
-                     height=250, width="stretch",
-                     column_config={"nombre": "Municipio", "actividades": "Actividades",
-                                    "potencial": st.column_config.ProgressColumn("Potencial", min_value=0, max_value=1,
-                                                                                 format="%.2f")})
-
-    fuente = ("Ruta y tiempos por calles de OpenStreetMap (OSRM)" if r["real"]
-              else "Sin conexión al servicio de rutas: distancias en línea recta y tiempos estimados a 25 km/h")
-    st.caption(f"⚠️ {fuente}. Paradas tomadas de puntos del DENUE; verifica horarios y accesos antes de publicar. "
-               "Imágenes satelitales y mapa de calles © Esri, Maxar, OpenStreetMap.")
+    with st.expander(f"Municipios sin circuito ({len(no_aptos)}) y por qué"):
+        st.dataframe(no_aptos[["nombre", "region", "motivo_no_apto"]].rename(
+            columns={"nombre": "Municipio", "region": "Región", "motivo_no_apto": "Motivo"}),
+            hide_index=True, width="stretch")
+        elegido = st.selectbox("Armar una ruta intermunicipal desde…", list(no_aptos.municipio_sk),
+                               format_func=dict(zip(no_aptos.municipio_sk, no_aptos.nombre)).get, key="ci_ruta_desde")
+        if st.button("🧭 Armar ruta desde aquí"):
+            st.session_state["rutas_modo"] = "🛠️ Arma tu ruta"
+            st.session_state["ar_inicio"] = int(elegido)
+            st.switch_page(st.session_state["paginas"]["rutas"])

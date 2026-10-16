@@ -16,7 +16,6 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 16,infraestructura,verde,0.6317,0.7373,28 min por carretera al ancla más cercana · 0.33 km de vías principales/km² · 5 hospedajes · 22 % viviendas con internet,21016,Aquixtla
 17,infraestructura,verde,0.7965,0.9078,13 min por carretera al ancla más cercana · 0.93 km de vías principales/km² · 4 hospedajes · 14 % viviendas con internet,21017,Atempan
 18,infraestructura,rojo,0.2369,0.0876,84 min por carretera al ancla más cercana · 0.20 km de vías principales/km² · 1 hospedajes · 18 % viviendas con internet,21018,Atexcal
-19,infraestructura,verde,0.9533,0.9908,0 min por carretera al ancla más cercana · 0.94 km de vías principales/km² · 80 hospedajes · 48 % viviendas con internet,21019,Atlixco
 21,infraestructura,amarillo,0.5358,0.576,28 min por carretera al ancla más cercana · 0.54 km de vías principales/km² · 0 hospedajes · 14 % viviendas con internet,21022,Atzitzihuacán
 22,infraestructura,amarillo,0.3594,0.2627,56 min por carretera al ancla más cercana · 0.30 km de vías principales/km² · 1 hospedajes · 10 % viviendas con internet,21023,Atzitzintla
 23,infraestructura,rojo,0.1118,0.0092,106 min por carretera al ancla más cercana · 0.14 km de vías principales/km² · 0 hospedajes · 3 % viviendas con internet,21024,Axutla
@@ -28,6 +27,7 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 60,infraestructura,verde,0.6336,0.7419,25 min por carretera al ancla más cercana · 0.61 km de vías principales/km² · 0 hospedajes · 32 % viviendas con internet,21060,Domingo Arenas
 61,infraestructura,rojo,0.2767,0.1521,102 min por carretera al ancla más cercana · 0.39 km de vías principales/km² · 1 hospedajes · 6 % viviendas con internet,21061,Eloxochitlán
 118,infraestructura,verde,0.6364,0.7465,48 min por carretera al ancla más cercana · 1.13 km de vías principales/km² · 1 hospedajes · 28 % viviendas con internet,21118,Los Reyes de Juárez
+19,infraestructura,verde,0.9533,0.9908,0 min por carretera al ancla más cercana · 0.94 km de vías principales/km² · 80 hospedajes · 48 % viviendas con internet,21019,Atlixco
 27,infraestructura,amarillo,0.5448,0.6037,55 min por carretera al ancla más cercana · 0.44 km de vías principales/km² · 1 hospedajes · 22 % viviendas con internet,21020,Atoyatempan
 20,infraestructura,amarillo,0.5724,0.6636,52 min por carretera al ancla más cercana · 0.63 km de vías principales/km² · 0 hospedajes · 40 % viviendas con internet,21021,Atzala
 31,infraestructura,rojo,0.2545,0.1106,78 min por carretera al ancla más cercana · 0.20 km de vías principales/km² · 0 hospedajes · 9 % viviendas con internet,21031,Coatzingo
@@ -45,7 +45,6 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 40,infraestructura,amarillo,0.4548,0.4378,38 min por carretera al ancla más cercana · 0.38 km de vías principales/km² · 0 hospedajes · 13 % viviendas con internet,21040,Cuautinchán
 41,infraestructura,verde,0.8666,0.9539,10 min por carretera al ancla más cercana · 1.72 km de vías principales/km² · 7 hospedajes · 67 % viviendas con internet,21041,Cuautlancingo
 42,infraestructura,rojo,0.2909,0.1705,107 min por carretera al ancla más cercana · 0.33 km de vías principales/km² · 1 hospedajes · 8 % viviendas con internet,21042,Cuayuca de Andrade
-43,infraestructura,verde,0.785,0.894,0 min por carretera al ancla más cercana · 0.67 km de vías principales/km² · 56 hospedajes · 10 % viviendas con internet,21043,Cuetzalan del Progreso
 44,infraestructura,amarillo,0.4602,0.447,29 min por carretera al ancla más cercana · 0.26 km de vías principales/km² · 0 hospedajes · 21 % viviendas con internet,21044,Cuyoaco
 45,infraestructura,amarillo,0.5889,0.6959,60 min por carretera al ancla más cercana · 0.38 km de vías principales/km² · 24 hospedajes · 26 % viviendas con internet,21045,Chalchicomula de Sesma
 46,infraestructura,verde,0.6025,0.7143,21 min por carretera al ancla más cercana · 0.27 km de vías principales/km² · 1 hospedajes · 33 % viviendas con internet,21046,Chapulco
@@ -55,8 +54,9 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 50,infraestructura,amarillo,0.3628,0.2673,132 min por carretera al ancla más cercana · 0.87 km de vías principales/km² · 2 hospedajes · 8 % viviendas con internet,21050,Chichiquila
 51,infraestructura,amarillo,0.5171,0.553,56 min por carretera al ancla más cercana · 0.26 km de vías principales/km² · 5 hospedajes · 34 % viviendas con internet,21051,Chietla
 52,infraestructura,rojo,0.3366,0.2258,104 min por carretera al ancla más cercana · 0.20 km de vías principales/km² · 2 hospedajes · 20 % viviendas con internet,21052,Chigmecatitlán
-53,infraestructura,verde,0.7715,0.8848,0 min por carretera al ancla más cercana · 0.32 km de vías principales/km² · 83 hospedajes · 24 % viviendas con internet,21053,Chignahuapan
 136,infraestructura,verde,0.8438,0.9355,17 min por carretera al ancla más cercana · 1.45 km de vías principales/km² · 3 hospedajes · 52 % viviendas con internet,21136,San Miguel Xoxtla
+43,infraestructura,verde,0.785,0.894,0 min por carretera al ancla más cercana · 0.67 km de vías principales/km² · 56 hospedajes · 10 % viviendas con internet,21043,Cuetzalan del Progreso
+53,infraestructura,verde,0.7715,0.8848,0 min por carretera al ancla más cercana · 0.32 km de vías principales/km² · 83 hospedajes · 24 % viviendas con internet,21053,Chignahuapan
 28,infraestructura,amarillo,0.382,0.2949,77 min por carretera al ancla más cercana · 0.92 km de vías principales/km² · 0 hospedajes · 3 % viviendas con internet,21028,Camocuautla
 30,infraestructura,rojo,0.3332,0.2212,74 min por carretera al ancla más cercana · 0.19 km de vías principales/km² · 0 hospedajes · 29 % viviendas con internet,21030,Coatepec
 34,infraestructura,verde,0.8235,0.9263,18 min por carretera al ancla más cercana · 1.45 km de vías principales/km² · 3 hospedajes · 50 % viviendas con internet,21034,Coronango
@@ -69,20 +69,18 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 80,infraestructura,amarillo,0.4201,0.3548,78 min por carretera al ancla más cercana · 0.94 km de vías principales/km² · 0 hospedajes · 3 % viviendas con internet,21080,Atlequizayan
 96,infraestructura,amarillo,0.4714,0.4654,68 min por carretera al ancla más cercana · 0.53 km de vías principales/km² · 0 hospedajes · 36 % viviendas con internet,21096,Mazapiltepec de Juárez
 90,infraestructura,verde,0.7545,0.871,10 min por carretera al ancla más cercana · 0.74 km de vías principales/km² · 1 hospedajes · 46 % viviendas con internet,21090,Juan C. Bonilla
-119,infraestructura,verde,0.963,0.9954,0 min por carretera al ancla más cercana · 2.95 km de vías principales/km² · 26 hospedajes · 87 % viviendas con internet,21119,San Andrés Cholula
 120,infraestructura,rojo,0.3493,0.2442,29 min por carretera al ancla más cercana · 0.19 km de vías principales/km² · 0 hospedajes · 7 % viviendas con internet,21120,San Antonio Cañada
 121,infraestructura,rojo,0.2722,0.1429,44 min por carretera al ancla más cercana · 0.08 km de vías principales/km² · 0 hospedajes · 12 % viviendas con internet,21121,San Diego la Mesa Tochimiltzingo
 122,infraestructura,amarillo,0.4784,0.47,39 min por carretera al ancla más cercana · 0.21 km de vías principales/km² · 0 hospedajes · 42 % viviendas con internet,21122,San Felipe Teotlalcingo
 123,infraestructura,rojo,0.2538,0.106,80 min por carretera al ancla más cercana · vías principales sin mapear en OSM · 0 hospedajes · 10 % viviendas con internet,21123,San Felipe Tepatlán
 124,infraestructura,verde,0.6703,0.8065,18 min por carretera al ancla más cercana · 0.25 km de vías principales/km² · 3 hospedajes · 29 % viviendas con internet,21124,San Gabriel Chilac
 144,infraestructura,verde,0.6949,0.8479,53 min por carretera al ancla más cercana · 0.60 km de vías principales/km² · 5 hospedajes · 32 % viviendas con internet,21144,San Salvador Huixcolotla
+119,infraestructura,verde,0.963,0.9954,0 min por carretera al ancla más cercana · 2.95 km de vías principales/km² · 26 hospedajes · 87 % viviendas con internet,21119,San Andrés Cholula
 91,infraestructura,verde,0.8937,0.977,12 min por carretera al ancla más cercana · 0.75 km de vías principales/km² · 6 hospedajes · 45 % viviendas con internet,21091,Juan Galindo
 95,infraestructura,amarillo,0.3764,0.2903,66 min por carretera al ancla más cercana · 0.34 km de vías principales/km² · 0 hospedajes · 17 % viviendas con internet,21095,La Magdalena Tlatlauquitepec
 97,infraestructura,amarillo,0.5888,0.6912,51 min por carretera al ancla más cercana · 0.68 km de vías principales/km² · 1 hospedajes · 38 % viviendas con internet,21097,Mixtla
 151,infraestructura,amarillo,0.5899,0.7005,54 min por carretera al ancla más cercana · 0.58 km de vías principales/km² · 1 hospedajes · 26 % viviendas con internet,21151,Santo Tomás Hueyotlipan
-172,infraestructura,amarillo,0.5536,0.6129,48 min por carretera al ancla más cercana · 0.29 km de vías principales/km² · 8 hospedajes · 17 % viviendas con internet,21172,Tetela de Ocampo
 173,infraestructura,verde,0.8677,0.9585,10 min por carretera al ancla más cercana · 0.89 km de vías principales/km² · 5 hospedajes · 36 % viviendas con internet,21173,Teteles de Ávila Castillo
-174,infraestructura,verde,0.8655,0.9493,24 min por carretera al ancla más cercana · 0.70 km de vías principales/km² · 31 hospedajes · 39 % viviendas con internet,21174,Teziutlán
 175,infraestructura,amarillo,0.5611,0.6267,14 min por carretera al ancla más cercana · 0.21 km de vías principales/km² · 2 hospedajes · 28 % viviendas con internet,21175,Tianguismanalco
 176,infraestructura,amarillo,0.5095,0.5484,44 min por carretera al ancla más cercana · 0.36 km de vías principales/km² · 1 hospedajes · 33 % viviendas con internet,21176,Tilapa
 177,infraestructura,amarillo,0.5572,0.6175,38 min por carretera al ancla más cercana · 0.25 km de vías principales/km² · 8 hospedajes · 17 % viviendas con internet,21177,Tlacotepec de Benito Juárez
@@ -91,6 +89,8 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 180,infraestructura,amarillo,0.5323,0.5668,48 min por carretera al ancla más cercana · 0.35 km de vías principales/km² · 3 hospedajes · 19 % viviendas con internet,21180,Tlahuapan
 203,infraestructura,rojo,0.3425,0.2396,61 min por carretera al ancla más cercana · 0.15 km de vías principales/km² · 2 hospedajes · 16 % viviendas con internet,21203,Xochitlán Todos Santos
 204,infraestructura,verde,0.6433,0.7604,11 min por carretera al ancla más cercana · 0.65 km de vías principales/km² · 0 hospedajes · 16 % viviendas con internet,21204,Yaonáhuac
+172,infraestructura,amarillo,0.5536,0.6129,48 min por carretera al ancla más cercana · 0.29 km de vías principales/km² · 8 hospedajes · 17 % viviendas con internet,21172,Tetela de Ocampo
+174,infraestructura,verde,0.8655,0.9493,24 min por carretera al ancla más cercana · 0.70 km de vías principales/km² · 31 hospedajes · 39 % viviendas con internet,21174,Teziutlán
 171,infraestructura,amarillo,0.5413,0.5991,58 min por carretera al ancla más cercana · 0.32 km de vías principales/km² · 3 hospedajes · 36 % viviendas con internet,21171,Tepeyahualco de Cuauhtémoc
 182,infraestructura,amarillo,0.4993,0.5069,56 min por carretera al ancla más cercana · 0.73 km de vías principales/km² · 0 hospedajes · 33 % viviendas con internet,21182,Tlanepantla
 214,infraestructura,verde,0.6602,0.7788,23 min por carretera al ancla más cercana · 0.30 km de vías principales/km² · 4 hospedajes · 30 % viviendas con internet,21214,Zinacatepec
@@ -99,15 +99,15 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 63,infraestructura,verde,0.642,0.7558,51 min por carretera al ancla más cercana · 0.82 km de vías principales/km² · 2 hospedajes · 19 % viviendas con internet,21063,Esperanza
 64,infraestructura,amarillo,0.3509,0.2488,96 min por carretera al ancla más cercana · 0.26 km de vías principales/km² · 5 hospedajes · 17 % viviendas con internet,21064,Francisco Z. Mena
 65,infraestructura,amarillo,0.391,0.3134,52 min por carretera al ancla más cercana · 0.29 km de vías principales/km² · 0 hospedajes · 14 % viviendas con internet,21065,General Felipe Ángeles
+71,infraestructura,verde,0.8578,0.9447,0 min por carretera al ancla más cercana · 0.48 km de vías principales/km² · 44 hospedajes · 33 % viviendas con internet,21071,Huauchinango
+74,infraestructura,verde,0.8741,0.9677,16 min por carretera al ancla más cercana · 0.79 km de vías principales/km² · 13 hospedajes · 45 % viviendas con internet,21074,Huejotzingo
 66,infraestructura,rojo,0.2518,0.1014,128 min por carretera al ancla más cercana · 0.32 km de vías principales/km² · 0 hospedajes · 6 % viviendas con internet,21066,Guadalupe
 67,infraestructura,amarillo,0.4796,0.4747,88 min por carretera al ancla más cercana · 0.31 km de vías principales/km² · 5 hospedajes · 21 % viviendas con internet,21067,Guadalupe Victoria
 68,infraestructura,rojo,0.2028,0.0461,100 min por carretera al ancla más cercana · 0.07 km de vías principales/km² · 2 hospedajes · 13 % viviendas con internet,21068,Hermenegildo Galeana
 69,infraestructura,amarillo,0.5667,0.6498,31 min por carretera al ancla más cercana · 0.41 km de vías principales/km² · 1 hospedajes · 23 % viviendas con internet,21069,Huaquechula
 70,infraestructura,rojo,0.2991,0.1751,78 min por carretera al ancla más cercana · 0.27 km de vías principales/km² · 1 hospedajes · 14 % viviendas con internet,21070,Huatlatlauca
-71,infraestructura,verde,0.8578,0.9447,0 min por carretera al ancla más cercana · 0.48 km de vías principales/km² · 44 hospedajes · 33 % viviendas con internet,21071,Huauchinango
 72,infraestructura,amarillo,0.5353,0.5714,52 min por carretera al ancla más cercana · 0.52 km de vías principales/km² · 4 hospedajes · 6 % viviendas con internet,21072,Huehuetla
 73,infraestructura,rojo,0.3211,0.2074,90 min por carretera al ancla más cercana · 0.21 km de vías principales/km² · 1 hospedajes · 19 % viviendas con internet,21073,Huehuetlán el Chico
-74,infraestructura,verde,0.8741,0.9677,16 min por carretera al ancla más cercana · 0.79 km de vías principales/km² · 13 hospedajes · 45 % viviendas con internet,21074,Huejotzingo
 75,infraestructura,amarillo,0.5386,0.5853,13 min por carretera al ancla más cercana · 0.18 km de vías principales/km² · 4 hospedajes · 7 % viviendas con internet,21075,Hueyapan
 76,infraestructura,amarillo,0.5016,0.5115,46 min por carretera al ancla más cercana · 0.27 km de vías principales/km² · 5 hospedajes · 13 % viviendas con internet,21076,Hueytamalco
 98,infraestructura,amarillo,0.365,0.2765,68 min por carretera al ancla más cercana · 0.25 km de vías principales/km² · 1 hospedajes · 22 % viviendas con internet,21098,Molcaxac
@@ -117,6 +117,7 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 113,infraestructura,rojo,0.3419,0.2304,96 min por carretera al ancla más cercana · 0.26 km de vías principales/km² · 1 hospedajes · 19 % viviendas con internet,21113,Piaxtla
 114,infraestructura,verde,0.9711,1.0,0 min por carretera al ancla más cercana · 1.88 km de vías principales/km² · 342 hospedajes · 67 % viviendas con internet,21114,Puebla
 115,infraestructura,amarillo,0.571,0.659,55 min por carretera al ancla más cercana · 0.45 km de vías principales/km² · 5 hospedajes · 14 % viviendas con internet,21115,Quecholac
+109,infraestructura,verde,0.7942,0.9032,0 min por carretera al ancla más cercana · 0.67 km de vías principales/km² · 13 hospedajes · 10 % viviendas con internet,21109,Pahuatlán
 99,infraestructura,amarillo,0.5054,0.5392,36 min por carretera al ancla más cercana · 0.31 km de vías principales/km² · 2 hospedajes · 13 % viviendas con internet,21099,Cañada Morelos
 100,infraestructura,amarillo,0.4983,0.5023,31 min por carretera al ancla más cercana · 0.62 km de vías principales/km² · 0 hospedajes · 7 % viviendas con internet,21100,Naupan
 101,infraestructura,verde,0.65,0.7742,22 min por carretera al ancla más cercana · 0.74 km de vías principales/km² · 1 hospedajes · 7 % viviendas con internet,21101,Nauzontla
@@ -127,7 +128,6 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 106,infraestructura,verde,0.6989,0.8525,19 min por carretera al ancla más cercana · 0.64 km de vías principales/km² · 1 hospedajes · 50 % viviendas con internet,21106,Ocoyucan
 107,infraestructura,amarillo,0.4352,0.4101,77 min por carretera al ancla más cercana · 0.56 km de vías principales/km² · 3 hospedajes · 5 % viviendas con internet,21107,Olintla
 108,infraestructura,amarillo,0.5644,0.6359,47 min por carretera al ancla más cercana · 0.29 km de vías principales/km² · 7 hospedajes · 26 % viviendas con internet,21108,Oriental
-109,infraestructura,verde,0.7942,0.9032,0 min por carretera al ancla más cercana · 0.67 km de vías principales/km² · 13 hospedajes · 10 % viviendas con internet,21109,Pahuatlán
 81,infraestructura,rojo,0.235,0.0829,154 min por carretera al ancla más cercana · 0.19 km de vías principales/km² · 2 hospedajes · 16 % viviendas con internet,21081,Ixcamilpa de Guerrero
 82,infraestructura,amarillo,0.4492,0.4286,89 min por carretera al ancla más cercana · 0.24 km de vías principales/km² · 6 hospedajes · 28 % viviendas con internet,21082,Ixcaquixtla
 84,infraestructura,amarillo,0.5043,0.5346,75 min por carretera al ancla más cercana · 0.67 km de vías principales/km² · 3 hospedajes · 12 % viviendas con internet,21084,Ixtepec
@@ -182,9 +182,9 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 201,infraestructura,amarillo,0.4567,0.4424,50 min por carretera al ancla más cercana · 0.43 km de vías principales/km² · 0 hospedajes · 18 % viviendas con internet,21201,Xochiltepec
 202,infraestructura,verde,0.646,0.765,31 min por carretera al ancla más cercana · 0.61 km de vías principales/km² · 4 hospedajes · 13 % viviendas con internet,21202,Xochitlán de Vicente Suárez
 205,infraestructura,rojo,0.3227,0.212,54 min por carretera al ancla más cercana · 0.20 km de vías principales/km² · 0 hospedajes · 17 % viviendas con internet,21205,Yehualtepec
+208,infraestructura,verde,0.8095,0.9171,0 min por carretera al ancla más cercana · 0.35 km de vías principales/km² · 111 hospedajes · 28 % viviendas con internet,21208,Zacatlán
 206,infraestructura,rojo,0.2259,0.0737,94 min por carretera al ancla más cercana · 0.23 km de vías principales/km² · 0 hospedajes · 20 % viviendas con internet,21206,Zacapala
 207,infraestructura,verde,0.7681,0.8802,25 min por carretera al ancla más cercana · 0.66 km de vías principales/km² · 11 hospedajes · 18 % viviendas con internet,21207,Zacapoaxtla
-208,infraestructura,verde,0.8095,0.9171,0 min por carretera al ancla más cercana · 0.35 km de vías principales/km² · 111 hospedajes · 28 % viviendas con internet,21208,Zacatlán
 209,infraestructura,verde,0.6758,0.8111,24 min por carretera al ancla más cercana · 0.26 km de vías principales/km² · 7 hospedajes · 42 % viviendas con internet,21209,Zapotitlán
 210,infraestructura,verde,0.6633,0.7834,53 min por carretera al ancla más cercana · 0.84 km de vías principales/km² · 6 hospedajes · 14 % viviendas con internet,21210,Zapotitlán de Méndez
 211,infraestructura,verde,0.8964,0.9816,12 min por carretera al ancla más cercana · 0.83 km de vías principales/km² · 7 hospedajes · 33 % viviendas con internet,21211,Zaragoza
@@ -233,7 +233,6 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 16,turismo_actual,verde,0.2884,0.3041,4.7 empleos turísticos por mil hab. · 5 hospedajes · 0 rutas oficiales,21016,Aquixtla
 17,turismo_actual,amarillo,0.4264,0.5991,13.7 empleos turísticos por mil hab. · 4 hospedajes · 0 rutas oficiales,21017,Atempan
 18,turismo_actual,verde,0.1986,0.1429,5.8 empleos turísticos por mil hab. · 1 hospedajes · 0 rutas oficiales,21018,Atexcal
-19,turismo_actual,rojo,0.9811,0.9908,35.7 empleos turísticos por mil hab. · 80 hospedajes · 6 rutas oficiales · ancla,21019,Atlixco
 21,turismo_actual,verde,0.3293,0.3871,12.3 empleos turísticos por mil hab. · 0 hospedajes · 1 rutas oficiales,21022,Atzitzihuacán
 22,turismo_actual,verde,0.3543,0.424,10.6 empleos turísticos por mil hab. · 1 hospedajes · 1 rutas oficiales,21023,Atzitzintla
 23,turismo_actual,verde,0.1349,0.0415,5.1 empleos turísticos por mil hab. · 0 hospedajes · 0 rutas oficiales,21024,Axutla
@@ -245,6 +244,7 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 60,turismo_actual,verde,0.2105,0.1613,9.5 empleos turísticos por mil hab. · 0 hospedajes · 0 rutas oficiales,21060,Domingo Arenas
 61,turismo_actual,verde,0.24,0.2212,3.1 empleos turísticos por mil hab. · 1 hospedajes · 1 rutas oficiales,21061,Eloxochitlán
 118,turismo_actual,verde,0.3737,0.4793,15.4 empleos turísticos por mil hab. · 1 hospedajes · 0 rutas oficiales,21118,Los Reyes de Juárez
+19,turismo_actual,rojo,0.9811,0.9908,35.7 empleos turísticos por mil hab. · 80 hospedajes · 6 rutas oficiales · ancla,21019,Atlixco
 27,turismo_actual,amarillo,0.4106,0.576,17.7 empleos turísticos por mil hab. · 1 hospedajes · 0 rutas oficiales,21020,Atoyatempan
 20,turismo_actual,verde,0.3377,0.3963,16.5 empleos turísticos por mil hab. · 0 hospedajes · 0 rutas oficiales,21021,Atzala
 31,turismo_actual,amarillo,0.4538,0.6313,31.9 empleos turísticos por mil hab. · 0 hospedajes · 0 rutas oficiales,21031,Coatzingo
@@ -262,7 +262,6 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 40,turismo_actual,verde,0.2666,0.2535,9.2 empleos turísticos por mil hab. · 0 hospedajes · 1 rutas oficiales,21040,Cuautinchán
 41,turismo_actual,amarillo,0.5353,0.7558,17.8 empleos turísticos por mil hab. · 7 hospedajes · 0 rutas oficiales,21041,Cuautlancingo
 42,turismo_actual,verde,0.3571,0.4332,14.3 empleos turísticos por mil hab. · 1 hospedajes · 0 rutas oficiales,21042,Cuayuca de Andrade
-43,turismo_actual,rojo,0.8488,0.9585,17.5 empleos turísticos por mil hab. · 56 hospedajes · 3 rutas oficiales · ancla,21043,Cuetzalan del Progreso
 44,turismo_actual,verde,0.216,0.1705,10.1 empleos turísticos por mil hab. · 0 hospedajes · 0 rutas oficiales,21044,Cuyoaco
 45,turismo_actual,rojo,0.6281,0.8525,18.3 empleos turísticos por mil hab. · 24 hospedajes · 1 rutas oficiales,21045,Chalchicomula de Sesma
 46,turismo_actual,verde,0.3719,0.4654,15.4 empleos turísticos por mil hab. · 1 hospedajes · 0 rutas oficiales,21046,Chapulco
@@ -272,8 +271,9 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 50,turismo_actual,verde,0.2052,0.1521,2.3 empleos turísticos por mil hab. · 2 hospedajes · 0 rutas oficiales,21050,Chichiquila
 51,turismo_actual,amarillo,0.5391,0.765,20.8 empleos turísticos por mil hab. · 5 hospedajes · 0 rutas oficiales,21051,Chietla
 52,turismo_actual,amarillo,0.5149,0.7097,24.7 empleos turísticos por mil hab. · 2 hospedajes · 0 rutas oficiales,21052,Chigmecatitlán
-53,turismo_actual,rojo,0.9101,0.9631,23.4 empleos turísticos por mil hab. · 83 hospedajes · 3 rutas oficiales · ancla,21053,Chignahuapan
 136,turismo_actual,amarillo,0.5611,0.7834,27.9 empleos turísticos por mil hab. · 3 hospedajes · 0 rutas oficiales,21136,San Miguel Xoxtla
+43,turismo_actual,rojo,0.8488,0.9585,17.5 empleos turísticos por mil hab. · 56 hospedajes · 3 rutas oficiales · ancla,21043,Cuetzalan del Progreso
+53,turismo_actual,rojo,0.9101,0.9631,23.4 empleos turísticos por mil hab. · 83 hospedajes · 3 rutas oficiales · ancla,21053,Chignahuapan
 28,turismo_actual,verde,0.1644,0.0829,7.3 empleos turísticos por mil hab. · 0 hospedajes · 0 rutas oficiales,21028,Camocuautla
 30,turismo_actual,amarillo,0.3911,0.5207,22.7 empleos turísticos por mil hab. · 0 hospedajes · 0 rutas oficiales,21030,Coatepec
 34,turismo_actual,amarillo,0.5076,0.6959,21.7 empleos turísticos por mil hab. · 3 hospedajes · 0 rutas oficiales,21034,Coronango
@@ -286,20 +286,18 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 80,turismo_actual,verde,0.1699,0.0876,7.6 empleos turísticos por mil hab. · 0 hospedajes · 0 rutas oficiales,21080,Atlequizayan
 96,turismo_actual,verde,0.1515,0.0553,6.3 empleos turísticos por mil hab. · 0 hospedajes · 0 rutas oficiales,21096,Mazapiltepec de Juárez
 90,turismo_actual,verde,0.3553,0.4286,14.3 empleos turísticos por mil hab. · 1 hospedajes · 0 rutas oficiales,21090,Juan C. Bonilla
-119,turismo_actual,rojo,0.985,0.9954,55.5 empleos turísticos por mil hab. · 26 hospedajes · 7 rutas oficiales · ancla,21119,San Andrés Cholula
 120,turismo_actual,verde,0.1017,0.023,2.1 empleos turísticos por mil hab. · 0 hospedajes · 0 rutas oficiales,21120,San Antonio Cañada
 121,turismo_actual,verde,0.2076,0.1567,5.9 empleos turísticos por mil hab. · 0 hospedajes · 1 rutas oficiales,21121,San Diego la Mesa Tochimiltzingo
 122,turismo_actual,amarillo,0.3819,0.5023,21.1 empleos turísticos por mil hab. · 0 hospedajes · 0 rutas oficiales,21122,San Felipe Teotlalcingo
 123,turismo_actual,verde,0.0999,0.0184,2.0 empleos turísticos por mil hab. · 0 hospedajes · 0 rutas oficiales,21123,San Felipe Tepatlán
 124,turismo_actual,rojo,0.6688,0.8986,38.5 empleos turísticos por mil hab. · 3 hospedajes · 1 rutas oficiales,21124,San Gabriel Chilac
 144,turismo_actual,rojo,0.6349,0.8664,37.2 empleos turísticos por mil hab. · 5 hospedajes · 0 rutas oficiales,21144,San Salvador Huixcolotla
+119,turismo_actual,rojo,0.985,0.9954,55.5 empleos turísticos por mil hab. · 26 hospedajes · 7 rutas oficiales · ancla,21119,San Andrés Cholula
 91,turismo_actual,amarillo,0.6274,0.8479,32.3 empleos turísticos por mil hab. · 6 hospedajes · 0 rutas oficiales,21091,Juan Galindo
 95,turismo_actual,amarillo,0.4003,0.5484,23.1 empleos turísticos por mil hab. · 0 hospedajes · 0 rutas oficiales,21095,La Magdalena Tlatlauquitepec
 97,turismo_actual,verde,0.3811,0.4977,15.9 empleos turísticos por mil hab. · 1 hospedajes · 0 rutas oficiales,21097,Mixtla
 151,turismo_actual,amarillo,0.4438,0.6083,21.8 empleos turísticos por mil hab. · 1 hospedajes · 0 rutas oficiales,21151,Santo Tomás Hueyotlipan
-172,turismo_actual,rojo,0.6559,0.8848,13.7 empleos turísticos por mil hab. · 8 hospedajes · 2 rutas oficiales · Pueblo Mágico,21172,Tetela de Ocampo
 173,turismo_actual,amarillo,0.5262,0.7281,18.9 empleos turísticos por mil hab. · 5 hospedajes · 0 rutas oficiales,21173,Teteles de Ávila Castillo
-174,turismo_actual,rojo,0.8168,0.9539,27.3 empleos turísticos por mil hab. · 31 hospedajes · 2 rutas oficiales · Pueblo Mágico,21174,Teziutlán
 175,turismo_actual,verde,0.2513,0.235,6.4 empleos turísticos por mil hab. · 2 hospedajes · 0 rutas oficiales,21175,Tianguismanalco
 176,turismo_actual,verde,0.2244,0.1843,7.3 empleos turísticos por mil hab. · 1 hospedajes · 0 rutas oficiales,21176,Tilapa
 177,turismo_actual,amarillo,0.5302,0.7373,13.6 empleos turísticos por mil hab. · 8 hospedajes · 1 rutas oficiales,21177,Tlacotepec de Benito Juárez
@@ -308,6 +306,8 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 180,turismo_actual,amarillo,0.466,0.6406,13.2 empleos turísticos por mil hab. · 3 hospedajes · 1 rutas oficiales,21180,Tlahuapan
 203,turismo_actual,verde,0.3526,0.4194,11.8 empleos turísticos por mil hab. · 2 hospedajes · 0 rutas oficiales,21203,Xochitlán Todos Santos
 204,turismo_actual,verde,0.2252,0.1889,10.4 empleos turísticos por mil hab. · 0 hospedajes · 0 rutas oficiales,21204,Yaonáhuac
+172,turismo_actual,rojo,0.6559,0.8848,13.7 empleos turísticos por mil hab. · 8 hospedajes · 2 rutas oficiales · Pueblo Mágico,21172,Tetela de Ocampo
+174,turismo_actual,rojo,0.8168,0.9539,27.3 empleos turísticos por mil hab. · 31 hospedajes · 2 rutas oficiales · Pueblo Mágico,21174,Teziutlán
 171,turismo_actual,amarillo,0.5334,0.7512,23.5 empleos turísticos por mil hab. · 3 hospedajes · 0 rutas oficiales,21171,Tepeyahualco de Cuauhtémoc
 182,turismo_actual,verde,0.1791,0.106,7.9 empleos turísticos por mil hab. · 0 hospedajes · 0 rutas oficiales,21182,Tlanepantla
 214,turismo_actual,rojo,0.6576,0.8894,30.1 empleos turísticos por mil hab. · 4 hospedajes · 1 rutas oficiales,21214,Zinacatepec
@@ -316,15 +316,15 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 63,turismo_actual,amarillo,0.5691,0.7926,23.3 empleos turísticos por mil hab. · 2 hospedajes · 1 rutas oficiales,21063,Esperanza
 64,turismo_actual,amarillo,0.3916,0.53,10.7 empleos turísticos por mil hab. · 5 hospedajes · 0 rutas oficiales,21064,Francisco Z. Mena
 65,turismo_actual,verde,0.2566,0.2442,11.9 empleos turísticos por mil hab. · 0 hospedajes · 0 rutas oficiales,21065,General Felipe Ángeles
+71,turismo_actual,rojo,0.9203,0.9724,26.4 empleos turísticos por mil hab. · 44 hospedajes · 3 rutas oficiales · ancla,21071,Huauchinango
+74,turismo_actual,rojo,0.7624,0.9447,19.6 empleos turísticos por mil hab. · 13 hospedajes · 4 rutas oficiales · Pueblo Mágico,21074,Huejotzingo
 66,turismo_actual,verde,0.2603,0.2488,12.0 empleos turísticos por mil hab. · 0 hospedajes · 0 rutas oficiales,21066,Guadalupe
 67,turismo_actual,amarillo,0.6025,0.8157,20.7 empleos turísticos por mil hab. · 5 hospedajes · 1 rutas oficiales,21067,Guadalupe Victoria
 68,turismo_actual,verde,0.2255,0.1935,4.6 empleos turísticos por mil hab. · 2 hospedajes · 0 rutas oficiales,21068,Hermenegildo Galeana
 69,turismo_actual,verde,0.3283,0.3779,8.1 empleos turísticos por mil hab. · 1 hospedajes · 2 rutas oficiales,21069,Huaquechula
 70,turismo_actual,verde,0.2355,0.2166,7.9 empleos turísticos por mil hab. · 1 hospedajes · 0 rutas oficiales,21070,Huatlatlauca
-71,turismo_actual,rojo,0.9203,0.9724,26.4 empleos turísticos por mil hab. · 44 hospedajes · 3 rutas oficiales · ancla,21071,Huauchinango
 72,turismo_actual,verde,0.3674,0.4516,10.3 empleos turísticos por mil hab. · 4 hospedajes · 0 rutas oficiales,21072,Huehuetla
 73,turismo_actual,amarillo,0.4843,0.6636,26.6 empleos turísticos por mil hab. · 1 hospedajes · 0 rutas oficiales,21073,Huehuetlán el Chico
-74,turismo_actual,rojo,0.7624,0.9447,19.6 empleos turísticos por mil hab. · 13 hospedajes · 4 rutas oficiales · Pueblo Mágico,21074,Huejotzingo
 75,turismo_actual,amarillo,0.4559,0.6359,15.4 empleos turísticos por mil hab. · 4 hospedajes · 0 rutas oficiales,21075,Hueyapan
 76,turismo_actual,verde,0.3621,0.4424,9.2 empleos turísticos por mil hab. · 5 hospedajes · 0 rutas oficiales,21076,Hueytamalco
 98,turismo_actual,verde,0.3616,0.4378,11.2 empleos turísticos por mil hab. · 1 hospedajes · 1 rutas oficiales,21098,Molcaxac
@@ -334,6 +334,7 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 113,turismo_actual,verde,0.3756,0.4839,15.7 empleos turísticos por mil hab. · 1 hospedajes · 0 rutas oficiales,21113,Piaxtla
 114,turismo_actual,rojo,0.9765,0.9862,32.9 empleos turísticos por mil hab. · 342 hospedajes · 6 rutas oficiales · ancla,21114,Puebla
 115,turismo_actual,amarillo,0.5085,0.7005,13.7 empleos turísticos por mil hab. · 5 hospedajes · 1 rutas oficiales,21115,Quecholac
+109,turismo_actual,rojo,0.7566,0.9401,13.0 empleos turísticos por mil hab. · 13 hospedajes · 3 rutas oficiales · ancla,21109,Pahuatlán
 99,turismo_actual,verde,0.2955,0.3318,8.6 empleos turísticos por mil hab. · 2 hospedajes · 0 rutas oficiales,21099,Cañada Morelos
 100,turismo_actual,verde,0.1855,0.129,3.8 empleos turísticos por mil hab. · 0 hospedajes · 1 rutas oficiales,21100,Naupan
 101,turismo_actual,verde,0.3203,0.3733,12.2 empleos turísticos por mil hab. · 1 hospedajes · 0 rutas oficiales,21101,Nauzontla
@@ -344,7 +345,6 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 106,turismo_actual,verde,0.2926,0.3226,10.7 empleos turísticos por mil hab. · 1 hospedajes · 0 rutas oficiales,21106,Ocoyucan
 107,turismo_actual,verde,0.2698,0.2673,6.0 empleos turísticos por mil hab. · 3 hospedajes · 0 rutas oficiales,21107,Olintla
 108,turismo_actual,amarillo,0.6097,0.8295,17.4 empleos turísticos por mil hab. · 7 hospedajes · 2 rutas oficiales,21108,Oriental
-109,turismo_actual,rojo,0.7566,0.9401,13.0 empleos turísticos por mil hab. · 13 hospedajes · 3 rutas oficiales · ancla,21109,Pahuatlán
 81,turismo_actual,verde,0.2937,0.3272,8.6 empleos turísticos por mil hab. · 2 hospedajes · 0 rutas oficiales,21081,Ixcamilpa de Guerrero
 82,turismo_actual,amarillo,0.609,0.8249,28.1 empleos turísticos por mil hab. · 6 hospedajes · 0 rutas oficiales,21082,Ixcaquixtla
 84,turismo_actual,amarillo,0.4173,0.5853,14.0 empleos turísticos por mil hab. · 3 hospedajes · 0 rutas oficiales,21084,Ixtepec
@@ -399,9 +399,9 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 201,turismo_actual,verde,0.2787,0.2949,13.5 empleos turísticos por mil hab. · 0 hospedajes · 0 rutas oficiales,21201,Xochiltepec
 202,turismo_actual,verde,0.3461,0.4055,5.2 empleos turísticos por mil hab. · 4 hospedajes · 1 rutas oficiales,21202,Xochitlán de Vicente Suárez
 205,turismo_actual,verde,0.2713,0.2742,12.9 empleos turísticos por mil hab. · 0 hospedajes · 0 rutas oficiales,21205,Yehualtepec
+208,turismo_actual,rojo,0.9372,0.977,26.8 empleos turísticos por mil hab. · 111 hospedajes · 4 rutas oficiales · ancla,21208,Zacatlán
 206,turismo_actual,verde,0.2897,0.3134,14.0 empleos turísticos por mil hab. · 0 hospedajes · 0 rutas oficiales,21206,Zacapala
 207,turismo_actual,amarillo,0.6116,0.8341,17.8 empleos turísticos por mil hab. · 11 hospedajes · 1 rutas oficiales,21207,Zacapoaxtla
-208,turismo_actual,rojo,0.9372,0.977,26.8 empleos turísticos por mil hab. · 111 hospedajes · 4 rutas oficiales · ancla,21208,Zacatlán
 209,turismo_actual,rojo,0.6886,0.9263,24.1 empleos turísticos por mil hab. · 7 hospedajes · 4 rutas oficiales,21209,Zapotitlán
 210,turismo_actual,rojo,0.654,0.8802,24.8 empleos turísticos por mil hab. · 6 hospedajes · 1 rutas oficiales,21210,Zapotitlán de Méndez
 211,turismo_actual,rojo,0.6385,0.871,32.6 empleos turísticos por mil hab. · 7 hospedajes · 0 rutas oficiales,21211,Zaragoza
@@ -667,7 +667,6 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 16,potencial,amarillo,14.36,,Crecimiento predicho de la oferta turística a 5 años +14.4 % (límite inferior del intervalo de 80 %: -21.6 %),21016,Aquixtla
 17,potencial,amarillo,44.01,,Crecimiento predicho de la oferta turística a 5 años +44.0 % (límite inferior del intervalo de 80 %: -1.2 %),21017,Atempan
 18,potencial,verde,65.49,,Crecimiento predicho de la oferta turística a 5 años +65.5 % (límite inferior del intervalo de 80 %: +13.5 %),21018,Atexcal
-19,potencial,amarillo,29.85,,Crecimiento predicho de la oferta turística a 5 años +29.9 % (límite inferior del intervalo de 80 %: -11.0 %),21019,Atlixco
 21,potencial,verde,51.28,,Crecimiento predicho de la oferta turística a 5 años +51.3 % (límite inferior del intervalo de 80 %: +3.7 %),21022,Atzitzihuacán
 22,potencial,amarillo,29.84,,Crecimiento predicho de la oferta turística a 5 años +29.8 % (límite inferior del intervalo de 80 %: -11.0 %),21023,Atzitzintla
 23,potencial,gris,,,Sin predicción de crecimiento: ningún eje con al menos 3 unidades económicas en el CE 2024 (fuera del rango de entrenamiento del modelo),21024,Axutla
@@ -679,6 +678,7 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 60,potencial,verde,51.94,,Crecimiento predicho de la oferta turística a 5 años +51.9 % (límite inferior del intervalo de 80 %: +4.2 %),21060,Domingo Arenas
 61,potencial,amarillo,36.97,,Crecimiento predicho de la oferta turística a 5 años +37.0 % (límite inferior del intervalo de 80 %: -6.1 %),21061,Eloxochitlán
 118,potencial,verde,72.66,,Crecimiento predicho de la oferta turística a 5 años +72.7 % (límite inferior del intervalo de 80 %: +18.4 %),21118,Los Reyes de Juárez
+19,potencial,amarillo,29.85,,Crecimiento predicho de la oferta turística a 5 años +29.9 % (límite inferior del intervalo de 80 %: -11.0 %),21019,Atlixco
 27,potencial,verde,69.86,,Crecimiento predicho de la oferta turística a 5 años +69.9 % (límite inferior del intervalo de 80 %: +16.5 %),21020,Atoyatempan
 20,potencial,verde,55.11,,Crecimiento predicho de la oferta turística a 5 años +55.1 % (límite inferior del intervalo de 80 %: +6.4 %),21021,Atzala
 31,potencial,verde,50.2,,Crecimiento predicho de la oferta turística a 5 años +50.2 % (límite inferior del intervalo de 80 %: +3.0 %),21031,Coatzingo
@@ -696,7 +696,6 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 40,potencial,verde,84.55,,Crecimiento predicho de la oferta turística a 5 años +84.5 % (límite inferior del intervalo de 80 %: +26.6 %),21040,Cuautinchán
 41,potencial,verde,54.05,,Crecimiento predicho de la oferta turística a 5 años +54.0 % (límite inferior del intervalo de 80 %: +5.6 %),21041,Cuautlancingo
 42,potencial,amarillo,37.25,,Crecimiento predicho de la oferta turística a 5 años +37.2 % (límite inferior del intervalo de 80 %: -5.9 %),21042,Cuayuca de Andrade
-43,potencial,amarillo,25.74,,Crecimiento predicho de la oferta turística a 5 años +25.7 % (límite inferior del intervalo de 80 %: -13.8 %),21043,Cuetzalan del Progreso
 44,potencial,verde,61.45,,Crecimiento predicho de la oferta turística a 5 años +61.4 % (límite inferior del intervalo de 80 %: +10.7 %),21044,Cuyoaco
 45,potencial,amarillo,31.38,,Crecimiento predicho de la oferta turística a 5 años +31.4 % (límite inferior del intervalo de 80 %: -9.9 %),21045,Chalchicomula de Sesma
 46,potencial,amarillo,45.37,,Crecimiento predicho de la oferta turística a 5 años +45.4 % (límite inferior del intervalo de 80 %: -0.3 %),21046,Chapulco
@@ -706,8 +705,9 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 50,potencial,verde,61.12,,Crecimiento predicho de la oferta turística a 5 años +61.1 % (límite inferior del intervalo de 80 %: +10.5 %),21050,Chichiquila
 51,potencial,amarillo,37.01,,Crecimiento predicho de la oferta turística a 5 años +37.0 % (límite inferior del intervalo de 80 %: -6.0 %),21051,Chietla
 52,potencial,verde,85.46,,Crecimiento predicho de la oferta turística a 5 años +85.5 % (límite inferior del intervalo de 80 %: +27.2 %),21052,Chigmecatitlán
-53,potencial,amarillo,41.69,,Crecimiento predicho de la oferta turística a 5 años +41.7 % (límite inferior del intervalo de 80 %: -2.8 %),21053,Chignahuapan
 136,potencial,amarillo,38.47,,Crecimiento predicho de la oferta turística a 5 años +38.5 % (límite inferior del intervalo de 80 %: -5.0 %),21136,San Miguel Xoxtla
+43,potencial,amarillo,25.74,,Crecimiento predicho de la oferta turística a 5 años +25.7 % (límite inferior del intervalo de 80 %: -13.8 %),21043,Cuetzalan del Progreso
+53,potencial,amarillo,41.69,,Crecimiento predicho de la oferta turística a 5 años +41.7 % (límite inferior del intervalo de 80 %: -2.8 %),21053,Chignahuapan
 28,potencial,verde,143.28,,Crecimiento predicho de la oferta turística a 5 años +143.3 % (límite inferior del intervalo de 80 %: +66.8 %),21028,Camocuautla
 30,potencial,verde,63.37,,Crecimiento predicho de la oferta turística a 5 años +63.4 % (límite inferior del intervalo de 80 %: +12.0 %),21030,Coatepec
 34,potencial,amarillo,31.49,,Crecimiento predicho de la oferta turística a 5 años +31.5 % (límite inferior del intervalo de 80 %: -9.8 %),21034,Coronango
@@ -720,20 +720,18 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 80,potencial,verde,68.09,,Crecimiento predicho de la oferta turística a 5 años +68.1 % (límite inferior del intervalo de 80 %: +15.3 %),21080,Atlequizayan
 96,potencial,amarillo,20.74,,Crecimiento predicho de la oferta turística a 5 años +20.7 % (límite inferior del intervalo de 80 %: -17.2 %),21096,Mazapiltepec de Juárez
 90,potencial,verde,62.51,,Crecimiento predicho de la oferta turística a 5 años +62.5 % (límite inferior del intervalo de 80 %: +11.4 %),21090,Juan C. Bonilla
-119,potencial,amarillo,29.65,,Crecimiento predicho de la oferta turística a 5 años +29.6 % (límite inferior del intervalo de 80 %: -11.1 %),21119,San Andrés Cholula
 120,potencial,verde,52.94,,Crecimiento predicho de la oferta turística a 5 años +52.9 % (límite inferior del intervalo de 80 %: +4.9 %),21120,San Antonio Cañada
 121,potencial,amarillo,19.89,,Crecimiento predicho de la oferta turística a 5 años +19.9 % (límite inferior del intervalo de 80 %: -17.8 %),21121,San Diego la Mesa Tochimiltzingo
 122,potencial,verde,68.25,,Crecimiento predicho de la oferta turística a 5 años +68.3 % (límite inferior del intervalo de 80 %: +15.4 %),21122,San Felipe Teotlalcingo
 123,potencial,verde,52.28,,Crecimiento predicho de la oferta turística a 5 años +52.3 % (límite inferior del intervalo de 80 %: +4.4 %),21123,San Felipe Tepatlán
 124,potencial,verde,47.09,,Crecimiento predicho de la oferta turística a 5 años +47.1 % (límite inferior del intervalo de 80 %: +0.9 %),21124,San Gabriel Chilac
 144,potencial,amarillo,42.29,,Crecimiento predicho de la oferta turística a 5 años +42.3 % (límite inferior del intervalo de 80 %: -2.4 %),21144,San Salvador Huixcolotla
+119,potencial,amarillo,29.65,,Crecimiento predicho de la oferta turística a 5 años +29.6 % (límite inferior del intervalo de 80 %: -11.1 %),21119,San Andrés Cholula
 91,potencial,amarillo,37.06,,Crecimiento predicho de la oferta turística a 5 años +37.1 % (límite inferior del intervalo de 80 %: -6.0 %),21091,Juan Galindo
 95,potencial,verde,101.56,,Crecimiento predicho de la oferta turística a 5 años +101.6 % (límite inferior del intervalo de 80 %: +38.2 %),21095,La Magdalena Tlatlauquitepec
 97,potencial,verde,80.43,,Crecimiento predicho de la oferta turística a 5 años +80.4 % (límite inferior del intervalo de 80 %: +23.7 %),21097,Mixtla
 151,potencial,amarillo,40.59,,Crecimiento predicho de la oferta turística a 5 años +40.6 % (límite inferior del intervalo de 80 %: -3.6 %),21151,Santo Tomás Hueyotlipan
-172,potencial,amarillo,42.6,,Crecimiento predicho de la oferta turística a 5 años +42.6 % (límite inferior del intervalo de 80 %: -2.2 %),21172,Tetela de Ocampo
 173,potencial,amarillo,25.12,,Crecimiento predicho de la oferta turística a 5 años +25.1 % (límite inferior del intervalo de 80 %: -14.2 %),21173,Teteles de Ávila Castillo
-174,potencial,amarillo,33.11,,Crecimiento predicho de la oferta turística a 5 años +33.1 % (límite inferior del intervalo de 80 %: -8.7 %),21174,Teziutlán
 175,potencial,verde,81.07,,Crecimiento predicho de la oferta turística a 5 años +81.1 % (límite inferior del intervalo de 80 %: +24.2 %),21175,Tianguismanalco
 176,potencial,amarillo,36.11,,Crecimiento predicho de la oferta turística a 5 años +36.1 % (límite inferior del intervalo de 80 %: -6.7 %),21176,Tilapa
 177,potencial,verde,47.1,,Crecimiento predicho de la oferta turística a 5 años +47.1 % (límite inferior del intervalo de 80 %: +0.9 %),21177,Tlacotepec de Benito Juárez
@@ -742,6 +740,8 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 180,potencial,amarillo,34.91,,Crecimiento predicho de la oferta turística a 5 años +34.9 % (límite inferior del intervalo de 80 %: -7.5 %),21180,Tlahuapan
 203,potencial,verde,64.76,,Crecimiento predicho de la oferta turística a 5 años +64.8 % (límite inferior del intervalo de 80 %: +13.0 %),21203,Xochitlán Todos Santos
 204,potencial,amarillo,14.46,,Crecimiento predicho de la oferta turística a 5 años +14.5 % (límite inferior del intervalo de 80 %: -21.5 %),21204,Yaonáhuac
+172,potencial,amarillo,42.6,,Crecimiento predicho de la oferta turística a 5 años +42.6 % (límite inferior del intervalo de 80 %: -2.2 %),21172,Tetela de Ocampo
+174,potencial,amarillo,33.11,,Crecimiento predicho de la oferta turística a 5 años +33.1 % (límite inferior del intervalo de 80 %: -8.7 %),21174,Teziutlán
 171,potencial,amarillo,22.83,,Crecimiento predicho de la oferta turística a 5 años +22.8 % (límite inferior del intervalo de 80 %: -15.8 %),21171,Tepeyahualco de Cuauhtémoc
 182,potencial,verde,69.77,,Crecimiento predicho de la oferta turística a 5 años +69.8 % (límite inferior del intervalo de 80 %: +16.4 %),21182,Tlanepantla
 214,potencial,amarillo,29.33,,Crecimiento predicho de la oferta turística a 5 años +29.3 % (límite inferior del intervalo de 80 %: -11.3 %),21214,Zinacatepec
@@ -750,15 +750,15 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 63,potencial,amarillo,44.84,,Crecimiento predicho de la oferta turística a 5 años +44.8 % (límite inferior del intervalo de 80 %: -0.7 %),21063,Esperanza
 64,potencial,amarillo,33.5,,Crecimiento predicho de la oferta turística a 5 años +33.5 % (límite inferior del intervalo de 80 %: -8.4 %),21064,Francisco Z. Mena
 65,potencial,verde,58.13,,Crecimiento predicho de la oferta turística a 5 años +58.1 % (límite inferior del intervalo de 80 %: +8.4 %),21065,General Felipe Ángeles
+71,potencial,amarillo,18.01,,Crecimiento predicho de la oferta turística a 5 años +18.0 % (límite inferior del intervalo de 80 %: -19.1 %),21071,Huauchinango
+74,potencial,verde,63.13,,Crecimiento predicho de la oferta turística a 5 años +63.1 % (límite inferior del intervalo de 80 %: +11.9 %),21074,Huejotzingo
 66,potencial,amarillo,9.16,,Crecimiento predicho de la oferta turística a 5 años +9.2 % (límite inferior del intervalo de 80 %: -25.1 %),21066,Guadalupe
 67,potencial,amarillo,43.53,,Crecimiento predicho de la oferta turística a 5 años +43.5 % (límite inferior del intervalo de 80 %: -1.6 %),21067,Guadalupe Victoria
 68,potencial,amarillo,36.26,,Crecimiento predicho de la oferta turística a 5 años +36.3 % (límite inferior del intervalo de 80 %: -6.6 %),21068,Hermenegildo Galeana
 69,potencial,amarillo,36.44,,Crecimiento predicho de la oferta turística a 5 años +36.4 % (límite inferior del intervalo de 80 %: -6.4 %),21069,Huaquechula
 70,potencial,verde,83.09,,Crecimiento predicho de la oferta turística a 5 años +83.1 % (límite inferior del intervalo de 80 %: +25.6 %),21070,Huatlatlauca
-71,potencial,amarillo,18.01,,Crecimiento predicho de la oferta turística a 5 años +18.0 % (límite inferior del intervalo de 80 %: -19.1 %),21071,Huauchinango
 72,potencial,amarillo,21.87,,Crecimiento predicho de la oferta turística a 5 años +21.9 % (límite inferior del intervalo de 80 %: -16.4 %),21072,Huehuetla
 73,potencial,verde,51.85,,Crecimiento predicho de la oferta turística a 5 años +51.8 % (límite inferior del intervalo de 80 %: +4.1 %),21073,Huehuetlán el Chico
-74,potencial,verde,63.13,,Crecimiento predicho de la oferta turística a 5 años +63.1 % (límite inferior del intervalo de 80 %: +11.9 %),21074,Huejotzingo
 75,potencial,verde,67.77,,Crecimiento predicho de la oferta turística a 5 años +67.8 % (límite inferior del intervalo de 80 %: +15.1 %),21075,Hueyapan
 76,potencial,amarillo,37.29,,Crecimiento predicho de la oferta turística a 5 años +37.3 % (límite inferior del intervalo de 80 %: -5.9 %),21076,Hueytamalco
 98,potencial,amarillo,10.96,,Crecimiento predicho de la oferta turística a 5 años +11.0 % (límite inferior del intervalo de 80 %: -23.9 %),21098,Molcaxac
@@ -768,6 +768,7 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 113,potencial,amarillo,21.93,,Crecimiento predicho de la oferta turística a 5 años +21.9 % (límite inferior del intervalo de 80 %: -16.4 %),21113,Piaxtla
 114,potencial,amarillo,21.74,,Crecimiento predicho de la oferta turística a 5 años +21.7 % (límite inferior del intervalo de 80 %: -16.5 %),21114,Puebla
 115,potencial,verde,66.19,,Crecimiento predicho de la oferta turística a 5 años +66.2 % (límite inferior del intervalo de 80 %: +14.0 %),21115,Quecholac
+109,potencial,amarillo,29.77,,Crecimiento predicho de la oferta turística a 5 años +29.8 % (límite inferior del intervalo de 80 %: -11.0 %),21109,Pahuatlán
 99,potencial,verde,77.0,,Crecimiento predicho de la oferta turística a 5 años +77.0 % (límite inferior del intervalo de 80 %: +21.4 %),21099,Cañada Morelos
 100,potencial,amarillo,41.7,,Crecimiento predicho de la oferta turística a 5 años +41.7 % (límite inferior del intervalo de 80 %: -2.8 %),21100,Naupan
 101,potencial,verde,82.05,,Crecimiento predicho de la oferta turística a 5 años +82.0 % (límite inferior del intervalo de 80 %: +24.9 %),21101,Nauzontla
@@ -778,7 +779,6 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 106,potencial,amarillo,38.95,,Crecimiento predicho de la oferta turística a 5 años +39.0 % (límite inferior del intervalo de 80 %: -4.7 %),21106,Ocoyucan
 107,potencial,amarillo,40.14,,Crecimiento predicho de la oferta turística a 5 años +40.1 % (límite inferior del intervalo de 80 %: -3.9 %),21107,Olintla
 108,potencial,verde,53.72,,Crecimiento predicho de la oferta turística a 5 años +53.7 % (límite inferior del intervalo de 80 %: +5.4 %),21108,Oriental
-109,potencial,amarillo,29.77,,Crecimiento predicho de la oferta turística a 5 años +29.8 % (límite inferior del intervalo de 80 %: -11.0 %),21109,Pahuatlán
 81,potencial,verde,53.44,,Crecimiento predicho de la oferta turística a 5 años +53.4 % (límite inferior del intervalo de 80 %: +5.2 %),21081,Ixcamilpa de Guerrero
 82,potencial,verde,46.78,,Crecimiento predicho de la oferta turística a 5 años +46.8 % (límite inferior del intervalo de 80 %: +0.7 %),21082,Ixcaquixtla
 84,potencial,verde,56.04,,Crecimiento predicho de la oferta turística a 5 años +56.0 % (límite inferior del intervalo de 80 %: +7.0 %),21084,Ixtepec
@@ -833,9 +833,9 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 201,potencial,amarillo,33.33,,Crecimiento predicho de la oferta turística a 5 años +33.3 % (límite inferior del intervalo de 80 %: -8.6 %),21201,Xochiltepec
 202,potencial,amarillo,38.76,,Crecimiento predicho de la oferta turística a 5 años +38.8 % (límite inferior del intervalo de 80 %: -4.8 %),21202,Xochitlán de Vicente Suárez
 205,potencial,verde,58.58,,Crecimiento predicho de la oferta turística a 5 años +58.6 % (límite inferior del intervalo de 80 %: +8.8 %),21205,Yehualtepec
+208,potencial,verde,65.77,,Crecimiento predicho de la oferta turística a 5 años +65.8 % (límite inferior del intervalo de 80 %: +13.7 %),21208,Zacatlán
 206,potencial,verde,60.34,,Crecimiento predicho de la oferta turística a 5 años +60.3 % (límite inferior del intervalo de 80 %: +10.0 %),21206,Zacapala
 207,potencial,amarillo,16.6,,Crecimiento predicho de la oferta turística a 5 años +16.6 % (límite inferior del intervalo de 80 %: -20.0 %),21207,Zacapoaxtla
-208,potencial,verde,65.77,,Crecimiento predicho de la oferta turística a 5 años +65.8 % (límite inferior del intervalo de 80 %: +13.7 %),21208,Zacatlán
 209,potencial,amarillo,28.6,,Crecimiento predicho de la oferta turística a 5 años +28.6 % (límite inferior del intervalo de 80 %: -11.8 %),21209,Zapotitlán
 210,potencial,amarillo,10.1,,Crecimiento predicho de la oferta turística a 5 años +10.1 % (límite inferior del intervalo de 80 %: -24.5 %),21210,Zapotitlán de Méndez
 211,potencial,amarillo,35.85,,Crecimiento predicho de la oferta turística a 5 años +35.9 % (límite inferior del intervalo de 80 %: -6.8 %),21211,Zaragoza
@@ -884,7 +884,6 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 16,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21016,Aquixtla
 17,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21017,Atempan
 18,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21018,Atexcal
-19,social,verde,,,Grado de marginación muy bajo (CONAPO 2020),21019,Atlixco
 21,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21022,Atzitzihuacán
 22,social,rojo,,,Grado de marginación alto (CONAPO 2020),21023,Atzitzintla
 23,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21024,Axutla
@@ -896,6 +895,7 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 60,social,verde,,,Grado de marginación bajo (CONAPO 2020),21060,Domingo Arenas
 61,social,rojo,,,Grado de marginación muy alto (CONAPO 2020),21061,Eloxochitlán
 118,social,verde,,,Grado de marginación bajo (CONAPO 2020),21118,Los Reyes de Juárez
+19,social,verde,,,Grado de marginación muy bajo (CONAPO 2020),21019,Atlixco
 27,social,verde,,,Grado de marginación bajo (CONAPO 2020),21020,Atoyatempan
 20,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21021,Atzala
 31,social,rojo,,,Grado de marginación alto (CONAPO 2020),21031,Coatzingo
@@ -913,7 +913,6 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 40,social,rojo,,,Grado de marginación alto (CONAPO 2020),21040,Cuautinchán
 41,social,verde,,,Grado de marginación muy bajo (CONAPO 2020),21041,Cuautlancingo
 42,social,rojo,,,Grado de marginación alto (CONAPO 2020),21042,Cuayuca de Andrade
-43,social,rojo,,,Grado de marginación alto (CONAPO 2020),21043,Cuetzalan del Progreso
 44,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21044,Cuyoaco
 45,social,verde,,,Grado de marginación bajo (CONAPO 2020),21045,Chalchicomula de Sesma
 46,social,verde,,,Grado de marginación bajo (CONAPO 2020),21046,Chapulco
@@ -923,8 +922,9 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 50,social,rojo,,,Grado de marginación alto (CONAPO 2020),21050,Chichiquila
 51,social,verde,,,Grado de marginación bajo (CONAPO 2020),21051,Chietla
 52,social,rojo,,,Grado de marginación alto (CONAPO 2020),21052,Chigmecatitlán
-53,social,verde,,,Grado de marginación bajo (CONAPO 2020),21053,Chignahuapan
 136,social,verde,,,Grado de marginación muy bajo (CONAPO 2020),21136,San Miguel Xoxtla
+43,social,rojo,,,Grado de marginación alto (CONAPO 2020),21043,Cuetzalan del Progreso
+53,social,verde,,,Grado de marginación bajo (CONAPO 2020),21053,Chignahuapan
 28,social,rojo,,,Grado de marginación alto (CONAPO 2020),21028,Camocuautla
 30,social,rojo,,,Grado de marginación alto (CONAPO 2020),21030,Coatepec
 34,social,verde,,,Grado de marginación muy bajo (CONAPO 2020),21034,Coronango
@@ -937,20 +937,18 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 80,social,rojo,,,Grado de marginación alto (CONAPO 2020),21080,Atlequizayan
 96,social,verde,,,Grado de marginación bajo (CONAPO 2020),21096,Mazapiltepec de Juárez
 90,social,verde,,,Grado de marginación muy bajo (CONAPO 2020),21090,Juan C. Bonilla
-119,social,verde,,,Grado de marginación muy bajo (CONAPO 2020),21119,San Andrés Cholula
 120,social,rojo,,,Grado de marginación alto (CONAPO 2020),21120,San Antonio Cañada
 121,social,rojo,,,Grado de marginación alto (CONAPO 2020),21121,San Diego la Mesa Tochimiltzingo
 122,social,verde,,,Grado de marginación bajo (CONAPO 2020),21122,San Felipe Teotlalcingo
 123,social,rojo,,,Grado de marginación alto (CONAPO 2020),21123,San Felipe Tepatlán
 124,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21124,San Gabriel Chilac
 144,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21144,San Salvador Huixcolotla
+119,social,verde,,,Grado de marginación muy bajo (CONAPO 2020),21119,San Andrés Cholula
 91,social,verde,,,Grado de marginación muy bajo (CONAPO 2020),21091,Juan Galindo
 95,social,verde,,,Grado de marginación bajo (CONAPO 2020),21095,La Magdalena Tlatlauquitepec
 97,social,verde,,,Grado de marginación bajo (CONAPO 2020),21097,Mixtla
 151,social,verde,,,Grado de marginación bajo (CONAPO 2020),21151,Santo Tomás Hueyotlipan
-172,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21172,Tetela de Ocampo
 173,social,verde,,,Grado de marginación muy bajo (CONAPO 2020),21173,Teteles de Ávila Castillo
-174,social,verde,,,Grado de marginación muy bajo (CONAPO 2020),21174,Teziutlán
 175,social,verde,,,Grado de marginación bajo (CONAPO 2020),21175,Tianguismanalco
 176,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21176,Tilapa
 177,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21177,Tlacotepec de Benito Juárez
@@ -959,6 +957,8 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 180,social,verde,,,Grado de marginación bajo (CONAPO 2020),21180,Tlahuapan
 203,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21203,Xochitlán Todos Santos
 204,social,verde,,,Grado de marginación bajo (CONAPO 2020),21204,Yaonáhuac
+172,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21172,Tetela de Ocampo
+174,social,verde,,,Grado de marginación muy bajo (CONAPO 2020),21174,Teziutlán
 171,social,verde,,,Grado de marginación bajo (CONAPO 2020),21171,Tepeyahualco de Cuauhtémoc
 182,social,verde,,,Grado de marginación bajo (CONAPO 2020),21182,Tlanepantla
 214,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21214,Zinacatepec
@@ -967,15 +967,15 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 63,social,verde,,,Grado de marginación bajo (CONAPO 2020),21063,Esperanza
 64,social,rojo,,,Grado de marginación alto (CONAPO 2020),21064,Francisco Z. Mena
 65,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21065,General Felipe Ángeles
+71,social,verde,,,Grado de marginación bajo (CONAPO 2020),21071,Huauchinango
+74,social,verde,,,Grado de marginación muy bajo (CONAPO 2020),21074,Huejotzingo
 66,social,rojo,,,Grado de marginación alto (CONAPO 2020),21066,Guadalupe
 67,social,verde,,,Grado de marginación bajo (CONAPO 2020),21067,Guadalupe Victoria
 68,social,rojo,,,Grado de marginación alto (CONAPO 2020),21068,Hermenegildo Galeana
 69,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21069,Huaquechula
 70,social,rojo,,,Grado de marginación alto (CONAPO 2020),21070,Huatlatlauca
-71,social,verde,,,Grado de marginación bajo (CONAPO 2020),21071,Huauchinango
 72,social,rojo,,,Grado de marginación muy alto (CONAPO 2020),21072,Huehuetla
 73,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21073,Huehuetlán el Chico
-74,social,verde,,,Grado de marginación muy bajo (CONAPO 2020),21074,Huejotzingo
 75,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21075,Hueyapan
 76,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21076,Hueytamalco
 98,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21098,Molcaxac
@@ -985,6 +985,7 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 113,social,rojo,,,Grado de marginación alto (CONAPO 2020),21113,Piaxtla
 114,social,verde,,,Grado de marginación muy bajo (CONAPO 2020),21114,Puebla
 115,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21115,Quecholac
+109,social,rojo,,,Grado de marginación alto (CONAPO 2020),21109,Pahuatlán
 99,social,rojo,,,Grado de marginación alto (CONAPO 2020),21099,Cañada Morelos
 100,social,rojo,,,Grado de marginación alto (CONAPO 2020),21100,Naupan
 101,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21101,Nauzontla
@@ -995,7 +996,6 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 106,social,verde,,,Grado de marginación bajo (CONAPO 2020),21106,Ocoyucan
 107,social,rojo,,,Grado de marginación muy alto (CONAPO 2020),21107,Olintla
 108,social,verde,,,Grado de marginación bajo (CONAPO 2020),21108,Oriental
-109,social,rojo,,,Grado de marginación alto (CONAPO 2020),21109,Pahuatlán
 81,social,rojo,,,Grado de marginación alto (CONAPO 2020),21081,Ixcamilpa de Guerrero
 82,social,verde,,,Grado de marginación bajo (CONAPO 2020),21082,Ixcaquixtla
 84,social,rojo,,,Grado de marginación alto (CONAPO 2020),21084,Ixtepec
@@ -1050,9 +1050,9 @@ municipio_sk,dimension,nivel,valor,percentil,motivo,cve_geo,nombre
 201,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21201,Xochiltepec
 202,social,rojo,,,Grado de marginación alto (CONAPO 2020),21202,Xochitlán de Vicente Suárez
 205,social,verde,,,Grado de marginación bajo (CONAPO 2020),21205,Yehualtepec
+208,social,verde,,,Grado de marginación bajo (CONAPO 2020),21208,Zacatlán
 206,social,rojo,,,Grado de marginación alto (CONAPO 2020),21206,Zacapala
 207,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21207,Zacapoaxtla
-208,social,verde,,,Grado de marginación bajo (CONAPO 2020),21208,Zacatlán
 209,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21209,Zapotitlán
 210,social,amarillo,,,Grado de marginación medio (CONAPO 2020),21210,Zapotitlán de Méndez
 211,social,verde,,,Grado de marginación muy bajo (CONAPO 2020),21211,Zaragoza

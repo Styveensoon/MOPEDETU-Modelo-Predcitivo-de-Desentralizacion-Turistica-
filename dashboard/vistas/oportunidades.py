@@ -1,109 +1,136 @@
-import plotly.express as px
+"""🗺️ Mapa de oportunidades: cualquier indicador de la base por municipio, banderas resaltadas y oferta contra
+visibilidad (datos de dw; umbrales leídos de model/indice.py, los mismos de la bandera)."""
+import html
+
+import numpy as np
+import pandas as pd
+import plotly.graph_objects as go
 import streamlit as st
 
-import estado
+import bd
+import ficha_bd as fb
+import indice
 import mapas
-import motor
 import tema
 
-METRICAS = {
-    "indice_oportunidad": ("Índice de oportunidad", tema.SEQ_TALAVERA, "{:.2f}"),
-    "crecimiento_pct": ("Crecimiento proyectado del empleo (%)", tema.SEQ_CRECIMIENTO, "{:.1f} %"),
-    "po_actual": ("Personal ocupado turístico (DENUE)", tema.SEQ_TALAVERA, "{:,.0f}"),
-    "menciones": ("Visibilidad (menciones)", tema.SEQ_TALAVERA, "{:,.0f}"),
-    "inversion_reciente_mdp": ("Inversión pública reciente (MDP)", tema.SEQ_CRECIMIENTO, "{:,.1f}"),
-    "indice_marginacion": ("Índice de marginación", tema.SEQ_CRECIMIENTO, "{:.2f}"),
-    "pct_via_pavimentada": ("Vías pavimentadas (%)", tema.SEQ_TALAVERA, "{:.0%}"),
-    "num_flags": ("Número de flags", tema.SEQ_CRECIMIENTO, "{:.0f}"),
-    "cl_actividad": ("Predominancia de una actividad (cociente de localización)", tema.SEQ_TALAVERA, "{:.2f}"),
+
+def _tabla_municipios() -> pd.DataFrame:
+    idx = bd.indice_municipio().set_index("municipio_sk")
+    f = bd.ficha().set_index("municipio_sk")
+    m = idx[["cve_geo", "nombre", "region", "es_ancla", "eje_lider", "indice_oportunidad", "ranking_estatal",
+             "score_oferta", "score_social", "score_accesibilidad", "score_potencial"]].copy()
+    for c in ("indice_oportunidad", "score_oferta", "score_social", "score_accesibilidad", "score_potencial"):
+        m[c] = m[c].astype(float)
+
+    def crec(pr):
+        v = [p["crecimiento_pct"] for p in (pr or []) if p.get("en_dominio")]
+        return max(v) if v else np.nan
+    m["crecimiento"] = f.prediccion.map(crec)
+    m["personal"] = bd.oferta().groupby("municipio_sk").personal_est.sum().astype(float)
+    m["exceso"] = f.exceso_oferta.map(lambda x: next((e["percentil"] for e in x or [] if e["eje"] == "global"), np.nan))
+    m["marginacion"] = bd.contexto().indice_marginacion.astype(float)
+    m["min_ancla"] = f.infraestructura.map(lambda i: (i or {}).get("min_ancla_cercana"))
+    m["visibilidad"] = f.visibilidad.map(lambda v: v["percentil"] if isinstance(v, dict) else np.nan)
+    m["seguridad"] = f.seguridad.map(lambda s: s["tasa_municipio"] if isinstance(s, dict) else np.nan)
+    ban = bd.banderas()
+    m["banderas"] = ban.groupby("municipio_sk").codigo.nunique().reindex(m.index).fillna(0)
+    m["circuito"] = bd.aptitud_circuitos().set_index("municipio_sk").potencial_circuito.astype(float)
+    det = bd.indice_detalle()
+    m["oferta_max"] = det.groupby("municipio_sk").score_oferta.max().astype(float)
+    return m
+
+
+INDICADORES = {
+    "indice_oportunidad": ("Índice de oportunidad (vigente)", False), "score_oferta": ("Componente: oferta", False),
+    "score_accesibilidad": ("Componente: accesibilidad por carretera", False),
+    "score_social": ("Componente: necesidad social", False), "score_potencial": ("Componente: potencial predicho", False),
+    "crecimiento": ("Crecimiento predicho a 5 años (máx. eje en dominio, %)", False),
+    "personal": ("Personal turístico estimado (DENUE)", False), "exceso": ("Oferta en exceso de la población (percentil)", False),
+    "marginacion": ("Índice de marginación CONAPO (más bajo = más marginado)", True),
+    "min_ancla": ("Minutos por carretera al ancla más cercana", True),
+    "visibilidad": ("Visibilidad en Wikipedia (percentil)", False),
+    "seguridad": ("Delitos en el municipio por 100 mil hab.", True), "banderas": ("Número de banderas activas", False),
+    "circuito": ("Potencial de circuito", False), "cl_actividad": ("Cociente de localización de una actividad", False),
 }
 
 
 def render():
-    d = estado.datos()
-    pred, mp = estado.prediccion()
-    act = d.actividades.set_index("clave")
-
     tema.hero("🗺️ Mapa de oportunidades",
-              "Explora cualquier indicador sobre los 217 municipios. Haz clic en un municipio para ver su detalle.",
-              estado.chips())
+              "Elige un indicador, resalta una bandera y haz clic en un municipio para ver por qué.", [])
+    try:
+        m = _tabla_municipios()
+        tipos = bd.banderas()[["codigo", "descripcion"]].drop_duplicates().sort_values("codigo")
+    except bd.SinDatos as e:
+        st.error(f"No se pudieron leer los datos: {e}")
+        return
+    c = st.columns([2, 1.4, 1.6])
+    ind = c[0].selectbox("Indicador", list(INDICADORES), format_func=lambda k: INDICADORES[k][0], key="op_ind")
+    if ind == "cl_actividad":
+        act = bd.actividades()
+        a = c[1].selectbox("Actividad", list(act.codigo), key="op_act",
+                           format_func=dict(zip(act.codigo, act.icono + " " + act.nombre)).get)
+        am = bd.actividad_municipio()
+        m["cl_actividad"] = am[am.codigo == a].set_index("municipio_sk").cociente_localizacion.astype(float)
+    bandera = c[2].selectbox("Resaltar bandera", ["(ninguna)"] + list(tipos.codigo), key="op_ban",
+                             format_func=lambda k: k if k.startswith("(") else fb.BANDERA.get(k, k))
+    if not bandera.startswith("("):
+        st.caption(f"🚩 **{fb.BANDERA.get(bandera, bandera)}**: {tipos.set_index('codigo').descripcion[bandera]}")
+    resaltar = set()
+    ban = bd.banderas()
+    if not bandera.startswith("("):
+        resaltar = set(m.cve_geo[m.index.isin(ban[ban.codigo == bandera].municipio_sk)])
 
-    c1, c2, c3, c4 = st.columns([2, 1.4, 1, 1])
-    metrica = c1.selectbox("Indicador", list(METRICAS), format_func=lambda k: METRICAS[k][0])
-    actividad = None
-    if metrica == "cl_actividad":
-        actividad = c2.selectbox("Actividad", act.index, format_func=lambda k: f"{act.icono[k]} {act.nombre[k]}")
-    flag = c2.selectbox("Resaltar flag", ["Ninguno"] + list(motor.FLAGS)) if metrica != "cl_actividad" else "Ninguno"
-    burbujas = c3.toggle("Burbujas de empleo", value=False, help="Tamaño = personal ocupado turístico")
-    nombres_fijos = c4.toggle("🏷️ Todos los nombres", value=False,
-                              help="Apagado: nombres principales y el resto aparece al hacer zoom.")
-
-    df = mp.copy()
-    if actividad:
-        cl = pred[pred.actividad == actividad].set_index("cve_geo").cociente_localizacion
-        df["cl_actividad"] = df.cve_geo.map(cl).fillna(0)
-    titulo, paleta, fmt = METRICAS[metrica]
-    resaltar = set(pred[pred[flag]].cve_geo) if flag != "Ninguno" else set()
-
-    df["tt"] = df.apply(
-        lambda r: f"<b>{r.nombre}</b> · {r.region}<br/>{titulo}: <b>{fmt.format(r[metrica])}</b><br/>"
-                  f"Líder: {r.icono_lider} {r.actividad_lider}<br/>Índice: {r.indice_oportunidad:.2f} · Flags: {r.num_flags}", axis=1)
-    vmax = df[metrica].quantile(0.97) if metrica in ("po_actual", "menciones", "inversion_reciente_mdp") else None
-    m = mapas.Mapa(d.geo, alto=640, fondo=mapas.FONDO_ESTADO).municipios(
-        df, metrica, df.set_index("cve_geo").tt, paleta=paleta, vmax=vmax, resaltar=resaltar,
-        cuantiles=metrica in ("indice_oportunidad", "po_actual", "menciones"),
-        seleccionado=st.session_state.get("op_cve"))
-    if burbujas:
-        b = df[df.po_actual > 0].copy()
-        b["tam"] = 4 + 26 * (b.po_actual / b.po_actual.max()) ** 0.5
-        m.puntos(b, tema.AMARILLO, "tam", "tt")
-    destacados = df[df.cve_geo.isin(set(df.nlargest(12, metrica).cve_geo) | set(df[df.es_ancla].cve_geo))]
-    m.nombres(destacados, tamano=10)
-    if nombres_fijos:
-        m.nombres(df[~df.cve_geo.isin(destacados.cve_geo)], tamano=8, color="#14213D", separacion=0)
-
-    mapa, panel = st.columns([2, 1])
-    with mapa:
-        seleccion = mapas.mostrar(m, "op_mapa", "op_cve")
-        mapas.leyenda(titulo, "bajo", "alto", paleta)
-        if resaltar:
-            st.caption(f"Contorno guinda: {len(resaltar)} municipios con **{flag}** — {motor.FLAGS[flag]}")
-
-    with panel:
-        if seleccion and st.button("✕ Cerrar detalle", key="op_cerrar"):
-            st.session_state["op_cve"] = None
-            st.rerun()
-        if seleccion:
-            r = df.set_index("cve_geo").loc[seleccion]
-            st.markdown(f"### {r.nombre}")
-            st.caption(f"{r.region} · {r.poblacion:,.0f} hab. · marginación {r.grado_marginacion.lower()}")
-            a, b = st.columns(2)
-            a.metric("Índice", f"{r.indice_oportunidad:.2f}")
-            b.metric("Crecimiento", f"{r.crecimiento_pct:+.1f} %")
-            filas = pred[pred.cve_geo == seleccion].sort_values("indice_oportunidad", ascending=False)
-            for f in filas.itertuples():
-                flags = [k for k in motor.FLAGS if getattr(f, k)]
-                st.markdown(f"{act.icono[f.actividad]} **{act.nombre[f.actividad]}** · CL {f.cociente_localizacion:.1f} "
-                            f"· {f.nivel_predominancia}" + ("".join(f' <span class="mope-tag flag">{x}</span>' for x in flags)),
-                            unsafe_allow_html=True)
-            if st.button("Abrir ficha completa →", width="stretch"):
-                st.session_state["ficha_cve"] = seleccion
-                st.switch_page(st.session_state["paginas"]["ficha"])
+    nombre_ind, invertir = INDICADORES[ind]
+    d = m.reset_index()
+    d["valor"] = -d[ind] if invertir else d[ind]
+    tt = d.set_index("cve_geo").apply(
+        lambda r: f"<b>{html.escape(r.nombre)}</b><br>{r.region}<br>{nombre_ind}: "
+                  + ("s/d" if pd.isna(r[ind]) else f"{r[ind]:,.2f}") + f"<br>Índice #{r.ranking_estatal}", axis=1)
+    izq, der = st.columns([1.6, 1])
+    with izq:
+        mp = mapas.Mapa(bd.geo(), alto=620, fondo=bd.fondo_mapa()).municipios(
+            d, "valor", tt, cuantiles=True, resaltar=resaltar, seleccionado=st.session_state.get("op_cve"))
+        mapas.mostrar(mp, "op_mapa", "op_cve")
+        mapas.leyenda(nombre_ind + (" (invertido: más oscuro = mejor)" if invertir else "") + " · guinda = bandera",
+                      "bajo", "alto")
+    with der:
+        cve = st.session_state.get("op_cve")
+        if not cve:
+            st.info("Haz clic en un municipio para ver su detalle.")
         else:
-            st.markdown("#### Ranking")
-            orden = df.sort_values(metrica, ascending=False)[["nombre", metrica, "actividad_lider"]]
-            st.dataframe(orden, hide_index=True, height=600, width="stretch",
-                         column_config={metrica: st.column_config.NumberColumn(titulo.split(" (")[0], format="%.2f"),
-                                        "actividad_lider": "Actividad líder", "nombre": "Municipio"})
+            r = m[m.cve_geo == cve].iloc[0]
+            mk = m.index[m.cve_geo == cve][0]
+            st.markdown(f"### {r.nombre}" + (" ⚓" if r.es_ancla else ""))
+            st.metric("Índice de oportunidad", f"{r.indice_oportunidad:.3f}", f"#{int(r.ranking_estatal)} de 217",
+                      delta_color="off")
+            comp = pd.DataFrame({"Componente": ["Oferta", "Accesibilidad", "Necesidad social", "Potencial"],
+                                 "Valor": [r.score_oferta, r.score_accesibilidad, r.score_social, r.score_potencial]})
+            st.dataframe(comp, hide_index=True, width="stretch", column_config={
+                "Valor": st.column_config.ProgressColumn(min_value=0, max_value=1, format="%.2f")})
+            for b in ban[ban.municipio_sk == mk].itertuples():
+                st.markdown(f'<span class="mope-tag flag">{fb.BANDERA.get(b.codigo, b.codigo)}</span> '
+                            f'<small>{html.escape(b.motivo or "")}</small>', unsafe_allow_html=True)
+            acts = bd.ficha().set_index("municipio_sk").actividades_principales.get(mk) or []
+            st.caption("Actividades principales: " + (" · ".join(f"{a['icono']} {a['nombre']}" for a in acts) or "—"))
+            if st.button("Abrir ficha técnica →", key="op_ficha"):
+                st.session_state["ir_a_cve"] = cve
+                st.switch_page(st.session_state["paginas"]["ficha_tecnica"])
 
-    st.markdown("#### 🔍 Oferta contra visibilidad: dónde está lo invisible")
-    sc = pred.assign(actividad_n=pred.actividad.map(act.nombre))
-    fig = px.scatter(sc, x="s_visibilidad", y="s_oferta", size="personal_ocupado", color="actividad_n",
-                     hover_name="nombre", hover_data={"cociente_localizacion": ":.2f", "s_visibilidad": ":.2f", "s_oferta": ":.2f"},
-                     size_max=28, opacity=.75, labels={"s_visibilidad": "Visibilidad (percentil)",
-                                                       "s_oferta": "Oferta real DENUE (percentil)", "actividad_n": "Actividad"})
-    fig.add_shape(type="rect", x0=0, x1=0.35, y0=0.6, y1=1.02, line=dict(color=tema.GUINDA, dash="dash"),
-                  fillcolor="rgba(138,21,56,.06)")
-    fig.add_annotation(x=0.17, y=1.05, text="🚩 OFERTA INVISIBLE", showarrow=False, font=dict(color=tema.GUINDA))
-    fig.update_layout(height=430, margin=dict(l=0, r=0, t=20, b=0))
-    st.plotly_chart(fig)
+    st.markdown("#### 👀 Oferta contra visibilidad")
+    uo, uv = indice.UMBRAL_INVISIBLE_OFERTA, indice.UMBRAL_INVISIBLE_VISIBILIDAD
+    inv = set(ban[ban.codigo == "OFERTA_INVISIBLE"].municipio_sk)
+    s = m.dropna(subset=["oferta_max", "visibilidad"])
+    fig = go.Figure()
+    for es, color, nombre in ((False, "#8C9BB0", "Resto"), (True, tema.GUINDA, "Oferta invisible")):
+        g = s[s.index.isin(inv) == es]
+        fig.add_trace(go.Scatter(x=g.oferta_max, y=g.visibilidad, mode="markers", name=nombre,
+                                 marker=dict(color=color, size=8, opacity=0.8), text=g.nombre,
+                                 hovertemplate="%{text}<br>oferta P%{x:.0%} · visibilidad P%{y:.0%}<extra></extra>"))
+    fig.add_shape(type="rect", x0=uo, x1=1, y0=0, y1=uv, fillcolor="rgba(138,21,56,.08)", line=dict(width=0))
+    fig.add_vline(x=uo, line_dash="dot", line_color=tema.GUINDA)
+    fig.add_hline(y=uv, line_dash="dot", line_color=tema.GUINDA)
+    fig.update_layout(height=380, margin=dict(l=0, r=0, t=10, b=0), xaxis_title="Percentil de oferta (mejor eje)",
+                      yaxis_title="Percentil de visibilidad", legend=dict(orientation="h", y=-0.2))
+    st.plotly_chart(fig, config={"displayModeBar": False}, key="op_scatter")
+    st.caption(f"Cuadrante sombreado: oferta ≥ P{uo * 100:.0f} y visibilidad ≤ P{uv * 100:.0f} (umbrales de la "
+               "bandera OFERTA_INVISIBLE en model/indice.py; la bandera además excluye anclas).")

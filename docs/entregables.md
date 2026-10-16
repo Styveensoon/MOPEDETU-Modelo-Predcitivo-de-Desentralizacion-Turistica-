@@ -39,8 +39,8 @@ pensada para la Secretaría de Turismo del Estado (planear y priorizar) y para o
 DENUE + Censos Económicos (2014, 2019, 2024) + contexto social, accesibilidad por carretera y fuentes abiertas →
 oferta por municipio y eje → **índice de oportunidad** (`v3_dominio_osrm`) + **banderas** + **predicción de
 crecimiento** (`crecimiento_ue_eje_lgbm_v2`) + **modelo de enlaces** → **optimizador de rutas** con reglas de operación → tablero.
-Resultado vigente: 5 rutas propuestas, 21 municipios
-emergentes, 105 municipios aptos para circuito.
+Resultado vigente: 5 rutas propuestas, 19 municipios
+emergentes, 86 municipios aptos para circuito.
 
 ## 4. Inventario y documentación de fuentes
 Una fila de `dw.dim_fuente` por fuente (también en la página **Metodología y fuentes** del tablero).
@@ -104,33 +104,33 @@ lectura pública, vistas `security_invoker`) → tablero Streamlit que **solo le
 |---|---|---|---|---|---|
 | Talavera y artesanías · Tlatlauquitepec → Tenampulco (propuesta 1) | Tlatlauquitepec → Zautla → Zacapoaxtla → Jonotla → Tuzamapan de Galeana → Tenampulco | 173 | 2 · Zacapoaxtla | Sierra Nororiental | nueva |
 | Volcanes y alta montaña · San Pedro Cholula → Atzitzihuacán (propuesta 2) | San Pedro Cholula → Nealtican → Calpan → San Jerónimo Tecuanipan → Tochimilco → Atzitzihuacán | 107 | 2 · San Pedro Cholula | Valle de Atlixco y Matamoros | nueva |
-| Flores y viveros · Tlatlauquitepec → Chapulco (propuesta 3) | Tlatlauquitepec → Oriental → Los Reyes de Juárez → Cuapiaxtla de Madero → Quecholac → Chapulco | 193 | 2 · Tlatlauquitepec | Valle de Serdán | nueva |
-| Gastronomía tradicional · Tehuacán → Nicolás Bravo (propuesta 4) | Tehuacán → Zapotitlán → San Gabriel Chilac → Cañada Morelos → Esperanza → Nicolás Bravo | 174 | 2 · Tehuacán | Tehuacán y Sierra Negra | parcialmente existente |
-| Mezcal y destilados · Tehuacán → Huehuetlán el Grande (propuesta 5) | Tehuacán → Tlacotepec de Benito Juárez → Tecali de Herrera → Molcaxac → Huehuetlán el Grande | 171 | 2 · Tehuacán | Mixteca | parcialmente existente |
+| Turismo religioso y conventos · Tehuacán → Cuautinchán (propuesta 3) | Tehuacán → Chalchicomula de Sesma → Quecholac → Acatzingo → Atoyatempan → Cuautinchán | 179 | 2 · Acatzingo | Valle de Serdán | nueva |
+| Mezcal y destilados · Tehuacán → Huehuetlán el Grande (propuesta 4) | Tehuacán → Tlacotepec de Benito Juárez → Tecali de Herrera → Molcaxac → Huehuetlán el Grande | 171 | 2 · Tehuacán | Mixteca | parcialmente existente |
+| Gastronomía tradicional · Pahuatlán → Tlaxco (propuesta 5) | Pahuatlán → Honey → Tlacuilotepec → Tlaxco | 99 | 2 · Pahuatlán | Sierra Norte | nueva |
 
 Descartadas y registradas: Ecoturismo y aventura · San Andrés Cholula → Huaquechula (descartada 1).
 
 **Top 10 municipios emergentes** (sin anclas): Santa Isabel Cholula (0.793), Jonotla (0.791), Huehuetla (0.722), Tlacuilotepec (0.720), Huehuetlán el Grande (0.718), Tochimilco (0.716), Ajalpan (0.716), Nauzontla (0.715), Zapotitlán (0.714), Tepexco (0.712).
 
 **Escenarios de concentración** (`fact_escenario_concentracion`): HHI 1,306 hoy → 1,141
-tendencial → 1,098 con rutas (hipotético); top 5 51.9 % →
-48.2 %; Gini 0.817 → 0.800.
+tendencial → 1,106 con rutas (hipotético); top 5 51.9 % →
+48.4 %; Gini 0.817 → 0.801.
 
 **Validaciones** (`fact_validacion`):
 
 | Código | Validación | Resultado | Estado |
 |---|---|---|---|
 | D1 | Predicción solo dentro del dominio del modelo | 0 fuera de dominio con predicción · 467 con predicción | ✅ |
-| R1 | Rutas del modelo operables | 5/5 cumplen · tramo máx. 68 min | ✅ |
+| R1 | Rutas del modelo operables | 5/5 cumplen · tramo máx. 75 min | ✅ |
 | R2 | Paradas con qué visitar y emergentes reales (§12.1) | 0 sin punto visitable · 0 emergentes solo con BARRERA_ACCESO | ✅ |
 | V1 | Cobertura de los 217 municipios | 217/217 con semáforos · 217/217 con contexto | ✅ |
 | V2 | Coherencia de anclas | 12/12 | ✅ |
 | V3 | El DENUE detecta la actividad en los municipios de su ruta oficial | cafe 19/29 · mezcal 6/12 | ✅ |
 | V4 | El modelo de crecimiento gana a sus líneas base | CV: MAE 0.2468 vs 0.2728 / 0.2832; Spearman 0.461 · temporal: Spearman 0.336 vs 0.061 | ✅ |
-| V5 | El modelo de enlaces gana a la distancia y a la similitud | AUC 0.881 vs distancia 0.856 y similitud 0.699 | ✅ |
+| V5 | El modelo de enlaces gana a la distancia y a la similitud | AUC 0.89 vs distancia 0.856 y similitud 0.702 | ✅ |
 | V6 | Sensibilidad del índice | 95%-100% | ✅ |
-| V7 | Novedad de las rutas | 3 nuevas · 2 parcialmente existentes | ✅ |
-| V8 | Descentralización (escenario hipotético) | HHI 1,306 → 1,141 → 1,098 | ✅ |
+| V7 | Novedad de las rutas | 4 nuevas · 1 parcialmente existentes | ✅ |
+| V8 | Descentralización (escenario hipotético) | HHI 1,306 → 1,141 → 1,106 | ✅ |
 | V9 | Proxy de turismo contra DATATUR | No ejecutable: DATATUR público trae 1 destino(s) de Puebla | ⏳ |
 
 ## 10. Presentación y demostración
@@ -144,6 +144,6 @@ Recorrido de 5 pasos en la página de inicio del tablero (problema → oportunid
   Validación temporal (2014→2019 entrena, 2019→2024 prueba): Spearman 0.336 vs
   0.061. Intervalo conformal de 80 % (cobertura 80%).
   Sin predicción con < 3 unidades.
-- **Enlaces** (`enlace_municipios_lgbm_v1`): AUC 0.881 vs 0.856 (distancia) y
-  0.699 (similitud).
+- **Enlaces** (`enlace_municipios_lgbm_v1`): AUC 0.89 vs 0.856 (distancia) y
+  0.702 (similitud).
 - Uso correcto: priorizar municipios, no pronosticar cifras exactas. Limitaciones en la página Metodología y fuentes.

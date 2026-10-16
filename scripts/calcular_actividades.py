@@ -7,9 +7,10 @@ Salidas:
   dw.fact_establecimiento_actividad: la misma detección, por negocio (sql/20, plan_migracion_front A9). Los
       negocios detectados que no estaban en dw.dim_establecimiento (productores de café, mezcal o bebidas, viveros:
       SCIAN fuera de los ejes turísticos) se agregan ahí con su clave del DENUE.
+  dw.fact_lugar_circuito: puntos visitables (atractivos, experiencias, cocina tradicional) para rutas y circuitos.
 
 Uso:
-    python scripts/calcular_actividades.py ruta/denue_inegi_21_.csv [--sin-bd] [--solo-establecimientos]
+    python scripts/calcular_actividades.py ruta/denue_inegi_21_.csv [--sin-bd] [--solo-establecimientos] [--solo-lugares]
 DENUE: https://www.inegi.org.mx/contenidos/masiva/denue/denue_21_csv.zip
 """
 import csv
@@ -225,12 +226,96 @@ def cargar_establecimientos(df: pd.DataFrame):
           + ", ".join(f"{a} {n}" for a, n in det.actividad.value_counts().items()))
 
 
+
+EXPERIENCIAS = ("cafe", "mezcal", "bebidas_tradicionales", "artesanias", "flores_viveros")
+ACENTOS = str.maketrans("ÁÉÍÓÚÜÑáéíóúüñ", "AEIOUUNaeiouun")
+
+
+def _redondeo_sql(v: pd.Series) -> pd.Series:
+    """round() de PostgreSQL sobre numeric: mitades lejos de cero (Python redondea al par)."""
+    return np.sign(v) * np.floor(np.abs(v) + 0.5)
+
+
+def calcular_lugares(df: pd.DataFrame, solo: bool = False):
+    """dw.fact_lugar_circuito: puntos visitables para rutas y circuitos (especificación en sql/21_lugar_circuito.sql).
+    prioridad: 1 curado · 2 lugar OSM con actividad · 3 negocio 712/713 de bridge_scian_eje · 4 experiencia por SCIAN ·
+    5 experiencia por nombre · 6 lugar OSM sin actividad · 7 cocina tradicional (7225 con actividad gastronomía).
+    Sin negocios registrados como "SIN NOMBRE" ni sin coordenadas; duplicados (mismo nombre a ~50 m) fuera."""
+    import supabase_cliente as sb
+
+    est = sb.leer("dim_establecimiento", "dw", "establecimiento_sk,id_denue,municipio_sk", secreta=True)
+    est["id_denue"] = est.id_denue.astype(str)
+    det = pd.concat([sel.assign(actividad=act, senal=np.where(sel.por_scian, "scian", "nombre"))[["id", "actividad", "senal"]]
+                     for act, sel in detectar(df).items() if len(sel)]).drop_duplicates(["id", "actividad"])
+    br = sb.leer("bridge_scian_eje", "dw", "scian_sk", secreta=True)
+    sc = sb.leer("dim_scian", "dw", "scian_sk,codigo_scian", secreta=True)
+    sc["codigo_scian"] = sc.codigo_scian.astype(str).str.strip()
+    scian_atr = set(sc[sc.scian_sk.isin(br.scian_sk) & sc.codigo_scian.str.match(r"71[23]")].codigo_scian)
+
+    d = df.merge(est, left_on="id", right_on="id_denue")
+    d["nombre"] = d.nom_estab.fillna("").str.strip().str[:200]
+    d["lat"] = pd.to_numeric(d.latitud, errors="coerce")
+    d["lon"] = pd.to_numeric(d.longitud, errors="coerce")
+    d = d[(d.nombre != "") & ~d.nombre.str.contains("sin nombre", case=False) & d.lat.notna() & d.lon.notna()]
+    d["personal_est"] = d.per_ocu.map(PUNTO_MEDIO)
+    d["lugar_id"] = "de:" + d.establecimiento_sk.astype(str)
+    a = det.merge(d[["id", "lugar_id", "municipio_sk", "nombre", "codigo_act", "personal_est", "lat", "lon"]], on="id")
+
+    atr = d[d.codigo_act.isin(scian_atr)].copy()
+    atr["actividad"] = atr.id.map(det.groupby("id").actividad.min())
+    atr["categoria"] = np.select([atr.codigo_act.isin(["712111", "712112"]), atr.codigo_act.str.startswith("7121"),
+                                  atr.codigo_act.isin(["713113", "713114"])], ["museo", "patrimonio", "balneario"],
+                                 "recreacion")
+    atr = atr.assign(tipo_parada="atractivo", origen="denue", prioridad=3)
+    exp = a[a.actividad.isin(EXPERIENCIAS) & ~a.codigo_act.isin(scian_atr)].copy()
+    exp = exp.assign(categoria=exp.actividad, tipo_parada="experiencia", origen="denue",
+                     prioridad=np.where(exp.senal == "scian", 4, 5))
+    com = a[(a.actividad == "gastronomia") & a.codigo_act.str.startswith("7225")].copy()
+    com = com.assign(categoria="comida", tipo_parada="comida", origen="denue", prioridad=7)
+
+    lug = sb.leer("fact_atractivo_lugar", "dw", "atractivo_sk,municipio_sk,nombre,categoria,actividades,lat,lon,origen,url",
+                  secreta=True)
+    con_act = lug.actividades.map(lambda x: bool(x))
+    al = pd.DataFrame({
+        "lugar_id": "al:" + lug.atractivo_sk.astype(str), "municipio_sk": lug.municipio_sk, "nombre": lug.nombre,
+        "actividad": lug.actividades.map(lambda x: x[0] if x else None), "categoria": lug.categoria,
+        "tipo_parada": "atractivo", "origen": np.where(lug.origen == "catalogo_curado", "curado", "osm"),
+        "url": lug.url, "personal_est": np.nan, "lat": pd.to_numeric(lug.lat), "lon": pd.to_numeric(lug.lon),
+        "prioridad": np.where(lug.origen == "catalogo_curado", 1, np.where(con_act, 2, 6))})
+
+    cols = ["lugar_id", "municipio_sk", "nombre", "actividad", "categoria", "tipo_parada", "origen", "url",
+            "personal_est", "lat", "lon", "prioridad"]
+    todos = pd.concat([al[cols]] + [x.assign(url=None)[cols] for x in (atr, exp, com)], ignore_index=True)
+    # un renglón por lugar (mejor prioridad, luego actividad)
+    todos = todos.sort_values(["lugar_id", "prioridad", "actividad"], na_position="last").drop_duplicates("lugar_id")
+    # mismo nombre normalizado en la misma celda de ~50 m: queda el de mejor prioridad y más personal
+    todos["_n"] = todos.nombre.str.strip().str.translate(ACENTOS).str.lower()
+    todos["_la"] = _redondeo_sql(todos.lat / 0.0005)
+    todos["_lo"] = _redondeo_sql(todos.lon / 0.0005)
+    todos = todos.sort_values(["municipio_sk", "_n", "_la", "_lo", "prioridad", "personal_est"],
+                              ascending=[True, True, True, True, True, False], na_position="last")
+    todos = todos.drop_duplicates(["municipio_sk", "_n", "_la", "_lo"])[cols]
+    todos["lat"], todos["lon"] = todos.lat.round(6), todos.lon.round(6)
+
+    filas = [{k: (None if (isinstance(v, float) and np.isnan(v)) else
+                  int(v) if k in ("municipio_sk", "prioridad") else v) for k, v in r.items()}
+             for r in todos.to_dict("records")]
+    sb._peticion("fact_lugar_circuito?lugar_id=not.is.null", True, "dw", "DELETE")
+    sb.insertar("fact_lugar_circuito", filas, "dw")
+    print(f"✓ fact_lugar_circuito: {len(filas):,} lugares · " + ", ".join(
+        f"{t} {n}" for t, n in todos.groupby(["tipo_parada", "origen"]).size().items()))
+
+
 def main():
     if len(sys.argv) < 2:
         raise SystemExit(__doc__)
     df = leer_denue(sys.argv[1])
     if "--solo-establecimientos" in sys.argv:
         cargar_establecimientos(df)
+        calcular_lugares(df)
+        return
+    if "--solo-lugares" in sys.argv:
+        calcular_lugares(df)
         return
     municipios, buscar = cargar_municipios()
     out, tot = calcular(df, municipios, senales_catalogo(buscar))
@@ -254,6 +339,7 @@ def main():
     if "--sin-bd" not in sys.argv:
         cargar_bd(out)
         cargar_establecimientos(df)
+        calcular_lugares(df)
 
 
 if __name__ == "__main__":

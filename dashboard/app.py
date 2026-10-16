@@ -17,7 +17,8 @@ st.set_page_config(page_title="MOPEDETU · Puebla", page_icon="🗺️", layout=
 
 import estado  # noqa: E402
 import tema  # noqa: E402
-from vistas import ficha_tecnica, metodologia, panorama, presentacion, rutas  # noqa: E402
+from vistas import (alertas, circuitos, escenarios, ficha_tecnica, metodologia, oportunidades,  # noqa: E402
+                    panorama, presentacion, rutas)
 
 tema.aplicar()
 
@@ -26,17 +27,20 @@ paginas = {
                             url_path="presentacion", default=True),
     "panorama": st.Page(panorama.render, title="Panorama", icon="🏠", url_path="panorama"),
     "ficha_tecnica": st.Page(ficha_tecnica.render, title="Ficha técnica", icon="🏘️", url_path="ficha-tecnica"),
+    "mapa": st.Page(oportunidades.render, title="Mapa de oportunidades", icon="🗺️", url_path="mapa"),
     "metodologia": st.Page(metodologia.render, title="Metodología y fuentes", icon="📚", url_path="metodologia"),
     "rutas": st.Page(rutas.render, title="Rutas", icon="🧭", url_path="rutas"),
+    "circuitos": st.Page(circuitos.render, title="Circuitos", icon="🔁", url_path="circuitos"),
+    "escenarios": st.Page(escenarios.render, title="Escenarios y sensibilidad", icon="🔮", url_path="escenarios"),
+    "alertas": st.Page(alertas.render, title="Alertas", icon="🚩", url_path="alertas"),
 }
 st.session_state["paginas"] = paginas
 
-# Corte P0 (plan_migracion_front.md §0.1): solo las páginas con datos reales. Mapa de oportunidades, Circuitos,
-# Escenarios y Alertas se agregan en P1.
 nav = st.navigation({
     "Inicio": [paginas["presentacion"]],
-    "Explorar": [paginas["panorama"], paginas["ficha_tecnica"], paginas["metodologia"]],
-    "Proponer": [paginas["rutas"]],
+    "Explorar": [paginas["panorama"], paginas["ficha_tecnica"], paginas["mapa"], paginas["metodologia"]],
+    "Proponer": [paginas["rutas"], paginas["circuitos"], paginas["escenarios"]],
+    "Actuar": [paginas["alertas"]],
 })
 estado.barra_lateral()
 nav.run()

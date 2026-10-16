@@ -10,11 +10,11 @@
     "gini": 0.804
   },
   "con_rutas_hipotetico": {
-    "hhi": 1097.7,
-    "pct_top5": 48.2,
-    "gini": 0.8
+    "hhi": 1105.8,
+    "pct_top5": 48.4,
+    "gini": 0.801
   },
-  "municipios_emergentes_en_rutas": 21,
+  "municipios_emergentes_en_rutas": 19,
   "supuesto": "Escenario hipotético: los municipios emergentes de las rutas propuestas alcanzan el límite superior del intervalo de 80 % de su crecimiento predicho; el resto sigue la tendencia. No es una predicción.",
   "modelo": "crecimiento_ue_eje_lgbm_v2"
 }

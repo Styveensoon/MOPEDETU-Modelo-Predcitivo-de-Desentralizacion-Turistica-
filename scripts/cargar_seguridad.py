@@ -22,6 +22,7 @@ Cada uno en percentil estatal; el nivel de la ruta sale del percentil MEDIO de s
 Es un semáforo para el operador, no una etiqueta pública del municipio; SESNSP mide denuncias, no victimización.
 
 Uso: python scripts/cargar_seguridad.py data/raw/sesnsp/idm_puebla_2015_2025.csv
+     python scripts/cargar_seguridad.py --solo-riesgo     (recalcula el riesgo de las rutas con fact_seguridad)
 """
 import sys
 import urllib.parse
@@ -63,6 +64,9 @@ def grupo(subtipo: str) -> str:
 
 
 def main():
+    if "--solo-riesgo" in sys.argv:
+        riesgo_rutas()
+        return
     d = pd.read_csv(sys.argv[1], encoding="utf-8")
     d["incidentes"] = d[MESES].sum(axis=1)
     d["grupo_delito"] = d["Subtipo de delito"].map(grupo)
@@ -99,10 +103,16 @@ def main():
                                         incidentes=int(r.incidentes), tasa_100k=float(r.tasa_100k), fuente_sk=fuente_sk)
                                    for r in g.itertuples()], "dw")
     print(f"✓ fact_seguridad: {len(g):,} filas")
+    riesgo_rutas()
 
-    # Riesgo para el visitante por ruta (último año)
-    ultimo = g["Año"].max()
-    ult = g[g["Año"] == ultimo]
+
+def riesgo_rutas():
+    """Riesgo para el visitante de cada ruta evaluada, con el último año de dw.fact_seguridad."""
+    g = sb.leer("fact_seguridad", "dw", "municipio_sk,anio,grupo_delito,tasa_100k", secreta=True)
+    g["tasa_100k"] = g.tasa_100k.astype(float)
+    ultimo = int(g.anio.max())
+    ult = g[g.anio == ultimo]
+    mun = sb.leer("dim_municipio", "dw", "municipio_sk,nombre", secreta=True)
     pct = {k: ult[ult.grupo_delito.isin(grupos)].groupby("municipio_sk").tasa_100k.sum().rank(pct=True)
            for k, grupos in (("municipio", EN_MUNICIPIO), ("carretera", CARRETERA))}
     nombre = mun.set_index("municipio_sk").nombre

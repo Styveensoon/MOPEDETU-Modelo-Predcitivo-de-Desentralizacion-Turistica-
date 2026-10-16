@@ -106,7 +106,7 @@ Al terminar P0: commit, ensayo de la demo con el recorrido de §12.7 y, solo ent
 
 ### A1 · Visibilidad (P1)
 - En `scripts/cargar_visibilidad_wikipedia.py`: resolver el título correcto por municipio. Buscar con la API de
-  Wikipedia (`action=query&list=search` o `prop=pageprops` con el código INEGI/Wikidata), **seguir redirecciones**
+  Wikipedia (`action=query&list=search` o `rop=pageprops` con el código INEGI/Wikidata), **seguir redirecciones**
   y sumar las vistas del título canónico. Para la capital usar el artículo del municipio (no el del estado).
   Guardar el título usado en una columna `titulo_wikipedia` de `fact_visibilidad`.
 - Volver a correr `sql/14_banderas_visibilidad.sql` (o el script que crea `OFERTA_INVISIBLE`).

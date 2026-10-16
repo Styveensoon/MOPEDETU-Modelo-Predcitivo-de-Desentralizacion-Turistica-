@@ -33,6 +33,11 @@ def _icono(codigo: str) -> str:
 
 
 def render():
+    modo = st.segmented_control("Rutas", ["🧠 Rutas del modelo", "🛠️ Arma tu ruta"], default="🧠 Rutas del modelo",
+                                key="rutas_modo", label_visibility="collapsed") or "🧠 Rutas del modelo"
+    if modo == "🛠️ Arma tu ruta":
+        _armar()
+        return
     try:
         paradas, idx = bd.rutas(), bd.indice_municipio()
     except bd.SinDatos as e:
@@ -244,3 +249,150 @@ def _recorrer(prop: pd.DataFrame, nombres: dict, color: dict, trazos: dict):
     fuente = (f"Trazo por carretera guardado ({tr['fuente']})" if tr
               else "Sin trazo guardado: tramos rectos con los tiempos de la base")
     st.caption(f"{fuente}. Tiempos de flujo libre (sin tráfico); las reglas usan el tiempo de planeación.")
+
+
+# ---------------------------------------------------------------- 🛠️ Arma tu ruta (mismas reglas que el modelo)
+REGLAS_TEXTO = {
+    "pocas_paradas": "menos de {min_paradas} paradas", "muchas_paradas": "más de {max_paradas} paradas",
+    "pocos_emergentes": "menos de {min_emergentes} municipios emergentes (con bandera distinta de barrera de acceso)",
+    "sin_pernocta": "dura más de un día y ninguna parada tiene ≥ {min_hospedaje_pernocta} hospedajes",
+    "region_angelopolis": "el beneficio se queda en Angelópolis", "infra_rojo": "pasa por infraestructura en rojo",
+    "parada_sin_punto_de_visita": "alguna parada no tiene ningún punto visitable",
+    "sin_candidatos_tema": "no hay municipios con ese tema, punto visitable e infraestructura suficiente",
+}
+QUE_CAMBIAR = {
+    "pocos_emergentes": "prueba otro tema o «sin tema», o baja el mínimo de emergentes",
+    "sin_pernocta": "acorta la ruta (menos paradas) o incluye un municipio con más hospedaje",
+    "sin_candidatos_tema": "elige «sin tema» u otro tema", "pocas_paradas": "elige otro tema o sal de otro municipio",
+    "infra_rojo": "quita la parada marcada en rojo", "parada_sin_punto_de_visita": "cambia esa parada por otra",
+}
+
+
+def _texto_regla(codigo: str, p: dict) -> str:
+    if codigo.startswith("tramo>"):
+        return f"algún tramo pasa de {p['max_tramo_min']} min de planeación"
+    if codigo.startswith("total>"):
+        return f"el recorrido pasa de {p['max_total_min']} min de planeación"
+    return REGLAS_TEXTO.get(codigo, codigo).format(**p)
+
+
+def _armar():
+    import dataclasses
+
+    import reglas_rutas as rr
+
+    tema.hero("🛠️ Arma tu ruta", "Sal de cualquier municipio: el motor aplica exactamente las mismas reglas que las "
+              "rutas del modelo (tiempos de planeación, emergentes, pernocta, puntos visitables).", [])
+    try:
+        ins = bd.insumos()
+    except bd.SinDatos as e:
+        st.error(f"«Arma tu ruta» necesita conexión a la base: {e}.")
+        return
+    p = ins.parametros
+    mun = ins.mun.sort_values("nombre")
+    etiqueta = lambda k: ("⚓ " if mun.es_ancla[k] else "") + mun.nombre[k]  # noqa: E731
+    act = bd.actividades().set_index("codigo")
+    temas = ["(sin tema)"] + [t for t in rr.TEMAS if ins.presente.get(t)]
+    with st.container(border=True):
+        c = st.columns([1.3, 1.1, 1.3, 1.9, 0.9])
+        capital = mun.index[mun.nombre == "Puebla"]
+        inicio = c[0].selectbox("🚩 Salida", list(mun.index), format_func=etiqueta, key="ar_inicio",
+                                index=list(mun.index).index(capital[0]) if len(capital) else 0)
+        forma = c[1].segmented_control("Paradas", ["Automáticas", "Yo elijo"], default="Automáticas",
+                                       key="ar_forma") or "Automáticas"
+        tema_sel = c[2].selectbox("Tema", temas, key="ar_tema",
+                                  format_func=lambda t: t if t.startswith("(") else
+                                  f"{act.icono.get(t, '')} {act.nombre.get(t, t)}")
+        destinos = c[3].multiselect("Municipios a visitar (el orden se optimiza)",
+                                    [k for k in mun.index if k != inicio], format_func=etiqueta,
+                                    max_selections=p["max_paradas_usuario"], key="ar_destinos",
+                                    disabled=forma != "Yo elijo", placeholder="Escribe para buscar…")
+        min_em = c[4].number_input("Mín. emergentes", 0, 5, int(p["min_emergentes"]), key="ar_min_em")
+    tema_cod = None if tema_sel.startswith("(") else tema_sel
+    if forma == "Yo elijo" and not destinos:
+        st.info("Elige al menos un municipio a visitar. Puedes escribir su nombre para buscarlo.")
+        return
+    if forma == "Yo elijo" and len(destinos) + 1 > p["max_paradas"]:
+        st.warning(f"Elegiste {len(destinos) + 1} paradas: las rutas del modelo usan máximo {p['max_paradas']}.")
+    ins_u = dataclasses.replace(ins, parametros={**p, "min_emergentes": int(min_em),
+                                                "max_paradas": max(p["max_paradas"], len(destinos) + 1)})
+    e = rr.construir_ruta(ins_u, int(inicio), tema_cod,
+                          [int(d) for d in destinos] if forma == "Yo elijo" else None, exigir_ancla=False)
+    # Región beneficiada en Angelópolis: aviso, no bloquea (§4.2)
+    bloquean = [i for i in e["incumplimientos"] if i != "region_angelopolis"]
+
+    if e.get("aviso_inicio"):
+        st.caption(f"ℹ️ {mun.nombre[inicio]} no es un destino ancla: las rutas del modelo salen de un ancla.")
+    if len(e["ruta"]) < 2:
+        st.error("No hay ruta: " + "; ".join(_texto_regla(i, ins_u.parametros) for i in e["incumplimientos"]) + ".")
+        consejos = [QUE_CAMBIAR[i] for i in e["incumplimientos"] if i in QUE_CAMBIAR]
+        if consejos:
+            st.info("Qué cambiar: " + "; ".join(dict.fromkeys(consejos)) + ".")
+        return
+
+    ruta = e["ruta"]
+    pu = ins_u.parametros
+    reglas = [
+        (f"{pu['min_paradas']}-{pu['max_paradas']} paradas", not ({"pocas_paradas", "muchas_paradas"} & set(bloquean))),
+        (f"tramo ≤ {pu['max_tramo_min']} min", not any(i.startswith("tramo>") for i in bloquean)),
+        (f"recorrido ≤ {pu['max_total_min']} min", not any(i.startswith("total>") for i in bloquean)),
+        (f"≥ {int(min_em)} emergentes", "pocos_emergentes" not in bloquean),
+        (f"pernocta con ≥ {pu['min_hospedaje_pernocta']} hospedajes", "sin_pernocta" not in bloquean),
+        ("sin infraestructura en rojo", "infra_rojo" not in bloquean),
+        ("todas las paradas con algo que visitar", "parada_sin_punto_de_visita" not in bloquean),
+    ]
+    k = st.columns(5)
+    k[0].metric("Municipios", len(ruta), f"{len(e['emergentes'])} emergentes", delta_color="off")
+    k[1].metric("Carretera", f"{e['minutos'] / 60:.1f} h", f"{e['minutos_plan'] / 60:.1f} h de planeación",
+                delta_color="off")
+    k[2].metric("Duración", f"{e['dias']} día(s)", f"{e['horas']:.0f} h con estancias", delta_color="off")
+    k[3].metric("Pernocta", mun.nombre[e["pernocta"]] if e["pernocta"] else "—")
+    k[4].metric("Región beneficiada", e["region"])
+    st.markdown(" · ".join(f"{'✅' if ok else '⚠️'} {t}" for t, ok in reglas)
+                + ("  \n⚠️ Aviso: el beneficio se queda en Angelópolis."
+                   if "region_angelopolis" in e["incumplimientos"] else ""))
+    if bloquean:
+        consejos = [QUE_CAMBIAR[i] for i in bloquean if i in QUE_CAMBIAR]
+        st.warning("Esta ruta no cumple: " + "; ".join(_texto_regla(i, pu) for i in bloquean) + "."
+                   + (f" Qué cambiar: {'; '.join(dict.fromkeys(consejos))}." if consejos else ""))
+
+    filas = [dict(orden=i + 1, municipio_sk=x, municipio=mun.nombre[x], region=mun.region[x],
+                  es_ancla=bool(mun.es_ancla[x]), es_emergente=x in e["emergentes"], es_pernocta=x == e["pernocta"],
+                  estancia_sugerida_h=e["estancias"][i], lat=float(mun.cabecera_lat[x]),
+                  lon=float(mun.cabecera_lon[x])) for i, x in enumerate(ruta)]
+    puntos = tuple((f["lat"], f["lon"]) for f in filas)
+    mins = [ins.tiempo[(a, b)] for a, b in zip(ruta, ruta[1:])]
+    r = navegacion.ruta(puntos, "auto") or navegacion.ruta_recta(puntos, mins)  # respaldo: tiempos de la base
+    traslados = [0.0] + [t["min"] for t in r["tramos"]]
+    g = pd.DataFrame(filas)
+    ag = agenda(list(g.itertuples()), traslados)
+    hora = lambda m: f"{int(m // 60):02d}:{int(m % 60):02d}"  # noqa: E731
+    izq, der = st.columns([1.7, 1])
+    with izq:
+        paradas = [dict(lon=f["lon"], lat=f["lat"], nombre=f["municipio"],
+                        icono="🛏️" if f["es_pernocta"] else ("⚓" if f["es_ancla"] else "📍"),
+                        actividad="Destino ancla" if f["es_ancla"] else ("Emergente" if f["es_emergente"] else "Parada"),
+                        detalle=f"{f['region']} · estancia {f['estancia_sugerida_h']:.0f} h",
+                        color=tema.hex_rgb(tema.COBALTO_OSC if f["es_ancla"] else tema.GUINDA), orden=i,
+                        hora=f"día {ag[i][0]}, {hora(ag[i][1])}") for i, f in enumerate(filas) if i]
+        limites = [ft["geometry"] for ft in bd.geo()["features"]
+                   if ft["properties"]["cve_geo"] in set(mun.cve_geo[ruta])]
+        navegacion.mapa(dict(lon=filas[0]["lon"], lat=filas[0]["lat"], nombre=filas[0]["municipio"],
+                             detalle=f"Salida: día 1, 09:00 · {filas[0]['region']}"), paradas, r, limites, "auto",
+                        alto=600)
+    with der:
+        itinerario = pd.DataFrame({
+            "Día": [a[0] for a in ag], "Llegada": [hora(a[1]) for a in ag],
+            "Municipio": [("⚓ " if f["es_ancla"] else "") + f["municipio"] + (" 🛏️" if f["es_pernocta"] else "")
+                          + (" 🚩" if f["es_emergente"] else "") for f in filas],
+            "Traslado": ["salida"] + [f"{t['min']:.0f} min · {t['km']:.0f} km" for t in r["tramos"]]})
+        st.dataframe(itinerario, hide_index=True, width="stretch")
+        st.download_button("⬇️ Itinerario (CSV)", itinerario.to_csv(index=False).encode("utf-8-sig"),
+                           "mi_ruta_mopedetu.csv", "text/csv", width="stretch")
+        st.link_button("🗺️ Abrir en Google Maps", navegacion.enlace_google(puntos, "auto"), width="stretch")
+        for f in filas[1:]:
+            st.markdown(f"**{f['municipio']}**")
+            _puntos_visitables(int(f["municipio_sk"]))
+    st.caption(("Trazo y tiempos por carretera en vivo (OSRM)" if r["real"]
+                else "Sin servicio de rutas en vivo: tramos rectos con los tiempos por carretera de la base")
+               + ". Las reglas se evalúan con el tiempo de planeación.")

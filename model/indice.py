@@ -31,6 +31,8 @@ import pandas as pd
 import base
 from base import EJES, pct
 
+# Umbrales de OFERTA_INVISIBLE (percentil de oferta del eje, percentil de visibilidad): los usa también el tablero
+UMBRAL_INVISIBLE_OFERTA, UMBRAL_INVISIBLE_VISIBILIDAD = 0.6, 0.35
 FLAGS_NUEVOS = [dict(codigo="OFERTA_SIN_REGISTRO", prioridad=1,
                      descripcion="Actividad reconocida en una ruta oficial sin registro en el DENUE (oferta informal o "
                                  "no registrada)"),
@@ -118,7 +120,8 @@ def banderas(b: base.Base, c: pd.DataFrame, exceso: pd.Series | None = None,
                                          + ", ".join(inv.nombre) if len(inv) else "")
         if visibilidad is not None:
             pv = visibilidad.get(mk, np.nan)
-            reglas["OFERTA_INVISIBLE"] = (r.score_oferta >= 0.6 and pv <= 0.35 and not x.es_ancla,
+            reglas["OFERTA_INVISIBLE"] = (r.score_oferta >= UMBRAL_INVISIBLE_OFERTA and pv <= UMBRAL_INVISIBLE_VISIBILIDAD
+                                          and not x.es_ancla,
                                           f"Oferta de {eje} en percentil {r.score_oferta:.0%} pero visibilidad en "
                                           f"percentil {pv:.0%} (vistas de su artículo en Wikipedia)")
         algun = any(v[0] for v in reglas.values())
