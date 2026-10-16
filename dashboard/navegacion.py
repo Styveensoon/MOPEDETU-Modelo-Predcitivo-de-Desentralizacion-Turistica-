@@ -93,6 +93,16 @@ def ruta(puntos: tuple[tuple[float, float], ...], perfil: str = "auto") -> dict 
     return None
 
 
+def ruta_guardada(geom: dict, puntos, kms: list[float], minutos: list[float]) -> dict:
+    """Ruta a partir del trazo por carretera guardado por el pipeline (fact_ruta_evaluacion.geom_trazo) y los
+    tiempos por tramo de la base: no llama a ningún servicio en vivo. Sin indicaciones paso a paso."""
+    total = max(sum(kms), 1e-6)
+    cortes = [sum(kms[:i + 1]) / total for i in range(len(kms))]
+    return dict(coords=geom["coordinates"], km=float(sum(kms)), min=float(sum(minutos)),
+                tramos=[dict(km=float(k), min=float(m)) for k, m in zip(kms, minutos)], cortes=cortes, pasos=[],
+                enganches=[[lon, lat] for lat, lon in puntos], real=True)
+
+
 def ruta_recta(puntos, minutos) -> dict:
     """Respaldo sin servicio: tramos rectos con los tiempos estimados por el motor."""
     kms = [km_entre(a, b) for a, b in zip(puntos, puntos[1:])]

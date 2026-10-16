@@ -1,11 +1,6 @@
-"""Lectura de la ficha técnica municipal desde Supabase (dw.v_ficha_municipio, publishable key)."""
+"""Etiquetas de lectura de la ficha técnica (texto, no datos). Los datos salen de `bd.py`."""
 
 from __future__ import annotations
-
-import pandas as pd
-import streamlit as st
-
-import supabase_cliente
 
 DIMENSIONES = {
     "turismo_actual": ("🧳", "Turismo actual"),
@@ -23,50 +18,16 @@ LECTURA = {
                         "gris": "Sin datos"},
     "oferta": {"verde": "Especializada", "amarillo": "Diversa, sin especialización", "rojo": "Mínima",
                "gris": "Sin oferta"},
-    "potencial": {"verde": "Crece", "amarillo": "Incierto", "rojo": "Estancado", "gris": "Sin modelo aún"},
+    "potencial": {"verde": "Crece", "amarillo": "Incierto", "rojo": "Estancado",
+                  "gris": "Sin predicción (fuera del dominio del modelo)"},
     "social": {"verde": "Baja", "amarillo": "Media", "rojo": "Alta: prioridad de impacto", "gris": "Sin dato"},
 }
+# Nombres legibles de las banderas de dw.dim_tipo_flag (la descripción completa se lee de la base)
+BANDERA = {"OFERTA_EMERGENTE": "Oferta emergente", "ACCESIBLE_NO_EXPLOTADO": "Accesible no explotado",
+           "BARRERA_ACCESO": "Barrera de acceso", "OFERTA_INVISIBLE": "Oferta invisible",
+           "OFERTA_SIN_REGISTRO": "Oferta sin registro", "IMPACTO_SOCIAL": "Impacto social"}
 MESES = ["E", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"]
 MESES_LARGO = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"]
-
-
-@st.cache_data(ttl=600, show_spinner="Leyendo la ficha técnica de Supabase…")
-def cargar() -> pd.DataFrame | None:
-    """Una fila por municipio. Devuelve None si no hay conexión configurada o la vista no responde."""
-    if not supabase_cliente.configurado():
-        return None
-    try:
-        df = supabase_cliente.leer("v_ficha_municipio", "dw")
-    except Exception:
-        return None
-    df["cve_geo"] = df.cve_geo.str.strip()
-    return df
-
-
-@st.cache_data(ttl=600, show_spinner="Leyendo rutas de Supabase…")
-def rutas() -> pd.DataFrame | None:
-    """Una fila por parada (dw.v_ruta_parada): rutas oficiales y propuestas por el modelo."""
-    if not supabase_cliente.configurado():
-        return None
-    try:
-        df = supabase_cliente.leer("v_ruta_parada", "dw")
-    except Exception:
-        return None
-    df["cve_geo"] = df.cve_geo.str.strip()
-    return df.sort_values(["ruta_sk", "orden_parada"])
-
-
-@st.cache_data(ttl=600, show_spinner=False)
-def indice() -> pd.DataFrame | None:
-    """Índice de oportunidad vigente por municipio (dw.v_indice_municipio)."""
-    if not supabase_cliente.configurado():
-        return None
-    try:
-        df = supabase_cliente.leer("v_indice_municipio", "dw")
-    except Exception:
-        return None
-    df["cve_geo"] = df.cve_geo.str.strip()
-    return df
 
 
 def nivel(fila, dimension: str) -> str:

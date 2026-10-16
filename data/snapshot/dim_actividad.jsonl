@@ -1,0 +1,14 @@
+{"actividad_sk":2,"codigo":"mezcal","nombre":"Mezcal y destilados","icono":"🥃","eje_sk":3}
+{"actividad_sk":10,"codigo":"volcanes","nombre":"Volcanes y alta montaña","icono":"🌋","eje_sk":3}
+{"actividad_sk":11,"codigo":"balnearios","nombre":"Balnearios y aguas termales","icono":"♨️","eje_sk":3}
+{"actividad_sk":12,"codigo":"flores_viveros","nombre":"Flores y viveros","icono":"🌸","eje_sk":4}
+{"actividad_sk":13,"codigo":"comunitario","nombre":"Turismo comunitario","icono":"🤝","eje_sk":3}
+{"actividad_sk":14,"codigo":"operadores","nombre":"Agencias y operadores turísticos","icono":"🧭","eje_sk":3}
+{"actividad_sk":1,"codigo":"cafe","nombre":"Café","icono":"☕","eje_sk":3}
+{"actividad_sk":3,"codigo":"bebidas_tradicionales","nombre":"Vinos, licores y bebidas tradicionales","icono":"🍷","eje_sk":2}
+{"actividad_sk":4,"codigo":"artesanias","nombre":"Talavera y artesanías","icono":"🏺","eje_sk":4}
+{"actividad_sk":5,"codigo":"gastronomia","nombre":"Gastronomía tradicional","icono":"🍲","eje_sk":2}
+{"actividad_sk":6,"codigo":"museos","nombre":"Museos y cultura","icono":"🏛️","eje_sk":3}
+{"actividad_sk":7,"codigo":"arqueologia","nombre":"Zonas arqueológicas","icono":"🗿","eje_sk":3}
+{"actividad_sk":8,"codigo":"religioso","nombre":"Turismo religioso y conventos","icono":"⛪","eje_sk":3}
+{"actividad_sk":9,"codigo":"ecoturismo","nombre":"Ecoturismo y aventura","icono":"🌲","eje_sk":3}

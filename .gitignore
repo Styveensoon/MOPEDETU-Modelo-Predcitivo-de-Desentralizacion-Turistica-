@@ -27,3 +27,6 @@ Thumbs.db
 
 # Credenciales locales
 .credenciales_roles.txt
+
+# Respaldos locales de la base (scripts/respaldo_local.py)
+data/respaldo/

@@ -1,115 +1,117 @@
-import numpy as np
+"""🏠 Panorama: la concentración del turismo, dónde está la oportunidad y qué proponen las rutas (datos de dw)."""
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 
-import estado
+import bd
+import ficha_bd as fb
 import mapas
-import motor
+import metricas
 import tema
+
+ETIQUETA_EJE = {0: "Los 4 ejes", 1: "Hospedaje", 2: "Alimentos", 3: "Turismo y cultura", 4: "Comercio turístico"}
 
 
 def render():
-    d = estado.datos()
-    ctx = estado.contexto()
-    pred, mp = estado.prediccion()
-    rutas = estado.rutas() if "Rutas" in ctx.predecir else []
+    try:
+        vig, idx, conc, esc = bd.vigente(), bd.indice_municipio(), bd.concentracion(), bd.escenarios()
+        rutas, ban, apt, oferta = bd.rutas(), bd.banderas(), bd.aptitud_circuitos(), bd.oferta()
+    except bd.SinDatos as e:
+        st.error(f"No se pudieron leer los datos: {e}")
+        return
+    prop = rutas[rutas.origen == "propuesta_modelo"]
+    mun = bd.municipios().set_index("municipio_sk")
 
     tema.hero("MOPEDETU · Descentralización turística de Puebla",
-              "¿Dónde está el turismo que nadie está viendo? Oportunidades, rutas y circuitos para los 217 municipios.",
-              estado.chips())
+              "¿Dónde se concentra hoy el turismo, dónde está la oportunidad y qué rutas la aprovechan? "
+              "Todo con datos reales de los 217 municipios.",
+              [f"Índice {vig['version_indice']}", f"Modelo {vig['modelo']}", "DENUE 05/2026", "Censos Económicos 2014-2024"])
 
-    po_rutas = motor.con_efecto_rutas(mp, rutas)
-    hhi_hoy, hhi_proy = motor.hhi(mp.po_actual) * 1e4, motor.hhi(po_rutas) * 1e4
-    crec = (mp.po_proyectado.sum() / mp.po_actual.sum() - 1) * 100
-
+    total = conc.set_index("eje_sk")
     k = st.columns(5)
-    k[0].metric("Municipios analizados", f"{len(mp)}", f"{mp.num_actividades.fillna(0).gt(0).sum()} con oferta turística",
-                delta_color="off")
-    k[1].metric("🚩 Oferta invisible", int(pred[pred.OFERTA_INVISIBLE].cve_geo.nunique()),
-                "municipios con flag", delta_color="off")
-    k[2].metric("🧭 Rutas propuestas", len(rutas),
-                f"{len({p['cve_geo'] for r in rutas for p in r.paradas if not p['es_ancla']})} municipios emergentes",
-                delta_color="off")
-    k[3].metric("Concentración (HHI)", f"{hhi_hoy:,.0f}", f"{hhi_proy - hhi_hoy:,.0f} con rutas", delta_color="inverse",
-                help="Índice Herfindahl-Hirschman del empleo turístico entre municipios (0-10,000). Menor = más descentralizado.")
-    k[4].metric(f"Empleo turístico a {ctx.supuestos.horizonte} años", f"{mp.po_proyectado.sum():,.0f}", f"{crec:+.1f} %")
+    con_bandera = ban[ban.codigo != "BARRERA_ACCESO"].municipio_sk.nunique()
+    k[0].metric("🚩 Municipios con oportunidad", con_bandera, "con alguna bandera (sin contar barrera)",
+                delta_color="off", help="Por tipo: " + " · ".join(
+                    f"{fb.BANDERA.get(c, c)} {n}" for c, n in ban.groupby("codigo").municipio_sk.nunique().items()))
+    k[1].metric("🧭 Rutas propuestas", prop.ruta_sk.nunique(),
+                f"{prop[prop.es_emergente].municipio_sk.nunique()} municipios emergentes", delta_color="off")
+    k[2].metric("Top 5 concentra hoy", f"{total.pct_top5[0]:.1f} %", f"HHI {total.hhi[0]:,.0f}", delta_color="off",
+                help="Personal turístico estimado (4 ejes) en los 5 municipios con más oferta.")
+    k[3].metric("Con rutas (hipotético)", f"{esc.pct_top5['con_rutas_hipotetico']:.1f} %",
+                f"{esc.pct_top5['con_rutas_hipotetico'] - esc.pct_top5['hoy']:+.1f} pp", delta_color="inverse",
+                help=esc.supuesto["con_rutas_hipotetico"])
+    k[4].metric("🔁 Aptos para circuito", int(apt.apto.sum()), "≥ 3 lugares ubicados", delta_color="off")
+
+    st.markdown("#### ⚖️ La cifra del problema: el turismo se concentra más que la gente")
+    barras = pd.DataFrame([{"Qué": "Población", "Top 5 (%)": float(total.pct_top5_poblacion.iloc[0]),
+                            "HHI": float(total.hhi_poblacion.iloc[0])}] +
+                          [{"Qué": ETIQUETA_EJE[e], "Top 5 (%)": float(r.pct_top5), "HHI": float(r.hhi)}
+                           for e, r in total.iterrows()])
+    fig = px.bar(barras, x="Top 5 (%)", y="Qué", orientation="h", text="Top 5 (%)", hover_data=["HHI"],
+                 color="Qué", color_discrete_sequence=["#8C9BB0", tema.COBALTO, "#2f5fb3", "#5C8FD6", tema.GUINDA,
+                                                       tema.AMARILLO])
+    fig.update_traces(texttemplate="%{text:.1f} %", textposition="outside")
+    fig.update_layout(height=280, showlegend=False, margin=dict(l=0, r=30, t=10, b=0), yaxis_title=None,
+                      xaxis=dict(range=[0, 100]))
+    st.plotly_chart(fig, config={"displayModeBar": False}, key="pan_problema")
+    st.caption(f"Participación de los 5 municipios con más personal ocupado (DENUE 05/2026) contra la de los 5 más "
+               f"poblados (Censo 2020: {float(total.pct_top5_poblacion.iloc[0]):.1f} %). Fuente: dw.v_concentracion_eje.")
 
     izq, der = st.columns([1.65, 1])
     with izq:
         st.markdown("#### 🗺️ Índice de oportunidad turística")
-        tt = mp.set_index("cve_geo").apply(
-            lambda r: f"<b>{r.nombre}</b><br/>{r.region}<br/>Índice: <b>{r.indice_oportunidad:.2f}</b><br/>"
-                      f"Líder: {r.icono_lider} {r.actividad_lider}<br/>Flags: {r.num_flags}"
-                      + ("<br/>⚓ Destino consolidado" if r.es_ancla else ""), axis=1)
-        fuera = set(mp.cve_geo) - set(estado.filtrar_region(mp).cve_geo)
-        m = mapas.Mapa(d.geo, alto=600, fondo=mapas.FONDO_ESTADO).municipios(mp, "indice_oportunidad", tt, cuantiles=True, atenuar=fuera)
-        anclas = mp[mp.es_ancla].copy()
-        anclas["tt"] = "<b>⚓ " + anclas.nombre + "</b><br>Destino consolidado"
-        for t in (_arcos(rutas).to_dict("records") if rutas else []):
-            m.trayecto([t["lon_a"], t["lon_b"]], [t["lat_a"], t["lat_b"]], tema.AMARILLO, t["ancho"], t["tt"])
+        tt = idx.set_index("cve_geo").apply(
+            lambda r: f"<b>{r.nombre}</b><br/>{r.region}<br/>Índice: <b>{r.indice_oportunidad:.3f}</b> "
+                      f"(#{r.ranking_estatal})<br/>Eje líder: {str(r.eje_lider).replace('_', ' ')}"
+                      + ("<br/>⚓ Destino ancla" if r.es_ancla else ""), axis=1)
+        m = mapas.Mapa(bd.geo(), alto=600, fondo=bd.fondo_mapa()).municipios(idx, "indice_oportunidad", tt,
+                                                                              cuantiles=True)
+        for sk, tr in bd.trazos().items():
+            if sk in set(prop.ruta_sk):
+                lon, lat = zip(*tr["geom"]["coordinates"])
+                m.trayecto(lon, lat, tema.AMARILLO, 3.5, f"<b>{prop[prop.ruta_sk == sk].ruta.iat[0]}</b>")
+        anclas = idx[idx.es_ancla].merge(mun[["cabecera_lat", "cabecera_lon"]], left_on="municipio_sk", right_index=True)
+        anclas = anclas.assign(lat=anclas.cabecera_lat.astype(float), lon=anclas.cabecera_lon.astype(float),
+                               tt="<b>⚓ " + anclas.nombre + "</b><br>Destino ancla")
         m.puntos(anclas, tema.COBALTO_OSC, 11, "tt")
-        emergentes = estado.filtrar_region(mp[~mp.es_ancla]).nlargest(5, "indice_oportunidad")
-        m.nombres(anclas, tamano=11).nombres(emergentes, tamano=10, color=tema.GUINDA)
+        top = idx[~idx.es_ancla].nsmallest(10, "ranking_estatal").merge(
+            mun[["cabecera_lat", "cabecera_lon"]], left_on="municipio_sk", right_index=True)
+        top = top.assign(lat=top.cabecera_lat.astype(float), lon=top.cabecera_lon.astype(float))
+        m.nombres(anclas, tamano=11).nombres(top.head(5), tamano=10, color=tema.GUINDA)
         mapas.mostrar(m, "pan_mapa")
-        mapas.leyenda("Índice de oportunidad (percentil estatal) · ⚓ anclas · nombres guinda = top emergentes",
-                      "bajo", "alto")
-
+        mapas.leyenda("Índice de oportunidad (percentil estatal) · ⚓ anclas · amarillo = rutas del modelo · "
+                      "guinda = top 5 emergentes", "bajo", "alto")
     with der:
-        st.markdown("#### 🌱 Top municipios emergentes")
-        top = estado.filtrar_region(mp[~mp.es_ancla]).nlargest(10, "indice_oportunidad")
-        fig = px.bar(top.iloc[::-1], x="indice_oportunidad", y="nombre", orientation="h",
-                     color="indice_oportunidad", color_continuous_scale=tema.PLOTLY_SEQ[1:],
-                     hover_data={"actividad_lider": True, "region": True},
-                     text=top.iloc[::-1].icono_lider)
-        fig.update_layout(height=330, margin=dict(l=0, r=0, t=0, b=0), coloraxis_showscale=False,
-                          xaxis_title=None, yaxis_title=None)
-        fig.update_traces(textposition="inside")
-        st.plotly_chart(fig)
+        st.markdown("#### 🌱 Top 10 municipios emergentes")
+        st.dataframe(pd.DataFrame({"#": top.ranking_estatal, "Municipio": top.nombre, "Región": top.region,
+                                   "Índice": top.indice_oportunidad.astype(float),
+                                   "Eje líder": top.eje_lider.str.replace("_", " ")}),
+                     hide_index=True, width="stretch",
+                     column_config={"Índice": st.column_config.ProgressColumn(min_value=0, max_value=1, format="%.3f")})
+        st.caption("Sin contar las 12 anclas. Ranking estatal del índice vigente (dw.v_indice_municipio).")
 
-        st.markdown("#### ⚖️ ¿Qué tan concentrado está el turismo?")
-        x0, y0 = motor.lorenz(mp.po_actual)
-        x1, y1 = motor.lorenz(po_rutas)
-        f2 = go.Figure()
-        f2.add_trace(go.Scatter(x=x0, y=x0, line=dict(color="#999", dash="dot"), name="Igualdad"))
-        f2.add_trace(go.Scatter(x=x0, y=y0, line=dict(color=tema.GUINDA, width=3), name=f"Hoy (Gini {motor.gini(mp.po_actual):.2f})"))
-        f2.add_trace(go.Scatter(x=x1, y=y1, line=dict(color=tema.COBALTO, width=3),
-                                name=f"Con rutas (Gini {motor.gini(po_rutas):.2f})", fill="tonexty",
-                                fillcolor="rgba(27,63,139,.12)"))
-        f2.update_layout(height=230, margin=dict(l=0, r=0, t=0, b=0), legend=dict(orientation="h", y=-0.25),
-                         xaxis_title="% acumulado de municipios", yaxis_title="% del empleo")
-        st.plotly_chart(f2)
+        st.markdown("#### 📉 Curva de Lorenz del empleo turístico")
+        hoy = oferta.groupby("municipio_sk").personal_est.sum()
+        x, y = metricas.lorenz(hoy)
+        fig = go.Figure([go.Scatter(x=[0, 1], y=[0, 1], mode="lines", line=dict(dash="dot", color="#8C9BB0"),
+                                    name="Igualdad"),
+                         go.Scatter(x=x, y=y, mode="lines", line=dict(color=tema.GUINDA, width=3), name="Hoy")])
+        fig.update_layout(height=260, margin=dict(l=0, r=0, t=10, b=0), legend=dict(orientation="h", y=-0.2),
+                          xaxis_title="% de municipios", yaxis_title="% del empleo")
+        st.plotly_chart(fig, config={"displayModeBar": False}, key="pan_lorenz")
+        st.caption(f"Gini hoy **{esc.gini['hoy']:.3f}** → tendencial {esc.gini['tendencial']:.3f} → con rutas "
+                   f"{esc.gini['con_rutas_hipotetico']:.3f} (hipotético: {esc.supuesto['con_rutas_hipotetico']})")
 
-    a, b = st.columns([1, 1])
-    with a:
-        st.markdown("#### 🧩 Oportunidad por región y actividad")
-        tm = pred.groupby(["region", "actividad"]).indice_oportunidad.mean().reset_index()
-        tm["actividad"] = tm.actividad.map(d.actividades.set_index("clave").nombre)
-        tm["peso"] = pred.groupby(["region", "actividad"]).personal_ocupado.sum().to_numpy()
-        fig = px.treemap(tm, path=["region", "actividad"], values="peso", color="indice_oportunidad",
-                         color_continuous_scale=tema.PLOTLY_SEQ)
-        fig.update_layout(height=360, margin=dict(l=0, r=0, t=0, b=0))
-        st.plotly_chart(fig)
-    with b:
-        st.markdown("#### 📈 Empleo turístico: hoy vs. proyectado por región")
-        reg = mp.groupby("region")[["po_actual", "po_proyectado"]].sum().reset_index()
-        reg["con rutas"] = mp.assign(r=mp.cve_geo.map(po_rutas)).groupby("region").r.sum().to_numpy()
-        reg = reg.rename(columns={"po_actual": "Hoy", "po_proyectado": "Proyectado"})
-        largo = reg.melt("region", var_name="Serie", value_name="Personal ocupado")
-        fig = px.bar(largo, x="Personal ocupado", y="region", color="Serie", barmode="group", orientation="h",
-                     color_discrete_sequence=["#B0BEC5", tema.AMARILLO, tema.COBALTO], log_x=True)
-        fig.update_layout(height=360, margin=dict(l=0, r=0, t=0, b=0), yaxis_title=None,
-                          legend=dict(orientation="h", y=-0.15))
-        st.plotly_chart(fig)
-
-
-def _arcos(rutas) -> pd.DataFrame:
-    filas = []
-    for r in rutas:
-        for a, b in zip(r.paradas, r.paradas[1:]):
-            filas.append(dict(lon_a=a["lon"], lat_a=a["lat"], lon_b=b["lon"], lat_b=b["lat"],
-                              color_a=[14, 42, 92, 230], color_b=[232, 177, 13, 240],
-                              ancho=2 + 4 * r.score_norm,
-                              tt=f"<b>{r.nombre}</b><br>{a['nombre']} → {b['nombre']}<br>{b['min_desde_anterior']:.0f} min"))
-    return pd.DataFrame(filas)
+    st.markdown("#### 🧩 Empleo turístico por región y eje")
+    ejes = bd.ejes().set_index("eje_sk").nombre
+    t = oferta.merge(mun[["region"]], left_on="municipio_sk", right_index=True)
+    t = t.groupby(["region", "eje_sk"], as_index=False).personal_est.sum()
+    t["eje"] = t.eje_sk.map(ejes)
+    t = t.merge(idx.groupby("region", as_index=False).indice_oportunidad.mean().rename(
+        columns={"indice_oportunidad": "indice_medio"}), on="region")
+    fig = px.treemap(t, path=["region", "eje"], values="personal_est", color="indice_medio",
+                     color_continuous_scale=tema.PLOTLY_SEQ, hover_data={"personal_est": ":,.0f"})
+    fig.update_layout(height=420, margin=dict(l=0, r=0, t=10, b=0), coloraxis_colorbar=dict(title="Índice medio"))
+    st.plotly_chart(fig, config={"displayModeBar": False}, key="pan_treemap")
+    st.caption("Tamaño = personal ocupado estimado (DENUE 05/2026); color = índice de oportunidad medio de la región.")

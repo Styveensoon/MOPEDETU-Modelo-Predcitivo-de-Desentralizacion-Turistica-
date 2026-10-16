@@ -1,11 +1,16 @@
 """Visibilidad de los municipios: vistas de su artículo en Wikipedia en español (F6d del plan de afinación).
 
-1. Wikidata: artículo de eswiki de cada municipio por su clave INEGI municipal (propiedad P3801).
-2. API de vistas de Wikimedia (per-article, usuarios humanos, todos los accesos), mensual, últimos 12 meses completos.
-3. dw.fact_visibilidad: una fila por municipio con la suma del periodo (actividad_sk NULL = municipio completo).
+1. Wikidata: dos artículos de eswiki por municipio: el del municipio (clave INEGI municipal, propiedad P3801) y el
+   de su localidad cabecera (clave de localidad INEGI terminada en 0001, propiedad P1976). La gente lee sobre todo el
+   de la ciudad ("Atlixco", "Cholula de Rivadavia", "Puebla de Zaragoza"), no el de "Municipio de X"; contar solo el
+   del municipio dejaba a la capital debajo de Tecamachalco (plan_migracion_front.md A1).
+2. Cada título se resuelve a su forma canónica siguiendo redirecciones (API de MediaWiki) y se suman las vistas de
+   la API de Wikimedia (per-article, usuarios humanos, todos los accesos), mensual, últimos 12 meses completos.
+3. dw.fact_visibilidad: una fila por municipio con la suma del periodo (actividad_sk NULL = municipio completo) y
+   los títulos usados en titulo_wikipedia.
 
 Es un proxy gratuito y abierto del interés por el municipio, no de visitantes: cuenta lectores en español de
-cualquier lugar y solo el título exacto (no suma redirecciones).
+cualquier lugar.
 
 Uso: python scripts/cargar_visibilidad_wikipedia.py [--fin AAAA-MM]   (por omisión, el último mes completo)
 """
@@ -28,14 +33,16 @@ import supabase_cliente as sb  # noqa: E402
 UA = {"User-Agent": "MOPEDETU/1.0 (proyecto academico UTP; https://github.com/gemo98)"}
 SPARQL = ('SELECT ?code ?art WHERE { ?item wdt:P3801 ?code . FILTER(STRSTARTS(?code, "21") && STRLEN(?code)=5) '
           '?art schema:about ?item ; schema:isPartOf <https://es.wikipedia.org/> }')
+SPARQL_CAB = ('SELECT ?code ?art WHERE { ?item wdt:P1976 ?code . FILTER(STRSTARTS(?code, "21") && STRENDS(?code, "0001") '
+              '&& STRLEN(?code)=9) ?art schema:about ?item ; schema:isPartOf <https://es.wikipedia.org/> }')
 VISTAS = ("https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/es.wikipedia/all-access/user/"
           "{titulo}/monthly/{ini}/{fin}")
 FUENTE = dict(nombre="Vistas de página de Wikipedia en español (Wikimedia)", institucion="Fundación Wikimedia",
               tipo="API abierta", url="https://wikimedia.org/api/rest_v1/",
               licencia_terminos="Datos de vistas en dominio público (CC0); artículos enlazados por Wikidata (CC0)",
-              cobertura="217 municipios de Puebla (artículo de eswiki enlazado por la clave INEGI P3801)",
+              cobertura="217 municipios de Puebla: artículo del municipio (P3801) + artículo de su cabecera (P1976, LOC 0001)",
               calidad_notas="Proxy de visibilidad/interés, no de visitantes. Usuarios humanos (agent=user), todos los "
-                            "accesos; solo el título exacto, sin redirecciones. Los artículos de municipios grandes "
+                            "accesos; títulos canónicos (redirecciones resueltas). Los artículos de municipios grandes "
                             "también reciben lectores por motivos no turísticos.",
               uso_en_modelo="fact_visibilidad · bandera OFERTA_INVISIBLE (oferta ≥ P60 y visibilidad ≤ P35)")
 
@@ -63,17 +70,31 @@ def main():
     ini = fin - pd.DateOffset(months=11)
     periodo_fin = (fin + pd.offsets.MonthEnd(0)).date()
 
-    res = obtener("https://query.wikidata.org/sparql?" + urllib.parse.urlencode({"query": SPARQL, "format": "json"}))
-    arts = {b["code"]["value"]: urllib.parse.unquote(b["art"]["value"].rsplit("/wiki/", 1)[1])
-            for b in res["results"]["bindings"]}
-    print(f"Wikidata: {len(arts)} municipios con artículo en eswiki")
+    def sparql(q):
+        res = obtener("https://query.wikidata.org/sparql?" + urllib.parse.urlencode({"query": q, "format": "json"}))
+        return {b["code"]["value"]: urllib.parse.unquote(b["art"]["value"].rsplit("/wiki/", 1)[1])
+                for b in res["results"]["bindings"]}
+    arts = sparql(SPARQL)
+    cab = {k[:5]: v for k, v in sparql(SPARQL_CAB).items()}
+    print(f"Wikidata: {len(arts)} municipios con artículo · {len(cab)} cabeceras con artículo propio")
 
-    filas = []
-    for cve, titulo in sorted(arts.items()):
+    def canonico(titulo: str) -> str:
+        r = obtener("https://es.wikipedia.org/w/api.php?" + urllib.parse.urlencode(
+            {"action": "query", "titles": titulo.replace("_", " "), "redirects": 1, "format": "json"}))
+        paginas = list(r["query"]["pages"].values())
+        return paginas[0]["title"].replace(" ", "_") if paginas and "missing" not in paginas[0] else titulo
+
+    def vistas_de(titulo: str) -> tuple[int, int]:
         d = obtener(VISTAS.format(titulo=urllib.parse.quote(titulo, safe=""), ini=ini.strftime("%Y%m%d00"),
                                   fin=fin.strftime("%Y%m%d00")))
-        vistas = sum(i["views"] for i in d["items"]) if d else 0
-        filas.append(dict(cve_geo=cve, titulo=titulo, vistas=vistas, meses=len(d["items"]) if d else 0))
+        return (sum(i["views"] for i in d["items"]), len(d["items"])) if d else (0, 0)
+
+    filas = []
+    for cve in sorted(arts):
+        titulos = list(dict.fromkeys(canonico(t) for t in (arts[cve], cab.get(cve)) if t))
+        conteo = [vistas_de(t) for t in titulos]
+        filas.append(dict(cve_geo=cve, titulo=" + ".join(titulos), vistas=sum(v for v, _ in conteo),
+                          meses=max(m for _, m in conteo)))
         time.sleep(0.1)
     df = pd.DataFrame(filas)
     (RAIZ / "data" / "derivados").mkdir(exist_ok=True)
@@ -93,7 +114,8 @@ def main():
     sb._peticion("fact_visibilidad", True, "dw", "POST",
                  [dict(municipio_sk=mun[r.cve_geo], actividad_sk=None, fuente_sk=fuente_sk,
                        periodo_inicio=ini.date().isoformat(), periodo_fin=periodo_fin.isoformat(),
-                       vistas=int(r.vistas), referencia=f"es.wikipedia.org/wiki/{r.titulo}")
+                       vistas=int(r.vistas), titulo_wikipedia=r.titulo,
+                       referencia="es.wikipedia.org/wiki/" + r.titulo.split(" + ")[0])
                   for r in df.itertuples()], {"Prefer": "return=minimal"})
     print(f"✓ fact_visibilidad: {len(df)} municipios")
 

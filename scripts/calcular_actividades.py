@@ -4,9 +4,12 @@ Salidas:
   data/derivados/actividad_municipio.csv   217 municipios × 14 actividades (unidades, personal, CL, nivel, principal)
   data/derivados/totales_municipio.csv     unidades y personal total, hospedaje y alimentos por municipio
   dw.dim_actividad y dw.fact_actividad_municipio en Supabase (si existen las tablas de sql/05)
+  dw.fact_establecimiento_actividad: la misma detección, por negocio (sql/20, plan_migracion_front A9). Los
+      negocios detectados que no estaban en dw.dim_establecimiento (productores de café, mezcal o bebidas, viveros:
+      SCIAN fuera de los ejes turísticos) se agregan ahí con su clave del DENUE.
 
 Uso:
-    python scripts/calcular_actividades.py ruta/denue_inegi_21_.csv [--sin-bd]
+    python scripts/calcular_actividades.py ruta/denue_inegi_21_.csv [--sin-bd] [--solo-establecimientos]
 DENUE: https://www.inegi.org.mx/contenidos/masiva/denue/denue_21_csv.zip
 """
 import csv
@@ -41,7 +44,7 @@ def sin_acentos(s: pd.Series) -> pd.Series:
 
 
 def leer_denue(ruta: str) -> pd.DataFrame:
-    cols = ["id", "nom_estab", "raz_social", "codigo_act", "per_ocu", "cve_mun"]
+    cols = ["id", "nom_estab", "raz_social", "codigo_act", "per_ocu", "cve_mun", "latitud", "longitud"]
     try:
         df = pd.read_csv(ruta, dtype=str, usecols=cols, encoding="utf-8")
     except UnicodeDecodeError:
@@ -185,11 +188,51 @@ def cargar_bd(out: pd.DataFrame):
     print(f"✓ fact_actividad_municipio: {len(filas)} filas (periodo {CORTE_DENUE})")
 
 
+def cargar_establecimientos(df: pd.DataFrame):
+    """dw.fact_establecimiento_actividad con la detección de detectar(); agrega a dim_establecimiento los negocios
+    detectados que faltan (mismo periodo, estrato y punto que el resto)."""
+    import supabase_cliente as sb
+
+    act_sk = {r["codigo"]: r["actividad_sk"] for r in sb._peticion("dim_actividad?select=actividad_sk,codigo", True, "dw")}
+    psk = sb._peticion(f"dim_periodo?select=periodo_sk&etiqueta=eq.{CORTE_DENUE.replace(' ', '%20')}", True, "dw")[0]["periodo_sk"]
+    det = pd.concat([sel.assign(actividad=act, senal=np.where(sel.por_scian, "scian", "nombre"))
+                     [["id", "actividad", "senal"]] for act, sel in detectar(df).items() if len(sel)])
+    det = det.drop_duplicates(["id", "actividad"])
+    est = sb.leer("dim_establecimiento", "dw", "establecimiento_sk,id_denue", secreta=True)
+    sk = dict(zip(est.id_denue.astype(str), est.establecimiento_sk))
+    faltan = df[df.id.isin(set(det.id) - set(sk)) & df.nom_estab.notna()].copy()
+    if len(faltan):
+        scian = dict(zip(*[sb.leer("dim_scian", "dw", "scian_sk,codigo_scian", secreta=True)[c]
+                           for c in ("codigo_scian", "scian_sk")]))
+        scian = {str(k).strip(): v for k, v in scian.items()}
+        estratos = {r["rango_texto"]: r["estrato_sk"] for r in sb._peticion("dim_estrato_personal?select=*", True, "dw")}
+        mun = sb.leer("dim_municipio", "dw", "municipio_sk,cve_geo", secreta=True)
+        msk = dict(zip(mun.cve_geo.str.strip(), mun.municipio_sk))
+        nuevos = [dict(id_denue=r.id, municipio_sk=int(msk[r.cve_geo]), scian_sk=int(scian[r.codigo_act]),
+                       estrato_sk=int(estratos.get(r.per_ocu, 1)), periodo_sk=psk, nombre=r.nom_estab.strip()[:200],
+                       geom=f"SRID=4326;POINT({r.longitud} {r.latitud})" if pd.notna(r.latitud) else None)
+                  for r in faltan.itertuples() if r.codigo_act in scian]
+        sb.insertar("dim_establecimiento", nuevos, "dw")
+        est = sb.leer("dim_establecimiento", "dw", "establecimiento_sk,id_denue", secreta=True)
+        sk = dict(zip(est.id_denue.astype(str), est.establecimiento_sk))
+        print(f"✓ dim_establecimiento: {len(nuevos)} negocios agregados (detectados por actividad, fuera de los ejes)")
+    det = det[det.id.isin(sk) & det.actividad.isin(act_sk)]
+    filas = [dict(establecimiento_sk=int(sk[r.id]), actividad_sk=int(act_sk[r.actividad]), senal=r.senal)
+             for r in det.itertuples()]
+    sb._peticion("fact_establecimiento_actividad?establecimiento_sk=not.is.null", True, "dw", "DELETE")
+    sb.insertar("fact_establecimiento_actividad", filas, "dw")
+    print(f"✓ fact_establecimiento_actividad: {len(filas):,} filas · por actividad: "
+          + ", ".join(f"{a} {n}" for a, n in det.actividad.value_counts().items()))
+
+
 def main():
     if len(sys.argv) < 2:
         raise SystemExit(__doc__)
-    municipios, buscar = cargar_municipios()
     df = leer_denue(sys.argv[1])
+    if "--solo-establecimientos" in sys.argv:
+        cargar_establecimientos(df)
+        return
+    municipios, buscar = cargar_municipios()
     out, tot = calcular(df, municipios, senales_catalogo(buscar))
 
     SALIDA.mkdir(parents=True, exist_ok=True)
@@ -210,6 +253,7 @@ def main():
               f"({len(hay) / max(1, len(ruta)):.0%}); sin registro: {', '.join(ruta[ruta.unidades == 0].municipio)}")
     if "--sin-bd" not in sys.argv:
         cargar_bd(out)
+        cargar_establecimientos(df)
 
 
 if __name__ == "__main__":

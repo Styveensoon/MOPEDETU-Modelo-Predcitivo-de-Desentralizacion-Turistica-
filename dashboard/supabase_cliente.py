@@ -48,11 +48,13 @@ def _peticion(ruta: str, secreta: bool = False, esquema: str = "public", metodo:
         raise
 
 
-def leer(tabla: str, esquema: str = "public", select: str = "*", secreta: bool = False) -> pd.DataFrame:
-    """Lee una tabla completa paginando de 1000 en 1000."""
+def leer(tabla: str, esquema: str = "public", select: str = "*", secreta: bool = False,
+         filtro: str = "") -> pd.DataFrame:
+    """Lee una tabla paginando de 1000 en 1000. `filtro` en sintaxis de PostgREST (p. ej. "municipio_sk=eq.43")
+    para no descargar la tabla completa."""
     filas, ini = [], 0
     while True:
-        lote = _peticion(f"{tabla}?select={select}", secreta, esquema,
+        lote = _peticion(f"{tabla}?select={select}" + (f"&{filtro}" if filtro else ""), secreta, esquema,
                          extra={"Range-Unit": "items", "Range": f"{ini}-{ini + 999}"})
         filas += lote
         if len(lote) < 1000:

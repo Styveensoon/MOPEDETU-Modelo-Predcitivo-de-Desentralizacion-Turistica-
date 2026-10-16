@@ -47,8 +47,8 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
 RAIZ = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(RAIZ / "dashboard"))
-from datos import ANCLAS, haversine_km, region_aprox  # noqa: E402
+sys.path[:0] = [str(RAIZ / "dashboard"), str(RAIZ / "model")]
+from geo_utils import haversine_km  # noqa: E402
 
 STG = RAIZ / "data" / "stg"
 SALIDA = RAIZ / "data" / "modelo"
@@ -130,7 +130,16 @@ def cargar_homologado(carpeta: Path):
     return censo, pd.DataFrame(totales), social, mun
 
 
-ANCLAS_USO, REGION_DE = set(ANCLAS), None  # modo original: anclas y región aproximada del modo DEMO
+ANCLAS_USO, REGION_DE = None, None  # se llenan de dw.dim_municipio (12 anclas, 7 regiones) en los dos modos
+
+
+def anclas_y_regiones():
+    """Anclas y regiones de dw.dim_municipio (antes, en el modo original, venían del modo DEMO del tablero)."""
+    global ANCLAS_USO, REGION_DE
+    import supabase_cliente as sb
+    dim = sb.leer("dim_municipio", "dw", "cve_geo,nombre,region,es_ancla", secreta=True)
+    dim["cve_geo"] = dim.cve_geo.str.strip()
+    ANCLAS_USO, REGION_DE = set(dim[dim.es_ancla].nombre), dict(zip(dim.cve_geo, dim.region))
 
 
 def _por_eje(df: pd.DataFrame) -> pd.DataFrame:
@@ -174,8 +183,7 @@ def armar_base(censo, totales, social, mun) -> pd.DataFrame:
     anclas = mun[mun["nombre"].isin(ANCLAS_USO)]
     dist = haversine_km(mun["lat"].values[:, None], mun["lon"].values[:, None],
                         anclas["lat"].values[None, :], anclas["lon"].values[None, :]).min(axis=1)
-    region = ([REGION_DE[c] for c in mun["cve_geo"]] if REGION_DE else
-              [region_aprox(a, o) for a, o in zip(mun["lat"], mun["lon"])])
+    region = [REGION_DE[c] for c in mun["cve_geo"]]
     base = base.merge(pd.DataFrame({"cve_geo": mun["cve_geo"], "dist_ancla_km": dist, "region": region}),
                       how="left")
 
@@ -322,6 +330,7 @@ def main():
         datos = cargar_homologado(Path(sys.argv[2]))
     else:
         datos = cargar()
+        anclas_y_regiones()
     SALIDA.mkdir(parents=True, exist_ok=True)
     base = armar_base(*datos)
     panel = armar_panel(base, TRANSICIONES)

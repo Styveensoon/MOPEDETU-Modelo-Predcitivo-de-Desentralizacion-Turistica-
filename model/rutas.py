@@ -1,28 +1,32 @@
-"""Pieza 4 · Optimizador de rutas turísticas nuevas (A6).
+"""Pieza 4 · Optimizador de rutas turísticas nuevas (A6), versión optimizador_rutas_v2.
+
+Parámetros: dw.dim_version_calculo 'optimizador_rutas_v2' (vía dw.v_vigente.parametros_rutas); los mismos que usa
+el tablero.
 
 Valor de un municipio m en una ruta de tema t (actividad):
-    v(m) = índice_v2(m, eje dominante) · (1 + 0.35·bandera) · (1 + 0.20·necesidad social) · (1 + 0.25·tema presente)
+    v(m) = índice(m, eje dominante) · (1 + 0.35·emergente) · (1 + 0.40·necesidad social) · (1 + 0.25·tema presente)
 Construcción (por cada ancla × tema): inserción voraz de la parada con mayor
-    v(m) · (0.5 + p_enlace(prev, m)) · (1 + 0.3·tramo nuevo) / (1 + minutos/60)
+    v(m) · (0.5 + p_enlace(prev, m)) · (1 + 0.3·tramo nuevo) / (1 + minutos de planeación/60)
 y reordenamiento 2-opt con el ancla fija al inicio.
+Tiempos: OSRM de flujo libre entre cabeceras × factor de planeación por región (1.25 en las sierras y Tehuacán,
+         1.10 en el resto; dw.v_tiempo_municipios.tiempo_min_planeacion). Las restricciones usan el tiempo de
+         planeación; se guardan los dos.
 Restricciones: 3-6 paradas · tramo ≤ 75 min · recorrido ≤ 240 min · inicia en un ancla y el resto no son anclas
-               · ≥ 2 municipios con bandera activa · todos con el tema presente (o reconocido en catálogo)
-               · al menos un mes de temporada compartido por la mayoría de las paradas (bono)
-Selección: búsqueda exhaustiva (con poda) de la mejor combinación de 5 rutas, lexicográfica: primero el
-           máximo de regiones beneficiadas distintas, luego Σ puntaje + 1.0 por cada tema distinto. Región de la ruta = la que predomina entre sus
-           paradas (donde llega el beneficio, no la del ancla). Restricciones: ≤ 50 % de municipios compartidos,
-           ≤ 2 rutas por tema, ≤ 2 rutas por ancla (Puebla es la puerta de entrada del estado).
-Tema:      solo cuenta presencia fuerte (alta, muy alta o reconocida en catálogo oficial). Especificidad: el
-           puntaje se multiplica de ×0.85 (tema más común, p. ej. gastronomía) a ×1.15 (tema más distintivo).
-Optimizador v2 (plan de afinación F5):
-           · tiempos por carretera entre cabeceras (dw.v_tiempo_municipios, OSRM), no la línea recta
-           · índice y banderas v3_dominio_osrm y crecimiento del modelo v2 (solo celdas en dominio)
-           · sin candidatas con semáforo de infraestructura rojo
-           · rutas de más de un día (traslado + estancias > 10 h) exigen un nodo de pernocta con hospedaje ≥ P50
-             estatal (el ancla cuenta)
-           · la región beneficiada no puede ser Angelópolis (descentralizar, no volver a la capital)
-           Las rutas que la selección sin estas reglas habría elegido y que no las cumplen se guardan con
-           origen = 'propuesta_descartada', cumple_restricciones = false y sus incumplimientos.
+               · ≥ 2 emergentes: municipios con alguna bandera activa distinta de BARRERA_ACCESO (que significa
+                 justamente "lejos del ancla") · todos con el tema presente (o reconocido en catálogo)
+               · sin paradas con semáforo de infraestructura rojo
+               · toda parada no ancla con al menos un punto visitable (dw.v_lugar_circuito, atractivo o experiencia)
+               · si traslado + estancias > 10 h: pernocta en una parada con ≥ 10 unidades de hospedaje (DENUE);
+                 se prefiere una emergente cercana al fin del día 1 y, si no hay, el ancla
+               · la región beneficiada (la que predomina entre las paradas) no puede ser Angelópolis
+               · bono si la mayoría de las paradas comparte un mes de temporada
+Selección: búsqueda exhaustiva (con poda) de la mejor combinación de 5 rutas, lexicográfica: primero el máximo de
+           regiones beneficiadas distintas, luego Σ puntaje + 1.0 por cada tema distinto. ≤ 50 % de municipios
+           compartidos, ≤ 2 rutas por tema, ≤ 2 rutas por ancla.
+Tema:      solo cuenta presencia fuerte (alta, muy alta o reconocida en catálogo oficial). Especificidad: el puntaje
+           se multiplica de ×0.85 (tema más común, p. ej. gastronomía) a ×1.15 (tema más distintivo).
+Las rutas que la selección sin las reglas de operación habría elegido y que no las cumplen se guardan con
+origen = 'propuesta_descartada', cumple_restricciones = false y sus incumplimientos.
 Escribe dim_ruta / fact_ruta_parada (origen = 'propuesta_modelo') y fact_ruta_evaluacion; reporta v_novedad_ruta.
 Uso: python model/rutas.py
 """
@@ -36,9 +40,12 @@ import base
 import enlaces
 from base import EJES, RAIZ, pct
 
-MAX_TRAMO, MAX_TOTAL, MIN_PARADAS, MAX_PARADAS = 75, 240, 3, 6
-N_RUTAS, MAX_SOLAPE = 5, 0.5
-ESTANCIA = {True: 3.0, False: 2.0}  # horas sugeridas: ancla / municipio emergente
+_P = base.sb._peticion("v_vigente?select=parametros_rutas", True, "dw")[0]["parametros_rutas"]
+MAX_TRAMO, MAX_TOTAL, MIN_PARADAS, MAX_PARADAS = _P["max_tramo_min"], _P["max_total_min"], _P["min_paradas"], _P["max_paradas"]
+N_RUTAS, MAX_SOLAPE = _P["n_rutas"], _P["max_solape"]
+ESTANCIA = {True: _P["estancia_ancla_h"], False: _P["estancia_emergente_h"]}  # horas: ancla / emergente
+MIN_EMERGENTES, MIN_HOSPEDAJE_PERNOCTA = _P["min_emergentes"], _P["min_hospedaje_pernocta"]
+NO_EMERGENTE = set(_P["banderas_no_emergente"])
 # "comunitario" queda fuera: se detecta por palabras como "cooperativa" o "ejido" en el nombre del negocio y
 # esa señal es ruidosa (restaurantes, cooperativas escolares). Se reincorpora con un catálogo de cooperativas turísticas.
 TEMAS = ["cafe", "mezcal", "ecoturismo", "gastronomia", "artesanias", "bebidas_tradicionales", "religioso",
@@ -47,10 +54,10 @@ TEMAS = ["cafe", "mezcal", "ecoturismo", "gastronomia", "artesanias", "bebidas_t
 # luego la calidad. BONO_REGION es mayor que cualquier diferencia posible de puntajes, así que una región más
 # siempre gana; BONO_TEMA premia la variedad de temas.
 BONO_REGION, BONO_TEMA = 100.0, 1.0
-MAX_POR_ANCLA = 2                   # Puebla y otras anclas pueden ser puerta de entrada de hasta 2 rutas
-HORAS_DIA = 10                      # jornada de 9:00 a 19:00, la misma de la agenda del tablero
+MAX_POR_ANCLA = _P["max_por_ancla"]  # Puebla y otras anclas pueden ser puerta de entrada de hasta 2 rutas
+HORAS_DIA = _P["horas_dia"]          # jornada de 9:00 a 19:00, la misma de la agenda del tablero
 VERSION_INDICE, MODELO_CRECIMIENTO = "v3_dominio_osrm", "crecimiento_ue_eje_lgbm_v2"
-REGION_CAPITAL = "Angelópolis"
+REGION_CAPITAL = _P["region_excluida"]
 
 
 def seleccionar(candidatas: list) -> list:
@@ -108,19 +115,22 @@ def datos(b: base.Base):
     t = base.sb.leer("v_tiempo_municipios", "dw", secreta=True).set_index(["municipio_origen_sk", "municipio_destino_sk"])
     sem = base.sb.leer("fact_semaforo_municipio", "dw", "municipio_sk,dimension,nivel", secreta=True)
     infra_rojo = set(sem[(sem.dimension == "infraestructura") & (sem.nivel == "rojo")].municipio_sk)
-    return v, modelo_sk, mejor, flags, pred, enl, t, infra_rojo
+    lug = base.sb.leer("v_lugar_circuito", "dw", "municipio_sk,tipo_parada", secreta=True)
+    visitables = set(lug[lug.tipo_parada.isin(["atractivo", "experiencia"])].municipio_sk)
+    return v, modelo_sk, mejor, flags, pred, enl, t, infra_rojo, visitables
 
 
 def main():
     b = base.cargar()
-    v3, modelo_sk, mejor, flags, pred, enl, acc, infra_rojo = datos(b)
+    v3, modelo_sk, mejor, flags, pred, enl, acc, infra_rojo, visitables = datos(b)
     m = b.mun
-    tiempo = acc.tiempo_min.to_dict()          # por carretera (OSRM) donde existe
+    tiempo_libre = acc.tiempo_min.to_dict()                    # OSRM de flujo libre (se muestra)
+    tiempo = acc.tiempo_min_planeacion.astype(float).to_dict()  # × factor de planeación: con este se decide
     dist = acc.distancia_km.to_dict()
     recta = b.acceso.set_index(["municipio_origen_sk", "municipio_destino_sk"])
     tiempo_est, dist_est = recta.tiempo_min_est.to_dict(), recta.distancia_km_recta.to_dict()
     hosp = b.infra.unidades_hospedaje.fillna(0)
-    hosp_p50 = float(hosp.median())
+    hosp_min = MIN_HOSPEDAJE_PERNOCTA
     p_enl = {}
     for r in enl.itertuples():
         p_enl[(r.municipio_a_sk, r.municipio_b_sk)] = p_enl[(r.municipio_b_sk, r.municipio_a_sk)] = r.probabilidad
@@ -133,7 +143,7 @@ def main():
         oficiales |= {frozenset(x) for x in zip(ms, ms[1:])}
 
     social = pct(-b.social.indice_marginacion)
-    con_flag = set(flags.municipio_sk)
+    con_flag = set(flags[~flags.codigo.isin(NO_EMERGENTE)].municipio_sk)   # emergente: bandera ≠ BARRERA_ACCESO
     motivo_flag = flags.sort_values("tipo_flag_sk").groupby("municipio_sk").codigo.apply(lambda s: sorted(set(s)))
     act = b.actividades.merge(b.cat_act[["actividad_sk", "codigo", "nombre", "icono"]])
     # Tema "presente" solo con presencia fuerte: especialización alta/muy alta o reconocida por la Secretaría
@@ -161,7 +171,7 @@ def main():
         return mejor_r
 
     def construir(ancla, tema):
-        candidatos = presente.get(tema, set()) - set(anclas) - infra_rojo
+        candidatos = (presente.get(tema, set()) & visitables) - set(anclas) - infra_rojo
         ruta = [ancla]
         while len(ruta) < MAX_PARADAS:
             fin, opciones = ruta[-1], []
@@ -185,7 +195,7 @@ def main():
     def evaluar(ruta, tema):
         resto = ruta[1:]
         emerg = [x for x in resto if x in con_flag]
-        if len(ruta) < MIN_PARADAS or len(emerg) < 2:
+        if len(ruta) < MIN_PARADAS or len(emerg) < MIN_EMERGENTES:
             return None
         meses = M.loc[ruta].sum()
         meses_comunes = [int(k) for k, v in meses.items() if v >= max(2, int(np.ceil(len(ruta) * 0.6)))]
@@ -201,16 +211,16 @@ def main():
         incumple, pernocta = [], None
         if dias > 1:
             # Se prefiere dormir en una parada emergente (la noche deja derrama fuera del ancla), la más cercana
-            # al fin de la primera jornada; el ancla de salida cuenta si ninguna otra tiene hospedaje ≥ P50.
+            # al fin de la primera jornada; el ancla de salida cuenta si ninguna otra tiene hospedaje ≥ 10.
             llegada, h = [], 0.0
             for k, x in enumerate(ruta):
                 h += (tiempo[(ruta[k - 1], x)] / 60 if k else 0)
                 llegada.append(h)
                 h += estancias[k]
-            paradas_ok = [k for k in range(1, len(ruta)) if hosp.get(ruta[k], 0) >= hosp_p50]
+            paradas_ok = [k for k in range(1, len(ruta)) if hosp.get(ruta[k], 0) >= hosp_min]
             if paradas_ok:
                 pernocta = ruta[min(paradas_ok, key=lambda k: abs(llegada[k] + estancias[k] - HORAS_DIA))]
-            elif hosp.get(ruta[0], 0) >= hosp_p50:
+            elif hosp.get(ruta[0], 0) >= hosp_min:
                 pernocta = ruta[0]
             else:
                 incumple.append("sin_pernocta")
@@ -223,8 +233,11 @@ def main():
         rojo = sum(x in infra_rojo for x in ruta)
         if rojo:
             incumple.append("infra_rojo")
+        if any(x not in visitables for x in resto):
+            incumple.append("parada_sin_punto_de_visita")
         return dict(ruta=ruta, tema=tema, puntaje=puntaje, emergentes=emerg, meses_comunes=meses_comunes,
-                    enlace_medio=enl_medio, tramos_nuevos=tramos_nuevos, minutos=recorrido(ruta),
+                    enlace_medio=enl_medio, tramos_nuevos=tramos_nuevos, minutos_plan=recorrido(ruta),
+                    minutos=sum(tiempo_libre[(a, c)] for a, c in zip(ruta, ruta[1:])),
                     estancias=estancias, horas=round(horas, 1), dias=dias, region=region, pernocta=pernocta,
                     incumplimientos=incumple, infra_rojo=rojo)
 
@@ -242,11 +255,6 @@ def main():
                          necesidad_social=round(float(np.mean([social[x] for x in r[1:]])), 2) if len(r) > 1 else None))
     pd.DataFrame(diag).sort_values(["tema", "puntaje"], ascending=[True, False]).to_csv(
         RAIZ / "data" / "derivados" / "rutas_candidatas.csv", index=False)
-    # Selección voraz por puntaje AJUSTADO: si la región del ancla o el tema ya tienen ruta, el puntaje se
-    # multiplica por PENAL_REGION / PENAL_TEMA (penaliza, no excluye: una ruta mucho mejor sigue entrando).
-    # Restricciones duras: anclas distintas, máximo 2 rutas por tema y ≤ 50 % de municipios compartidos.
-    # Región de una ruta = región que predomina entre sus paradas (donde llega el beneficio), no la del ancla:
-    # p. ej. la ruta del mezcal sale de Puebla (Angelópolis) pero sus paradas están en la Mixteca.
     # Región de una ruta = región que predomina entre sus paradas (donde llega el beneficio), no la del ancla:
     # p. ej. la ruta del mezcal sale de Puebla (Angelópolis) pero sus paradas están en la Mixteca.
     operables = [e for e in candidatas if not e["incumplimientos"]]
@@ -296,7 +304,8 @@ def main():
                                 distancia_desde_anterior_km=round(dist_est[(prev, x)], 2) if prev else None,
                                 tiempo_desde_anterior_min=round(tiempo_est[(prev, x)], 1) if prev else None,
                                 distancia_desde_anterior_km_real=round(dist[(prev, x)], 2) if prev else None,
-                                tiempo_desde_anterior_min_real=round(tiempo[(prev, x)], 1) if prev else None,
+                                tiempo_desde_anterior_min_real=round(tiempo_libre[(prev, x)], 1) if prev else None,
+                                tiempo_desde_anterior_min_planeacion=round(tiempo[(prev, x)], 1) if prev else None,
                                 es_ancla=bool(m.es_ancla[x]), es_emergente=x in e["emergentes"],
                                 estancia_sugerida_h=e["estancias"][k], es_pernocta=x == e["pernocta"],
                                 unidades_hospedaje=int(hosp.get(x, 0))))
@@ -304,7 +313,7 @@ def main():
         base.sb._peticion("fact_ruta_evaluacion", True, "dw", "POST", dict(
             ruta_sk=sk, modelo_sk=modelo_sk, version_sk=v3,
             tiempo_total_min=round(sum(tiempo_est[(a, c)] for a, c in zip(ruta, ruta[1:])), 1),
-            tiempo_total_min_real=round(e["minutos"], 1),
+            tiempo_total_min_real=round(e["minutos"], 1), tiempo_total_min_planeacion=round(e["minutos_plan"], 1),
             potencial_pred_medio_pct=base.limpio(round(float(crec_medio), 2)),
             necesidad_social_media=round(float(np.mean([social[x] for x in ruta[1:]])), 3),
             num_municipios_emergentes=len(e["emergentes"]), puntaje_total=round(float(e["puntaje"]), 4),

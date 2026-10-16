@@ -1,101 +1,88 @@
+"""🧭 Rutas del modelo: las 5 rutas propuestas por el optimizador (model/rutas.py) y las descartadas, leídas de
+Supabase (dw.v_ruta_parada) con su trazo por carretera guardado (sin servicios en vivo)."""
 import html
-import json
-from pathlib import Path
 
 import pandas as pd
 import streamlit as st
 
-import estado
+import bd
 import ficha_bd as fb
 import mapas
-import motor
 import navegacion
 import tema
 
 COLORES_RUTA = ["#1B3F8B", "#8A1538", "#E8B10D", "#2E7D32", "#00897B", "#D81B60", "#546E7A", "#6D4C41"]
-ICONO_TEMA = {"cafe": "☕", "mezcal": "🥃", "gastronomia": "🍲", "comunitario": "🤝", "volcanes": "🌋",
-              "ecoturismo": "🌲", "artesanias": "🏺", "bebidas_tradicionales": "🍷", "religioso": "⛪",
-              "balnearios": "♨️", "flores_viveros": "🌸", "museos": "🏛️", "arqueologia": "🗿",
-              "pueblos_magicos": "✨", "senderismo": "🥾", "conventos": "⛪", "naturaleza": "🌵"}
 NOVEDAD = {"nueva": ("Nueva", "#2E7D32"), "parcialmente_existente": ("Parcialmente existente", "#E8B10D"),
            "existente": ("Ya existe", "#8A1538")}
-ESCENARIO = Path(__file__).resolve().parents[2] / "data" / "derivados" / "escenario_concentracion.json"
-BANDERAS = {"OFERTA_EMERGENTE": "oferta emergente", "ACCESIBLE_NO_EXPLOTADO": "accesible no explotado",
-            "BARRERA_ACCESO": "barrera de acceso", "OFERTA_INVISIBLE": "oferta invisible",
-            "OFERTA_SIN_REGISTRO": "oferta sin registro",
-            "IMPACTO_SOCIAL": "impacto social"}
+INCUMPLIMIENTO = {"region_angelopolis": "su beneficio se queda en Angelópolis (la región de la capital)",
+                  "sin_pernocta": "dura más de un día y ninguna parada tiene ≥ 10 hospedajes",
+                  "infra_rojo": "pasa por un municipio con infraestructura en rojo",
+                  "parada_sin_punto_de_visita": "tiene una parada sin ningún punto visitable",
+                  "tramo>75": "algún tramo pasa de 75 min de planeación", "total>240": "el recorrido pasa de 240 min"}
 
 
 def _legible(texto: str) -> str:
-    for codigo, nombre in BANDERAS.items():
-        texto = texto.replace(codigo, nombre)
+    for codigo, nombre in fb.BANDERA.items():
+        texto = texto.replace(codigo, nombre.lower())
     return texto
 
 
-def render():
-    # Dos modos: las rutas que propone el modelo (Supabase) y la ruta a la medida desde cualquier municipio
-    modo = st.segmented_control("Rutas", ["🧠 Rutas del modelo", "🛠️ Arma tu ruta"], default="🧠 Rutas del modelo",
-                                key="rutas_modo", label_visibility="collapsed") or "🧠 Rutas del modelo"
-    if modo == "🛠️ Arma tu ruta":
-        d = estado.datos()
-        tema.hero("🛠️ Arma tu ruta", "Sal de cualquier municipio y deja que el motor proponga las paradas, o elígelas "
-                  "tú; el recorrido se traza por carretera real.", estado.chips())
-        _armar(d, d.actividades.set_index("clave"))
-        return
+def _icono(codigo: str) -> str:
+    act = bd.actividades().set_index("codigo").icono
+    return act.get(codigo, "🧭")
 
-    paradas, idx = fb.rutas(), fb.indice()
-    if paradas is None or idx is None:
-        st.error("No se pudieron leer las rutas de Supabase (`dw.v_ruta_parada`). Revisa el `.env`.")
+
+def render():
+    try:
+        paradas, idx = bd.rutas(), bd.indice_municipio()
+    except bd.SinDatos as e:
+        st.error(f"No se pudieron leer las rutas: {e}")
         return
     prop = paradas[paradas.origen == "propuesta_modelo"]
+    desc = paradas[paradas.origen == "propuesta_descartada"]
     ofic = paradas[paradas.origen == "existente"]
     rutas = prop.drop_duplicates("ruta_sk").reset_index(drop=True)
+    params = bd.vigente()["parametros_rutas"]
 
     tema.hero("🧭 Rutas turísticas propuestas por el modelo",
               "Cada ruta parte de un destino ancla (⚓) y lleva al visitante a municipios emergentes con bandera de "
-              "oportunidad. Se arman con el índice de oportunidad, el crecimiento predicho y el modelo de enlaces, "
-              "y se comparan contra las rutas oficiales.",
+              "oportunidad y algo que visitar. Tiempos por carretera con margen de planeación, pernocta donde hay "
+              "hospedaje y riesgo conocido.",
               [f"{len(rutas)} rutas propuestas", f"comparadas con {ofic.ruta_sk.nunique()} rutas oficiales",
-               f"{rutas.duracion_estimada_h.max() // 8 + 1:.0f} días máx. con estancias"])
+               f"tramo ≤ {params['max_tramo_min']} min · recorrido ≤ {params['max_total_min']} min de planeación",
+               f"pernocta con ≥ {params['min_hospedaje_pernocta']} hospedajes"])
     if rutas.empty:
-        st.info("Todavía no hay rutas propuestas. Corre `python model/rutas.py`.")
+        st.info("Todavía no hay rutas propuestas. Corre `python scripts/pipeline.py`.")
         return
 
+    esc = bd.escenarios()
     k = st.columns(5)
     k[0].metric("Rutas propuestas", len(rutas), f"{(rutas.clasificacion_novedad == 'nueva').sum()} totalmente nuevas",
                 delta_color="off")
     k[1].metric("Municipios emergentes", prop[prop.es_emergente].municipio_sk.nunique(), "con bandera de oportunidad",
                 delta_color="off")
-    k[2].metric("Tramos nuevos", f"{100 - rutas.pct_tramos_existentes.mean():.0f} %",
-                help="Porcentaje de tramos que no aparecen en ninguna de las rutas oficiales.")
-    k[3].metric("Crecimiento esperado", f"{rutas.potencial_pred_medio_pct.mean():+.0f} %",
-                "oferta turística a 5 años", delta_color="off",
-                help="Promedio del crecimiento predicho de la oferta en las paradas emergentes.")
-    try:
-        esc = json.loads(ESCENARIO.read_text(encoding="utf-8"))
-        k[4].metric("Concentración top 5", f"{esc['con_rutas_hipotetico']['pct_top5']:.1f} %",
-                    f"{esc['con_rutas_hipotetico']['pct_top5'] - esc['hoy']['pct_top5']:+.1f} pp vs hoy",
-                    delta_color="inverse", help=esc["supuesto"])
-    except Exception:
-        k[4].metric("Regiones", rutas.region.nunique())
+    k[2].metric("Regiones beneficiadas", rutas.region_beneficiada.nunique(), "sin Angelópolis", delta_color="off")
+    k[3].metric("Cumplen todas las reglas", f"{int(rutas.cumple_restricciones.sum())}/{len(rutas)}")
+    k[4].metric("Concentración top 5", f"{esc.pct_top5['con_rutas_hipotetico']:.1f} %",
+                f"{esc.pct_top5['con_rutas_hipotetico'] - esc.pct_top5['hoy']:+.1f} pp vs hoy (hipotético)",
+                delta_color="inverse", help=esc.supuesto["con_rutas_hipotetico"])
 
+    nombres = {r.ruta_sk: f"{_icono(r.tema)} {r.ruta}" for r in rutas.itertuples()}
+    color = {sk: COLORES_RUTA[i % len(COLORES_RUTA)] for i, sk in enumerate(rutas.ruta_sk)}
+    trazos = bd.trazos()
     c1, c2 = st.columns([3, 1])
-    nombres = {r.ruta_sk: f"{ICONO_TEMA.get(r.tema, '🧭')} {r.ruta}" for r in rutas.itertuples()}
     por_nombre = {v: k for k, v in nombres.items()}
     vistas = c1.multiselect("Rutas a mostrar en el mapa", list(por_nombre), default=list(por_nombre),
                             key="rt_sel") or list(por_nombre)
     elegidas = [por_nombre[v] for v in vistas]
-    ver_oficiales = c2.toggle("Ver rutas oficiales", value=False, key="rt_ofic",
-                              help="Dibuja en gris las rutas del catálogo de la Secretaría de Turismo.")
-    color = {sk: COLORES_RUTA[i % len(COLORES_RUTA)] for i, sk in enumerate(rutas.ruta_sk)}
+    ver_oficiales = c2.toggle("Ver rutas oficiales", value=False, key="rt_ofic")
 
     mapa, lista = st.columns([1.55, 1])
     with mapa:
-        geo = estado.datos().geo
         tt = idx.set_index("cve_geo").apply(
             lambda r: f"<b>{r.nombre}</b><br>Índice de oportunidad {r.indice_oportunidad:.2f} "
                       f"(#{r.ranking_estatal})<br>Mejor eje: {str(r.eje_lider).replace('_', ' ')}", axis=1)
-        m = mapas.Mapa(geo, alto=640, fondo=mapas.FONDO_ESTADO).municipios(
+        m = mapas.Mapa(bd.geo(), alto=640, fondo=bd.fondo_mapa()).municipios(
             idx, "indice_oportunidad", tt, paleta=tema.SEQ_TALAVERA[:3], cuantiles=True)
         if ver_oficiales:
             for _, g in ofic.groupby("ruta_sk"):
@@ -103,24 +90,27 @@ def render():
                     m.trayecto(g.lon, g.lat, "rgba(90,90,90,0.55)", 1.6, f"<b>{g.ruta.iat[0]}</b><br>Ruta oficial")
         sel = prop[prop.ruta_sk.isin(elegidas)]
         for sk, g in sel.groupby("ruta_sk"):
-            m.trayecto(g.lon, g.lat, color[sk], 4.5, f"<b>{nombres[sk]}</b><br>{len(g)} paradas · "
-                                                     f"{g.tiempo_total_min.iat[0]:.0f} min de traslado")
+            tr = trazos.get(int(sk))
+            lon, lat = (zip(*tr["geom"]["coordinates"]) if tr else (g.lon, g.lat))
+            m.trayecto(list(lon), list(lat), color[sk], 4.5,
+                       f"<b>{nombres[sk]}</b><br>{len(g)} paradas · {g.tiempo_total_min.iat[0]:.0f} min por carretera")
         pts = sel.copy()
         pts["color"] = [tema.COBALTO_OSC if a else color[sk] for a, sk in zip(pts.es_ancla, pts.ruta_sk)]
         pts["num"] = pts.orden_parada.astype(str)
-        pts["tt"] = [f"<b>{r.orden_parada}. {r.municipio}</b>{' ⚓' if r.es_ancla else ''}<br>{nombres[r.ruta_sk]}<br>"
+        pts["tt"] = [f"<b>{r.orden_parada}. {r.municipio}</b>{' ⚓' if r.es_ancla else ''}"
+                     f"{' 🛏️' if r.es_pernocta else ''}<br>{nombres[r.ruta_sk]}<br>"
                      + ("Destino ancla" if r.es_ancla else ("🚩 Emergente con bandera" if r.es_emergente else "Parada"))
                      + (f"<br>🚗 {r.tiempo_desde_anterior_min:.0f} min desde la anterior" if r.orden_parada > 1 else "")
                      for r in pts.itertuples()]
         m.puntos(pts, "color", 20, "tt", texto="num", posicion_texto="middle center", color_texto="white",
                  tamano_texto=11)
-        if len(elegidas) <= 2:  # con todas las rutas a la vez, los nombres se enciman: bastan números y hover
+        if len(elegidas) <= 2:
             m.nombres(sel.drop_duplicates("municipio_sk"), columna="municipio", tamano=10, separacion=0.06)
         if len(sel):
             m.encuadre(sel.lat, sel.lon, margen=0.12, aspecto=1.15)
         mapas.mostrar(m, "rt_mapa")
-        st.caption("Fondo: índice de oportunidad (más oscuro = mayor). Números = orden de las paradas; "
-                   "azul oscuro = destino ancla. Elige una o dos rutas para ver los nombres de las paradas.")
+        st.caption("Fondo: índice de oportunidad (más oscuro = mayor). Líneas = trazo por carretera guardado. "
+                   "Números = orden de las paradas; azul oscuro = ancla; 🛏️ = pernocta.")
 
     with lista:
         for i, r in enumerate(rutas.itertuples()):
@@ -128,40 +118,55 @@ def render():
             nov, col_nov = NOVEDAD.get(r.clasificacion_novedad, (r.clasificacion_novedad, "#546E7A"))
             with st.expander(nombres[r.ruta_sk], expanded=i == 0):
                 st.markdown(f"<span class='mope-tag' style='background:{col_nov};color:white'>{nov}</span> "
-                            f"<small>{r.pct_tramos_existentes:.0f} % de tramos en rutas oficiales · "
-                            f"{r.region}</small>", unsafe_allow_html=True)
+                            f"<small>{r.pct_tramos_existentes:.0f} % de tramos en rutas oficiales · beneficia a "
+                            f"<b>{r.region_beneficiada}</b></small>", unsafe_allow_html=True)
                 a, b, c = st.columns(3)
-                a.metric("Duración", f"{r.duracion_estimada_h:.0f} h", f"{r.tiempo_total_min / 60:.1f} h en carretera",
-                         delta_color="off")
-                b.metric("Emergentes", int(r.num_municipios_emergentes))
-                c.metric("Crecimiento", f"{r.potencial_pred_medio_pct:+.0f} %")
+                a.metric("Días", int(r.dias_sugeridos), f"{r.duracion_estimada_h:.0f} h con estancias", delta_color="off")
+                b.metric("Carretera", f"{r.tiempo_total_min / 60:.1f} h",
+                         f"{float(r.tiempo_total_min_planeacion) / 60:.1f} h de planeación", delta_color="off",
+                         help="Flujo libre (OSRM, sin tráfico) y con el margen de planeación por región que usan las reglas.")
+                c.metric("Emergentes", int(r.num_municipios_emergentes))
                 for p in g.itertuples():
                     etiqueta = ('<span class="mope-tag ancla">ANCLA</span>' if p.es_ancla else
                                 '<span class="mope-tag flag">EMERGENTE</span>' if p.es_emergente else "")
+                    cama = f" 🛏️ pernocta ({int(p.unidades_hospedaje)} hospedajes)" if p.es_pernocta else ""
                     viaje = f" · 🚗 {p.tiempo_desde_anterior_min:.0f} min" if p.orden_parada > 1 else ""
                     st.markdown(f"<span style='color:{color[r.ruta_sk]};font-weight:800'>{p.orden_parada}.</span> "
-                                f"**{p.municipio}** {etiqueta}<br><small style='opacity:.7'>{p.region}{viaje} · "
+                                f"**{p.municipio}** {etiqueta}{cama}<br><small style='opacity:.7'>{p.region}{viaje} · "
                                 f"estancia {p.estancia_sugerida_h:.0f} h</small>", unsafe_allow_html=True)
+                    if not p.es_ancla:
+                        _puntos_visitables(int(p.municipio_sk))
+                if r.riesgo_seguridad:
+                    st.caption("🛡️ " + r.riesgo_seguridad)
                 st.caption(html.escape(_legible(r.descripcion or "")))
 
     st.markdown("#### 📊 Comparar rutas propuestas")
     tabla = pd.DataFrame([{
         "Ruta": nombres[r.ruta_sk], "Novedad": NOVEDAD.get(r.clasificacion_novedad, (r.clasificacion_novedad,))[0],
-        "Tramos en rutas oficiales (%)": r.pct_tramos_existentes, "Paradas": r.num_municipios,
-        "Emergentes": r.num_municipios_emergentes, "Carretera (h)": round(r.tiempo_total_min / 60, 1),
-        "Duración total (h)": r.duracion_estimada_h, "Crecimiento esperado (%)": r.potencial_pred_medio_pct,
-        "Necesidad social": r.necesidad_social_media, "Puntaje": r.puntaje_total,
+        "Región beneficiada": r.region_beneficiada, "Días": r.dias_sugeridos,
+        "Carretera (h)": round(r.tiempo_total_min / 60, 1),
+        "Planeación (h)": round(float(r.tiempo_total_min_planeacion) / 60, 1),
+        "Pernocta": ", ".join(prop[(prop.ruta_sk == r.ruta_sk) & prop.es_pernocta].municipio) or "—",
+        "Emergentes": r.num_municipios_emergentes, "Crecimiento esperado (%)": r.potencial_pred_medio_pct,
+        "Necesidad social": r.necesidad_social_media, "Riesgo": r.riesgo_seguridad,
         "Recorrido": " → ".join(prop[prop.ruta_sk == r.ruta_sk].municipio),
     } for r in rutas.itertuples()])
     st.dataframe(tabla, hide_index=True, width="stretch", column_config={
         "Necesidad social": st.column_config.ProgressColumn(min_value=0, max_value=1, format="%.2f"),
-        "Puntaje": st.column_config.NumberColumn(format="%.2f"),
         "Crecimiento esperado (%)": st.column_config.NumberColumn(format="%+.0f %%")})
     st.download_button("⬇️ Descargar rutas propuestas (CSV)", tabla.to_csv(index=False).encode("utf-8-sig"),
                        "rutas_propuestas_mopedetu.csv", "text/csv")
 
-    _recorrer(prop, nombres, color)
+    _recorrer(prop, nombres, color, trazos)
 
+    if len(desc):
+        with st.expander(f"🚫 Rutas descartadas ({desc.ruta_sk.nunique()}) y por qué"):
+            for sk, g in desc.groupby("ruta_sk"):
+                motivos = [INCUMPLIMIENTO.get(m, m) for m in (g.incumplimientos.iat[0] or [])]
+                st.markdown(f"**{g.ruta.iat[0]}** · {' → '.join(g.municipio)}  \nSe descartó porque "
+                            + "; ".join(motivos) + ".")
+            st.caption("El optimizador la habría elegido sin las reglas de operación; se guarda para explicar por "
+                       "qué se eligieron otras.")
     with st.expander(f"📚 Rutas oficiales del catálogo de la Secretaría ({ofic.ruta_sk.nunique()})"):
         of = ofic.groupby("ruta_sk").agg(Ruta=("ruta", "first"), Tema=("tema", "first"),
                                          Recorrido=("municipio", " → ".join)).reset_index(drop=True)
@@ -170,159 +175,72 @@ def render():
                "Económicos), no de visitantes; el siguiente paso es validarlas con las comunidades.")
 
 
-def _recorrer(prop: pd.DataFrame, nombres: dict, color: dict):
-    """Recorre una ruta propuesta por carretera real (OSRM) en el mapa de navegación, con agenda por días,
-    indicaciones y enlaces a Google Maps y Waze."""
+def _puntos_visitables(municipio_sk: int):
+    lug = bd.lugares(municipio_sk)
+    lug = lug[lug.tipo_parada.isin(["atractivo", "experiencia"])].head(3)
+    if len(lug):
+        st.markdown("<small style='opacity:.8;margin-left:18px'>📍 " + " · ".join(
+            html.escape(n) + (" ✅" if o == "curado" else "") for n, o in zip(lug.nombre, lug.origen))
+            + "</small>", unsafe_allow_html=True)
+
+
+def agenda(paradas: list, traslados: list[float]) -> list[tuple[int, float]]:
+    """(día, minuto de llegada) por parada: jornadas de 9:00 a 19:00; el día termina en la parada de pernocta."""
+    dia, reloj, out = 1, 9 * 60, []
+    for k, p in enumerate(paradas):
+        estancia = 60 * float(p.estancia_sugerida_h or 2)
+        llegada = reloj + traslados[k]
+        if k and (llegada + estancia > 19 * 60 or paradas[k - 1].es_pernocta):
+            dia, llegada = dia + 1, 9 * 60 + traslados[k]
+        out.append((dia, llegada))
+        reloj = llegada + estancia
+    return out
+
+
+def _recorrer(prop: pd.DataFrame, nombres: dict, color: dict, trazos: dict):
+    """Recorrido de una ruta del modelo con su trazo guardado, agenda por días e itinerario descargable."""
     st.markdown("#### 🛰️ Recorrer una ruta propuesta")
     sk = st.selectbox("Ruta", list(nombres), format_func=nombres.get, key="rt_recorrer",
                       label_visibility="collapsed")
     g = prop[prop.ruta_sk == sk].sort_values("orden_parada")
-    puntos = tuple((float(r.lat), float(r.lon)) for r in g.itertuples())
-    estimados = g.tiempo_desde_anterior_min.fillna(0).tolist()[1:]
-    r = navegacion.ruta(puntos, "auto") or navegacion.ruta_recta(puntos, estimados)
-    traslados = [0.0] + [t["min"] for t in r["tramos"]]
-
-    # Agenda: jornadas de 9:00 a 19:00 con la estancia sugerida por el modelo en cada parada
-    dia, reloj, agenda = 1, 9 * 60, []
-    for k, p in enumerate(g.itertuples()):
-        estancia = 60 * float(p.estancia_sugerida_h or 2)
-        llegada = reloj + traslados[k]
-        if k and llegada + estancia > 19 * 60:
-            dia, llegada = dia + 1, 9 * 60 + traslados[k]
-        agenda.append((dia, llegada))
-        reloj = llegada + estancia
+    filas = list(g.itertuples())
+    puntos = tuple((float(r.lat), float(r.lon)) for r in filas)
+    kms = g.distancia_desde_anterior_km.astype(float).tolist()[1:]
+    mins = g.tiempo_desde_anterior_min.astype(float).tolist()[1:]
+    tr = trazos.get(int(sk))
+    r = navegacion.ruta_guardada(tr["geom"], puntos, kms, mins) if tr else navegacion.ruta_recta(puntos, mins)
+    traslados = [0.0] + mins
+    ag = agenda(filas, traslados)
     hora = lambda m: f"{int(m // 60):02d}:{int(m % 60):02d}"  # noqa: E731
 
-    filas = list(g.itertuples())
     rgb = tema.hex_rgb(color[sk])
-    paradas = [dict(lon=float(p.lon), lat=float(p.lat), nombre=p.municipio, icono="⚓" if p.es_ancla else "📍",
+    paradas = [dict(lon=float(p.lon), lat=float(p.lat), nombre=p.municipio,
+                    icono="🛏️" if p.es_pernocta else ("⚓" if p.es_ancla else "📍"),
                     actividad="Destino ancla" if p.es_ancla else ("Emergente con bandera" if p.es_emergente else "Parada"),
                     detalle=f"{p.region} · estancia {p.estancia_sugerida_h:.0f} h",
                     color=tema.hex_rgb(tema.COBALTO_OSC) if p.es_ancla else rgb, orden=i,
-                    hora=f"día {agenda[i][0]}, {hora(agenda[i][1])}")
+                    hora=f"día {ag[i][0]}, {hora(ag[i][1])}")
               for i, p in enumerate(filas) if i]
-    geo = estado.datos().geo
-    limites = [f["geometry"] for f in geo["features"] if f["properties"]["cve_geo"] in set(g.cve_geo)]
+    limites = [f["geometry"] for f in bd.geo()["features"] if f["properties"]["cve_geo"] in set(g.cve_geo)]
+    itinerario = pd.DataFrame({
+        "Día": [a[0] for a in ag], "Llegada": [hora(a[1]) for a in ag],
+        "Municipio": [("⚓ " if p.es_ancla else "") + p.municipio + (" 🛏️" if p.es_pernocta else "") for p in filas],
+        "Traslado": ["salida"] + [f"{m:.0f} min · {k:.0f} km" for m, k in zip(mins, kms)],
+        "Estancia (h)": [p.estancia_sugerida_h for p in filas]})
     izq, der = st.columns([1.7, 1])
     with izq:
         p0 = filas[0]
         navegacion.mapa(dict(lon=float(p0.lon), lat=float(p0.lat), nombre=p0.municipio,
                              detalle=f"Salida: día 1, 09:00 · {p0.region}"), paradas, r, limites, "auto", alto=560)
-        st.caption("**▶ Recorrer** sigue la carretera como en un navegador · 🛰️/🗺️ cambia entre satélite y calles.")
+        st.caption("**▶ Recorrer** sigue el trazo guardado · 🛰️/🗺️ cambia entre satélite y calles.")
     with der:
         k = st.columns(2)
-        k[0].metric("Por carretera" if r["real"] else "En línea recta", f"{r['km']:,.0f} km")
-        k[1].metric("Manejo", f"{r['min'] / 60:.1f} h", f"{agenda[-1][0]} día(s)", delta_color="off")
-        st.dataframe(pd.DataFrame({
-            "Día": [a[0] for a in agenda], "Llegada": [hora(a[1]) for a in agenda],
-            "Municipio": [("⚓ " if p.es_ancla else "") + p.municipio for p in filas],
-            "Traslado": ["salida"] + [f"{t['min']:.0f} min · {t['km']:.0f} km" for t in r["tramos"]],
-        }), hide_index=True, width="stretch")
-        b = st.columns(2)
-        b[0].link_button("🗺️ Google Maps", navegacion.enlace_google(puntos, "auto"), width="stretch")
-        b[1].link_button(f"🚙 Waze a {filas[1].municipio}", navegacion.enlace_waze(*puntos[1]), width="stretch")
-        navegacion.indicaciones(r, [p.municipio for p in filas], traslados[1:])
-    fuente = ("Trazo y tiempos por carreteras de OpenStreetMap (OSRM)" if r["real"]
-              else "Sin conexión al servicio de rutas: distancias en línea recta y tiempos estimados por el modelo")
-    st.caption(f"⚠️ {fuente}.")
-
-
-# ---------------------------------------------------------------- Arma tu ruta (Rol B · Raúl)
-def _armar(d, act):
-    """Ruta a la medida: sale de cualquier municipio y visita los que elija el usuario (o los propone
-    el motor), dibujada por carretera en el mapa de navegación."""
-    pred, mp = estado.prediccion()
-    mun = d.municipios.sort_values("nombre")
-    nombres = dict(zip(mun.cve_geo, mun.nombre))
-    anclas = set(mun[mun.es_ancla].cve_geo)
-    # Solo el nombre: con la región en la etiqueta, buscar "Atlixco" encontraba toda su región primero.
-    etiqueta = lambda c: f"{'⚓ ' if c in anclas else ''}{nombres[c]}"  # noqa: E731
-    opciones = mun.cve_geo.tolist()
-    capital = mun[mun.nombre == "Puebla"].cve_geo
-    with st.container(border=True):
-        c = st.columns([1.3, 1.25, 1.85, 0.9, 0.9])
-        inicio = c[0].selectbox("🚩 Salida", opciones, format_func=etiqueta, key="ruta_inicio",
-                                index=opciones.index(capital.iloc[0]) if len(capital) else 0)
-        forma = c[1].segmented_control("Paradas", ["Automáticas", "Yo elijo"], default="Automáticas",
-                                       key="ruta_forma") or "Automáticas"
-        destinos = c[2].multiselect("Municipios a visitar (el orden se optimiza)", [o for o in opciones if o != inicio],
-                                    format_func=etiqueta, max_selections=9, key="ruta_destinos",
-                                    disabled=forma != "Yo elijo", placeholder="Escribe para buscar…")
-        dias = c[3].select_slider("📅 Días", [1, 2, 3, 4], value=2, disabled=forma != "Automáticas")
-        maximo = c[4].select_slider("Máx. paradas", list(range(3, 9)), value=6, disabled=forma != "Automáticas")
-
-    if forma == "Yo elijo" and not destinos:
-        st.info("Elige al menos un municipio a visitar. Puedes escribir su nombre para buscarlo.")
-        return
-    ruta = motor.ruta_personalizada(d, pred, inicio, destinos if forma == "Yo elijo" else None, dias, maximo)
-    if ruta is None:
-        st.warning(f"No hay municipios con oferta turística a menos de 2.5 h de {nombres[inicio]} para estas "
-                   "actividades. Prueba **Yo elijo**, más días o más actividades en la barra lateral.")
-        return
-
-    ps = ruta.paradas
-    puntos = tuple((float(p["lat"]), float(p["lon"])) for p in ps)
-    r = navegacion.ruta(puntos, "auto") or navegacion.ruta_recta(puntos, [p["min_desde_anterior"] for p in ps[1:]])
-    traslados = [0.0] + [t["min"] for t in r["tramos"]]
-
-    # Agenda: jornadas de 9:00 a 19:00; si la siguiente visita no cabe, se pasa al día siguiente.
-    dia, reloj, agenda = 1, 9 * 60, []
-    for k, p in enumerate(ps):
-        estancia = 180 if p["es_ancla"] else 150
-        llegada = reloj + traslados[k]
-        if k and llegada + estancia > 19 * 60:
-            dia, llegada = dia + 1, 9 * 60 + traslados[k]
-        agenda.append((dia, llegada))
-        reloj = llegada + estancia
-    hora = lambda m: f"{int(m // 60):02d}:{int(m % 60):02d}"  # noqa: E731
-
-    k = st.columns(5)
-    k[0].metric("Municipios", len(ps), f"{ruta.emergentes} emergentes", delta_color="off")
-    k[1].metric("Distancia por carretera" if r["real"] else "Distancia en línea recta", f"{r['km']:,.0f} km")
-    k[2].metric("Manejo", f"{r['min'] / 60:.1f} h", "tiempo de traslado", delta_color="off")
-    k[3].metric("Duración", f"{agenda[-1][0]} día{'s' if agenda[-1][0] > 1 else ''}",
-                f"regreso ≈ {hora(reloj)}", delta_color="off")
-    k[4].metric("Tema", act.corto[ruta.tema] if ruta.tema in act.index else "Mixta")
-
-    def color(p):
-        if p["es_ancla"]:
-            return tema.hex_rgb(tema.COBALTO_OSC)
-        return list(act.color[p["actividades"][0]]) if p["actividades"] else tema.hex_rgb(tema.GUINDA)
-
-    def detalle(p):
-        acts = ", ".join(act.corto[a] for a in p["actividades"][:3]) or "Sin actividad destacada"
-        return f"{p['region']} · {acts}"
-
-    izq, der = st.columns([1.7, 1])
-    with izq:
-        st.markdown(f"#### 🛰️ {ruta.nombre}")
-        paradas = [dict(lon=float(p["lon"]), lat=float(p["lat"]), nombre=p["nombre"], icono=p["iconos"] or "📍",
-                        actividad="Destino consolidado" if p["es_ancla"] else ("Oportunidad" if p["flag"] else "Emergente"),
-                        detalle=detalle(p), color=color(p), orden=i, hora=f"día {agenda[i][0]}, {hora(agenda[i][1])}")
-                   for i, p in enumerate(ps) if i]
-        cves = {p["cve_geo"] for p in ps}
-        limites = [f["geometry"] for f in d.geo["features"] if f["properties"]["cve_geo"] in cves]
-        navegacion.mapa(dict(lon=float(ps[0]["lon"]), lat=float(ps[0]["lat"]), nombre=ps[0]["nombre"],
-                             detalle=f"Salida: día 1, 09:00 · {detalle(ps[0])}"), paradas, r, limites, "auto", alto=640)
-        st.caption("**▶ Recorrer** sigue la carretera como en un navegador · clic en un municipio para ver su ficha · "
-                   "🛰️/🗺️ cambia entre satélite y mapa de calles.")
-
-    with der:
-        st.markdown("#### 🗒️ Itinerario")
-        st.dataframe(pd.DataFrame({
-            "Día": [a[0] for a in agenda], "Llegada": [hora(a[1]) for a in agenda],
-            "Municipio": [("⚓ " if p["es_ancla"] else "") + p["nombre"] for p in ps],
-            "Actividades": [p["iconos"] for p in ps],
-            "Traslado": ["salida"] + [f"{t['min']:.0f} min · {t['km']:.0f} km" for t in r["tramos"]],
-        }), hide_index=True, width="stretch")
-        b = st.columns(2)
-        b[0].link_button("🗺️ Abrir en Google Maps", navegacion.enlace_google(puntos, "auto"), width="stretch")
-        b[1].link_button(f"🚙 Ir a {ps[1]['nombre']} en Waze", navegacion.enlace_waze(*puntos[1]), width="stretch")
-        navegacion.indicaciones(r, [p["nombre"] for p in ps], traslados[1:])
-        if forma == "Automáticas":
-            st.caption(f"Paradas propuestas por el motor: municipios con oferta en las actividades elegidas, a menos "
-                       f"de 2.5 h entre sí, priorizando oportunidad y marginación, dentro de {dias} día(s).")
-
-    fuente = ("Trazo y tiempos por carreteras de OpenStreetMap (OSRM)" if r["real"]
-              else "Sin conexión al servicio de rutas: distancias en línea recta y tiempos estimados")
-    st.caption(f"⚠️ {fuente}. Estancia sugerida: 3 h en destinos consolidados y 2.5 h en el resto.")
+        k[0].metric("Por carretera", f"{r['km']:,.0f} km")
+        k[1].metric("Manejo", f"{r['min'] / 60:.1f} h", f"{ag[-1][0]} día(s)", delta_color="off")
+        st.dataframe(itinerario, hide_index=True, width="stretch")
+        st.download_button("⬇️ Itinerario (CSV)", itinerario.to_csv(index=False).encode("utf-8-sig"),
+                           f"itinerario_ruta_{sk}.csv", "text/csv", width="stretch")
+        st.link_button("🗺️ Abrir en Google Maps", navegacion.enlace_google(puntos, "auto"), width="stretch")
+    fuente = (f"Trazo por carretera guardado ({tr['fuente']})" if tr
+              else "Sin trazo guardado: tramos rectos con los tiempos de la base")
+    st.caption(f"{fuente}. Tiempos de flujo libre (sin tráfico); las reglas usan el tiempo de planeación.")

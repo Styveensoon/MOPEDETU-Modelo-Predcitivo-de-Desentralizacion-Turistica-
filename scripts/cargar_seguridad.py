@@ -5,17 +5,21 @@ del Sistema Nacional de Seguridad Pública, en https://www.gob.mx/sesnsp/accione
 (enlace de SharePoint; se descarga con .../_layouts/15/download.aspx?share=<id>).
 
 Agrupación (por subtipo):
-  homicidio                  homicidio doloso y feminicidio
-  robo_transeunte_carretera  robo a transeúnte (vía pública y espacio abierto), en transporte público e individual,
-                             y a transportista (carreteras)
-  secuestro_extorsion        secuestro y extorsión
-  otros                      el resto
+  homicidio            homicidio doloso y feminicidio
+  robo_transeunte      robo a transeúnte (vía pública y espacio abierto) y en transporte público e individual
+  robo_carretera       robo a transportista (carreteras)
+  secuestro_extorsion  secuestro y extorsión
+  otros                el resto
 Tasa por 100 mil habitantes con la población CONAPO del año (dw.fact_poblacion_anual; si falta, Censo 2020).
 
-Riesgo de ruta (fact_ruta_evaluacion.riesgo_seguridad): con el último año, percentil estatal de la tasa de delitos
-que afectan al visitante (los tres primeros grupos) en cada parada; la ruta toma el de su parada más alta:
-bajo (< P50), medio (P50-P80), alto (≥ P80). Es un semáforo para el operador, no una etiqueta pública del municipio;
-SESNSP mide denuncias, no victimización.
+Riesgo de ruta (fact_ruta_evaluacion.riesgo_seguridad), con el último año y por separado (plan_migracion_front A6):
+  · delitos en el municipio: homicidio + secuestro/extorsión + robo a transeúnte, por 100 mil hab.
+  · robo en carretera: robo a transportista, por 100 mil hab. (lo pone la autopista que cruza el municipio, no el
+    municipio; antes se mezclaba y dejaba a Esperanza como el municipio "más peligroso")
+Cada uno en percentil estatal; el nivel de la ruta sale del percentil MEDIO de sus paradas: bajo (< P50), medio
+(P50-P80), alto (≥ P80), y se informa la parada más alta. Con el máximo, casi toda ruta de 6 paradas salía "alta"
+(en municipios chicos una o dos denuncias disparan la tasa).
+Es un semáforo para el operador, no una etiqueta pública del municipio; SESNSP mide denuncias, no victimización.
 
 Uso: python scripts/cargar_seguridad.py data/raw/sesnsp/idm_puebla_2015_2025.csv
 """
@@ -35,12 +39,14 @@ MESES = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto
          "Noviembre", "Diciembre"]
 GRUPOS = {
     "homicidio": {"Homicidio doloso", "Feminicidio"},
-    "robo_transeunte_carretera": {"Robo a transeúnte en vía pública", "Robo a transeúnte en espacio abierto al público",
-                                  "Robo en transporte público colectivo", "Robo en transporte individual",
-                                  "Robo en transporte público individual", "Robo a transportista"},
+    "robo_transeunte": {"Robo a transeúnte en vía pública", "Robo a transeúnte en espacio abierto al público",
+                        "Robo en transporte público colectivo", "Robo en transporte individual",
+                        "Robo en transporte público individual"},
+    "robo_carretera": {"Robo a transportista"},
     "secuestro_extorsion": {"Secuestro", "Extorsión"},
 }
-VISITANTE = list(GRUPOS)
+EN_MUNICIPIO = ["homicidio", "secuestro_extorsion", "robo_transeunte"]
+CARRETERA = ["robo_carretera"]
 FUENTE = dict(nombre="SESNSP · Incidencia delictiva municipal (fuero común)",
               institucion="Secretariado Ejecutivo del Sistema Nacional de Seguridad Pública", tipo="Oficial",
               url="https://www.gob.mx/sesnsp/acciones-y-programas/datos-abiertos-de-incidencia-delictiva",
@@ -96,16 +102,24 @@ def main():
 
     # Riesgo para el visitante por ruta (último año)
     ultimo = g["Año"].max()
-    v = g[(g["Año"] == ultimo) & g.grupo_delito.isin(VISITANTE)].groupby("municipio_sk").tasa_100k.sum()
-    pv = v.rank(pct=True)
+    ult = g[g["Año"] == ultimo]
+    pct = {k: ult[ult.grupo_delito.isin(grupos)].groupby("municipio_sk").tasa_100k.sum().rank(pct=True)
+           for k, grupos in (("municipio", EN_MUNICIPIO), ("carretera", CARRETERA))}
     nombre = mun.set_index("municipio_sk").nombre
     paradas = sb.leer("fact_ruta_parada", "dw", "ruta_sk,municipio_sk", secreta=True)
     evaluadas = {r["ruta_sk"] for r in sb._peticion("fact_ruta_evaluacion?select=ruta_sk", True, "dw")}
+
+    def nivel(q):
+        return "alto" if q >= 0.8 else ("medio" if q >= 0.5 else "bajo")
+
     for sk, p in paradas[paradas.ruta_sk.isin(evaluadas)].groupby("ruta_sk"):
-        peor = pv.reindex(p.municipio_sk).idxmax()
-        q = pv[peor]
-        nivel = "alto" if q >= 0.8 else ("medio" if q >= 0.5 else "bajo")
-        texto = f"{nivel} (parada más alta: {nombre[peor]}, P{q * 100:.0f} estatal de delitos al visitante {ultimo})"
+        partes = []
+        for etiqueta, pv in (("delitos en el municipio", pct["municipio"]), ("robo en carretera", pct["carretera"])):
+            q = pv.reindex(p.municipio_sk)
+            peor = q.idxmax()
+            partes.append(f"{etiqueta}: {nivel(q.mean())} (P{q.mean() * 100:.0f} medio; más alta "
+                          f"{nombre[peor]} P{q[peor] * 100:.0f})")
+        texto = " · ".join(partes) + f" · SESNSP {ultimo}"
         sb._peticion(f"fact_ruta_evaluacion?ruta_sk=eq.{sk}", True, "dw", "PATCH", {"riesgo_seguridad": texto},
                      {"Prefer": "return=minimal"})
         print(f"  ruta #{sk}: {texto}")

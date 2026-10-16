@@ -1,5 +1,4 @@
 ancla,tema,paradas,recorrido,emergentes,factible,puntaje,candidatos_tema,necesidad_social
-Tlatlauquitepec,arqueologia,3,Tlatlauquitepec → Tepeyahualco → Guadalupe Victoria,2,True,2.774,4,0.32
 Atlixco,arqueologia,1,Atlixco,0,False,,4,
 Cuetzalan del Progreso,arqueologia,1,Cuetzalan del Progreso,0,False,,4,
 Chignahuapan,arqueologia,1,Chignahuapan,0,False,,4,
@@ -9,26 +8,27 @@ Puebla,arqueologia,1,Puebla,0,False,,4,
 San Andrés Cholula,arqueologia,1,San Andrés Cholula,0,False,,4,
 San Pedro Cholula,arqueologia,1,San Pedro Cholula,0,False,,4,
 Tehuacán,arqueologia,1,Tehuacán,0,False,,4,
+Tlatlauquitepec,arqueologia,3,Tlatlauquitepec → Tepeyahualco → Guadalupe Victoria,1,False,,4,0.32
 Xicotepec,arqueologia,1,Xicotepec,0,False,,4,
 Zacatlán,arqueologia,1,Zacatlán,0,False,,4,
-Chignahuapan,artesanias,6,Chignahuapan → Aquixtla → Zacapoaxtla → Jonotla → Tuzamapan de Galeana → Tenampulco,4,True,8.735,18,0.64
-Zacatlán,artesanias,6,Zacatlán → Aquixtla → Zacapoaxtla → Jonotla → Tuzamapan de Galeana → Tenampulco,4,True,8.726,18,0.64
-Huauchinango,artesanias,6,Huauchinango → Aquixtla → Zacapoaxtla → Jonotla → Tuzamapan de Galeana → Tenampulco,4,True,8.627,18,0.64
-Tlatlauquitepec,artesanias,4,Tlatlauquitepec → Jonotla → Tuzamapan de Galeana → Tenampulco,3,True,6.04,18,0.73
-Cuetzalan del Progreso,artesanias,4,Cuetzalan del Progreso → Jonotla → Tuzamapan de Galeana → Tenampulco,3,True,5.513,18,0.73
-Atlixco,artesanias,4,Atlixco → Atzitzihuacán → Cohuecan → Acteopan,3,True,4.583,18,0.72
-San Pedro Cholula,artesanias,4,San Pedro Cholula → Atzitzihuacán → Cohuecan → Acteopan,3,True,4.483,18,0.72
-San Andrés Cholula,artesanias,4,San Andrés Cholula → Tecali de Herrera → Acajete → San Salvador el Seco,3,True,3.643,18,0.25
-Puebla,artesanias,4,Puebla → Acajete → Tecali de Herrera → San Salvador el Seco,3,True,3.575,18,0.25
-Tehuacán,artesanias,4,Tehuacán → San Salvador el Seco → Acajete → Tecali de Herrera,3,True,3.47,18,0.25
+Tlatlauquitepec,artesanias,6,Tlatlauquitepec → Zautla → Zacapoaxtla → Jonotla → Tuzamapan de Galeana → Tenampulco,4,True,9.31,18,0.68
+Cuetzalan del Progreso,artesanias,4,Cuetzalan del Progreso → Jonotla → Tuzamapan de Galeana → Tenampulco,3,True,5.5,18,0.73
+Atlixco,artesanias,4,Atlixco → Atzitzihuacán → Cohuecan → Acteopan,3,True,4.58,18,0.72
+San Pedro Cholula,artesanias,4,San Pedro Cholula → Atzitzihuacán → Cohuecan → Acteopan,3,True,4.478,18,0.72
+San Andrés Cholula,artesanias,4,San Andrés Cholula → Tecali de Herrera → Acajete → San Salvador el Seco,3,True,3.635,18,0.25
+Puebla,artesanias,4,Puebla → Acajete → Tecali de Herrera → San Salvador el Seco,3,True,3.568,18,0.25
+Chignahuapan,artesanias,2,Chignahuapan → Aquixtla,1,False,,18,0.58
+Huauchinango,artesanias,1,Huauchinango,0,False,,18,
 Pahuatlán,artesanias,1,Pahuatlán,0,False,,18,
+Tehuacán,artesanias,1,Tehuacán,0,False,,18,
 Xicotepec,artesanias,1,Xicotepec,0,False,,18,
-San Andrés Cholula,balnearios,5,San Andrés Cholula → San Salvador el Verde → Tepatlaxco de Hidalgo → Nopalucan → Cuyoaco,4,True,5.56,8,0.17
-San Pedro Cholula,balnearios,5,San Pedro Cholula → San Salvador el Verde → Tepatlaxco de Hidalgo → Nopalucan → Cuyoaco,4,True,5.557,8,0.17
-Atlixco,balnearios,5,Atlixco → San Salvador el Verde → Tepatlaxco de Hidalgo → Nopalucan → Cuyoaco,4,True,5.528,8,0.17
-Tlatlauquitepec,balnearios,5,Tlatlauquitepec → Cuyoaco → Nopalucan → Tepatlaxco de Hidalgo → San Salvador el Verde,4,True,5.499,8,0.17
-Cuetzalan del Progreso,balnearios,5,Cuetzalan del Progreso → Cuyoaco → Nopalucan → Tepatlaxco de Hidalgo → San Salvador el Verde,4,True,5.401,8,0.17
-Puebla,balnearios,4,Puebla → Tepatlaxco de Hidalgo → Nopalucan → Cuyoaco,3,True,4.247,8,0.2
+Zacatlán,artesanias,2,Zacatlán → Aquixtla,1,False,,18,0.58
+San Andrés Cholula,balnearios,5,San Andrés Cholula → San Salvador el Verde → Tepatlaxco de Hidalgo → Nopalucan → Cuyoaco,4,True,5.549,8,0.17
+San Pedro Cholula,balnearios,5,San Pedro Cholula → San Salvador el Verde → Tepatlaxco de Hidalgo → Nopalucan → Cuyoaco,4,True,5.546,8,0.17
+Atlixco,balnearios,5,Atlixco → San Salvador el Verde → Tepatlaxco de Hidalgo → Nopalucan → Cuyoaco,4,True,5.515,8,0.17
+Tlatlauquitepec,balnearios,5,Tlatlauquitepec → Cuyoaco → Nopalucan → Tepatlaxco de Hidalgo → San Salvador el Verde,4,True,5.486,8,0.17
+Puebla,balnearios,4,Puebla → Tepatlaxco de Hidalgo → Nopalucan → Cuyoaco,3,True,4.24,8,0.2
+Cuetzalan del Progreso,balnearios,1,Cuetzalan del Progreso,0,False,,8,
 Chignahuapan,balnearios,1,Chignahuapan,0,False,,8,
 Huauchinango,balnearios,1,Huauchinango,0,False,,8,
 Pahuatlán,balnearios,1,Pahuatlán,0,False,,8,
@@ -41,72 +41,72 @@ Chignahuapan,bebidas_tradicionales,1,Chignahuapan,0,False,,3,
 Huauchinango,bebidas_tradicionales,1,Huauchinango,0,False,,3,
 Pahuatlán,bebidas_tradicionales,1,Pahuatlán,0,False,,3,
 Puebla,bebidas_tradicionales,2,Puebla → Huejotzingo,0,False,,3,0.05
-San Andrés Cholula,bebidas_tradicionales,3,San Andrés Cholula → Tecamachalco → Palmar de Bravo,1,False,,3,0.33
+San Andrés Cholula,bebidas_tradicionales,2,San Andrés Cholula → Huejotzingo,0,False,,3,0.05
 San Pedro Cholula,bebidas_tradicionales,2,San Pedro Cholula → Huejotzingo,0,False,,3,0.05
 Tehuacán,bebidas_tradicionales,3,Tehuacán → Palmar de Bravo → Tecamachalco,1,False,,3,0.33
 Tlatlauquitepec,bebidas_tradicionales,1,Tlatlauquitepec,0,False,,3,
 Xicotepec,bebidas_tradicionales,1,Xicotepec,0,False,,3,
 Zacatlán,bebidas_tradicionales,1,Zacatlán,0,False,,3,
-Cuetzalan del Progreso,cafe,6,Cuetzalan del Progreso → Jonotla → Zoquiapan → Zapotitlán de Méndez → Huitzilan de Serdán → Zongozotla,4,True,8.857,25,0.76
-Tlatlauquitepec,cafe,6,Tlatlauquitepec → Jonotla → Zoquiapan → Zapotitlán de Méndez → Huitzilan de Serdán → Zongozotla,4,True,8.829,25,0.76
-Xicotepec,cafe,6,Xicotepec → Zihuateutla → Naupan → Tlacuilotepec → Tlaxco → Pantepec,4,True,8.112,25,0.86
-Pahuatlán,cafe,5,Pahuatlán → Tlacuilotepec → Naupan → Zihuateutla → Pantepec,4,True,6.938,25,0.86
-Huauchinango,cafe,5,Huauchinango → Zihuateutla → Naupan → Tlacuilotepec → Tlaxco,3,True,6.743,25,0.85
-Chignahuapan,cafe,5,Chignahuapan → Zihuateutla → Naupan → Tlacuilotepec → Tlaxco,3,True,6.683,25,0.85
+Tlatlauquitepec,cafe,6,Tlatlauquitepec → Zautla → Zacapoaxtla → Jonotla → Zoquiapan → Zapotitlán de Méndez,4,True,8.979,25,0.69
+Cuetzalan del Progreso,cafe,6,Cuetzalan del Progreso → Jonotla → Zoquiapan → Zapotitlán de Méndez → Huitzilan de Serdán → Zongozotla,4,True,8.843,25,0.76
+Pahuatlán,cafe,3,Pahuatlán → Tlacuilotepec → Tlaxco,2,True,3.547,25,0.88
 Atlixco,cafe,2,Atlixco → Tochimilco,1,False,,25,0.62
+Chignahuapan,cafe,1,Chignahuapan,0,False,,25,
+Huauchinango,cafe,2,Huauchinango → Zihuateutla,1,False,,25,0.8
 Puebla,cafe,2,Puebla → Tochimilco,1,False,,25,0.62
 San Andrés Cholula,cafe,2,San Andrés Cholula → Tochimilco,1,False,,25,0.62
 San Pedro Cholula,cafe,2,San Pedro Cholula → Tochimilco,1,False,,25,0.62
 Tehuacán,cafe,3,Tehuacán → Ajalpan → San José Miahuatlán,1,False,,25,0.67
+Xicotepec,cafe,2,Xicotepec → Zihuateutla,1,False,,25,0.8
 Zacatlán,cafe,1,Zacatlán,0,False,,25,
-Atlixco,ecoturismo,6,Atlixco → Huaquechula → Atzitzihuacán → Cohuecan → San Nicolás de los Ranchos → Nealtican,5,True,7.529,20,0.41
-San Andrés Cholula,ecoturismo,6,San Andrés Cholula → Calpan → San Nicolás de los Ranchos → Nealtican → Atzitzihuacán → Huaquechula,5,True,7.494,20,0.36
-Puebla,ecoturismo,6,Puebla → Calpan → San Nicolás de los Ranchos → Nealtican → Atzitzihuacán → Huaquechula,5,True,7.485,20,0.36
-San Pedro Cholula,ecoturismo,6,San Pedro Cholula → Calpan → San Nicolás de los Ranchos → Nealtican → Atzitzihuacán → Huaquechula,5,True,7.244,20,0.36
-Zacatlán,ecoturismo,5,Zacatlán → Tetela de Ocampo → Zoquiapan → Xochitlán de Vicente Suárez → Hueytlalpan,4,True,6.699,20,0.81
-Chignahuapan,ecoturismo,5,Chignahuapan → Tetela de Ocampo → Zoquiapan → Xochitlán de Vicente Suárez → Hueytlalpan,4,True,6.415,20,0.81
-Tehuacán,ecoturismo,5,Tehuacán → Atzitzintla → Chalchicomula de Sesma → Chilchotla → Tepeyahualco,4,True,6.026,20,0.52
-Tlatlauquitepec,ecoturismo,4,Tlatlauquitepec → Zoquiapan → Xochitlán de Vicente Suárez → Tetela de Ocampo,3,True,5.061,20,0.75
-Cuetzalan del Progreso,ecoturismo,4,Cuetzalan del Progreso → Zoquiapan → Xochitlán de Vicente Suárez → Hueytlalpan,3,True,4.994,20,0.89
+San Andrés Cholula,ecoturismo,6,San Andrés Cholula → Calpan → San Nicolás de los Ranchos → Nealtican → Atzitzihuacán → Huaquechula,5,True,7.487,20,0.36
+Atlixco,ecoturismo,6,Atlixco → Huaquechula → Atzitzihuacán → Cohuecan → Nealtican → San Nicolás de los Ranchos,5,True,7.477,20,0.41
+Puebla,ecoturismo,6,Puebla → Calpan → San Nicolás de los Ranchos → Nealtican → Atzitzihuacán → Huaquechula,5,True,7.477,20,0.36
+San Pedro Cholula,ecoturismo,6,San Pedro Cholula → Calpan → San Nicolás de los Ranchos → Nealtican → Atzitzihuacán → Huaquechula,5,True,7.238,20,0.36
+Tehuacán,ecoturismo,5,Tehuacán → Atzitzintla → Chalchicomula de Sesma → Oriental → Tepeyahualco,4,True,5.938,20,0.38
+Cuetzalan del Progreso,ecoturismo,4,Cuetzalan del Progreso → Zoquiapan → Xochitlán de Vicente Suárez → Hueytlalpan,3,True,4.982,20,0.89
+Tlatlauquitepec,ecoturismo,4,Tlatlauquitepec → Zoquiapan → Xochitlán de Vicente Suárez → Hueytlalpan,3,True,4.96,20,0.89
+Chignahuapan,ecoturismo,2,Chignahuapan → Tetela de Ocampo,1,False,,20,0.56
 Huauchinango,ecoturismo,2,Huauchinango → Honey,1,False,,20,0.65
 Pahuatlán,ecoturismo,2,Pahuatlán → Honey,1,False,,20,0.65
 Xicotepec,ecoturismo,2,Xicotepec → Honey,1,False,,20,0.65
-Tehuacán,flores_viveros,6,Tehuacán → Zapotitlán → Chapulco → Quecholac → Los Reyes de Juárez → Cuapiaxtla de Madero,3,True,7.183,12,0.38
-Atlixco,flores_viveros,3,Atlixco → Santa Isabel Cholula → San Felipe Teotlalcingo,2,True,3.803,12,0.42
-Puebla,flores_viveros,3,Puebla → Santa Isabel Cholula → San Felipe Teotlalcingo,2,True,3.684,12,0.42
-San Pedro Cholula,flores_viveros,3,San Pedro Cholula → Santa Isabel Cholula → San Felipe Teotlalcingo,2,True,3.679,12,0.42
-San Andrés Cholula,flores_viveros,3,San Andrés Cholula → Santa Isabel Cholula → San Felipe Teotlalcingo,2,True,3.412,12,0.42
-Tlatlauquitepec,flores_viveros,3,Tlatlauquitepec → Oriental → Chilchotla,2,True,3.264,12,0.47
+Zacatlán,ecoturismo,1,Zacatlán,0,False,,20,
+Tehuacán,flores_viveros,6,Tehuacán → Zapotitlán → Chapulco → Quecholac → Los Reyes de Juárez → Cuapiaxtla de Madero,3,True,7.162,12,0.38
+Tlatlauquitepec,flores_viveros,6,Tlatlauquitepec → Oriental → Los Reyes de Juárez → Cuapiaxtla de Madero → Quecholac → Chapulco,3,True,6.904,12,0.31
+Atlixco,flores_viveros,3,Atlixco → Santa Isabel Cholula → San Felipe Teotlalcingo,2,True,3.799,12,0.42
+Puebla,flores_viveros,3,Puebla → Santa Isabel Cholula → San Felipe Teotlalcingo,2,True,3.68,12,0.42
+San Pedro Cholula,flores_viveros,3,San Pedro Cholula → Santa Isabel Cholula → San Felipe Teotlalcingo,2,True,3.675,12,0.42
+San Andrés Cholula,flores_viveros,3,San Andrés Cholula → Santa Isabel Cholula → San Felipe Teotlalcingo,2,True,3.408,12,0.42
 Cuetzalan del Progreso,flores_viveros,1,Cuetzalan del Progreso,0,False,,12,
 Chignahuapan,flores_viveros,3,Chignahuapan → Juan Galindo → Tlaola,1,False,,12,0.48
 Huauchinango,flores_viveros,3,Huauchinango → Juan Galindo → Tlaola,1,False,,12,0.48
-Pahuatlán,flores_viveros,3,Pahuatlán → Juan Galindo → Tlaola,1,False,,12,0.48
+Pahuatlán,flores_viveros,1,Pahuatlán,0,False,,12,
 Xicotepec,flores_viveros,3,Xicotepec → Juan Galindo → Tlaola,1,False,,12,0.48
 Zacatlán,flores_viveros,3,Zacatlán → Juan Galindo → Tlaola,1,False,,12,0.48
-Cuetzalan del Progreso,gastronomia,6,Cuetzalan del Progreso → Jonotla → Huehuetla → Ixtepec → Zapotitlán de Méndez → Zongozotla,5,True,8.464,61,0.79
-Tlatlauquitepec,gastronomia,6,Tlatlauquitepec → Zaragoza → Nauzontla → Jonotla → Huehuetla → Ixtepec,5,True,8.16,61,0.67
-Pahuatlán,gastronomia,6,Pahuatlán → Honey → Tlacuilotepec → Tlaxco → Juan Galindo → Zihuateutla,4,True,6.842,61,0.65
-Chignahuapan,gastronomia,6,Chignahuapan → Zihuateutla → Juan Galindo → Honey → Tlacuilotepec → Tlaxco,4,True,6.818,61,0.65
-Tehuacán,gastronomia,6,Tehuacán → San Gabriel Chilac → Zapotitlán → Esperanza → Cañada Morelos → Nicolás Bravo,5,True,6.713,61,0.48
-Atlixco,gastronomia,6,Atlixco → Epatlán → Izúcar de Matamoros → Tlapanalá → San Jerónimo Tecuanipan → Cuautinchán,5,True,5.786,61,0.44
-Puebla,gastronomia,6,Puebla → Cuautinchán → Tepeaca → Cuapiaxtla de Madero → Huitziltepec → Atoyatempan,3,True,5.621,61,0.35
-San Andrés Cholula,gastronomia,6,San Andrés Cholula → Cuautinchán → Tepeaca → Cuapiaxtla de Madero → Huitziltepec → Atoyatempan,3,True,5.611,61,0.35
-Xicotepec,gastronomia,5,Xicotepec → Juan Galindo → Zihuateutla → Venustiano Carranza → Francisco Z. Mena,4,True,5.413,61,0.53
-Huauchinango,gastronomia,5,Huauchinango → Juan Galindo → Zihuateutla → Venustiano Carranza → Francisco Z. Mena,4,True,5.411,61,0.53
-Zacatlán,gastronomia,5,Zacatlán → Juan Galindo → Tlaxco → Tlacuilotepec → Honey,3,True,5.291,61,0.62
-San Pedro Cholula,gastronomia,6,San Pedro Cholula → San Jerónimo Tecuanipan → Tlapanalá → Epatlán → Izúcar de Matamoros → Chietla,4,True,5.265,61,0.35
-Atlixco,mezcal,6,Atlixco → Tianguismanalco → Huejotzingo → Tepeojuma → Huehuetlán el Grande → Tecali de Herrera,4,True,7.222,17,0.3
-San Pedro Cholula,mezcal,6,San Pedro Cholula → Huejotzingo → Tianguismanalco → Tecali de Herrera → Huehuetlán el Grande → Tepeojuma,4,True,7.21,17,0.3
-Tehuacán,mezcal,5,Tehuacán → Tlacotepec de Benito Juárez → Tecali de Herrera → Huehuetlán el Grande → Tepeojuma,4,True,6.558,17,0.44
-San Andrés Cholula,mezcal,5,San Andrés Cholula → Huehuetlán el Grande → Tecali de Herrera → Tepeaca → Tlacotepec de Benito Juárez,3,True,6.16,17,0.41
-Puebla,mezcal,5,Puebla → Huehuetlán el Grande → Tecali de Herrera → Tepeaca → Tlacotepec de Benito Juárez,3,True,6.134,17,0.41
-Cuetzalan del Progreso,mezcal,5,Cuetzalan del Progreso → Xochitlán de Vicente Suárez → Tetela de Ocampo → Xochiapulco → Libres,2,True,5.93,17,0.57
-Zacatlán,mezcal,5,Zacatlán → Tetela de Ocampo → Xochitlán de Vicente Suárez → Xochiapulco → Libres,2,True,5.916,17,0.57
-Tlatlauquitepec,mezcal,5,Tlatlauquitepec → Libres → Xochiapulco → Tetela de Ocampo → Xochitlán de Vicente Suárez,2,True,5.849,17,0.57
-Chignahuapan,mezcal,5,Chignahuapan → Tetela de Ocampo → Xochitlán de Vicente Suárez → Xochiapulco → Libres,2,True,5.676,17,0.57
+Cuetzalan del Progreso,gastronomia,6,Cuetzalan del Progreso → Jonotla → Nauzontla → Zapotitlán de Méndez → Ixtepec → Huehuetla,5,True,8.531,61,0.78
+Tlatlauquitepec,gastronomia,6,Tlatlauquitepec → Zaragoza → Nauzontla → Jonotla → Huehuetla → Ixtepec,5,True,8.14,61,0.67
+Tehuacán,gastronomia,6,Tehuacán → Zapotitlán → San Gabriel Chilac → Cañada Morelos → Esperanza → Nicolás Bravo,5,True,6.701,61,0.48
+Puebla,gastronomia,6,Puebla → Cuautinchán → Tepeaca → Cuapiaxtla de Madero → Huitziltepec → Atoyatempan,3,True,5.615,61,0.35
+San Andrés Cholula,gastronomia,6,San Andrés Cholula → Cuautinchán → Tepeaca → Cuapiaxtla de Madero → Huitziltepec → Atoyatempan,3,True,5.604,61,0.35
+Atlixco,gastronomia,6,Atlixco → San Jerónimo Tecuanipan → Tlapanalá → Epatlán → Izúcar de Matamoros → Chietla,4,True,5.274,61,0.35
+San Pedro Cholula,gastronomia,6,San Pedro Cholula → San Jerónimo Tecuanipan → Tlapanalá → Epatlán → Izúcar de Matamoros → Chietla,4,True,5.256,61,0.35
+Pahuatlán,gastronomia,4,Pahuatlán → Honey → Tlacuilotepec → Tlaxco,3,True,4.6,61,0.81
+Chignahuapan,gastronomia,4,Chignahuapan → Honey → Tlacuilotepec → Tlaxco,3,True,4.311,61,0.81
+Xicotepec,gastronomia,4,Xicotepec → Juan Galindo → Zihuateutla → Venustiano Carranza,3,True,4.036,61,0.45
+Huauchinango,gastronomia,4,Huauchinango → Juan Galindo → Zihuateutla → Venustiano Carranza,3,True,4.035,61,0.45
+Zacatlán,gastronomia,4,Zacatlán → Juan Galindo → Zihuateutla → Venustiano Carranza,3,True,3.935,61,0.45
+Atlixco,mezcal,6,Atlixco → Tianguismanalco → Huejotzingo → Tecali de Herrera → Molcaxac → Huehuetlán el Grande,4,True,7.007,17,0.33
+Tehuacán,mezcal,5,Tehuacán → Tlacotepec de Benito Juárez → Tecali de Herrera → Molcaxac → Huehuetlán el Grande,4,True,6.226,17,0.48
+San Pedro Cholula,mezcal,5,San Pedro Cholula → Huejotzingo → Tianguismanalco → Tecali de Herrera → Huehuetlán el Grande,3,True,5.899,17,0.3
+Puebla,mezcal,4,Puebla → Huehuetlán el Grande → Tecali de Herrera → Tlacotepec de Benito Juárez,3,True,5.166,17,0.48
+Cuetzalan del Progreso,mezcal,4,Cuetzalan del Progreso → Xochitlán de Vicente Suárez → Xochiapulco → Tetela de Ocampo,2,True,4.893,17,0.71
+Tlatlauquitepec,mezcal,4,Tlatlauquitepec → Xochitlán de Vicente Suárez → Xochiapulco → Tetela de Ocampo,2,True,4.874,17,0.71
+San Andrés Cholula,mezcal,4,San Andrés Cholula → Huehuetlán el Grande → Tecali de Herrera → Tlacotepec de Benito Juárez,3,True,4.713,17,0.48
+Chignahuapan,mezcal,4,Chignahuapan → Tetela de Ocampo → Xochiapulco → Xochitlán de Vicente Suárez,2,True,4.612,17,0.71
 Huauchinango,mezcal,1,Huauchinango,0,False,,17,
 Pahuatlán,mezcal,1,Pahuatlán,0,False,,17,
 Xicotepec,mezcal,1,Xicotepec,0,False,,17,
+Zacatlán,mezcal,1,Zacatlán,0,False,,17,
 Atlixco,museos,1,Atlixco,0,False,,0,
 Cuetzalan del Progreso,museos,1,Cuetzalan del Progreso,0,False,,0,
 Chignahuapan,museos,1,Chignahuapan,0,False,,0,
@@ -119,11 +119,11 @@ Tehuacán,museos,1,Tehuacán,0,False,,0,
 Tlatlauquitepec,museos,1,Tlatlauquitepec,0,False,,0,
 Xicotepec,museos,1,Xicotepec,0,False,,0,
 Zacatlán,museos,1,Zacatlán,0,False,,0,
-Tehuacán,religioso,6,Tehuacán → Chalchicomula de Sesma → Quecholac → Acatzingo → Atoyatempan → Cuautinchán,3,True,7.258,18,0.39
-Puebla,religioso,6,Puebla → Cuautinchán → Tecali de Herrera → Atoyatempan → Huitziltepec → Acatzingo,4,True,7.039,18,0.36
-San Pedro Cholula,religioso,5,San Pedro Cholula → Tochimilco → Huaquechula → Izúcar de Matamoros → Tehuitzingo,4,True,6.605,18,0.48
-Atlixco,religioso,5,Atlixco → Tochimilco → Huaquechula → Izúcar de Matamoros → Tehuitzingo,4,True,6.36,18,0.48
-San Andrés Cholula,religioso,5,San Andrés Cholula → Tochimilco → Huaquechula → Izúcar de Matamoros → Tehuitzingo,4,True,5.969,18,0.48
+Tehuacán,religioso,6,Tehuacán → Chalchicomula de Sesma → Quecholac → Acatzingo → Atoyatempan → Cuautinchán,3,True,7.241,18,0.39
+Puebla,religioso,6,Puebla → Cuautinchán → Tecali de Herrera → Atoyatempan → Huitziltepec → Acatzingo,4,True,7.032,18,0.36
+San Pedro Cholula,religioso,5,San Pedro Cholula → Tochimilco → Huaquechula → Izúcar de Matamoros → Tehuitzingo,4,True,6.596,18,0.48
+Atlixco,religioso,5,Atlixco → Tochimilco → Huaquechula → Izúcar de Matamoros → Tehuitzingo,4,True,6.352,18,0.48
+San Andrés Cholula,religioso,5,San Andrés Cholula → Tochimilco → Huaquechula → Izúcar de Matamoros → Tehuitzingo,4,True,5.96,18,0.48
 Cuetzalan del Progreso,religioso,2,Cuetzalan del Progreso → Jonotla,1,False,,18,0.78
 Chignahuapan,religioso,1,Chignahuapan,0,False,,18,
 Huauchinango,religioso,1,Huauchinango,0,False,,18,
@@ -131,15 +131,15 @@ Pahuatlán,religioso,1,Pahuatlán,0,False,,18,
 Tlatlauquitepec,religioso,2,Tlatlauquitepec → Jonotla,1,False,,18,0.78
 Xicotepec,religioso,1,Xicotepec,0,False,,18,
 Zacatlán,religioso,1,Zacatlán,0,False,,18,
-San Pedro Cholula,volcanes,6,San Pedro Cholula → Nealtican → Calpan → San Jerónimo Tecuanipan → Tochimilco → Atzitzihuacán,5,True,8.508,11,0.42
-Atlixco,volcanes,6,Atlixco → Tochimilco → Atzitzihuacán → Cohuecan → Huaquechula → San Jerónimo Tecuanipan,5,True,8.29,11,0.56
-Puebla,volcanes,6,Puebla → San Jerónimo Tecuanipan → Cohuecan → Huaquechula → Atzitzihuacán → Tochimilco,5,True,8.261,11,0.56
-San Andrés Cholula,volcanes,6,San Andrés Cholula → Nealtican → Calpan → San Jerónimo Tecuanipan → Tochimilco → Atzitzihuacán,5,True,7.729,11,0.42
+San Pedro Cholula,volcanes,6,San Pedro Cholula → Nealtican → Calpan → San Jerónimo Tecuanipan → Tochimilco → Atzitzihuacán,5,True,8.502,11,0.42
+Atlixco,volcanes,6,Atlixco → Tochimilco → Atzitzihuacán → Cohuecan → Huaquechula → San Jerónimo Tecuanipan,5,True,8.281,11,0.56
+Puebla,volcanes,6,Puebla → San Jerónimo Tecuanipan → Cohuecan → Huaquechula → Atzitzihuacán → Tochimilco,5,True,8.251,11,0.56
+San Andrés Cholula,volcanes,6,San Andrés Cholula → Nealtican → Calpan → San Jerónimo Tecuanipan → Tochimilco → Atzitzihuacán,5,True,7.722,11,0.42
 Cuetzalan del Progreso,volcanes,1,Cuetzalan del Progreso,0,False,,11,
 Chignahuapan,volcanes,1,Chignahuapan,0,False,,11,
 Huauchinango,volcanes,1,Huauchinango,0,False,,11,
 Pahuatlán,volcanes,1,Pahuatlán,0,False,,11,
-Tehuacán,volcanes,2,Tehuacán → San Salvador el Seco,1,False,,11,0.19
+Tehuacán,volcanes,1,Tehuacán,0,False,,11,
 Tlatlauquitepec,volcanes,1,Tlatlauquitepec,0,False,,11,
 Xicotepec,volcanes,1,Xicotepec,0,False,,11,
 Zacatlán,volcanes,1,Zacatlán,0,False,,11,

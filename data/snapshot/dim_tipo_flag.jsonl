@@ -1,0 +1,6 @@
+{"tipo_flag_sk":1,"codigo":"OFERTA_EMERGENTE","descripcion":"Cociente de localización alto con volumen mínimo y sin ser ancla ni Pueblo Mágico","prioridad":1}
+{"tipo_flag_sk":2,"codigo":"ACCESIBLE_NO_EXPLOTADO","descripcion":"Cercano a un ancla y con oferta baja respecto a su potencial","prioridad":2}
+{"tipo_flag_sk":3,"codigo":"BARRERA_ACCESO","descripcion":"Oferta relevante pero lejos de anclas o de municipios con servicios","prioridad":3}
+{"tipo_flag_sk":4,"codigo":"IMPACTO_SOCIAL","descripcion":"Flag activo en municipio con marginación alta o muy alta","prioridad":1}
+{"tipo_flag_sk":5,"codigo":"OFERTA_SIN_REGISTRO","descripcion":"Actividad reconocida en una ruta oficial sin registro en el DENUE (oferta informal o no registrada)","prioridad":1}
+{"tipo_flag_sk":6,"codigo":"OFERTA_INVISIBLE","descripcion":"Oferta del eje en percentil ≥ 60 con visibilidad en percentil ≤ 35 (vistas de Wikipedia, dw.fact_visibilidad)","prioridad":1}

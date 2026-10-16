@@ -46,12 +46,13 @@ def pct(s: pd.Series) -> pd.Series:
 @lru_cache(maxsize=1)
 def cargar() -> Base:
     leer = lambda t, sel="*": sb.leer(t, "dw", sel, secreta=True)
-    mun = leer("dim_municipio", "municipio_sk,cve_geo,nombre,region,es_pueblo_magico,es_ancla,superficie_km2")
+    # Coordenadas de la cabecera municipal: los tiempos de fact_accesibilidad se calculan entre cabeceras
+    mun = leer("dim_municipio", "municipio_sk,cve_geo,nombre,region,es_pueblo_magico,es_ancla,superficie_km2,"
+                                "cabecera_nombre,cabecera_lat,cabecera_lon")
     mun["cve_geo"] = mun.cve_geo.str.strip()
-    import json
-    geo = json.loads((RAIZ / "data" / "geo" / "puebla_municipios.geojson").read_text(encoding="utf-8"))
-    cent = pd.DataFrame([f["properties"] for f in geo["features"]])[["cve_geo", "lon", "lat"]]
-    mun = mun.merge(cent, on="cve_geo").set_index("municipio_sk").sort_index()
+    mun = mun.rename(columns={"cabecera_lat": "lat", "cabecera_lon": "lon"})
+    mun[["lat", "lon"]] = mun[["lat", "lon"]].astype(float)
+    mun = mun.set_index("municipio_sk").sort_index()
 
     periodos = {r["etiqueta"]: r["periodo_sk"] for r in sb._peticion("dim_periodo?select=*", True, "dw")}
     fuentes = {r["nombre"]: r["fuente_sk"] for r in sb._peticion("dim_fuente?select=fuente_sk,nombre", True, "dw")}

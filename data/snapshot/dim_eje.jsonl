@@ -1,0 +1,5 @@
+{"eje_sk":0,"codigo":"global","nombre":"Global","descripcion":"Índice combinado de todos los ejes"}
+{"eje_sk":1,"codigo":"hospedaje","nombre":"Hospedaje","descripcion":"Hoteles, cabañas, campamentos, casas de huéspedes"}
+{"eje_sk":2,"codigo":"alimentos","nombre":"Alimentos y bebidas","descripcion":"Restaurantes, cafeterías, bares y preparación de alimentos"}
+{"eje_sk":3,"codigo":"turismo","nombre":"Turismo y cultura","descripcion":"Agencias de viajes, museos, sitios históricos, esparcimiento y recreación"}
+{"eje_sk":4,"codigo":"comercio_turistico","nombre":"Comercio turístico","descripcion":"Artesanías y comercio dirigido al visitante (definir códigos SCIAN)"}

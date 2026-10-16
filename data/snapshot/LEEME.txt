@@ -1,0 +1,23 @@
+Copia local de la base MOPEDETU (Supabase, esquema dw) para usar el tablero sin internet
+2026-10-15 19:35
+Objeto	Filas
+dw.v_vigente	1
+dw.v_ficha_municipio	217
+dw.v_ruta_parada	169
+dw.v_indice_municipio	217
+dw.fact_indice_oportunidad	2604
+dw.fact_flag_oportunidad	13888
+dw.dim_tipo_flag	6
+dw.v_concentracion_eje	5
+dw.fact_escenario_concentracion	3
+dw.fact_oferta_municipio_eje	868
+dw.fact_ruta_evaluacion	6
+dw.dim_fuente	22
+dw.dim_modelo	15
+dw.fact_validacion	12
+dw.dim_actividad	14
+dw.dim_eje	5
+dw.dim_municipio	217
+dw.v_lugar_circuito	12003
+dw.fact_demanda_hotelera	36
+dw.v_aptitud_circuito	217
