@@ -205,6 +205,9 @@ def main():
     base.asegurar_modelo(dict(nombre="enlace_linea_base_distancia", tarea="linea_base",
                               algoritmo="Puntaje = −distancia", metricas={"cv": res["b_distancia"]},
                               variables={"compara_con": modelo["nombre"]}))
+    base.asegurar_modelo(dict(nombre="enlace_linea_base_similitud", tarea="linea_base",
+                              algoritmo="Puntaje = similitud coseno de perfiles", metricas={"cv": res["b_similitud"]},
+                              variables={"compara_con": modelo["nombre"]}))
     X.assign(prob=prob, cv=pred).to_csv(RAIZ / "data" / "derivados" / "enlaces_pares.csv", index=False)
 
 

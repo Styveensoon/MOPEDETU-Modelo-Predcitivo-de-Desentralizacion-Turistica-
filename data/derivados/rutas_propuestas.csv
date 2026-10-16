@@ -1,6 +1,6 @@
 ruta_sk,nombre,recorrido,puntaje,minutos,novedad
-80,Café · Cuetzalan del Progreso → Zacapoaxtla (propuesta 1),Cuetzalan del Progreso → Jonotla → Zoquiapan → Zapotitlán de Méndez → Xochitlán de Vicente Suárez → Zacapoaxtla,9.19967527674789,76.7,nueva
-81,Volcanes y alta montaña · San Pedro Cholula → Atzitzihuacán (propuesta 2),San Pedro Cholula → San Jerónimo Tecuanipan → Nealtican → Calpan → Tochimilco → Atzitzihuacán,8.289663826812545,99.0,nueva
-82,Gastronomía tradicional · Cuetzalan del Progreso → Zihuateutla (propuesta 3),Cuetzalan del Progreso → Jonotla → Huehuetla → Olintla → Jopala → Zihuateutla,8.055631656414304,85.9,nueva
-83,Ecoturismo y aventura · San Andrés Cholula → Huaquechula (propuesta 4),San Andrés Cholula → Nealtican → Calpan → San Nicolás de los Ranchos → Atzitzihuacán → Huaquechula,6.8707101969447555,131.5,parcialmente_existente
-84,Mezcal y destilados · San Andrés Cholula → Ixcaquixtla (propuesta 5),San Andrés Cholula → Huehuetlán el Grande → Tzicatlacoyan → Tecali de Herrera → Molcaxac → Ixcaquixtla,6.441123153683681,189.3,parcialmente_existente
+97,Talavera y artesanías · Chignahuapan → Tenampulco (propuesta 1),Chignahuapan → Aquixtla → Zacapoaxtla → Jonotla → Tuzamapan de Galeana → Tenampulco,8.734540243819637,194.6,nueva
+98,Volcanes y alta montaña · San Pedro Cholula → Atzitzihuacán (propuesta 2),San Pedro Cholula → Nealtican → Calpan → San Jerónimo Tecuanipan → Tochimilco → Atzitzihuacán,8.508453625309025,107.0,nueva
+99,Café · Xicotepec → Pantepec (propuesta 3),Xicotepec → Zihuateutla → Naupan → Tlacuilotepec → Tlaxco → Pantepec,8.111518759588828,235.5,parcialmente_existente
+100,Turismo religioso y conventos · Tehuacán → Cuautinchán (propuesta 4),Tehuacán → Chalchicomula de Sesma → Quecholac → Acatzingo → Atoyatempan → Cuautinchán,7.257501446647901,179.3,nueva
+101,Gastronomía tradicional · Tehuacán → Nicolás Bravo (propuesta 5),Tehuacán → San Gabriel Chilac → Zapotitlán → Esperanza → Cañada Morelos → Nicolás Bravo,6.713376478263061,168.6,parcialmente_existente

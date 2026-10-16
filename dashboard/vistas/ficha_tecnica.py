@@ -198,18 +198,25 @@ def _ficha(f, todos: pd.DataFrame):
             st.caption("✅ revisado a mano con fuente · el resto viene de OpenStreetMap")
     with t2:
         i = f.infraestructura or {}
+
+        def v(clave, fmt=".0f"):
+            # NULL = sin dato (p. ej. cero de OSM en un municipio poco mapeado): no se muestra como 0
+            x = i.get(clave)
+            return "s/d" if x is None else format(x, fmt)
+
         ancla = todos.set_index("municipio_sk").nombre.get(int(i.get("ancla_cercana_sk") or 0), "—")
         a, b = st.columns(2)
-        a.metric("Ancla más cercana", f"{i.get('min_ancla_cercana', 0):.0f} min", ancla, delta_color="off")
-        b.metric("A la capital", f"{i.get('min_capital', 0):.0f} min")
-        a.metric("Hospedajes", f"{i.get('unidades_hospedaje', 0):.0f}")
-        b.metric("Restaurantes", f"{i.get('unidades_alimentos', 0):.0f}")
-        a.metric("Vías principales", f"{i.get('km_vias_por_km2', 0):.2f} km/km²")
-        b.metric("Viviendas con internet", f"{i.get('pct_viviendas_internet', 0):.0f} %")
-        st.caption(f"⛽ {i.get('gasolineras', 0):.0f} gasolineras · 🏦 {i.get('bancos', 0):.0f} bancos · "
-                   f"💊 {i.get('farmacias', 0):.0f} farmacias · 🏥 {i.get('unidades_salud', 0):.0f} salud · "
-                   f"🚌 {i.get('terminales_autobus', 0):.0f} terminales · 📍 {i.get('atractivos_osm', 0):.0f} atractivos OSM · "
-                   f"{i.get('municipios_colindantes', 0):.0f} municipios vecinos. Tiempos estimados en línea recta × factor de rodeo.")
+        a.metric("Ancla más cercana", f"{v('min_ancla_cercana')} min", ancla, delta_color="off")
+        b.metric("A la capital", f"{v('min_capital')} min")
+        a.metric("Hospedajes", v("unidades_hospedaje"))
+        b.metric("Restaurantes", v("unidades_alimentos"))
+        a.metric("Vías principales", f"{v('km_vias_por_km2', '.2f')} km/km²")
+        b.metric("Viviendas con internet", f"{v('pct_viviendas_internet')} %")
+        st.caption(f"⛽ {v('gasolineras')} gasolineras · 🏦 {v('bancos')} bancos · "
+                   f"💊 {v('farmacias')} farmacias · 🏥 {v('unidades_salud')} salud · "
+                   f"🚌 {v('terminales_autobus')} terminales · 📍 {v('atractivos_osm')} atractivos OSM · "
+                   f"{v('municipios_colindantes')} municipios vecinos. Tiempos por carretera desde la cabecera "
+                   "(OSRM, sin tráfico); s/d = OpenStreetMap no tiene mapeado este municipio.")
     with t3:
         meses = f.temporada_meses or [0] * 12
         fuertes = set(f.meses_fuertes or [])

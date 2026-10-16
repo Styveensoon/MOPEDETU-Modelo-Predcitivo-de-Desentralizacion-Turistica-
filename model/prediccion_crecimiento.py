@@ -22,6 +22,12 @@ Salidas en data/modelo/:
 
 Uso:
     python model/prediccion_crecimiento.py
+    python model/prediccion_crecimiento.py --homologado data/raw/censos   # plan de afinación F4
+
+Modo --homologado: los ejes son los de dw.dim_eje con los pesos SCIAN de scripts/cargar_datos_base.py (no los
+subsectores completos de arriba, donde comercio_turistico eran las agencias 5615), y las anclas (12) y regiones (7)
+son las de dw.dim_municipio, no las del modo DEMO. Lee la serie histórica del CE 2024 (tr_ce_pue_{2014,2019,2024}.csv
+en la carpeta dada) y el contexto social de Supabase. Escribe en data/modelo/homologado/.
 """
 
 from __future__ import annotations
@@ -78,6 +84,55 @@ def cargar():
     return censo, totales, social, mun
 
 
+def cargar_homologado(carpeta: Path):
+    """Mismas salidas que cargar(), pero con un pseudo-sector por eje de la base (sector_scian = código de dim_eje),
+    agregado con agregar_ce() de cargar_datos_base: mismos códigos, pesos y regla de confidencialidad que dw."""
+    global EJES, ANCLAS_USO, REGION_DE
+    sys.path.insert(0, str(RAIZ / "scripts"))
+    import cargar_datos_base as cdb
+    sb = cdb.sb
+    dim = sb.leer("dim_municipio", "dw", "municipio_sk,cve_geo,nombre,region,es_ancla", secreta=True)
+    dim["cve_geo"] = dim.cve_geo.str.strip()
+    ejes = {r["codigo"]: r["eje_sk"] for r in sb._peticion("dim_eje?select=eje_sk,codigo", True, "dw") if r["eje_sk"]}
+    EJES = {e: [e] for e in ejes}
+    codigo_eje = {sk: e for e, sk in ejes.items()}
+    largo, totales = [], []
+    for anio in (2014, 2019, 2024):
+        crudo = pd.read_csv(carpeta / f"ce_{anio}" / "conjunto_de_datos" / f"tr_ce_pue_{anio}.csv", dtype=str)
+        crudo = crudo[crudo.ID_ESTRATO.isna()]
+        ce = cdb.leer_ce(carpeta / f"ce_{anio}" / "conjunto_de_datos" / f"tr_ce_pue_{anio}.csv", anio)
+        sel = ce[ce.codigo.isin(cdb.CODIGOS_CE + ["TOTAL"])].drop_duplicates(["cve_geo", "codigo"])
+        # Renglón estatal (E04 vacío) con el mismo formato, como municipio "21000"
+        est = crudo[crudo.E04.isna()].copy()
+        est["codigo"] = np.where(est.SECTOR.isna(), "TOTAL", est.CODIGO.fillna("").str.strip())
+        est = est.assign(cve_geo="21000", unidades=pd.to_numeric(est.UE), personal=pd.to_numeric(est.H001A),
+                         vacb=pd.to_numeric(est.A131A))[["cve_geo", "codigo", "unidades", "personal", "vacb"]]
+        msk = dict(zip(dim.cve_geo, dim.municipio_sk)) | {"21000": 0}
+        todo = pd.concat([sel, est[est.codigo.isin(cdb.CODIGOS_CE + ["TOTAL"])]]).drop_duplicates(["cve_geo", "codigo"])
+        cve = {v: k for k, v in msk.items()}
+        for f in cdb.agregar_ce(todo, 0, msk, ejes):
+            fila = dict(cve_geo=cve[f["municipio_sk"]], anio_censal=anio, sector_scian=codigo_eje[f["eje_sk"]],
+                        unidades=f["unidades"], personal_ocupado=f["personal_ocupado"],
+                        va_censal_bruto=f["va_censal_bruto_mdp"], confidencial=f["hay_confidencial"])
+            (totales if fila["cve_geo"] == "21000" else largo).append(fila)
+        for r in todo[todo.codigo == "TOTAL"].itertuples():
+            totales.append(dict(cve_geo=r.cve_geo, anio_censal=anio, sector_scian="TOTAL", unidades=r.unidades,
+                                personal_ocupado=r.personal, va_censal_bruto=r.vacb, confidencial=False))
+    censo = pd.DataFrame(largo)
+    censo = censo[censo.unidades > 0]  # como INEGI: sin renglón cuando no hay establecimientos
+    soc = sb.leer("fact_contexto_social", "dw", "municipio_sk,poblacion_total,indice_marginacion", secreta=True)
+    social = soc.merge(dim[["municipio_sk", "cve_geo"]])[["cve_geo", "poblacion_total", "indice_marginacion"]]
+    geo = json.loads((RAIZ / "data" / "geo" / "puebla_municipios.geojson").read_text(encoding="utf-8"))
+    mun = pd.DataFrame([f["properties"] for f in geo["features"]])[["cve_geo", "nombre", "lat", "lon"]]
+    ANCLAS_USO = set(dim[dim.es_ancla].nombre)
+    REGION_DE = dict(zip(dim.cve_geo, dim.region))
+    print(f"Homologado: {len(EJES)} ejes de dim_eje · {len(ANCLAS_USO)} anclas · {len(set(REGION_DE.values()))} regiones")
+    return censo, pd.DataFrame(totales), social, mun
+
+
+ANCLAS_USO, REGION_DE = set(ANCLAS), None  # modo original: anclas y región aproximada del modo DEMO
+
+
 def _por_eje(df: pd.DataFrame) -> pd.DataFrame:
     """Agrega sectores a ejes. Si algún sector del eje es confidencial, PO y VA del eje quedan nulos."""
     mapa = {s: e for e, ss in EJES.items() for s in ss}
@@ -116,11 +171,12 @@ def armar_base(censo, totales, social, mun) -> pd.DataFrame:
 
     base = base.merge(social[["cve_geo", "poblacion_total", "indice_marginacion"]], how="left")
     base = base.merge(mun, how="left")
-    anclas = mun[mun["nombre"].isin(ANCLAS)]
+    anclas = mun[mun["nombre"].isin(ANCLAS_USO)]
     dist = haversine_km(mun["lat"].values[:, None], mun["lon"].values[:, None],
                         anclas["lat"].values[None, :], anclas["lon"].values[None, :]).min(axis=1)
-    base = base.merge(pd.DataFrame({"cve_geo": mun["cve_geo"], "dist_ancla_km": dist,
-                                    "region": [region_aprox(a, o) for a, o in zip(mun["lat"], mun["lon"])]}),
+    region = ([REGION_DE[c] for c in mun["cve_geo"]] if REGION_DE else
+              [region_aprox(a, o) for a, o in zip(mun["lat"], mun["lon"])])
+    base = base.merge(pd.DataFrame({"cve_geo": mun["cve_geo"], "dist_ancla_km": dist, "region": region}),
                       how="left")
 
     with np.errstate(divide="ignore", invalid="ignore"):
@@ -260,8 +316,14 @@ def supera(temporal: pd.DataFrame, nombre: str) -> bool:
 # --------------------------------------------------------------------------- flujo
 
 def main():
+    global SALIDA, VERSION
+    if len(sys.argv) > 2 and sys.argv[1] == "--homologado":
+        SALIDA, VERSION = SALIDA / "homologado", "v2_homologado"
+        datos = cargar_homologado(Path(sys.argv[2]))
+    else:
+        datos = cargar()
     SALIDA.mkdir(parents=True, exist_ok=True)
-    base = armar_base(*cargar())
+    base = armar_base(*datos)
     panel = armar_panel(base, TRANSICIONES)
     panel.to_csv(SALIDA / "panel_crecimiento.csv", index=False)
     con_obj = panel.dropna(subset=["delta_log"])

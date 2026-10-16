@@ -1,7 +1,8 @@
 """Validación V8 · Concentración del turismo (HHI y % en los 5 municipios principales): hoy, tendencial y con rutas.
 
   Hoy:         personal turístico estimado del DENUE 05/2026 (4 ejes).
-  Tendencial:  cada municipio × eje crece lo que predice el modelo (crecimiento_ue_eje_lgbm_v1).
+  Tendencial:  cada municipio × eje crece lo que predice el modelo (crecimiento_ue_eje_lgbm_v2; fuera de dominio,
+               sin cambio).
   Con rutas:   ESCENARIO HIPOTÉTICO. Supuesto: en los municipios emergentes de las 5 rutas propuestas se
                alcanza el límite superior del intervalo de 80 % en vez de la predicción central.
 Uso: python model/escenario_hhi.py
@@ -14,6 +15,8 @@ import pandas as pd
 import base
 from base import RAIZ
 
+MODELO = "crecimiento_ue_eje_lgbm_v2"
+
 
 def concentracion(s: pd.Series) -> dict:
     p = s / s.sum()
@@ -22,7 +25,11 @@ def concentracion(s: pd.Series) -> dict:
 
 def main():
     b = base.cargar()
+    modelo = base.sb._peticion(f"dim_modelo?select=modelo_sk&nombre=eq.{MODELO}", True, "dw")[0]["modelo_sk"]
     pred = base.sb.leer("fact_prediccion_crecimiento", "dw", secreta=True)
+    pred = pred[pred.modelo_sk == modelo]
+    # Fuera de dominio (< 3 UE) no hay predicción: esas celdas se dejan como hoy (crecimiento 0 %), sin inventar
+    pred[["crecimiento_pred_pct", "intervalo_sup_pct"]] = pred[["crecimiento_pred_pct", "intervalo_sup_pct"]].fillna(0)
     rutas = base.sb.leer("fact_ruta_parada", "dw", secreta=True)
     propuestas = {r["ruta_sk"] for r in base.sb._peticion("dim_ruta?select=ruta_sk&origen=eq.propuesta_modelo", True, "dw")}
     emergentes = set(rutas[rutas.ruta_sk.isin(propuestas) & rutas.es_emergente].municipio_sk)
@@ -35,7 +42,9 @@ def main():
            (("hoy", "personal_est"), ("tendencial_5_anios", "tendencial"), ("con_rutas_hipotetico", "con_rutas"))}
     res["municipios_emergentes_en_rutas"] = len(emergentes)
     res["supuesto"] = ("Escenario hipotético: los municipios emergentes de las rutas propuestas alcanzan el límite "
-                       "superior del intervalo de 80 % de su crecimiento predicho.")
+                       "superior del intervalo de 80 % de su crecimiento predicho. Celdas fuera del dominio del "
+                       "modelo (< 3 unidades) se mantienen en su valor actual.")
+    res["modelo"] = MODELO
     for k in ("hoy", "tendencial_5_anios", "con_rutas_hipotetico"):
         print(f"  {k:<22} HHI {res[k]['hhi']:>7,.0f} · top 5 concentra {res[k]['pct_top5']:.1f} %")
     (RAIZ / "data" / "derivados" / "escenario_concentracion.json").write_text(json.dumps(res, indent=2, ensure_ascii=False),

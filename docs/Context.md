@@ -854,30 +854,37 @@ python tests/test_tablero.py
 ### 15.4 Índice y banderas
 
 - Versión v2: **385 banderas activas en 131 municipios**.
-- Mejores oportunidades fuera de anclas: **Jonotla (#1, 0.86)**, Huehuetla, Jalpan, Zacapoaxtla, Zapotitlán de
-  Méndez, Huehuetlán el Grande, Pantepec…
+- Mejores oportunidades fuera de anclas en `v1_base`: **Jonotla (#1, 0.855)**, Huehuetla, Jalpan, Zacapoaxtla,
+  Zapotitlán de Méndez, Huehuetlán el Grande, Pantepec… En `v2_con_prediccion` Jonotla sigue #1 con **0.735**; en
+  `v3_dominio_osrm` (la que muestra el tablero desde la afinación de oct-2026) es #2 con 0.791, detrás de Santa
+  Isabel Cholula (0.793). Ver `Validations.md` §25.
 
-### 15.5 Rutas propuestas (última corrida, `data/derivados/rutas_propuestas.csv`)
+### 15.5 Rutas propuestas (optimizador v2, 15-oct-2026, `data/derivados/rutas_propuestas.csv`)
 
-| # | Ruta | Recorrido | Minutos | Novedad |
-|---|---|---|---|---|
-| 1 | ☕ Café · Cuetzalan → Zacapoaxtla | Cuetzalan del Progreso → Jonotla → Zoquiapan → Zapotitlán de Méndez → Xochitlán de Vicente Suárez → Zacapoaxtla | 77 | nueva |
-| 2 | 🌋 Volcanes · San Pedro Cholula → Atzitzihuacán | San Pedro Cholula → San Jerónimo Tecuanipan → Nealtican → Calpan → Tochimilco → Atzitzihuacán | 99 | nueva |
-| 3 | 🍲 Gastronomía · Cuetzalan → Zihuateutla | Cuetzalan del Progreso → Jonotla → Huehuetla → Olintla → Jopala → Zihuateutla | 86 | nueva |
-| 4 | 🌲 Ecoturismo · San Andrés Cholula → Huaquechula | San Andrés Cholula → Nealtican → Calpan → San Nicolás de los Ranchos → Atzitzihuacán → Huaquechula | 132 | parcialmente existente |
-| 5 | 🥃 Mezcal · San Andrés Cholula → Ixcaquixtla | San Andrés Cholula → Huehuetlán el Grande → Tzicatlacoyan → Tecali de Herrera → Molcaxac → Ixcaquixtla | 189 | parcialmente existente |
+Tiempos por carretera entre cabeceras (OSRM), índice `v3_dominio_osrm`, sin paradas con infraestructura 🔴,
+pernocta obligatoria si la ruta pasa de 10 h y región beneficiada distinta de Angelópolis (`Validations.md` §25.5).
 
-De 144 combinaciones ancla × tema, **56 fueron factibles**. Los 20 municipios emergentes de las rutas alimentan el
-escenario de concentración:
+| # | Ruta | Recorrido | Min. carretera | Días · pernocta | Novedad | Riesgo (SESNSP) |
+|---|---|---|---|---|---|---|
+| 1 | 🏺 Talavera y artesanías · Chignahuapan → Tenampulco | Chignahuapan → Aquixtla → Zacapoaxtla → Jonotla → Tuzamapan de Galeana → Tenampulco | 195 | 2 · Zacapoaxtla | nueva | medio |
+| 2 | 🌋 Volcanes · San Pedro Cholula → Atzitzihuacán | San Pedro Cholula → Nealtican → Calpan → San Jerónimo Tecuanipan → Tochimilco → Atzitzihuacán | 107 | 2 · Calpan | nueva | alto |
+| 3 | ☕ Café · Xicotepec → Pantepec | Xicotepec → Zihuateutla → Naupan → Tlacuilotepec → Tlaxco → Pantepec | 236 | 2 · Tlacuilotepec | parcialmente existente | medio |
+| 4 | ⛪ Religioso · Tehuacán → Cuautinchán | Tehuacán → Chalchicomula de Sesma → Quecholac → Acatzingo → Atoyatempan → Cuautinchán | 179 | 2 · Acatzingo | nueva | alto |
+| 5 | 🍲 Gastronomía · Tehuacán → Nicolás Bravo | Tehuacán → San Gabriel Chilac → Zapotitlán → Esperanza → Cañada Morelos → Nicolás Bravo | 169 | 2 · Esperanza | parcialmente existente | alto |
+
+Descartada y registrada (`origen = 'propuesta_descartada'`): Ecoturismo · San Andrés Cholula → Huaquechula, porque
+su región beneficiada era Angelópolis. De 68 combinaciones ancla × tema factibles, 44 cumplen las reglas de
+operación. El riesgo es el de la parada más alta en delitos que afectan al visitante (2025), un semáforo para el
+operador y no una etiqueta del municipio. Escenario de concentración (modelo v2):
 
 | Escenario | HHI | Top 5 |
 |---|---|---|
 | Hoy | 1,306 | 51.9 % |
-| Tendencial a 5 años | 1,132 | 49.1 % |
-| Con rutas (hipotético) | 1,103 | 48.5 % |
+| Tendencial a 5 años | 1,141 | 49.2 % |
+| Con rutas (hipotético) | 1,113 | 48.5 % |
 
-> La tabla de rutas de `docs/resultados_modelo.md` corresponde a una corrida anterior (Xicotepec → Naupan,
-> Chignahuapan → Tuzamapan, etc.). La vigente es la de arriba, posterior a la incorporación de El Peñón de Jonotla.
+> Las corridas anteriores (Cuetzalan → Zacapoaxtla, etc., con tiempos en línea recta) quedaron en el respaldo
+> `respaldo_20261015` de la base y en el historial de git.
 
 ---
 
@@ -951,8 +958,9 @@ Es una **prueba de humo** (que nada truene), no de valores.
 ### 19.2 Pendientes
 
 - Conectar el tablero DEMO a Supabase (`datos.py` con `FUENTE = "supabase"`).
-- V6 (sensibilidad del índice) y V9 (proxy contra DATATUR): sin hacer.
-- Validación temporal del modelo de unidades (incorporar CE 2014).
+- ~~V6 (sensibilidad del índice)~~: hecha (✅, `Validations.md` §25.8). V9 (proxy contra DATATUR): DATATUR cargado,
+  pero el archivo público solo trae la ciudad de Puebla; falta el monitoreo por destino de la Secretaría.
+- ~~Validación temporal del modelo de unidades (incorporar CE 2014)~~: hecha (`Validations.md` §25.6).
 - Cargar a la base los 821 establecimientos de `osm_nuevos.csv` (`scripts/cargar_osm.py` no existe).
 - `model/publicar_pendientes.py` referido en `base.py` no existe.
 - Mapa HTML exportado sin internet (respaldo de la demo).

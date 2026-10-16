@@ -1,0 +1,206 @@
+cve_geo,nom_mun,eje,modelo,periodo_base,horizonte_anios,personal_base,base_confidencial,unidades_base,delta_log_pred,crecimiento_pred_pct,intervalo_inf_pct,intervalo_sup_pct,personal_pred,incremento_personal_pred,ranking_potencial
+21060,Domingo Arenas,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,46,False,27,0.6788,97.15,33.2,179.45,92,46,1
+21125,San Gregorio Atzompa,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,287,False,86,0.5674,76.36,19.15,149.98,507,220,2
+21126,San Jerónimo Tecuanipan,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,30,False,20,0.5455,72.55,16.58,144.58,52,22,3
+21033,Cohuecan,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,11,False,5,0.543,72.11,16.28,143.96,20,9,4
+21160,Teotlalco,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,24,False,12,0.5379,71.25,15.7,142.74,42,18,5
+21149,Santiago Miahuatlán,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,295,False,120,0.4826,62.03,9.47,129.67,479,184,6
+21103,Nicolás Bravo,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,48,False,26,0.4758,60.94,8.73,128.12,78,30,7
+21096,Mazapiltepec de Juárez,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,9,False,6,0.4695,59.92,8.04,126.68,15,6,8
+21133,San Martín Totoltepec,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,18,False,10,0.4584,58.16,6.86,124.18,29,11,9
+21092,Juan N. Méndez,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,21,False,10,0.4582,58.13,6.84,124.14,34,13,10
+21021,Atzala,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,15,False,9,0.4541,57.47,6.39,123.21,24,9,11
+21201,Xochiltepec,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,33,False,15,0.4489,56.65,5.84,122.05,52,19,12
+21150,Huehuetlán el Grande,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,36,False,17,0.4475,56.44,5.69,121.74,57,21,13
+21044,Cuyoaco,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,124,False,66,0.4434,55.8,5.26,120.84,194,70,14
+21196,Xayacatlán de Bravo,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,17,False,9,0.4307,53.83,3.93,118.05,27,10,15
+21016,Aquixtla,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,24,False,12,0.4292,53.6,3.78,117.73,37,13,16
+21041,Cuautlancingo,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,1904,False,761,0.4204,52.25,2.87,115.81,2899,995,17
+21136,San Miguel Xoxtla,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,244,False,116,0.4193,52.08,2.75,115.57,372,128,18
+21181,Tlaltenango,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,52,False,36,0.4178,51.86,2.6,115.25,79,27,19
+21124,San Gabriel Chilac,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,460,False,222,0.4177,51.84,2.59,115.23,699,239,20
+21146,Santa Catarina Tlaltempan,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,14,False,6,0.4155,51.51,2.36,114.76,22,8,21
+21013,Altepexi,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,568,False,244,0.4125,51.07,2.06,114.13,859,291,22
+21007,Ahuatlán,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,23,False,10,0.411,50.84,1.91,113.8,35,12,23
+21075,Hueyapan,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,137,False,70,0.4101,50.69,1.81,113.6,207,70,24
+21156,Tehuacán,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,7296,False,2554,0.4092,50.56,1.72,113.41,10985,3689,25
+21169,Tepexi de Rodríguez,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,150,False,84,0.4055,50.01,1.35,112.63,226,76,26
+21034,Coronango,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,720,False,261,0.402,49.47,0.99,111.88,1077,357,27
+21117,Rafael Lara Grajales,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,400,False,161,0.3984,48.95,0.63,111.13,596,196,28
+21195,Vicente Guerrero,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,126,False,58,0.3937,48.25,0.16,110.14,187,61,29
+21214,Zinacatepec,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,414,False,210,0.3919,47.98,-0.02,109.76,613,199,30
+21109,Pahuatlán,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,156,False,82,0.3904,47.76,-0.17,109.44,231,75,31
+21177,Tlacotepec de Benito Juárez,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,633,False,244,0.3884,47.45,-0.38,109.01,934,301,32
+21056,Chila de la Sal,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,13,False,6,0.38,46.22,-1.21,107.27,19,6,33
+21144,San Salvador Huixcolotla,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,610,False,200,0.3794,46.14,-1.27,107.14,892,282,34
+21170,Tepeyahualco,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,172,False,70,0.3785,46.02,-1.35,106.97,252,80,35
+21205,Yehualtepec,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,293,False,123,0.3697,44.74,-2.21,105.16,425,132,36
+21011,Albino Zertuche,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,30,False,14,0.3646,44.0,-2.71,104.11,44,14,37
+21067,Guadalupe Victoria,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,280,False,128,0.3596,43.28,-3.2,103.09,402,122,38
+21209,Zapotitlán,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,166,False,62,0.3584,43.1,-3.32,102.84,238,72,39
+21030,Coatepec,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,9,False,6,0.3578,43.01,-3.38,102.71,13,4,40
+21055,Chila,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,34,False,23,0.3557,42.71,-3.58,102.29,49,15,41
+21217,Zoquitlán,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,91,False,44,0.3519,42.18,-3.94,101.53,130,39,42
+21204,Yaonáhuac,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,55,False,32,0.3512,42.08,-4.01,101.39,79,24,43
+21108,Oriental,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,233,False,100,0.3499,41.9,-4.13,101.14,331,98,44
+21065,General Felipe Ángeles,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,228,False,99,0.3498,41.88,-4.14,101.11,324,96,45
+21054,Chignautla,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,246,False,132,0.3487,41.72,-4.25,100.88,349,103,46
+21202,Xochitlán de Vicente Suárez,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,34,False,24,0.3467,41.44,-4.44,100.48,49,15,47
+21015,Amozoc,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,1753,False,772,0.3457,41.3,-4.53,100.29,2477,724,48
+21119,San Andrés Cholula,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,6466,False,1473,0.3443,41.11,-4.67,100.01,9124,2658,49
+21102,Nealtican,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,368,False,161,0.3437,41.01,-4.73,99.88,519,151,50
+21085,Izúcar de Matamoros,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,2258,False,861,0.3432,40.94,-4.78,99.78,3183,925,51
+21010,Ajalpan,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,860,False,396,0.3395,40.43,-5.12,99.06,1208,348,52
+21088,Jonotla,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,20,False,11,0.3375,40.14,-5.32,98.64,28,8,53
+21004,Acatzingo,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,830,False,314,0.3351,39.8,-5.55,98.16,1161,331,54
+21154,Tecamachalco,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,1519,False,502,0.3295,39.03,-6.07,97.07,2112,593,55
+21186,Tlatlauquitepec,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,566,False,224,0.3263,38.58,-6.37,96.43,785,219,56
+21038,Cuapiaxtla de Madero,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,252,False,98,0.3262,38.57,-6.38,96.41,350,98,57
+21104,Nopalucan,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,253,False,102,0.321,37.85,-6.86,95.4,349,96,58
+21180,Tlahuapan,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,430,False,188,0.3197,37.67,-6.98,95.15,592,162,59
+21040,Cuautinchán,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,69,False,38,0.3189,37.56,-7.06,94.98,95,26,60
+21208,Zacatlán,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,1427,False,518,0.3188,37.54,-7.07,94.96,1963,536,61
+21094,Libres,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,698,False,256,0.3161,37.18,-7.32,94.44,958,260,62
+21153,Tecali de Herrera,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,318,False,130,0.3161,37.18,-7.32,94.45,437,119,63
+21157,Tehuitzingo,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,282,False,128,0.3137,36.85,-7.54,93.97,386,104,64
+21001,Acajete,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,590,False,288,0.3131,36.76,-7.6,93.86,807,217,65
+21091,Juan Galindo,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,250,False,110,0.3122,36.64,-7.68,93.68,342,92,66
+21211,Zaragoza,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,332,False,166,0.3115,36.54,-7.75,93.55,454,122,67
+21143,San Salvador el Verde,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,630,False,262,0.3105,36.41,-7.84,93.36,860,230,68
+21212,Zautla,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,150,False,74,0.3058,35.78,-8.27,92.46,204,54,69
+21172,Tetela de Ocampo,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,295,False,130,0.3046,35.61,-8.38,92.22,400,105,70
+21122,San Felipe Teotlalcingo,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,164,False,79,0.3042,35.55,-8.42,92.14,223,59,71
+21017,Atempan,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,280,False,140,0.3033,35.43,-8.5,91.97,380,100,72
+21179,Tlachichuca,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,216,False,90,0.3007,35.08,-8.73,91.48,292,76,73
+21199,Xiutetelco,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,320,False,166,0.3003,35.03,-8.77,91.4,432,112,74
+21080,Atlequizayan,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,15,False,8,0.2998,34.96,-8.82,91.31,21,6,75
+21087,Jolalpan,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,114,False,49,0.2997,34.94,-8.83,91.28,154,40,76
+21115,Quecholac,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,654,False,280,0.2957,34.41,-9.19,90.52,879,225,77
+21197,Xicotepec,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,1479,False,660,0.2935,34.11,-9.39,90.1,1984,505,78
+21132,San Martín Texmelucan,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,3658,False,1455,0.2895,33.57,-9.75,89.34,4886,1228,79
+21025,Ayotoxco de Guerrero,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,130,False,68,0.2892,33.54,-9.78,89.29,174,44,80
+21189,Tochtepec,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,284,False,141,0.2869,33.23,-9.99,88.85,379,95,81
+21058,Chilchotla,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,222,False,107,0.2861,33.13,-10.06,88.7,296,74,82
+21111,Pantepec,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,111,False,50,0.285,32.98,-10.16,88.49,148,37,83
+21155,Tecomatlán,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,103,False,36,0.2804,32.36,-10.57,87.62,137,34,84
+21003,Acatlán,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,870,False,361,0.2769,31.91,-10.88,86.97,1148,278,85
+21064,Francisco Z. Mena,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,150,False,70,0.2674,30.66,-11.72,85.2,196,46,86
+21127,San Jerónimo Xayacatlán,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,62,False,27,0.2552,29.07,-12.8,82.95,80,18,87
+21114,Puebla,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,40130,False,12421,0.2549,29.03,-12.82,82.9,51780,11650,88
+21141,San Pedro Yeloixtlahuaca,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,67,False,27,0.2549,29.03,-12.82,82.89,87,20,89
+21047,Chiautla,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,557,False,212,0.2536,28.87,-12.93,82.67,718,161,90
+21078,Huitzilan de Serdán,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,60,False,34,0.2509,28.52,-13.17,82.17,77,17,91
+21084,Ixtepec,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,69,False,34,0.249,28.28,-13.33,81.83,89,20,92
+21210,Zapotitlán de Méndez,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,89,False,48,0.2284,25.65,-15.1,78.11,112,23,93
+21191,Tulcingo,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,320,False,132,0.2178,24.34,-15.99,76.25,398,78,94
+21072,Huehuetla,alimentos,crecimiento_ridge_v2_homologado,CE 2024,5,164,False,65,0.1625,17.65,-20.52,66.76,193,29,95
+21033,Cohuecan,comercio_turistico,crecimiento_ridge_v2_homologado,CE 2024,5,432,False,202,0.8703,138.77,4.47,269.48,1033,601,1
+21125,San Gregorio Atzompa,comercio_turistico,crecimiento_ridge_v2_homologado,CE 2024,5,7,False,4,0.7594,113.71,-6.5,230.7,16,9,2
+21126,San Jerónimo Tecuanipan,comercio_turistico,crecimiento_ridge_v2_homologado,CE 2024,5,4,False,4,0.7557,112.91,-6.85,229.46,10,6,3
+21046,Chapulco,comercio_turistico,crecimiento_ridge_v2_homologado,CE 2024,5,8,False,5,0.6842,98.23,-13.27,206.75,17,9,4
+21105,Ocotepec,comercio_turistico,crecimiento_ridge_v2_homologado,CE 2024,5,4,False,3,0.634,88.51,-17.52,191.71,8,4,5
+21044,Cuyoaco,comercio_turistico,crecimiento_ridge_v2_homologado,CE 2024,5,10,False,8,0.6277,87.34,-18.03,189.9,20,10,6
+21057,Honey,comercio_turistico,crecimiento_ridge_v2_homologado,CE 2024,5,6,False,4,0.5817,78.91,-21.72,176.85,12,6,7
+21119,San Andrés Cholula,comercio_turistico,crecimiento_ridge_v2_homologado,CE 2024,5,165,False,108,0.565,75.94,-23.02,172.26,291,126,8
+21170,Tepeyahualco,comercio_turistico,crecimiento_ridge_v2_homologado,CE 2024,5,20,False,10,0.5637,75.71,-23.12,171.91,36,16,9
+21059,Chinantla,comercio_turistico,crecimiento_ridge_v2_homologado,CE 2024,5,3,False,2,0.5525,73.75,-23.98,168.87,6,3,10
+21138,San Nicolás de los Ranchos,comercio_turistico,crecimiento_ridge_v2_homologado,CE 2024,5,18,False,14,0.5442,72.32,-24.6,166.66,32,14,11
+21023,Atzitzintla,comercio_turistico,crecimiento_ridge_v2_homologado,CE 2024,5,12,False,6,0.5368,71.05,-25.16,164.69,21,9,12
+21211,Zaragoza,comercio_turistico,crecimiento_ridge_v2_homologado,CE 2024,5,20,False,13,0.536,70.92,-25.22,164.49,35,15,13
+21074,Huejotzingo,comercio_turistico,crecimiento_ridge_v2_homologado,CE 2024,5,85,False,57,0.533,70.4,-25.44,163.69,146,61,14
+21197,Xicotepec,comercio_turistico,crecimiento_ridge_v2_homologado,CE 2024,5,94,False,53,0.5221,68.55,-26.25,160.83,159,65,15
+21011,Albino Zertuche,comercio_turistico,crecimiento_ridge_v2_homologado,CE 2024,5,6,False,4,0.5212,68.41,-26.32,160.6,11,5,16
+21134,San Matías Tlalancaleca,comercio_turistico,crecimiento_ridge_v2_homologado,CE 2024,5,41,False,26,0.5202,68.24,-26.39,160.34,70,29,17
+21017,Atempan,comercio_turistico,crecimiento_ridge_v2_homologado,CE 2024,5,18,False,13,0.5154,67.43,-26.75,159.08,31,13,18
+21104,Nopalucan,comercio_turistico,crecimiento_ridge_v2_homologado,CE 2024,5,34,False,22,0.5124,66.93,-26.96,158.32,57,23,19
+21140,San Pedro Cholula,comercio_turistico,crecimiento_ridge_v2_homologado,CE 2024,5,370,False,197,0.5086,66.3,-27.24,157.34,616,246,20
+21015,Amozoc,comercio_turistico,crecimiento_ridge_v2_homologado,CE 2024,5,204,False,122,0.4911,63.41,-28.5,152.87,334,130,21
+21078,Huitzilan de Serdán,comercio_turistico,crecimiento_ridge_v2_homologado,CE 2024,5,3,False,2,0.4854,62.48,-28.91,151.42,5,2,22
+21207,Zacapoaxtla,comercio_turistico,crecimiento_ridge_v2_homologado,CE 2024,5,90,False,53,0.4509,56.98,-31.32,142.91,142,52,23
+21114,Puebla,comercio_turistico,crecimiento_ridge_v2_homologado,CE 2024,5,2015,False,954,0.3797,46.18,-36.04,126.21,2946,931,24
+21125,San Gregorio Atzompa,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,10,False,3,0.5666,76.23,3.11,212.77,18,8,1
+21124,San Gabriel Chilac,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,7,False,3,0.5435,72.21,0.76,205.64,13,6,2
+21013,Altepexi,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,9,False,3,0.4609,58.55,-7.23,181.4,15,6,3
+21051,Chietla,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,12,False,5,0.454,57.46,-7.87,179.45,19,7,4
+21109,Pahuatlán,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,38,False,11,0.4468,56.34,-8.53,177.47,60,22,5
+21195,Vicente Guerrero,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,5,False,3,0.4419,55.56,-8.98,176.09,8,3,6
+21144,San Salvador Huixcolotla,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,13,False,5,0.4179,51.87,-11.14,169.55,20,7,7
+21171,Tepeyahualco de Cuauhtémoc,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,4,False,3,0.4118,50.95,-11.68,167.91,7,3,8
+21214,Zinacatepec,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,13,False,4,0.4117,50.93,-11.69,167.88,20,7,9
+21010,Ajalpan,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,10,False,4,0.3989,49.01,-12.81,164.47,15,5,10
+21035,Coxcatlán,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,9,False,3,0.3964,48.65,-13.02,163.83,14,5,11
+21136,San Miguel Xoxtla,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,12,False,3,0.3808,46.34,-14.38,159.72,18,6,12
+21117,Rafael Lara Grajales,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,21,False,7,0.3783,45.98,-14.58,159.09,31,10,13
+21189,Tochtepec,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,6,False,4,0.3765,45.71,-14.74,158.61,9,3,14
+21038,Cuapiaxtla de Madero,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,14,False,4,0.3729,45.2,-15.04,157.7,21,7,15
+21177,Tlacotepec de Benito Juárez,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,32,False,8,0.3703,44.82,-15.26,157.03,47,15,16
+21110,Palmar de Bravo,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,14,False,6,0.3691,44.64,-15.37,156.72,21,7,17
+21180,Tlahuapan,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,18,False,3,0.353,42.33,-16.72,152.6,26,8,18
+21157,Tehuitzingo,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,9,False,5,0.3495,41.84,-17.01,151.73,13,4,19
+21134,San Matías Tlalancaleca,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,13,False,5,0.3483,41.67,-17.11,151.44,19,6,20
+21025,Ayotoxco de Guerrero,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,5,False,3,0.3437,41.01,-17.49,150.26,7,2,21
+21074,Huejotzingo,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,60,False,13,0.343,40.92,-17.55,150.1,85,25,22
+21067,Guadalupe Victoria,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,15,False,5,0.34,40.49,-17.8,149.34,21,6,23
+21001,Acajete,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,19,False,6,0.3305,39.17,-18.57,147.0,27,8,24
+21194,Venustiano Carranza,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,32,False,7,0.3302,39.12,-18.6,146.91,45,13,25
+21047,Chiautla,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,18,False,6,0.3297,39.05,-18.64,146.79,25,7,26
+21017,Atempan,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,11,False,4,0.324,38.26,-19.1,145.38,16,5,27
+21212,Zautla,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,6,False,4,0.3199,37.7,-19.43,144.39,9,3,28
+21004,Acatzingo,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,43,False,12,0.3132,36.77,-19.97,142.75,59,16,29
+21164,Tepeaca,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,120,False,30,0.3112,36.5,-20.13,142.27,164,44,30
+21199,Xiutetelco,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,8,False,3,0.3086,36.15,-20.34,141.64,11,3,31
+21075,Hueyapan,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,8,False,4,0.2989,34.83,-21.11,139.3,11,3,32
+21054,Chignautla,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,17,False,4,0.295,34.31,-21.42,138.37,23,6,33
+21173,Teteles de Ávila Castillo,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,13,False,5,0.2945,34.24,-21.45,138.26,18,5,34
+21179,Tlachichuca,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,13,False,4,0.2933,34.09,-21.54,137.98,18,5,35
+21091,Juan Galindo,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,19,False,5,0.2921,33.92,-21.64,137.68,26,7,36
+21085,Izúcar de Matamoros,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,163,False,33,0.2915,33.84,-21.69,137.54,219,56,37
+21132,San Martín Texmelucan,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,167,False,36,0.2911,33.79,-21.72,137.45,224,57,38
+21150,Huehuetlán el Grande,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,11,False,6,0.2902,33.67,-21.79,137.24,15,4,39
+21143,San Salvador el Verde,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,51,False,8,0.2824,32.63,-22.4,135.39,68,17,40
+21016,Aquixtla,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,10,False,5,0.2772,31.95,-22.8,134.18,14,4,41
+21015,Amozoc,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,83,False,13,0.2752,31.68,-22.96,133.7,110,27,42
+21154,Tecamachalco,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,95,False,18,0.2678,30.7,-23.52,131.97,124,29,43
+21072,Huehuetla,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,7,False,4,0.2673,30.65,-23.56,131.88,9,2,44
+21142,San Salvador el Seco,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,43,False,13,0.2655,30.41,-23.7,131.46,56,13,45
+21094,Libres,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,65,False,16,0.2638,30.18,-23.83,131.05,85,20,46
+21211,Zaragoza,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,27,False,7,0.2517,28.62,-24.74,128.28,35,8,47
+21026,Calpan,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,13,False,3,0.243,27.51,-25.39,126.3,17,4,48
+21041,Cuautlancingo,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,72,False,7,0.2421,27.39,-25.46,126.09,92,20,49
+21191,Tulcingo,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,21,False,11,0.2376,26.81,-25.8,125.07,27,6,50
+21115,Quecholac,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,29,False,5,0.2375,26.81,-25.8,125.07,37,8,51
+21084,Ixtepec,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,6,False,3,0.2367,26.71,-25.86,124.88,8,2,52
+21209,Zapotitlán,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,29,False,7,0.236,26.62,-25.91,124.73,37,8,53
+21156,Tehuacán,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,744,False,94,0.2351,26.5,-25.99,124.51,941,197,54
+21071,Huauchinango,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,227,False,43,0.2311,26.0,-26.27,123.63,286,59,55
+21210,Zapotitlán de Méndez,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,10,False,6,0.229,25.74,-26.43,123.16,13,3,56
+21104,Nopalucan,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,23,False,4,0.2283,25.65,-26.48,123.01,29,6,57
+21202,Xochitlán de Vicente Suárez,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,8,False,4,0.2221,24.87,-26.94,121.62,10,2,58
+21172,Tetela de Ocampo,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,26,False,7,0.2192,24.51,-27.15,120.98,33,7,59
+21006,Ahuacatlán,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,11,False,3,0.218,24.36,-27.24,120.71,14,3,60
+21058,Chilchotla,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,21,False,7,0.2168,24.2,-27.33,120.44,26,5,61
+21108,Oriental,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,43,False,7,0.189,20.81,-29.31,114.41,52,9,62
+21064,Francisco Z. Mena,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,15,False,5,0.1872,20.59,-29.44,114.02,18,3,63
+21197,Xicotepec,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,202,False,33,0.1795,19.66,-29.99,112.37,242,40,64
+21217,Zoquitlán,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,21,False,4,0.1776,19.44,-30.12,111.98,25,4,65
+21003,Acatlán,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,64,False,11,0.177,19.36,-30.16,111.84,77,13,66
+21082,Ixcaquixtla,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,31,False,6,0.1734,18.93,-30.41,111.08,37,6,67
+21045,Chalchicomula de Sesma,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,117,False,24,0.161,17.47,-31.27,108.48,138,21,68
+21019,Atlixco,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,677,False,77,0.1492,16.09,-32.08,106.04,786,109,69
+21207,Zacapoaxtla,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,64,False,11,0.1358,14.55,-32.98,103.3,73,9,70
+21186,Tlatlauquitepec,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,105,False,24,0.1334,14.27,-33.14,102.81,120,15,71
+21140,San Pedro Cholula,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,430,False,44,0.1273,13.58,-33.54,101.58,489,59,72
+21153,Tecali de Herrera,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,39,False,4,0.1151,12.2,-34.35,99.13,44,5,73
+21076,Hueytamalco,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,27,False,5,0.1127,11.93,-34.51,98.66,30,3,74
+21208,Zacatlán,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,468,False,109,0.1127,11.93,-34.51,98.65,524,56,75
+21174,Teziutlán,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,228,False,29,0.1025,10.8,-35.17,96.64,253,25,76
+21169,Tepexi de Rodríguez,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,38,False,6,0.0704,7.29,-37.22,90.42,41,3,77
+21170,Tepeyahualco,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,36,False,3,0.0636,6.57,-37.64,89.15,38,2,78
+21114,Puebla,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,4760,False,333,0.037,3.77,-39.28,84.17,4939,179,79
+21155,Tecomatlán,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,26,False,4,0.0266,2.7,-39.91,82.27,27,1,80
+21053,Chignahuapan,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,341,False,83,0.0165,1.67,-40.51,80.44,347,6,81
+21034,Coronango,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,61,False,3,0.0149,1.5,-40.61,80.15,62,1,82
+21111,Pantepec,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,23,False,3,0.01,1.0,-40.9,79.26,23,0,83
+21119,San Andrés Cholula,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,726,False,26,-0.2838,-24.71,-55.95,33.63,546,-180,84
+21043,Cuetzalan del Progreso,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,311,False,56,-0.3413,-28.92,-58.41,26.16,221,-90,85
+21088,Jonotla,hospedaje,crecimiento_ridge_v2_homologado,CE 2024,5,41,False,6,-0.9955,-63.05,-78.38,-34.42,15,-26,86

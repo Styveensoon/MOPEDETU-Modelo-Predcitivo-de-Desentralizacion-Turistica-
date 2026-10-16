@@ -39,8 +39,8 @@ class Base:
 
 
 def pct(s: pd.Series) -> pd.Series:
-    """Percentil en [0, 1] (empates promediados); NaN → 0."""
-    return s.rank(pct=True, method="average").fillna(0.0)
+    """Percentil en [0, 1] (empates promediados); NaN → 0.5 (sin dato = neutral, no castigo)."""
+    return s.rank(pct=True, method="average").fillna(0.5)
 
 
 @lru_cache(maxsize=1)
@@ -127,7 +127,7 @@ def reemplazar(tabla: str, filtro: str, filas: list, lote: int = 1000):
 
 
 def limpio(v):
-    if v is None:
+    if v is None or v is pd.NA:
         return None
     if isinstance(v, (np.floating, float)):
         return None if not np.isfinite(v) else float(v)

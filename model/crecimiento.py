@@ -12,7 +12,12 @@ Valida:    GroupKFold (5) por municipio: un municipio nunca está a la vez en en
 Intervalo: conformal: predicción ± cuantil 80 % del error absoluto observado en validación cruzada
            (cobertura del 80 % por construcción; se reporta la cobertura medida).
 
-Escribe dw.dim_modelo, dw.fact_prediccion_crecimiento y el índice v2_con_prediccion (score_potencial).
+Dominio:   (v2, plan de afinación F2c) solo se predice donde el eje tiene ≥ 3 unidades en el CE 2024, el mismo
+           filtro del entrenamiento; fuera de dominio la predicción queda NULL con su motivo. La corrida v1 (sin
+           dominio) se conserva en la base con su propio modelo_sk.
+
+Escribe dw.dim_modelo (crecimiento_ue_eje_lgbm_v2), dw.fact_prediccion_crecimiento y el índice v3_dominio_osrm.
+Las versiones v1_base y v2_con_prediccion del índice no se tocan.
 Uso: python model/crecimiento.py
 """
 import json
@@ -35,6 +40,9 @@ warnings.filterwarnings("ignore")
 TAREA = "crecimiento_municipal"  # dim_modelo.tarea ∈ {crecimiento_municipal, enlace_municipios, linea_base}
 HORIZONTE = 5
 SEMILLA = 2026
+MIN_UNIDADES = 3   # dominio del modelo: mismo umbral que objetivo()
+MOTIVO_FUERA = f"base menor a {MIN_UNIDADES} unidades: fuera del rango de entrenamiento"
+VERSION_INDICE = "v3_dominio_osrm"
 PARAMS = dict(n_estimators=400, learning_rate=0.03, num_leaves=15, min_child_samples=12, subsample=0.8,
               subsample_freq=1, colsample_bytree=0.8, reg_lambda=1.0, random_state=SEMILLA, verbose=-1)
 
@@ -42,7 +50,7 @@ PARAMS = dict(n_estimators=400, learning_rate=0.03, num_leaves=15, min_child_sam
 def panel(b: base.Base) -> pd.DataFrame:
     """Una fila por municipio × eje con las variables en 2019 y 2024 y el crecimiento observado."""
     ce = b.censo.copy()
-    anio = {b.periodos["CE 2019"]: 2019, b.periodos["CE 2024"]: 2024}
+    anio = {b.periodos["CE 2014"]: 2014, b.periodos["CE 2019"]: 2019, b.periodos["CE 2024"]: 2024}
     ce["anio"] = ce.periodo_sk.map(anio)
     w = ce.pivot_table(index=["municipio_sk", "eje_sk"], columns="anio",
                        values=["personal_ocupado", "unidades", "va_censal_bruto_mdp", "hay_confidencial"],
@@ -55,8 +63,9 @@ def panel(b: base.Base) -> pd.DataFrame:
     tot = pd.DataFrame(tot).assign(cve_geo=lambda d: d.cve_geo.str.strip())
     tot = tot.merge(b.mun.reset_index()[["municipio_sk", "cve_geo"]]).pivot(
         index="municipio_sk", columns="anio_censal", values="personal_ocupado")
-    for y in (2019, 2024):
-        w[f"po_mun_{y}"] = w.municipio_sk.map(tot[y])
+    for y in (2014, 2019, 2024):
+        if y in tot.columns:
+            w[f"po_mun_{y}"] = w.municipio_sk.map(tot[y])
     return w
 
 
@@ -103,12 +112,34 @@ def variables(w: pd.DataFrame, b: base.Base, t: int) -> pd.DataFrame:
     return X
 
 
-def objetivo(w: pd.DataFrame) -> pd.Series:
+def objetivo(w: pd.DataFrame, t0: int = 2019, t1: int = 2024) -> pd.Series:
     """Crecimiento logarítmico de unidades económicas (nunca confidenciales). Se excluyen ejes sin oferta
-    en ambos censos y los municipios con menos de 3 unidades en 2019 en el eje (crecimientos espurios)."""
-    u19, u24 = w.unidades_2019.fillna(0), w.unidades_2024.fillna(0)
-    y = np.log1p(u24) - np.log1p(u19)
-    return y.where((u19 >= 3) | (u24 >= 3))
+    en ambos censos y los municipios con menos de 3 unidades en el eje en ambos (crecimientos espurios)."""
+    u0, u1 = w[f"unidades_{t0}"].fillna(0), w[f"unidades_{t1}"].fillna(0)
+    y = np.log1p(u1) - np.log1p(u0)
+    return y.where((u0 >= MIN_UNIDADES) | (u1 >= MIN_UNIDADES))
+
+
+def validar_temporal(w: pd.DataFrame, b: base.Base) -> dict | None:
+    """Validación en el tiempo (plan de afinación F4): entrena con la transición CE 2014 → 2019 (variables de 2014)
+    y predice 2019 → 2024 con variables de 2019, contra lo observado. Incluye la pandemia en el periodo de prueba."""
+    if "unidades_2014" not in w or "po_mun_2014" not in w:
+        return None
+    y_tr, y_te = objetivo(w, 2014, 2019), objetivo(w, 2019, 2024)
+    tr, te = y_tr.notna(), y_te.notna()
+    X14, X19 = variables(w, b, 2014), variables(w, b, 2019)
+    p = pd.DataFrame({"lgbm": lgb.LGBMRegressor(**PARAMS).fit(X14[tr], y_tr[tr]).predict(X19[te]),
+                      "b1_media_eje": X19[te].eje.map(y_tr[tr].groupby(X14[tr].eje).mean()).to_numpy()},
+                     index=y_te[te].index)
+    y = y_te[te]
+    res = {}
+    for k in p:
+        top_real, top_pred = y >= y.quantile(0.8), p[k] >= p[k].quantile(0.8)
+        res[k] = dict(mae=round(float((p[k] - y).abs().mean()), 4),
+                      spearman=round(float(spearmanr(p[k], y).correlation), 3),
+                      precision_top20=round(float((top_real & top_pred).sum() / top_pred.sum()), 3))
+    res["n_entrenamiento"], res["n_prueba"] = int(tr.sum()), int(te.sum())
+    return res
 
 
 def validar(X: pd.DataFrame, y: pd.Series, grupos: pd.Series) -> tuple[dict, pd.DataFrame]:
@@ -150,6 +181,12 @@ def main():
         print(f"  {k:<13} MAE {res[k]['mae']:.3f} · Spearman {res[k]['spearman']:+.3f} · precisión top 20 % {res[k]['precision_top20']:.0%}")
     print(f"  cobertura del intervalo de 80 %: {res['cobertura_intervalo_80']:.0%}")
     gana = res["lgbm"]["mae"] < min(res["b1_media_eje"]["mae"], res["b2_ridge"]["mae"])
+    temporal = validar_temporal(w, b)
+    if temporal:
+        res["validacion_temporal_2014_2019_a_2019_2024"] = temporal
+        for k in ("lgbm", "b1_media_eje"):
+            print(f"  temporal {k:<13} MAE {temporal[k]['mae']:.3f} · Spearman {temporal[k]['spearman']:+.3f} · "
+                  f"precisión top 20 % {temporal[k]['precision_top20']:.0%}")
 
     # Modelo final con todos los datos válidos y explicabilidad SHAP (contribuciones de LightGBM)
     final = lgb.LGBMRegressor(**PARAMS).fit(X, y)
@@ -171,13 +208,21 @@ def main():
     out["personal_base"] = [p if pd.notna(p) and not c else round(float(denue.get((mk, e), np.nan)), 1)
                             for p, c, mk, e in zip(w.personal_ocupado_2024, w.hay_confidencial_2024.astype(bool),
                                                    w.municipio_sk, w.eje_sk)]
-    out["crecimiento_pred_pct"] = np.round((np.expm1(yhat)) * 100, 2)
-    out["intervalo_inf_pct"] = np.round(np.expm1(lo) * 100, 2)
-    out["intervalo_sup_pct"] = np.round(np.expm1(hi) * 100, 2)
-    out["ranking_potencial"] = out.groupby("eje_sk").crecimiento_pred_pct.rank(ascending=False, method="min").astype(int)
+    out["unidades_base"] = w.unidades_2024.fillna(0).astype(int)
+    out["en_dominio"] = out.unidades_base >= MIN_UNIDADES
+    dentro = out.en_dominio.to_numpy()
+    out["crecimiento_pred_pct"] = np.where(dentro, np.round((np.expm1(yhat)) * 100, 2), np.nan)
+    out["intervalo_inf_pct"] = np.where(dentro, np.round(np.expm1(lo) * 100, 2), np.nan)
+    out["intervalo_sup_pct"] = np.where(dentro, np.round(np.expm1(hi) * 100, 2), np.nan)
+    out["ranking_potencial"] = out.groupby("eje_sk").crecimiento_pred_pct.rank(ascending=False, method="min") \
+        .astype("Int64")
+    out["motivo_sin_prediccion"] = np.where(dentro, None, MOTIVO_FUERA)
+    d = out[out.en_dominio]
+    print(f"  dominio: {len(d)} celdas con predicción, {(~out.en_dominio).sum()} sin predicción (< {MIN_UNIDADES} UE) · "
+          f"mediana {d.crecimiento_pred_pct.median():+.1f} % · negativos {(d.crecimiento_pred_pct < 0).sum()}")
 
     modelo = dict(
-        nombre="crecimiento_ue_eje_lgbm_v1", tarea=TAREA,
+        nombre="crecimiento_ue_eje_lgbm_v2", tarea=TAREA,
         algoritmo="LightGBM (gradient boosting) + intervalo conformal de 80 %",
         variables={"objetivo": "ln(1+UE_t+5) - ln(1+UE_t): unidades económicas turísticas por municipio y eje "
                                "(Censos Económicos)",
@@ -185,18 +230,20 @@ def main():
         hiperparametros=PARAMS, periodo_entrenamiento="CE 2019 → CE 2024 (variables medidas en 2019)",
         periodo_validacion="GroupKFold de 5 particiones por municipio",
         esquema_validacion="Validación cruzada agrupada por municipio; líneas base: media del eje y Ridge. "
-                           "No hay segundo periodo temporal porque el CE 2014 no tiene descarga por entidad.",
+                           "Además validación temporal: entrenar CE 2014 → 2019 y probar 2019 → 2024 (serie histórica "
+                           "homologada del CE 2024; el periodo de prueba incluye la pandemia).",
         metricas=res,
         explicabilidad="Contribuciones SHAP exactas de LightGBM (pred_contrib); importancia media normalizada.",
         limitaciones="Un solo periodo censal (2019-2024, incluye la pandemia). Mide unidades económicas (oferta), "
-                     "no visitantes. Municipios con menos de 3 unidades en el eje quedan fuera del entrenamiento. "
+                     "no visitantes. Municipios con menos de 3 unidades en el eje quedan fuera del entrenamiento y, "
+                     "desde la v2, también sin predicción (en_dominio = false). Accesibilidad por carretera (OSRM). "
                      "La predicción es un escenario tendencial, no un compromiso de crecimiento.")
     psk = b.periodos["CE 2024"]
     filas = [{k: base.limpio(v) for k, v in r.items()} | dict(periodo_base_sk=psk, horizonte_anios=HORIZONTE)
              for r in out.to_dict("records")]
     publicar(modelo, "fact_prediccion_crecimiento", filas)
-    for clave, nombre, algoritmo in (("b1_media_eje", "crecimiento_linea_base_media_eje", "Media del eje en entrenamiento"),
-                                     ("b2_ridge", "crecimiento_linea_base_ridge", "Ridge (alpha=3) estandarizado")):
+    for clave, nombre, algoritmo in (("b1_media_eje", "crecimiento_linea_base_media_eje_v2", "Media del eje en entrenamiento"),
+                                     ("b2_ridge", "crecimiento_linea_base_ridge_v2", "Ridge (alpha=3) estandarizado")):
         base.asegurar_modelo(dict(nombre=nombre, tarea="linea_base", algoritmo=algoritmo,
                                   variables={"compara_con": modelo["nombre"]}, metricas={"cv": res[clave]},
                                   periodo_entrenamiento=modelo["periodo_entrenamiento"],
@@ -204,18 +251,34 @@ def main():
                                   esquema_validacion="Mismas particiones que el modelo principal"))
     print("✓ dim_modelo: líneas base registradas con sus métricas")
 
-    # Índice v2 con el potencial predicho (percentil del crecimiento dentro de cada eje)
-    pot = out.set_index(["municipio_sk", "eje_sk"]).crecimiento_pred_pct.groupby(level="eje_sk").transform(pct)
+    # Índice v3: potencial solo en dominio (percentil dentro del eje; fuera de dominio NaN y se renormalizan los
+    # pesos), y en alimentos y comercio la oferta en exceso de la población en vez del tamaño bruto.
+    pot = out.set_index(["municipio_sk", "eje_sk"]).crecimiento_pred_pct.groupby(level="eje_sk") \
+        .rank(pct=True, method="average")
+    exc = base.sb.leer("v_exceso_oferta", "dw", "municipio_sk,eje_sk,periodo_sk,percentil_residuo", secreta=True)
+    exc = exc[exc.periodo_sk == b.periodos["DENUE 2026-05"]].set_index(["municipio_sk", "eje_sk"]).percentil_residuo
     pesos = base.sb._peticion("dim_version_calculo?select=pesos&nombre=eq.v2_con_prediccion", True, "dw")[0]["pesos"]
-    v2 = base.asegurar_version("v2_con_prediccion", "Índice con potencial predicho (model/crecimiento.py)", pesos)
-    c = indice.indice(indice.componentes(b), pesos, potencial=pot)
-    indice.guardar_indice(c, v2, b.periodos["DENUE 2026-05"])
-    f = indice.banderas(b, c)
-    base.reemplazar("fact_flag_oportunidad", f"version_sk=eq.{v2}",
-                    [r | dict(version_sk=v2) for r in f.drop(columns="codigo").to_dict("records")])
-    print(f"✓ fact_indice_oportunidad v2: {len(c)} filas · banderas v2: {int(f.flag_activo.sum())} activas")
+    v3 = base.asegurar_version(VERSION_INDICE, "Índice con potencial solo en dominio (≥ 3 UE), tiempos por carretera "
+                               "(OSRM) y oferta de alimentos y comercio en exceso de la población "
+                               "(model/crecimiento.py, plan de afinación F2-F3)", pesos)
+    c = indice.componentes(b)
+    residentes = c.eje_sk.isin([2, 4])
+    c.loc[residentes, "score_oferta"] = [exc.get((m, e), np.nan) for m, e in
+                                         zip(c.municipio_sk[residentes], c.eje_sk[residentes])]
+    c = indice.indice(c, pesos, potencial=pot, renormalizar=True)
+    indice.guardar_indice(c, v3, b.periodos["DENUE 2026-05"])
+    vis = base.sb.leer("fact_visibilidad", "dw", "municipio_sk,vistas,periodo_inicio,actividad_sk", secreta=True)
+    if len(vis):
+        vis = vis[vis.actividad_sk.isna() & (vis.periodo_inicio == vis.periodo_inicio.max())]
+        vis = vis.set_index("municipio_sk").vistas.rank(pct=True)
+    indice.asegurar_flags()
+    f = indice.banderas(b, c, exceso=exc, visibilidad=vis if len(vis) else None)
+    base.reemplazar("fact_flag_oportunidad", f"version_sk=eq.{v3}",
+                    [r | dict(version_sk=v3) for r in f.drop(columns="codigo").to_dict("records")])
+    print(f"✓ fact_indice_oportunidad {VERSION_INDICE}: {len(c)} filas · banderas: "
+          f"{f[f.flag_activo].codigo.value_counts().to_dict()}")
 
-    top = out.merge(b.mun[["nombre", "es_ancla"]], left_on="municipio_sk", right_index=True)
+    top = out[out.en_dominio].merge(b.mun[["nombre", "es_ancla"]], left_on="municipio_sk", right_index=True)
     top = top[~top.es_ancla & (top.personal_base.fillna(0) >= 10)].nlargest(10, "crecimiento_pred_pct")
     print("Mayor crecimiento esperado (no anclas, ≥10 empleos):",
           ", ".join(f"{n} ({EJES[e][:4]}) {p:+.0f}%" for n, e, p in zip(top.nombre, top.eje_sk, top.crecimiento_pred_pct)))

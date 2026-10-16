@@ -29,7 +29,9 @@ import supabase_cliente as sb  # noqa: E402
 
 SALIDA = RAIZ / "data" / "derivados"
 FECHA_CORTE = "2026-10-14"
+FECHA_OSM = "2026-10-15"   # descarga de Overpass y matriz OSRM del plan de afinación (F1, F2)
 MIN_POR_KM_RECTA = 1.8  # mismo factor que dw.fact_accesibilidad (241.1 min / 133.96 km)
+INDICADORES_OSM = ("atractivos_osm", "terminales_autobus", "km_vias_principales", "km_vias_por_km2")
 VERSION = dict(nombre="ficha_semaforos_v1",
                descripcion="Semáforos de la ficha técnica municipal (docs/modelo_predictivo_anillos.md §3.1)",
                pesos={"infraestructura": {"acceso_ancla": 0.35, "red_vial": 0.25, "hospedaje": 0.20,
@@ -52,9 +54,11 @@ FUENTES_NUEVAS = [
          uso_en_modelo="Población, internet (A2) y necesidad social (A4)"),
     dict(clave="osm_2026", nombre="OpenStreetMap · red vial principal y servicios (Overpass)",
          institucion="Colaboradores de OpenStreetMap", tipo="Abierta colaborativa",
-         url="https://overpass-api.de/", version_corte=f"Consulta {FECHA_CORTE}", fecha_descarga=FECHA_CORTE,
+         url="https://overpass-api.de/", version_corte=f"Consulta {FECHA_OSM}", fecha_descarga=FECHA_OSM,
          licencia_terminos="ODbL (atribución)", cobertura="Vías motorway-tertiary, servicios y atractivos de Puebla",
-         calidad_notas="La cobertura de OSM es desigual en municipios rurales; se usa en percentiles, no en valores absolutos.",
+         calidad_notas="La cobertura de OSM es desigual en municipios rurales; se usa en percentiles, no en valores absolutos. "
+                       "Un cero de OSM con completitud_osm ≤ P25 estatal se guarda como NULL con calidad 'sin_dato' "
+                       "(no mapeado, no inexistente).",
          uso_en_modelo="Densidad vial, terminales y atractivos (A2)"),
     dict(clave="eventos", nombre="Calendario de ferias, festivales y temporadas", institucion="Varias (Sectur Puebla, prensa, agregadores)",
          tipo="Catálogo manual", url="https://www.zonaturistica.com/eventos-en/puebla", version_corte="2026",
@@ -72,7 +76,8 @@ def haversine_km(lat1, lon1, lat2, lon2):
 
 
 def pct(s: pd.Series) -> pd.Series:
-    return s.rank(pct=True, method="average").fillna(0)
+    # Sin dato = neutral (0.5): un cero de OSM no mapeado no debe castigar al municipio rural.
+    return s.rank(pct=True, method="average").fillna(0.5)
 
 
 # ---------------------------------------------------------------- lectura de Supabase
@@ -88,12 +93,18 @@ def leer_bd():
     paradas = paradas[paradas.ruta_sk.isin({r["ruta_sk"] for r in rutas})]
     social = sb.leer("fact_contexto_social", "dw", "municipio_sk,grado_marginacion,indice_marginacion", secreta=True)
     pred = sb.leer("fact_prediccion_crecimiento", "dw", "municipio_sk,crecimiento_pred_pct,intervalo_inf_pct,"
-                   "intervalo_sup_pct,personal_base", secreta=True)
-    return mun, act.merge(cat, on="actividad_sk"), paradas, social, pred
+                   "intervalo_sup_pct,personal_base,modelo_sk", secreta=True)
+    modelos = sb._peticion("dim_modelo?select=modelo_sk,nombre", True, "dw")
+    v2 = [m["modelo_sk"] for m in modelos if m["nombre"] == "crecimiento_ue_eje_lgbm_v2"]
+    if v2:  # con el modelo v2 (F2c) el semáforo solo usa celdas en dominio; las demás quedan sin predicción
+        pred = pred[pred.modelo_sk == v2[0]].dropna(subset=["crecimiento_pred_pct"])
+    tiempos = sb.leer("v_tiempo_municipios", "dw", "municipio_origen_sk,municipio_destino_sk,tiempo_min,fuente_tiempo",
+                      secreta=True)
+    return mun, act.merge(cat, on="actividad_sk"), paradas, social, pred, tiempos
 
 
 # ---------------------------------------------------------------- A2
-def infraestructura(mun, geo_path, denue_path, osm_dir, iter_path):
+def infraestructura(mun, tiempos, geo_path, denue_path, osm_dir, iter_path):
     geo = json.loads(Path(geo_path).read_text(encoding="utf-8"))
     polys = {f["properties"]["CVEGEO"]: shape(f["geometry"]).buffer(0) for f in geo["features"]}
     claves = list(polys)
@@ -109,16 +120,23 @@ def infraestructura(mun, geo_path, denue_path, osm_dir, iter_path):
     df = mun.set_index("cve_geo")
     out = pd.DataFrame(index=df.index)
 
-    # Accesibilidad: ancla más cercana y capital (tiempo estimado con el factor de fact_accesibilidad).
+    # Accesibilidad: ancla más cercana y capital por carretera entre cabeceras (dw.v_tiempo_municipios, OSRM).
+    # Los valores en línea recta × 1.8 min/km se conservan con sufijo _recta para comparar.
     anclas = df[df.es_ancla].index
+    t = tiempos.set_index(["municipio_origen_sk", "municipio_destino_sk"]).tiempo_min.astype(float)
     for c in df.index:
-        p = centro[c]
+        p, m = centro[c], df.municipio_sk[c]
         dist = {a: haversine_km(p.y, p.x, centro[a].y, centro[a].x) for a in anclas if a != c}
         a_min = min(dist, key=dist.get)
-        out.loc[c, "min_ancla_cercana"] = 0.0 if c in anclas else round(dist[a_min] * MIN_POR_KM_RECTA, 1)
-        out.loc[c, "ancla_cercana_sk"] = df.municipio_sk[c] if c in anclas else df.municipio_sk[a_min]
-        out.loc[c, "min_capital"] = round(haversine_km(p.y, p.x, centro["21114"].y, centro["21114"].x)
-                                          * MIN_POR_KM_RECTA, 1)
+        out.loc[c, "min_ancla_cercana_recta"] = 0.0 if c in anclas else round(dist[a_min] * MIN_POR_KM_RECTA, 1)
+        out.loc[c, "ancla_cercana_sk_recta"] = m if c in anclas else df.municipio_sk[a_min]
+        out.loc[c, "min_capital_recta"] = round(haversine_km(p.y, p.x, centro["21114"].y, centro["21114"].x)
+                                                * MIN_POR_KM_RECTA, 1)
+        por_carretera = {a: t[(m, df.municipio_sk[a])] for a in anclas if a != c}
+        a_min = min(por_carretera, key=por_carretera.get)
+        out.loc[c, "min_ancla_cercana"] = 0.0 if c in anclas else round(por_carretera[a_min], 1)
+        out.loc[c, "ancla_cercana_sk"] = m if c in anclas else df.municipio_sk[a_min]
+        out.loc[c, "min_capital"] = 0.0 if c == "21114" else round(t[(m, df.municipio_sk["21114"])], 1)
     # Colindancia con margen de ~100 m: los polígonos de INEGI no siempre comparten el borde exacto.
     out["municipios_colindantes"] = [sum(1 for j in arbol.query(polys[c].buffer(0.001), predicate="intersects")
                                          if claves[j] != c) for c in out.index]
@@ -135,14 +153,19 @@ def infraestructura(mun, geo_path, denue_path, osm_dir, iter_path):
     out["km_vias_principales"] = pd.Series(km).round(1)
     out["km_vias_por_km2"] = (out.km_vias_principales / df.superficie_km2.astype(float)).round(3)
 
-    # Puntos OSM: terminales y atractivos.
+    # Puntos OSM: terminales y atractivos; los POIs con nombre miden qué tan mapeado está el municipio.
     puntos = json.loads((Path(osm_dir) / "puntos.json").read_text(encoding="utf-8"))["elements"]
     cuenta = {"terminales_autobus": {}, "atractivos_osm": {}}
+    con_nombre = {}
     for e in puntos:
         lat, lon = (e.get("lat"), e.get("lon")) if "lat" in e else (e.get("center", {}).get("lat"), e.get("center", {}).get("lon"))
         if lat is None:
             continue
         t = e.get("tags", {})
+        if "name" in t:
+            c = municipio_de(Point(lon, lat))
+            if c:
+                con_nombre[c] = con_nombre.get(c, 0) + 1
         if t.get("amenity") == "bus_station":
             k = "terminales_autobus"
         elif t.get("tourism") in ("attraction", "museum", "viewpoint") or "historic" in t or t.get("leisure") in ("nature_reserve", "water_park"):
@@ -161,6 +184,9 @@ def infraestructura(mun, geo_path, denue_path, osm_dir, iter_path):
     sys.path.insert(0, str(RAIZ / "model"))
     from actividades import PUNTO_MEDIO
     d["personal"] = d.per_ocu.map(PUNTO_MEDIO).fillna(2.5)
+    # Completitud OSM: POIs con nombre por cada mil establecimientos del DENUE (F2a del plan de afinación).
+    establecimientos = d.groupby("cve_geo").size().reindex(out.index)
+    out["completitud_osm"] = (1000 * pd.Series(con_nombre).reindex(out.index).fillna(0) / establecimientos).round(2)
     def contar(prefijos, campo="size"):
         s = d[d.codigo_act.str.startswith(prefijos)].groupby("cve_geo")
         return (s.size() if campo == "size" else s.personal.sum()).reindex(out.index).fillna(0)
@@ -198,7 +224,17 @@ def infraestructura(mun, geo_path, denue_path, osm_dir, iter_path):
         "ocupantes_por_cuarto": num("PRO_OCUP_C"),
     })
     out["indice_carencias"] = carencias.apply(pct).mean(axis=1).round(4)
-    return out
+
+    # Calidad: un cero de OSM donde OSM está poco mapeado (completitud ≤ P25) es "no mapeado", no "no existe".
+    # ≤ y no <: en 2026 el P25 es 0 (83 municipios sin un solo POI con nombre) y con < la regla nunca aplicaría.
+    calidad = pd.DataFrame("observado", index=out.index, columns=out.columns)
+    poco_mapeado = out.completitud_osm <= out.completitud_osm.quantile(0.25)
+    for ind in INDICADORES_OSM:
+        cero = out[ind] == 0
+        calidad.loc[cero & poco_mapeado, ind] = "sin_dato"
+        calidad.loc[cero & ~poco_mapeado, ind] = "cero_confirmado"
+        out.loc[cero & poco_mapeado, ind] = np.nan
+    return out, calidad
 
 
 # ---------------------------------------------------------------- semáforos
@@ -225,9 +261,10 @@ def semaforos(mun, infra, act, paradas, social, pred):
         n = nivel_por_umbral(v, b, a, invertido=True)
         filas.append(dict(municipio_sk=m, dimension="infraestructura", nivel=n, valor=round(v, 4),
                           percentil=round(pct(i_infra)[m], 4),
-                          motivo=f"{inf.min_ancla_cercana[m]:.0f} min al ancla más cercana · "
-                                 f"{inf.km_vias_por_km2[m]:.2f} km de vías principales/km² · "
-                                 f"{inf.unidades_hospedaje[m]:.0f} hospedajes · {inf.pct_viviendas_internet[m]:.0f} % viviendas con internet"))
+                          motivo=f"{inf.min_ancla_cercana[m]:.0f} min por carretera al ancla más cercana · "
+                                 + ("vías principales sin mapear en OSM · " if pd.isna(inf.km_vias_por_km2[m]) else
+                                    f"{inf.km_vias_por_km2[m]:.2f} km de vías principales/km² · ")
+                                 + f"{inf.unidades_hospedaje[m]:.0f} hospedajes · {inf.pct_viviendas_internet[m]:.0f} % viviendas con internet"))
 
     # Turismo actual (intensidad proxy; más = más concentrado).
     w = VERSION["pesos"]["turismo_actual"]
@@ -270,7 +307,8 @@ def semaforos(mun, infra, act, paradas, social, pred):
         g = pred[pred.municipio_sk == m] if len(pred) else pred
         if len(g) == 0:
             filas.append(dict(municipio_sk=m, dimension="potencial", nivel="gris", valor=None, percentil=None,
-                              motivo="Pendiente: predicción de crecimiento (Rol B)"))
+                              motivo="Sin predicción de crecimiento: ningún eje con al menos 3 unidades económicas "
+                                     "en el CE 2024 (fuera del rango de entrenamiento del modelo)"))
             continue
         # Promedio de los ejes ponderado por su empleo: el máximo lo inflaba un eje con 3 negocios
         peso = g.personal_base.fillna(0).clip(lower=1)
@@ -328,28 +366,35 @@ def asegurar_version():
 
 
 UNIDADES = {"min_ancla_cercana": "min", "ancla_cercana_sk": "municipio_sk", "min_capital": "min",
+            "min_ancla_cercana_recta": "min", "ancla_cercana_sk_recta": "municipio_sk", "min_capital_recta": "min",
+            "completitud_osm": "POIs OSM con nombre por mil establecimientos DENUE",
             "municipios_colindantes": "municipios", "km_vias_principales": "km", "km_vias_por_km2": "km/km²",
             "terminales_autobus": "terminales", "atractivos_osm": "puntos", "unidades_hospedaje": "establecimientos",
             "personal_hospedaje": "personas", "unidades_alimentos": "establecimientos", "personal_alimentos": "personas",
             "gasolineras": "establecimientos", "bancos": "sucursales", "farmacias": "establecimientos",
             "unidades_salud": "establecimientos", "poblacion_2020": "habitantes", "pct_viviendas_internet": "%",
             "servicios_por_10k_hab": "por 10 mil hab.", "indice_carencias": "0-1", "intensidad_turistica": "0-1"}
-FUENTE_INDICADOR = {"min_ancla_cercana": "marco", "ancla_cercana_sk": "marco", "min_capital": "marco",
+FUENTE_INDICADOR = {"min_ancla_cercana": "osrm", "ancla_cercana_sk": "osrm", "min_capital": "osrm",
+                    "min_ancla_cercana_recta": "marco", "ancla_cercana_sk_recta": "marco", "min_capital_recta": "marco",
+                    "completitud_osm": "osm_2026",
                     "municipios_colindantes": "marco", "km_vias_principales": "osm_2026", "km_vias_por_km2": "osm_2026",
                     "terminales_autobus": "osm_2026", "atractivos_osm": "osm_2026", "poblacion_2020": "iter_2020",
                     "pct_viviendas_internet": "iter_2020", "indice_carencias": "iter_2020",
                     "servicios_por_10k_hab": "denue_2026", "intensidad_turistica": "denue_2026"}
 
 
-def cargar(mun, infra, temporadas, sem, fuentes, version_sk):
-    fuentes = {**fuentes, "marco": 2}
+def cargar(mun, infra, calidad, temporadas, sem, fuentes, version_sk):
+    osrm = sb._peticion("dim_fuente?select=fuente_sk&nombre=like.OSRM*", True, "dw")
+    fuentes = {**fuentes, "marco": 2, "osrm": osrm[0]["fuente_sk"] if osrm else 2}
     msk = dict(zip(mun.cve_geo, mun.municipio_sk))
     filas = []
     for c, r in infra.iterrows():
         for ind, v in r.items():
+            fuente = FUENTE_INDICADOR.get(ind, "denue_2026")
             filas.append(dict(municipio_sk=int(msk[c]), indicador=ind, valor=None if pd.isna(v) else float(v),
-                              unidad=UNIDADES.get(ind), fuente_sk=fuentes[FUENTE_INDICADOR.get(ind, "denue_2026")],
-                              fecha_corte=FECHA_CORTE))
+                              unidad=UNIDADES.get(ind), fuente_sk=fuentes[fuente],
+                              fecha_corte=FECHA_OSM if fuente in ("osm_2026", "osrm") else FECHA_CORTE,
+                              calidad=calidad.at[c, ind] if ind in calidad.columns else "observado"))
     sb._peticion("fact_infraestructura?municipio_sk=not.is.null", True, "dw", "DELETE")
     sb.insertar("fact_infraestructura", filas, "dw")
     print(f"✓ fact_infraestructura: {len(filas)} filas ({infra.shape[1]} indicadores × {len(infra)} municipios)")
@@ -382,8 +427,9 @@ def main():
     ap.add_argument("--sin-bd", action="store_true")
     args = ap.parse_args()
 
-    mun, act, paradas, social, pred = leer_bd()
-    infra = infraestructura(mun, args.geo, args.denue, args.osm, args.iter)
+    mun, act, paradas, social, pred, tiempos = leer_bd()
+    infra, calidad = infraestructura(mun, tiempos, args.geo, args.denue, args.osm, args.iter)
+    print("Calidad de indicadores OSM:", {i: calidad[i].value_counts().to_dict() for i in INDICADORES_OSM})
     sem, intensidad = semaforos(mun, infra, act, paradas, social, pred)
     infra["intensidad_turistica"] = intensidad.values.round(4)
     with (RAIZ / "data" / "catalogos" / "temporadas.csv").open(encoding="utf-8") as f:
@@ -402,7 +448,7 @@ def main():
     print(f"V2 anclas con intensidad ≥ P50: {anclas.sum() - len(bajas)}/{anclas.sum()}"
           + (f" (por debajo: {', '.join(bajas)})" if bajas else ""))
     if not args.sin_bd:
-        cargar(mun, infra, temporadas, sem, asegurar_fuentes(), asegurar_version())
+        cargar(mun, infra, calidad, temporadas, sem, asegurar_fuentes(), asegurar_version())
 
 
 if __name__ == "__main__":

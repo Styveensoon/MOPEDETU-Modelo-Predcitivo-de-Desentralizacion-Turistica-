@@ -14,9 +14,19 @@ Selección: búsqueda exhaustiva (con poda) de la mejor combinación de 5 rutas,
            ≤ 2 rutas por tema, ≤ 2 rutas por ancla (Puebla es la puerta de entrada del estado).
 Tema:      solo cuenta presencia fuerte (alta, muy alta o reconocida en catálogo oficial). Especificidad: el
            puntaje se multiplica de ×0.85 (tema más común, p. ej. gastronomía) a ×1.15 (tema más distintivo).
+Optimizador v2 (plan de afinación F5):
+           · tiempos por carretera entre cabeceras (dw.v_tiempo_municipios, OSRM), no la línea recta
+           · índice y banderas v3_dominio_osrm y crecimiento del modelo v2 (solo celdas en dominio)
+           · sin candidatas con semáforo de infraestructura rojo
+           · rutas de más de un día (traslado + estancias > 10 h) exigen un nodo de pernocta con hospedaje ≥ P50
+             estatal (el ancla cuenta)
+           · la región beneficiada no puede ser Angelópolis (descentralizar, no volver a la capital)
+           Las rutas que la selección sin estas reglas habría elegido y que no las cumplen se guardan con
+           origen = 'propuesta_descartada', cumple_restricciones = false y sus incumplimientos.
 Escribe dim_ruta / fact_ruta_parada (origen = 'propuesta_modelo') y fact_ruta_evaluacion; reporta v_novedad_ruta.
 Uso: python model/rutas.py
 """
+import math
 import itertools
 
 import numpy as np
@@ -38,6 +48,9 @@ TEMAS = ["cafe", "mezcal", "ecoturismo", "gastronomia", "artesanias", "bebidas_t
 # siempre gana; BONO_TEMA premia la variedad de temas.
 BONO_REGION, BONO_TEMA = 100.0, 1.0
 MAX_POR_ANCLA = 2                   # Puebla y otras anclas pueden ser puerta de entrada de hasta 2 rutas
+HORAS_DIA = 10                      # jornada de 9:00 a 19:00, la misma de la agenda del tablero
+VERSION_INDICE, MODELO_CRECIMIENTO = "v3_dominio_osrm", "crecimiento_ue_eje_lgbm_v2"
+REGION_CAPITAL = "Angelópolis"
 
 
 def seleccionar(candidatas: list) -> list:
@@ -80,26 +93,34 @@ def seleccionar(candidatas: list) -> list:
 
 
 def datos(b: base.Base):
-    v2 = base.sb._peticion("dim_version_calculo?select=version_sk&nombre=eq.v2_con_prediccion", True, "dw")[0]["version_sk"]
+    v = base.sb._peticion(f"dim_version_calculo?select=version_sk&nombre=eq.{VERSION_INDICE}", True, "dw")[0]["version_sk"]
     idx = base.sb.leer("fact_indice_oportunidad", "dw", secreta=True)
-    idx = idx[idx.version_sk == v2]
+    idx = idx[idx.version_sk == v]
     mejor = idx.loc[idx.groupby("municipio_sk").indice_oportunidad.idxmax()].set_index("municipio_sk")
     flags = base.sb.leer("fact_flag_oportunidad", "dw", secreta=True)
-    flags = flags[(flags.version_sk == v2) & flags.flag_activo]
+    flags = flags[(flags.version_sk == v) & flags.flag_activo]
     tipos = {r["tipo_flag_sk"]: r["codigo"] for r in base.sb._peticion("dim_tipo_flag?select=*", True, "dw")}
     flags["codigo"] = flags.tipo_flag_sk.map(tipos)
+    modelo_sk = base.sb._peticion(f"dim_modelo?select=modelo_sk&nombre=eq.{MODELO_CRECIMIENTO}", True, "dw")[0]["modelo_sk"]
     pred = base.sb.leer("fact_prediccion_crecimiento", "dw", secreta=True)
+    pred = pred[pred.modelo_sk == modelo_sk]
     enl = base.sb.leer("fact_prediccion_enlace", "dw", secreta=True)
-    t = b.acceso.set_index(["municipio_origen_sk", "municipio_destino_sk"])
-    return v2, mejor, flags, pred, enl, t
+    t = base.sb.leer("v_tiempo_municipios", "dw", secreta=True).set_index(["municipio_origen_sk", "municipio_destino_sk"])
+    sem = base.sb.leer("fact_semaforo_municipio", "dw", "municipio_sk,dimension,nivel", secreta=True)
+    infra_rojo = set(sem[(sem.dimension == "infraestructura") & (sem.nivel == "rojo")].municipio_sk)
+    return v, modelo_sk, mejor, flags, pred, enl, t, infra_rojo
 
 
 def main():
     b = base.cargar()
-    v2, mejor, flags, pred, enl, acc = datos(b)
+    v3, modelo_sk, mejor, flags, pred, enl, acc, infra_rojo = datos(b)
     m = b.mun
-    tiempo = acc.tiempo_min_est.to_dict()
-    dist = acc.distancia_km_recta.to_dict()
+    tiempo = acc.tiempo_min.to_dict()          # por carretera (OSRM) donde existe
+    dist = acc.distancia_km.to_dict()
+    recta = b.acceso.set_index(["municipio_origen_sk", "municipio_destino_sk"])
+    tiempo_est, dist_est = recta.tiempo_min_est.to_dict(), recta.distancia_km_recta.to_dict()
+    hosp = b.infra.unidades_hospedaje.fillna(0)
+    hosp_p50 = float(hosp.median())
     p_enl = {}
     for r in enl.itertuples():
         p_enl[(r.municipio_a_sk, r.municipio_b_sk)] = p_enl[(r.municipio_b_sk, r.municipio_a_sk)] = r.probabilidad
@@ -140,7 +161,7 @@ def main():
         return mejor_r
 
     def construir(ancla, tema):
-        candidatos = presente.get(tema, set()) - set(anclas)
+        candidatos = presente.get(tema, set()) - set(anclas) - infra_rojo
         ruta = [ancla]
         while len(ruta) < MAX_PARADAS:
             fin, opciones = ruta[-1], []
@@ -172,8 +193,40 @@ def main():
         tramos_nuevos = np.mean([frozenset((a, c)) not in oficiales for a, c in zip(ruta, ruta[1:])])
         puntaje = (sum(valor(x, tema) for x in resto) * (0.7 + 0.3 * enl_medio) * (1 + 0.2 * tramos_nuevos)
                    * (1 + 0.1 * bool(meses_comunes)) * especificidad[tema] - 0.15 * recorrido(ruta) / MAX_TOTAL)
+        # Operabilidad (F5): pernocta, región beneficiada y restricciones medidas por carretera
+        estancias = [ESTANCIA[bool(m.es_ancla[x])] for x in ruta]
+        horas = recorrido(ruta) / 60 + sum(estancias)
+        dias = max(1, math.ceil(horas / HORAS_DIA))
+        region = m.region.reindex(resto).mode().iat[0]
+        incumple, pernocta = [], None
+        if dias > 1:
+            # Se prefiere dormir en una parada emergente (la noche deja derrama fuera del ancla), la más cercana
+            # al fin de la primera jornada; el ancla de salida cuenta si ninguna otra tiene hospedaje ≥ P50.
+            llegada, h = [], 0.0
+            for k, x in enumerate(ruta):
+                h += (tiempo[(ruta[k - 1], x)] / 60 if k else 0)
+                llegada.append(h)
+                h += estancias[k]
+            paradas_ok = [k for k in range(1, len(ruta)) if hosp.get(ruta[k], 0) >= hosp_p50]
+            if paradas_ok:
+                pernocta = ruta[min(paradas_ok, key=lambda k: abs(llegada[k] + estancias[k] - HORAS_DIA))]
+            elif hosp.get(ruta[0], 0) >= hosp_p50:
+                pernocta = ruta[0]
+            else:
+                incumple.append("sin_pernocta")
+        if region == REGION_CAPITAL:
+            incumple.append("region_angelopolis")
+        if any(tiempo[(a, c)] > MAX_TRAMO for a, c in zip(ruta, ruta[1:])):
+            incumple.append(f"tramo>{MAX_TRAMO}")
+        if recorrido(ruta) > MAX_TOTAL:
+            incumple.append(f"total>{MAX_TOTAL}")
+        rojo = sum(x in infra_rojo for x in ruta)
+        if rojo:
+            incumple.append("infra_rojo")
         return dict(ruta=ruta, tema=tema, puntaje=puntaje, emergentes=emerg, meses_comunes=meses_comunes,
-                    enlace_medio=enl_medio, tramos_nuevos=tramos_nuevos, minutos=recorrido(ruta))
+                    enlace_medio=enl_medio, tramos_nuevos=tramos_nuevos, minutos=recorrido(ruta),
+                    estancias=estancias, horas=round(horas, 1), dias=dias, region=region, pernocta=pernocta,
+                    incumplimientos=incumple, infra_rojo=rojo)
 
     construidas = {(a, t): construir(a, t) for a in anclas for t in TEMAS}
     candidatas = [e for (a, t), r in construidas.items() if (e := evaluar(r, t))]
@@ -194,63 +247,84 @@ def main():
     # Restricciones duras: anclas distintas, máximo 2 rutas por tema y ≤ 50 % de municipios compartidos.
     # Región de una ruta = región que predomina entre sus paradas (donde llega el beneficio), no la del ancla:
     # p. ej. la ruta del mezcal sale de Puebla (Angelópolis) pero sus paradas están en la Mixteca.
-    for e in candidatas:
-        e["region"] = m.region.reindex(e["ruta"][1:]).mode().iat[0]
-    elegidas = seleccionar(candidatas)
-    print(f"Candidatas factibles: {len(candidatas)} (anclas × temas) · elegidas: {len(elegidas)}")
+    # Región de una ruta = región que predomina entre sus paradas (donde llega el beneficio), no la del ancla:
+    # p. ej. la ruta del mezcal sale de Puebla (Angelópolis) pero sus paradas están en la Mixteca.
+    operables = [e for e in candidatas if not e["incumplimientos"]]
+    elegidas = seleccionar(operables)
+    # Las que se habrían elegido sin las reglas de operabilidad y no las cumplen: quedan registradas para explicar
+    # por qué se eligieron otras.
+    descartadas = [e for e in seleccionar(candidatas) if e["incumplimientos"]]
+    print(f"Candidatas factibles: {len(candidatas)} (anclas × temas) · operables: {len(operables)} · "
+          f"elegidas: {len(elegidas)} · descartadas registradas: {len(descartadas)}")
 
     # --- escritura
-    viejas = base.sb._peticion("dim_ruta?select=ruta_sk&origen=eq.propuesta_modelo", True, "dw")
+    viejas = base.sb._peticion("dim_ruta?select=ruta_sk&origen=in.(propuesta_modelo,propuesta_descartada)", True, "dw")
     if viejas:
         ids = ",".join(str(r["ruta_sk"]) for r in viejas)
         for t in ("fact_ruta_evaluacion", "fact_ruta_parada"):
             base.sb._peticion(f"{t}?ruta_sk=in.({ids})", True, "dw", "DELETE")
         base.sb._peticion(f"dim_ruta?ruta_sk=in.({ids})", True, "dw", "DELETE")
-    modelo_sk = base.sb._peticion("dim_modelo?select=modelo_sk&nombre=eq.crecimiento_ue_eje_lgbm_v1", True, "dw")[0]["modelo_sk"]
     nom_act = dict(zip(b.cat_act.codigo, b.cat_act.nombre))
     ico_act = dict(zip(b.cat_act.codigo, b.cat_act.icono))
     meses_txt = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"]
-    resumen = []
-    for i, e in enumerate(elegidas, 1):
+
+    def escribir(e, i, origen):
         ruta, tema = e["ruta"], e["tema"]
         nombres = [m.nombre[x] for x in ruta]
-        estancias = [ESTANCIA[bool(m.es_ancla[x])] for x in ruta]
-        horas = round((e["minutos"] / 60) + sum(estancias), 1)
         crec_ruta = [crec.get((x, int(mejor.eje_sk[x])), np.nan) for x in ruta[1:]]
+        crec_medio = np.nanmean(crec_ruta) if np.isfinite(crec_ruta).any() else np.nan
         desc = (f"{ico_act[tema]} Ruta de {nom_act[tema].lower()} que parte de {nombres[0]} (ancla) hacia "
                 f"{len(e['emergentes'])} municipios emergentes con bandera de oportunidad: "
                 + "; ".join(f"{m.nombre[x]} ({', '.join(motivo_flag.get(x, []))})" for x in e["emergentes"])
-                + f". Recorrido {e['minutos']:.0f} min en carretera, {horas} h con estancias. "
-                f"Crecimiento esperado medio {np.nanmean(crec_ruta):+.0f} % a 5 años. "
-                f"{e['tramos_nuevos']:.0%} de los tramos no existe en rutas oficiales."
+                + f". Recorrido {e['minutos']:.0f} min por carretera, {e['horas']} h con estancias"
+                + (f" en {e['dias']} días con pernocta en {m.nombre[e['pernocta']]}" if e["pernocta"] else "")
+                + ". "
+                + (f"Crecimiento esperado medio {crec_medio:+.0f} % a 5 años. " if np.isfinite(crec_medio) else "")
+                + f"{e['tramos_nuevos']:.0%} de los tramos no existe en rutas oficiales."
                 + (f" Temporada compartida: {', '.join(meses_txt[k - 1] for k in e['meses_comunes'])}."
-                   if e["meses_comunes"] else ""))
-        fila = dict(nombre=f"{nom_act[tema]} · {nombres[0]} → {nombres[-1]} (propuesta {i})",
-                    tipo="ruta_intermunicipal", tema=tema, es_monotematica=True, origen="propuesta_modelo",
-                    version_sk=v2, num_municipios=len(ruta), duracion_estimada_h=horas, descripcion=desc[:1500])
+                   if e["meses_comunes"] else "")
+                + (f" Descartada: {', '.join(e['incumplimientos'])}." if e["incumplimientos"] else ""))
+        etiqueta = "propuesta" if origen == "propuesta_modelo" else "descartada"
+        fila = dict(nombre=f"{nom_act[tema]} · {nombres[0]} → {nombres[-1]} ({etiqueta} {i})",
+                    tipo="ruta_intermunicipal", tema=tema, es_monotematica=True, origen=origen,
+                    version_sk=v3, num_municipios=len(ruta), duracion_estimada_h=e["horas"], descripcion=desc[:1500])
         sk = base.sb._peticion("dim_ruta", True, "dw", "POST", fila, {"Prefer": "return=representation"})[0]["ruta_sk"]
         paradas = []
         for k, x in enumerate(ruta):
             prev = ruta[k - 1] if k else None
             paradas.append(dict(ruta_sk=sk, orden_parada=k + 1, municipio_sk=int(x), eje_sk=int(mejor.eje_sk[x]),
-                                distancia_desde_anterior_km=round(dist[(prev, x)], 2) if prev else None,
-                                tiempo_desde_anterior_min=round(tiempo[(prev, x)], 1) if prev else None,
+                                distancia_desde_anterior_km=round(dist_est[(prev, x)], 2) if prev else None,
+                                tiempo_desde_anterior_min=round(tiempo_est[(prev, x)], 1) if prev else None,
+                                distancia_desde_anterior_km_real=round(dist[(prev, x)], 2) if prev else None,
+                                tiempo_desde_anterior_min_real=round(tiempo[(prev, x)], 1) if prev else None,
                                 es_ancla=bool(m.es_ancla[x]), es_emergente=x in e["emergentes"],
-                                estancia_sugerida_h=estancias[k]))
+                                estancia_sugerida_h=e["estancias"][k], es_pernocta=x == e["pernocta"],
+                                unidades_hospedaje=int(hosp.get(x, 0))))
         base.sb._peticion("fact_ruta_parada", True, "dw", "POST", paradas, {"Prefer": "return=minimal"})
         base.sb._peticion("fact_ruta_evaluacion", True, "dw", "POST", dict(
-            ruta_sk=sk, modelo_sk=modelo_sk, version_sk=v2, tiempo_total_min=round(e["minutos"], 1),
-            potencial_pred_medio_pct=base.limpio(round(float(np.nanmean(crec_ruta)), 2)),
+            ruta_sk=sk, modelo_sk=modelo_sk, version_sk=v3,
+            tiempo_total_min=round(sum(tiempo_est[(a, c)] for a, c in zip(ruta, ruta[1:])), 1),
+            tiempo_total_min_real=round(e["minutos"], 1),
+            potencial_pred_medio_pct=base.limpio(round(float(crec_medio), 2)),
             necesidad_social_media=round(float(np.mean([social[x] for x in ruta[1:]])), 3),
-            num_municipios_emergentes=len(e["emergentes"]), puntaje_total=round(float(e["puntaje"]), 4)),
+            num_municipios_emergentes=len(e["emergentes"]), puntaje_total=round(float(e["puntaje"]), 4),
+            dias_sugeridos=e["dias"], region_beneficiada=e["region"], cumple_restricciones=not e["incumplimientos"],
+            incumplimientos=e["incumplimientos"], paradas_infra_rojo=e["infra_rojo"]),
             {"Prefer": "return=minimal"})
-        resumen.append((sk, fila["nombre"], " → ".join(nombres), e))
+        return sk, fila["nombre"], " → ".join(nombres), e
+
+    resumen = [escribir(e, i, "propuesta_modelo") for i, e in enumerate(elegidas, 1)]
+    for i, e in enumerate(descartadas, 1):
+        sk, nombre, recorrido_txt, _ = escribir(e, i, "propuesta_descartada")
+        print(f"  descartada #{sk} {nombre}: {', '.join(e['incumplimientos'])} · {recorrido_txt}")
     print(f"✓ dim_ruta / fact_ruta_parada / fact_ruta_evaluacion: {len(resumen)} rutas propuestas")
 
     nov = base.sb.leer("v_novedad_ruta", "dw", secreta=True).set_index("ruta_sk")
     for sk, nombre, recorrido_txt, e in resumen:
         n = nov.loc[sk]
-        print(f"  #{sk} {nombre}\n      {recorrido_txt} · {e['minutos']:.0f} min · emergentes {len(e['emergentes'])} · "
+        print(f"  #{sk} {nombre}\n      {recorrido_txt} · {e['minutos']:.0f} min · {e['dias']} día(s)"
+              + (f", pernocta en {m.nombre[e['pernocta']]}" if e["pernocta"] else "")
+              + f" · región {e['region']} · emergentes {len(e['emergentes'])} · "
               f"enlace P{e['enlace_medio']:.0%} · novedad: {n.clasificacion_novedad} "
               f"({n.pct_tramos_existentes:.0f} % tramos existentes)")
     pd.DataFrame([dict(ruta_sk=sk, nombre=n_, recorrido=r_, puntaje=e["puntaje"], minutos=e["minutos"],

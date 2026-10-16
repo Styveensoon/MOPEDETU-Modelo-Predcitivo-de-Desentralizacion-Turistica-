@@ -4,13 +4,14 @@
     "pct_top5": 51.9
   },
   "tendencial_5_anios": {
-    "hhi": 1132.5,
-    "pct_top5": 49.1
+    "hhi": 1141.4,
+    "pct_top5": 49.2
   },
   "con_rutas_hipotetico": {
-    "hhi": 1102.8,
+    "hhi": 1113.3,
     "pct_top5": 48.5
   },
-  "municipios_emergentes_en_rutas": 20,
-  "supuesto": "Escenario hipotético: los municipios emergentes de las rutas propuestas alcanzan el límite superior del intervalo de 80 % de su crecimiento predicho."
+  "municipios_emergentes_en_rutas": 21,
+  "supuesto": "Escenario hipotético: los municipios emergentes de las rutas propuestas alcanzan el límite superior del intervalo de 80 % de su crecimiento predicho. Celdas fuera del dominio del modelo (< 3 unidades) se mantienen en su valor actual.",
+  "modelo": "crecimiento_ue_eje_lgbm_v2"
 }

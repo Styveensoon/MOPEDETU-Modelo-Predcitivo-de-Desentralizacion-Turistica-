@@ -245,8 +245,11 @@ def oferta(d: pd.DataFrame, tot: pd.DataFrame, msk: dict):
 
 
 def leer_ce(ruta: str, anio: int) -> pd.DataFrame:
-    """Normaliza los dos formatos de INEGI a: cve_geo, codigo, unidades, personal, vacb."""
-    if anio == 2019:  # los renglones traen una coma final: sin index_col=False se corre una columna
+    """Normaliza los dos formatos de INEGI a: cve_geo, codigo, unidades, personal, vacb.
+    El formato con columna E04 es el de la serie histórica del CE 2024 (2014, 2019 y 2024 homologados a SCIAN 2023);
+    el CE 2019 original trae MUNICIPIO."""
+    encabezado = pd.read_csv(ruta, dtype=str, nrows=0).columns
+    if "E04" not in encabezado:  # CE 2019 original: los renglones traen una coma final, sin index_col=False se corre
         df = pd.read_csv(ruta, dtype=str, index_col=False)
         df = df.rename(columns={"MUNICIPIO": "mun"})
         df = df[df.ID_ESTRATO.fillna("").str.strip() == ""]
@@ -264,6 +267,62 @@ def leer_ce(ruta: str, anio: int) -> pd.DataFrame:
     return df[["cve_geo", "codigo", "unidades", "personal", "vacb"]]
 
 
+def agregar_ce(sel: pd.DataFrame, psk: int, msk: dict, ejes: dict) -> list:
+    """Censo Económico por municipio × eje con los pesos de EJES_SCIAN. INEGI oculta el personal de los códigos
+    con pocas unidades: personal_ocupado suma solo lo publicado ("al menos X") y pct_personal_cubierto dice qué
+    parte de las unidades del eje tiene su personal publicado."""
+    piv = sel.set_index(["cve_geo", "codigo"])
+    fact = []
+    for c in msk:
+        for eje in EJES_SCIAN:
+            u = u_pub = p = v = 0.0
+            conf = False
+            for cod in CODIGOS_CE:
+                w = peso_eje(cod).get(eje, 0) if len(cod) == 6 else (EJES_SCIAN[eje].get(cod, 0))
+                if cod == "487":
+                    w = 1.0 if eje == "turismo" else 0
+                if not w or (c, cod) not in piv.index:
+                    continue
+                r = piv.loc[(c, cod)]
+                ue = 0.0 if pd.isna(r.unidades) else float(r.unidades)  # (NaN or 0) sería NaN
+                u += w * ue
+                if pd.isna(r.personal):
+                    conf = conf or ue > 0
+                else:
+                    u_pub += w * ue
+                    p += w * r.personal
+                    v += w * (r.vacb if pd.notna(r.vacb) else 0)
+            fact.append(dict(municipio_sk=int(msk[c]), eje_sk=ejes[eje], periodo_sk=psk, unidades=round(u),
+                             personal_ocupado=round(p), va_censal_bruto_mdp=round(v, 3), hay_confidencial=conf,
+                             unidades_con_personal_publicado=round(u_pub),
+                             pct_personal_cubierto=round(100 * u_pub / u, 2) if u > 0 else None))
+        # (sin fila global: el DDL del Rol A no admite eje_sk = 0 en esta tabla)
+    return fact
+
+
+def cobertura_censo(msk: dict):
+    """Recalcula fact_censo_economico desde stg.censo_economico (sin volver a leer los CSV de INEGI) para llenar
+    unidades_con_personal_publicado y pct_personal_cubierto. Verifica que las columnas viejas no cambien."""
+    ejes = {r["codigo"]: r["eje_sk"] for r in sb._peticion("dim_eje?select=eje_sk,codigo", True, "dw")}
+    stg = sb.leer("censo_economico", "stg", secreta=True)
+    stg["cve_geo"] = stg.cve_geo.str.strip()
+    stg = stg.rename(columns={"sector_scian": "codigo", "personal_ocupado": "personal", "va_censal_bruto": "vacb"})
+    for c in ("unidades", "personal", "vacb"):
+        stg[c] = pd.to_numeric(stg[c], errors="coerce")
+    actual = sb.leer("fact_censo_economico", "dw", "municipio_sk,eje_sk,periodo_sk,unidades,personal_ocupado",
+                     secreta=True).set_index(["municipio_sk", "eje_sk", "periodo_sk"])
+    fact = []
+    for anio, sel in stg.groupby("anio_censal"):
+        fact += agregar_ce(sel.drop_duplicates(["cve_geo", "codigo"]), periodo(f"CE {anio}"), msk, ejes)
+    nuevo = pd.DataFrame(fact).set_index(["municipio_sk", "eje_sk", "periodo_sk"])
+    dif = (nuevo[["unidades", "personal_ocupado"]].reindex(actual.index) != actual[["unidades", "personal_ocupado"]])
+    if dif.any().any():
+        raise SystemExit(f"La reagregación no coincide con la base en {int(dif.any(axis=1).sum())} filas; no se escribe")
+    sb.insertar("fact_censo_economico", fact, "dw")  # upsert: solo cambian las dos columnas nuevas
+    print(f"✓ fact_censo_economico: cobertura de personal publicado en {len(fact):,} filas "
+          f"({(nuevo.pct_personal_cubierto < 80).sum()} con cobertura < 80 %)")
+
+
 def censo(rutas: dict, msk: dict):
     ejes = {r["codigo"]: r["eje_sk"] for r in sb._peticion("dim_eje?select=eje_sk,codigo", True, "dw")}
     stg, fact = [], []
@@ -276,34 +335,10 @@ def censo(rutas: dict, msk: dict):
                             unidades=entero(r.unidades), personal_ocupado=entero(r.personal),
                             va_censal_bruto=limpiar(r.vacb),
                             confidencial=bool(pd.notna(r.unidades) and r.unidades > 0 and pd.isna(r.personal))))
-        psk = periodo(f"CE {anio}")
-        piv = sel.set_index(["cve_geo", "codigo"])
-        for c in msk:
-            acum = {}
-            for eje in EJES_SCIAN:
-                u = p = v = 0.0
-                conf = False
-                for cod in CODIGOS_CE:
-                    w = peso_eje(cod).get(eje, 0) if len(cod) == 6 else (EJES_SCIAN[eje].get(cod, 0))
-                    if cod == "487":
-                        w = 1.0 if eje == "turismo" else 0
-                    if not w or (c, cod) not in piv.index:
-                        continue
-                    r = piv.loc[(c, cod)]
-                    ue = 0.0 if pd.isna(r.unidades) else float(r.unidades)  # (NaN or 0) sería NaN
-                    u += w * ue
-                    if pd.isna(r.personal):
-                        conf = conf or ue > 0
-                    else:
-                        p += w * r.personal
-                        v += w * (r.vacb if pd.notna(r.vacb) else 0)
-                acum[eje] = (u, p, v, conf)
-                fact.append(dict(municipio_sk=int(msk[c]), eje_sk=ejes[eje], periodo_sk=psk, unidades=round(u),
-                                 personal_ocupado=round(p), va_censal_bruto_mdp=round(v, 3), hay_confidencial=conf))
-            # (sin fila global: el DDL del Rol A no admite eje_sk = 0 en esta tabla)
+        fact += agregar_ce(sel, periodo(f"CE {anio}"), msk, ejes)
         tot = ce[ce.codigo == "TOTAL"]
         print(f"  CE {anio}: {tot.cve_geo.nunique()} municipios · personal ocupado total {tot.personal.sum():,.0f}")
-    borrar("censo_economico", "cve_geo=not.is.null", "stg")
+    borrar("censo_economico", f"anio_censal=in.({','.join(str(a) for a in rutas)})", "stg")  # solo los años que se cargan
     insertar("censo_economico", stg, "stg")
     for anio in rutas:
         borrar("fact_censo_economico", f"periodo_sk=eq.{periodo(f'CE {anio}')}")
@@ -365,6 +400,14 @@ def accesibilidad(geo_path: str, mun: pd.DataFrame):
         print(f"  accesibilidad previa: {len(previas)} filas · dif. media distancia "
               f"{(nuevo.distancia_km_recta - nuevo.distancia_km_recta_prev).abs().mean():.2f} km · "
               f"colindancia coincide {(nuevo.es_colindante == nuevo.es_colindante_prev).mean():.0%}")
+        # Los tiempos por carretera (scripts/calcular_tiempos_osrm.py) no dependen de esta sección: se conservan.
+        carretera = ["distancia_km_carretera", "tiempo_min_carretera", "fuente_tiempo", "fecha_calculo"]
+        if set(carretera) <= set(previas.columns):
+            prev = previas.set_index(["municipio_origen_sk", "municipio_destino_sk"])[carretera]
+            for f in filas:
+                k = (f["municipio_origen_sk"], f["municipio_destino_sk"])
+                if k in prev.index:
+                    f.update({c: limpiar(prev.at[k, c]) for c in carretera})
     borrar("fact_accesibilidad", "municipio_origen_sk=not.is.null")
     insertar("fact_accesibilidad", filas, lote=2000)
     print(f"✓ fact_accesibilidad: {len(filas):,} pares (colindantes: {sum(f['es_colindante'] for f in filas)})")
@@ -410,7 +453,7 @@ def atractivos(osm_dir: str, geo_path: str, msk: dict):
 
 def main():
     ap = argparse.ArgumentParser()
-    for a in ("--denue", "--ce2019", "--ce2024", "--catalogo", "--iter", "--conapo", "--coneval", "--geo", "--osm"):
+    for a in ("--denue", "--ce2014", "--ce2019", "--ce2024", "--catalogo", "--iter", "--conapo", "--coneval", "--geo", "--osm"):
         ap.add_argument(a)
     ap.add_argument("--solo", default="fuentes,scian,denue,oferta,censo,social,accesibilidad,atractivos")
     args = ap.parse_args()
@@ -438,7 +481,9 @@ def main():
             tot = d.groupby("cve_geo").agg(personal_est_total=("personal", "sum")).reset_index()
         oferta(d, tot, msk)
     if "censo" in solo:
-        censo({2019: args.ce2019, 2024: args.ce2024}, msk)
+        censo({a: r for a, r in ((2014, args.ce2014), (2019, args.ce2019), (2024, args.ce2024)) if r}, msk)
+    if "censo_cobertura" in solo:  # no está en el valor por omisión: censo ya calcula la cobertura
+        cobertura_censo(msk)
     if "social" in solo:
         social(args.iter, args.conapo, args.coneval, msk)
     if "accesibilidad" in solo:

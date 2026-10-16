@@ -117,9 +117,9 @@ Las rutas benefician a 4 regiones distintas y llevan de 4 a 5 municipios emergen
 | V1 | Cobertura A0, A2 y A4 en 217 municipios | ✅ 100 % |
 | V2 | Anclas con intensidad turística ≥ P50 (sin forzar) | ✅ 12/12 |
 | V3 | El DENUE detecta la actividad en los municipios de su ruta oficial | Café 66 %, mezcal 50 %. La brecha es la bandera OFERTA_INVISIBLE (29) |
-| V4 | El modelo de crecimiento gana a las líneas base | ✅ En MAE, Spearman y top 20 %. Validación entre municipios; no hay segundo periodo temporal porque el CE 2014 no tiene descarga |
+| V4 | El modelo de crecimiento gana a las líneas base | ✅ En MAE, Spearman y top 20 %. Validación entre municipios y, desde oct-2026, también temporal con el CE 2014 de la serie histórica (Spearman 0.336 vs 0.061 de la media del eje) |
 | V5 | El modelo de enlaces gana a la distancia | ✅ AUC 0.881 vs 0.856; AP 2.3× |
-| V6 | Sensibilidad del índice a ±20 % en los pesos | Pendiente |
+| V6 | Sensibilidad del índice a ±20 % en los pesos | ✅ El top 20 conserva 85-100 % (v2) y 95-100 % (v3). Sin el componente de potencial, solo 60 % / 65 %: ese componente pesa mucho en el ranking |
 | V7 | Al menos 1 ruta nueva y 1 parcialmente existente | ✅ 3 nuevas, 2 parcialmente existentes (extienden circuitos oficiales a municipios emergentes) |
 | V8 | Concentración del turismo | Hoy HHI 1,306 (top 5 = 51.9 %) → tendencial 1,132 (49.1 %) → **con rutas, hipotético** 1,103 (48.5 %). Supuesto: los emergentes de las rutas alcanzan el límite superior de su intervalo |
 | V9 | Proxy de turismo contra DATATUR | Pendiente |
@@ -158,6 +158,7 @@ Las rutas benefician a 4 regiones distintas y llevan de 4 a 5 municipios emergen
   - La Fiesta de la Virgen del Peñón (22 de octubre) entra en las temporadas.
 - **Efecto:**
   - Jonotla pasa a tener turismo religioso y ecoturismo como actividades principales.
-  - Es la **oportunidad número 1 del índice** (0.86).
+  - Es la **oportunidad número 1 del índice** en `v1_base` (0.855) y en `v2_con_prediccion` (0.735); en
+    `v3_dominio_osrm` es la número 2 (0.791).
   - Entra en dos de las cinco rutas: café y gastronomía, ambas desde Cuetzalan.
   - La ficha técnica lista sus lugares para visitar.

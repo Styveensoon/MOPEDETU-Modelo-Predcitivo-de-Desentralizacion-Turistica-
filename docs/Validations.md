@@ -382,7 +382,9 @@ cuenta **completo**; de OSM solo cuentan **religioso, ecoturismo y volcanes** (m
 DENUE y del INAH; así no se inflan actividades).
 
 **Efecto verificado:** Jonotla pasa a tener turismo religioso y ecoturismo como actividades principales, es la
-oportunidad #1 del índice (0.86) y entra en dos de las cinco rutas propuestas.
+oportunidad #1 del índice (0.855 en `v1_base`; 0.735 en `v2_con_prediccion`; #2 con 0.791 en `v3_dominio_osrm`)
+y entró en dos de las cinco rutas propuestas de la corrida anterior (en el optimizador v2 está en la de talavera y
+artesanías, §25.5).
 
 ---
 
@@ -595,9 +597,11 @@ ranking estatal sobre ese máximo. Las rutas también usan el mejor eje de v2 (�
 ### 10.4 Validaciones del índice
 
 - **Coherencia:** `indice.py` imprime el índice medio de anclas contra el resto (control visual).
-- **Resultado:** mejores oportunidades fuera de anclas: Jonotla (0.86), Huehuetla, Jalpan, Zacapoaxtla, Zapotitlán
-  de Méndez, Huehuetlán el Grande, Pantepec.
-- **V6 (pendiente):** sensibilidad de ±20 % en cada peso; criterio: el top 20 conserva ≥ 70 % de sus municipios.
+- **Resultado (`v1_base`):** mejores oportunidades fuera de anclas: Jonotla (0.855), Huehuetla, Jalpan, Zacapoaxtla,
+  Zapotitlán de Méndez, Huehuetlán el Grande, Pantepec.
+- **V6 ✅:** sensibilidad de ±20 % en cada peso; criterio: el top 20 conserva ≥ 70 % de sus municipios. v2: 85-100 %;
+  v3: 95-100 %. Sin el componente de potencial el top 20 conserva solo 60 % (v2) / 65 % (v3): ese componente decide
+  buena parte del ranking (§25.8).
 
 ---
 
@@ -1375,7 +1379,7 @@ potencial = 0.6 · índice medio del municipio + 0.4 · min(# actividades, 5) / 
 | **V3** | El DENUE detecta la actividad en los municipios de su ruta oficial | Se reporta; la brecha se trata como oferta reconocida sin registro | Café 66 % (19/29), mezcal 50 % (6/12); se convierte en bandera `OFERTA_INVISIBLE` | ✅ reportado |
 | **V4** | El modelo de crecimiento gana a sus líneas base | Rol C: menor MAE que media del eje y Ridge. Rol B: mayor Spearman y precisión ≥ que todas las líneas base en la prueba temporal | Rol C gana en MAE, Spearman y top 20 %. Rol B gana en Spearman y top 20 (MAE: Ridge 0.322 es algo mejor que gbm 0.327) | ✅ |
 | **V5** | El modelo de enlaces gana a la distancia | AUC > línea base de distancia, validado por ruta | AUC 0.881 vs 0.856; AP 2.3× | ✅ |
-| **V6** | Sensibilidad del índice | ±20 % en cada peso; el top 20 conserva ≥ 70 % de sus municipios | — | ⏳ pendiente |
+| **V6** | Sensibilidad del índice | ±20 % en cada peso; el top 20 conserva ≥ 70 % de sus municipios | v2 85-100 %, v3 95-100 % (sin potencial: 60 % / 65 %) | ✅ |
 | **V7** | Novedad de las rutas | ≥ 1 nueva y ≥ 1 parcialmente existente | 3 nuevas, 2 parcialmente existentes | ✅ |
 | **V8** | Descentralización | HHI hoy vs escenario con rutas, presentado como hipotético | 1,306 → 1,132 → 1,103 | ✅ |
 | **V9** | Proxy de turismo contra DATATUR | Spearman ≥ 0.6 en destinos con datos | — | ⏳ pendiente |
@@ -1513,7 +1517,7 @@ Se documentan para que nadie los descubra en la presentación:
 7. **2-opt de una pasada** en `rutas.py` (una sola mejor inversión), frente al 2-opt iterativo del motor DEMO.
 8. **Meses fuertes con actividades de intensidad 1** (palenques todo el año) en el perfil y en las rutas; la vista de
    la ficha sí exige intensidad ≥ 2.
-9. **V6 y V9 sin ejecutar.**
+9. **V9 sin ejecutar** (V6 ✅ en §25.8; DATATUR público solo trae la ciudad de Puebla).
 
 ---
 
@@ -1527,3 +1531,285 @@ Se documentan para que nadie los descubra en la presentación:
 - Que una ruta es nueva sin haberla comparado con el catálogo oficial.
 - Que el semáforo rojo es malo: significa "ya concentra turismo".
 - Que el crecimiento predicho es un compromiso: es un **escenario tendencial** con intervalo.
+
+---
+
+## 25. Afinación de la base (plan `docs/plan_afinacion_bd.md`, octubre 2026)
+
+Resultados de las validaciones de cada fase, en el orden en que se ejecutaron. Respaldo previo: esquema privado
+`respaldo_20261015` en la misma base (copia de las 35 tablas de `dw` y `stg` más la definición de las 9 vistas;
+sin permisos para `anon` ni `authenticated`).
+
+### 25.1 F0 · Seguridad (15-oct-2026, `sql/09_seguridad_vistas.sql`)
+
+| Control | Resultado |
+|---|---|
+| Asesor de seguridad: `security_definer_view` | ✅ 0 (antes 9) |
+| Asesor: `rls_auto_enable` ejecutable por `anon` | ✅ revocado |
+| Tablas de `dw` con RLS y sin política | ✅ 0 (antes 25); queda solo INFO en `stg` y en el respaldo, cerrados a propósito |
+| `GET /rest/v1/v_ficha_municipio`, `v_ruta_parada`, `v_indice_municipio` con la *publishable key* | ✅ 200 con datos |
+| `GET stg.denue` con la *publishable key* | ✅ 401 (no expuesto) |
+| `tests/test_tablero.py` (incluye `test_ficha_tecnica`) | ✅ OK |
+
+Los roles `dev_raul` y `dev_styveen` no existen en la base; si se vuelven a usar, aplicar
+`DDL/04_permisos_mopedetu.sql`.
+
+### 25.2 F3 · Concentración por eje y oferta en exceso (`sql/10_vistas_concentracion.sql`)
+
+`SELECT * FROM dw.v_concentracion_eje WHERE periodo_sk = 7` (DENUE 2026-05):
+
+| Eje | Top 5 | HHI | Municipios con oferta |
+|---|---|---|---|
+| 0 · los 4 ejes | 51.9 % | 1,306 | 217 |
+| 1 · hospedaje | 63.1 % | 1,872 | 159 |
+| 2 · alimentos | 52.8 % | 1,331 | 215 |
+| 3 · turismo y cultura | 77.7 % | 3,478 | 89 |
+| 4 · comercio turístico | 38.9 % | 565 | 200 |
+| Referencia: población 2020 | 37.5 % | 749 | 217 |
+
+✅ Coincide con lo esperado del plan. `v_exceso_oferta`: ajuste ln(1+personal) ~ ln(población) por periodo y eje
+(R² = 0.764 en el eje 0); 1,085 filas (217 × 5 ejes). La nota de dependencia DENUE ↔ CE (correlación 0.998)
+quedó en `dim_fuente.calidad_notas` de las fuentes 1, 3 y 12.
+
+### 25.3 F1 · Tiempos por carretera (`sql/11_afinacion_columnas.sql`, `scripts/calcular_tiempos_osrm.py`)
+
+- Cabeceras: `cve_cab` del Catálogo Único de Claves Geoestadísticas (servicio wscatgeo de INEGI) con coordenadas
+  del ITER 2020. **Las 217 cabeceras son `LOC = 0001`** (resuelve I6).
+- Matriz: servidor público de OSRM (`router.project-osrm.org`, perfil auto), servicio `table` en 25 peticiones de
+  50 × 50 cabeceras con pausa; registrado como `osrm_publico` y como fuente en `dim_fuente`. Para pasar a
+  `osrm_local` basta `--osrm http://localhost:5000`.
+
+| Control | Resultado |
+|---|---|
+| Pares con `fuente_tiempo LIKE 'osrm%'` | ✅ 46,872 de 46,872 (criterio: ≥ 8,452) |
+| Pares sin ruta | ✅ 0 |
+| Pares más rápidos que la recta entre cabeceras a 90 km/h (*snapping*) | ✅ 0 |
+| Pares a ≤ 150 min | 24,251 por carretera vs 16,904 con la recta × 1.8 |
+
+Factor carretera / recta × 1.8 entre colindantes, por región de origen:
+
+| Región | Factor |
+|---|---|
+| Sierra Norte | 2.45 |
+| Sierra Nororiental | 1.44 |
+| Mixteca | 1.23 |
+| Tehuacán y Sierra Negra | 1.15 |
+| Valle de Atlixco y Matamoros | 1.13 |
+| Angelópolis | 0.97 |
+| Valle de Serdán | 0.83 |
+
+Lectura: la recta × 1.8 (≈ 33 km/h) subestimaba la Sierra Norte, pero **sobrestimaba** los valles con autopista
+(media estatal 0.84). OSRM da tiempos de flujo libre, sin tráfico: en la sierra el tiempo real puede ser mayor.
+
+`fact_infraestructura`: `min_ancla_cercana`, `ancla_cercana_sk` y `min_capital` ahora son por carretera desde la
+cabecera; los valores anteriores quedan como `min_ancla_cercana_recta`, `ancla_cercana_sk_recta` y
+`min_capital_recta`.
+
+### 25.4 F2 · Calidad del dato y dominio de predicción
+
+**2a. Calidad OSM.** Nuevo indicador `completitud_osm` = POIs de OSM con nombre por cada mil establecimientos del
+DENUE. Un cero de OSM en un municipio con completitud ≤ P25 pasa a `valor = NULL`, `calidad = 'sin_dato'`; con
+completitud mayor, `cero_confirmado`. Se usa ≤ y no < porque el P25 es 0 (83 municipios sin un solo POI con
+nombre). Resultado: `atractivos_osm` 80 sin dato / 64 ceros confirmados; `terminales_autobus` 83 / 100;
+`km_vias_principales` 1 sin dato. `pct(NaN)` pasó de 0 a **0.5** (neutral) en `model/base.py` y
+`scripts/calcular_ficha.py` (§1.1).
+
+**2b. Confidencialidad del censo.** `unidades_con_personal_publicado` y `pct_personal_cubierto` llenos en las
+1,736 filas (recalculadas desde `stg.censo_economico`; las columnas anteriores coinciden fila por fila). 647 celdas
+con unidades tienen cobertura < 80 %: su `personal_ocupado` se lee como "al menos X".
+
+**2c. Dominio.** Modelo nuevo `crecimiento_ue_eje_lgbm_v2` (#146); el v1 (#141) se conserva con sus 868 filas.
+
+| en_dominio | Celdas | Con predicción | Mediana | Negativos |
+|---|---|---|---|---|
+| true (≥ 3 UE en CE 2024) | 467 | 467 | +37.7 % | 26 |
+| false | 401 | 0 | — | — |
+
+✅ Ninguna celda con `unidades_base < 3` tiene predicción. Validación cruzada del v2: LightGBM MAE 0.247 ·
+Spearman 0.461 · precisión top 20 % 57 % (líneas base: media del eje 0.273 / Ridge 0.283).
+
+Índice `v3_dominio_osrm` (version_sk 5): potencial solo en dominio con pesos renormalizados, accesibilidad por
+carretera, y en alimentos y comercio `score_oferta` = percentil del residuo de `v_exceso_oferta`. Celdas fuera de
+dominio en el top 20 por eje: **14 de 80** (en v2 eran 35). `OFERTA_EMERGENTE` en alimentos y comercio exige además
+residuo ≥ P75. `v1_base` y `v2_con_prediccion` no se modificaron.
+
+⚠️ **Criterio no alcanzado:** el semáforo de potencial quedó con 4 gris + 2 rojo = 6 municipios (antes 1; meta
+≥ 10). Razón: el semáforo promedia los ejes del municipio ponderando por empleo, y casi todos los municipios tienen
+al menos alimentos dentro de dominio con crecimiento positivo; solo 4 no tienen ningún eje con ≥ 3 UE. Bajar la
+meta a la fuerza exigiría cambiar la regla del semáforo (p. ej. rojo si el límite inferior del intervalo es < 0),
+que es una decisión de diseño pendiente, no de datos.
+
+### 25.5 F5 · Rutas operables (`sql/12_rutas_operables.sql`, optimizador v2 en `model/rutas.py`)
+
+Antes de reoptimizar, las 5 rutas publicadas medidas entre cabeceras por carretera:
+
+| Ruta anterior | Recta × 1.8 | Carretera | Tramo máx. |
+|---|---|---|---|
+| Café · Cuetzalan → Zacapoaxtla | 77 | 116 | 33 |
+| Volcanes · San Pedro Cholula → Atzitzihuacán | 99 | 115 | 52 |
+| Gastronomía · Cuetzalan → Zihuateutla | 86 | 236 | **99** (> 75) |
+| Ecoturismo · San Andrés Cholula → Huaquechula | 132 | 122 | 57 |
+| Mezcal · San Andrés Cholula → Ixcaquixtla | 189 | 192 | 59 |
+
+Con cabeceras como origen, solo gastronomía viola el tramo de 75 min. Las cifras de la auditoría del plan (café 185,
+volcanes 197 con un tramo de 94 min) son mayores; probablemente se midieron entre otros puntos (centroides o
+localidades), así que el diagnóstico D1 se confirma en la sierra pero con menor magnitud entre cabeceras.
+
+Reglas nuevas: tiempos por carretera, índice y banderas `v3_dominio_osrm`, crecimiento del modelo v2, sin
+candidatas con semáforo de infraestructura rojo, pernocta obligatoria si traslado + estancias > 10 h (parada con
+hospedaje ≥ P50 estatal; se prefiere una emergente cercana al fin de la primera jornada y el ancla solo como
+respaldo) y región beneficiada distinta de Angelópolis. 68 candidatas factibles, 44 operables.
+
+| Ruta (origen = propuesta_modelo) | Carretera (min) | Tramo máx. | Días | Pernocta (hospedajes) | Región beneficiada | Cumple |
+|---|---|---|---|---|---|---|
+| Volcanes · San Pedro Cholula → Atzitzihuacán | 107 | 34 | 2 | Calpan (3) | Valle de Atlixco y Matamoros | ✅ |
+| Talavera y artesanías · Chignahuapan → Tenampulco | 195 | 75 | 2 | Zacapoaxtla (11) | Sierra Nororiental | ✅ |
+| Café · Xicotepec → Pantepec | 236 | 66 | 2 | Tlacuilotepec (2) | Sierra Norte | ✅ |
+| Religioso · Tehuacán → Cuautinchán | 179 | 60 | 2 | Acatzingo (12) | Valle de Serdán | ✅ |
+| Gastronomía · Tehuacán → Nicolás Bravo | 169 | 67 | 2 | Esperanza (2) | Tehuacán y Sierra Negra | ✅ |
+
+✅ Las 5 cumplen con tiempos reales y tienen pernocta. Descartada y registrada (`origen = 'propuesta_descartada'`):
+Ecoturismo · San Andrés Cholula → Huaquechula, por `region_angelopolis`.
+
+⚠️ El P50 estatal de hospedaje es de solo 2 establecimientos (58 municipios no tienen ninguno), así que tres
+pernoctas quedan en municipios con 2-3 hospedajes. La regla del plan se cumple, pero conviene subirla (p. ej. P75)
+o validar la capacidad con la Secretaría antes de vender las rutas.
+
+`v_ruta_parada` muestra ahora el tiempo por carretera (también para las rutas oficiales, desde
+`fact_accesibilidad`); los valores en línea recta siguen en las columnas `_est`. El escenario V8
+(`model/escenario_hhi.py`, modelo v2): HHI hoy 1,306 → tendencial 1,141 → con rutas 1,114 (top 5: 51.9 → 49.2 →
+48.6 %). `v_indice_municipio` toma la versión más reciente, así que el tablero ya muestra `v3_dominio_osrm`.
+
+### 25.6 F4 · Panel censal completo y modelo del rol B
+
+**CE 2014.** Cargado desde la serie histórica del CE 2024 (`conjunto_de_datos_ce_pue_2014_csv.zip`, homologada a
+SCIAN 2023) con los mismos códigos y pesos que 2019 y 2024 (`scripts/cargar_datos_base.py --solo censo --ce2014`).
+
+| periodo_sk | Censo | Filas | UE | Personal publicado |
+|---|---|---|---|---|
+| 6 | CE 2014 | 868 | 27,979 | 72,063 |
+| 3 | CE 2019 | 868 | 37,571 | 101,673 |
+| 4 | CE 2024 | 868 | 49,838 | 133,960 |
+
+✅ 3 censos × 868. Control de comparabilidad: con la serie histórica, la agregación reproduce exactamente el
+CE 2024 de la base y las **unidades** del CE 2019 (100 % de las celdas); el **personal** 2019 difiere en el 9.4 %
+de las celdas (la publicación original suprimía más por confidencialidad). 2019 no se reemplazó; como el modelo usa
+unidades, la transición 2014 → 2019 es comparable.
+
+**Validación temporal del modelo del rol C** (entrena 2014 → 2019, prueba 2019 → 2024, 482 celdas):
+
+| Modelo | MAE | Spearman | Precisión top 20 % |
+|---|---|---|---|
+| LightGBM | 0.275 | 0.336 | 47 % |
+| Media del eje | 0.287 | 0.061 | 16 % |
+
+El modelo supera a la línea base fuera del tiempo, con menos fuerza que en la validación cruzada (0.461); el
+periodo de prueba incluye la pandemia. Guardado en `dim_modelo.metricas` del v2.
+
+**Modelo del rol B en la base.** `model/prediccion_crecimiento.py --homologado` lo reentrena con los ejes de
+`dim_eje` y sus pesos (comercio turístico = artesanías y talavera; las agencias 5615 van en turismo), las 12 anclas
+y las 7 regiones de `dim_municipio`. `scripts/cargar_modelo_rolb.py` lo carga:
+
+- `dim_modelo`: `crecimiento_ridge_v2_homologado` (en uso, #152), `crecimiento_gbm_v2_homologado`,
+  `crecimiento_gbm_ue_v2_homologado` y las líneas base `rolb_lb_*_v2_homologado`.
+- Validación temporal del rol B (objetivo en personal, 129 celdas de prueba): Ridge Spearman 0.289 · precisión
+  top 20 0.40 · supera sus tres líneas base. `gbm_ue` (para bases confidenciales) **no** las supera, así que por
+  su propia regla no predice celdas con personal confidencial: el eje turismo queda sin predicción del rol B.
+- `fact_prediccion_crecimiento`: 205 filas (#152), 203 en dominio (≥ 3 UE). No se mezcla con el rol C porque tiene
+  su propio `modelo_sk`; todos los lectores (`calcular_ficha.py`, `rutas.py`, `escenario_hhi.py`) filtran por modelo.
+
+**Línea base "solo similitud"** del modelo de enlaces registrada como `enlace_linea_base_similitud`
+(AUC 0.699, AP 0.019); `model/enlaces.py` la registra en adelante.
+
+### 25.7 F6 · Fuentes nuevas (`sql/13_fuentes_nuevas.sql`, `sql/14_banderas_visibilidad.sql`)
+
+| Fuente | Tabla | Carga | Resultado |
+|---|---|---|---|
+| DATATUR · Monitoreo Hotelero mensual (SECTUR) | `dim_destino_datatur`, `bridge_destino_municipio`, `fact_demanda_hotelera` | `scripts/cargar_datatur.py` | 36 meses (sep-2023 a ago-2026) de **un solo destino de Puebla: la ciudad**. Ocupación media 59.7 %; mínimo en enero (49.6 %), máximo en noviembre (65.4 %). Cuartos en promedio diario; sin llegadas ni estadía en el archivo público. Todo preliminar según la fuente |
+| SESNSP · Incidencia delictiva municipal 2015-2025 | `fact_seguridad` | `scripts/cargar_seguridad.py` | 9,548 filas (217 × 11 años × 4 grupos). Llena `fact_ruta_evaluacion.riesgo_seguridad` |
+| Wikipedia en español · vistas de página | `fact_visibilidad` | `scripts/cargar_visibilidad_wikipedia.py` | 217/217 municipios (artículo por la clave INEGI P3801 de Wikidata); 440,648 vistas oct-2025 a sep-2026, mediana 1,345 |
+| CONAPO · Población municipal 1990-2040 | `fact_poblacion_anual` | `scripts/cargar_poblacion_conapo.py` | 6,727 filas (217 × 2010-2040). Puebla: 6.71 M (2020) → 7.15 M (2026) → 8.02 M (2040). Las tasas de seguridad usan la población del año |
+| Registro Nacional de Turismo | — | — | ⬜ **No disponible** como datos abiertos por municipio y giro (ver `datos_base.md`) |
+
+✅ Criterio F6: al menos una fuente de demanda (DATATUR) cargada. ⚠️ **V9 no se puede ejecutar**: el criterio es un
+Spearman entre destinos y el archivo público trae un solo destino de Puebla; hace falta el monitoreo por destino de
+la Secretaría estatal (Observatorio Turístico, que lo publica en PDF anual con Tehuacán y otros).
+
+**Banderas.** La antigua `OFERTA_INVISIBLE` (reconocida en ruta oficial sin registro DENUE) se renombró a
+`OFERTA_SIN_REGISTRO` conservando su `tipo_flag_sk`, y se creó la `OFERTA_INVISIBLE` real (oferta del eje ≥ P60 y
+visibilidad ≤ P35, solo en v3). Banderas v3: IMPACTO_SOCIAL 109 · BARRERA_ACCESO 95 · OFERTA_INVISIBLE 92 ·
+ACCESIBLE_NO_EXPLOTADO 77 · OFERTA_EMERGENTE 75 · OFERTA_SIN_REGISTRO 37. Las 5 rutas no cambiaron.
+
+**Riesgo de las rutas** (percentil estatal 2025 de homicidio + robo a transeúnte/carretera + secuestro/extorsión,
+por 100 mil hab., en la parada más alta): talavera medio (Jonotla P76), café medio (Naupan P75), volcanes alto
+(San Pedro Cholula P93), religioso alto (Chalchicomula de Sesma P96), gastronomía alto (**Esperanza P100, que además
+es su pernocta**). El grupo incluye robo a transportista, que pesa en municipios pequeños sobre autopistas; antes de
+vender la ruta de gastronomía conviene revisar la pernocta.
+
+### 25.8 F7 · Catálogos, documentación y V6
+
+- `dim_municipio.anio_pueblo_magico` lleno para los 13 municipios Pueblo Mágico (Cholula cuenta en San Andrés y San
+  Pedro), consistente con `es_pueblo_magico`.
+- Vista `dw.v_cobertura_catalogos` (`sql/15_cobertura_catalogos.sql`): eventos propios, lugares curados y OSM y
+  zonas INAH por municipio, con marcas de ruta oficial y propuesta.
+- ⚠️ **Meta de eventos no alcanzada:** de los 29 municipios en rutas propuestas, solo 5 tienen un evento propio
+  (de los 70 en rutas oficiales, 14). Faltan: Acatzingo, Aquixtla, Atoyatempan, Atzitzihuacán, Calpan, Cañada
+  Morelos, Chalchicomula de Sesma, Cuautinchán, Esperanza, Naupan, Nealtican, Nicolás Bravo, Pantepec, Quecholac,
+  San Gabriel Chilac, San Jerónimo Tecuanipan, San Pedro Cholula, Tenampulco, Tlacuilotepec, Tlaxco, Tuzamapan de
+  Galeana, Zacapoaxtla, Zapotitlán y Zihuateutla. Igual con lugares curados (1 de 29) y zonas INAH (4). Es curaduría
+  manual con una URL de fuente por registro; no se rellenó para no inventar datos.
+- Documentación corregida: Jonotla vale 0.855 en `v1_base`, 0.735 en `v2_con_prediccion` y 0.791 (#2) en
+  `v3_dominio_osrm` (`Context.md`, `resultados_modelo.md`, §4.6); tabla de rutas de `Context.md` §15.5 actualizada.
+
+**V6 ✅ (sensibilidad del índice, ±20 % en cada peso, top 20 por municipio):**
+
+| Versión | Top 20 conservado | Sin el componente de potencial |
+|---|---|---|
+| `v2_con_prediccion` | 85-100 % | 60 % |
+| `v3_dominio_osrm` | 95-100 % | 65 % |
+
+Criterio (≥ 70 %) cumplido en ambas. El potencial predicho sigue decidiendo una parte grande del ranking; en v3 ya
+solo usa celdas dentro del dominio del modelo.
+
+### 25.9 Lista de aceptación del plan
+
+| Fase | Criterio | Estado |
+|---|---|---|
+| F0 | Asesor sin errores; tablero con la *publishable key* | ✅ |
+| F1 | ≥ 8,452 pares por carretera; indicadores de acceso recalculados | ✅ 46,872 pares (OSRM público) |
+| F2 | Sin predicciones fuera de dominio; `pct(NaN)` neutral; calidad OSM | ✅ (semáforo de potencial: 6 rojo/gris, meta 10 — §25.4) |
+| F3 | `v_concentracion_eje` y `v_exceso_oferta` publicadas | ✅ |
+| F4 | Tres censos; modelo del rol B con ejes homologados | ✅ |
+| F5 | 5 rutas con `cumple_restricciones` y pernocta | ✅ (pernoctas con pocos hospedajes — §25.5) |
+| F6 | Una fuente de demanda o formalidad; V9 si hay DATATUR | ✅ DATATUR · ⚠️ V9 imposible con un destino |
+| F7 | Eventos y lugares curados en municipios de rutas; documentación | ⚠️ documentación ✅, curaduría pendiente (24 municipios) |
+| — | Fuentes nuevas con fila completa en `dim_fuente` | ✅ OSRM, DATATUR, SESNSP, Wikipedia, CONAPO |
+| — | `Validations.md` con cada fase | ✅ esta sección |
+
+### 25.10 Orden de reejecución (el que se usó; reemplaza el §7 del plan)
+
+```bash
+# Estructura (ya aplicadas en Supabase; idempotentes)
+sql/09_seguridad_vistas.sql  sql/10_vistas_concentracion.sql  sql/11_afinacion_columnas.sql
+sql/12_rutas_operables.sql   sql/13_fuentes_nuevas.sql        sql/14_banderas_visibilidad.sql
+sql/15_cobertura_catalogos.sql
+
+# Datos y modelo
+python scripts/calcular_tiempos_osrm.py --iter <ITER 2020 CSV>              # F1
+python scripts/cargar_datos_base.py --solo censo --ce2014 <tr_ce_pue_2014.csv>   # F4 (solo borra el año que carga)
+python scripts/cargar_datos_base.py --solo censo_cobertura                   # F2b
+python scripts/cargar_visibilidad_wikipedia.py                               # F6d (antes del índice v3)
+python scripts/calcular_ficha.py --denue ... --osm ... --iter ... --geo ...  # infraestructura por carretera y calidad
+python model/crecimiento.py                                                  # modelo v2, validación temporal, índice v3
+python scripts/calcular_ficha.py ...                                         # otra vez: semáforo de potencial
+python model/rutas.py                                                        # optimizador v2
+python model/escenario_hhi.py
+python model/prediccion_crecimiento.py --homologado data/raw/censos && python scripts/cargar_modelo_rolb.py
+python scripts/cargar_datatur.py data/raw/datatur
+python scripts/cargar_poblacion_conapo.py data/raw/conapo/pobproy_ggrupos.csv
+python scripts/cargar_seguridad.py data/raw/sesnsp/idm_puebla_2015_2025.csv  # DESPUÉS de rutas.py (llena su riesgo)
+python tests/test_tablero.py
+```
+
+`pandas` quedó fijado en `< 3` en `requirements.txt`: con pandas 3 los `None` de columnas de texto pasan a `NaN` y la
+API rechaza el JSON. Se agregaron también `lightgbm`, `shapely` y `requests`, que el código ya usaba.

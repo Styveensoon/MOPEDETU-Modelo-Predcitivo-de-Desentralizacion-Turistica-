@@ -22,6 +22,7 @@ NOVEDAD = {"nueva": ("Nueva", "#2E7D32"), "parcialmente_existente": ("Parcialmen
 ESCENARIO = Path(__file__).resolve().parents[2] / "data" / "derivados" / "escenario_concentracion.json"
 BANDERAS = {"OFERTA_EMERGENTE": "oferta emergente", "ACCESIBLE_NO_EXPLOTADO": "accesible no explotado",
             "BARRERA_ACCESO": "barrera de acceso", "OFERTA_INVISIBLE": "oferta invisible",
+            "OFERTA_SIN_REGISTRO": "oferta sin registro",
             "IMPACTO_SOCIAL": "impacto social"}
 
 

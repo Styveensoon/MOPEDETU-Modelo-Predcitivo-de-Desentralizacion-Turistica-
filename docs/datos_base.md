@@ -70,3 +70,26 @@ Un peso menor que 1 indica una actividad que atiende tanto a visitantes como a r
 2. Modelo de crecimiento (CE 2019 → 2024, validación cruzada entre municipios) → `fact_prediccion_crecimiento`.
 3. Modelo de enlaces (84 tramos de rutas oficiales) → `fact_prediccion_enlace`; clusters y similitud.
 4. Optimizador de rutas → `dim_ruta` / `fact_ruta_parada` (origen `propuesta_modelo`) y `fact_ruta_evaluacion`.
+
+## Fuentes de la afinación (oct-2026) e investigación pendiente
+
+Resultado de la investigación de `docs/plan_afinacion_bd.md` §5. Cada punto terminó en una fila de `dw.dim_fuente`
+o en una nota de "no disponible".
+
+| # | Pregunta | Resultado |
+|---|---|---|
+| I1 | ¿Qué destinos de Puebla mide DATATUR? | ✅ El archivo mensual público del Monitoreo Hotelero (datatur.sectur.gob.mx/SitePages/hoteleria.aspx) trae **solo "PUEBLA, PUE."** (ciudad), sep-2023 a ago-2026 → `fact_demanda_hotelera`. Otros destinos (Tehuacán, etc.) solo en los PDF anuales del Observatorio Turístico estatal (sectur.puebla.gob.mx/observatorioturistico). El portal datos.puebla.gob.mx (ocupación por destino 2010-2019) no resolvía DNS el 15-oct-2026 |
+| I2 | RNT por municipio y giro | ⬜ **No disponible** como datos abiertos. Hay que pedirlo a la Secretaría estatal (Registro Estatal de Turismo) o por la Plataforma Nacional de Transparencia |
+| I3 | CSV de incidencia delictiva municipal | ✅ SESNSP, metodología 2015-2025 (SharePoint enlazado desde gob.mx/sesnsp; se descarga con `/_layouts/15/download.aspx?share=<id>`) → `fact_seguridad` |
+| I4 | Nombre vigente de la dependencia y regionalización | ⬜ Pendiente (no se agregó `region_vigente`) |
+| I5 | Lista oficial de Pueblos Mágicos | 🟨 Sigue verificada con prensa; `anio_pueblo_magico` ya está en `dim_municipio` |
+| I6 | ¿Cabecera = `LOC 0001`? | ✅ Sí en los 217 municipios de Puebla (clave `cve_cab` del servicio wscatgeo de INEGI) |
+| I7 | ¿OSRM local o público? | ✅ Público (`router.project-osrm.org`, 25 peticiones `table` de 50 × 50, uso justo). Con Docker se puede rehacer local con `--osrm` |
+| I8 | Términos de reseñas | ⬜ No se investigó; se usó Wikipedia (CC0), que sí se puede almacenar |
+| I9 | Datos de la Secretaría | ⬜ Requiere reunión |
+| I10 | Catálogo de turismo comunitario | ⬜ Pendiente (en 2026 la Secretaría entregó 106 distintivos de turismo comunitario en 45 municipios: buscar ese padrón) |
+| I11 | Proyecciones municipales de población | ✅ CONAPO, "Reconstrucción y proyecciones de la población de los municipios de México 1990-2040" (datos.gob.mx) → `fact_poblacion_anual` |
+| I12 | Zonas arqueológicas y museos | ⬜ Pendiente (siguen 4 zonas INAH) |
+
+Fuentes nuevas en `dim_fuente`: OSRM (tiempos por carretera), DATATUR, SESNSP, Wikipedia (vistas) y CONAPO
+(población por año). Los archivos crudos quedan en `data/raw/` (ignorado por git).

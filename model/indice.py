@@ -13,8 +13,15 @@ Banderas (fact_flag_oportunidad), con el motivo en texto:
   ACCESIBLE_NO_EXPLOTADO  ≤ 60 min de un ancla, oferta del eje baja (< P40) pero complementarios altos (≥ P50)
   BARRERA_ACCESO          oferta del eje alta (≥ P60) pero > 75 min de un ancla (tramo máximo de ruta), o > 45 min
                           con vías en el cuartil inferior
-  OFERTA_INVISIBLE        actividad reconocida en ruta oficial sin ningún registro en el DENUE
+  OFERTA_SIN_REGISTRO     actividad reconocida en ruta oficial sin ningún registro en el DENUE (antes se llamaba
+                          OFERTA_INVISIBLE; sql/14_banderas_visibilidad.sql)
+  OFERTA_INVISIBLE        (solo v3, con dw.fact_visibilidad) oferta del eje ≥ P60 y visibilidad ≤ P35
   IMPACTO_SOCIAL          cualquiera de las anteriores en municipio con marginación alta o muy alta
+
+Versión v3_dominio_osrm (la escribe model/crecimiento.py; plan de afinación F2-F3): tiempos por carretera, potencial
+solo en celdas dentro del dominio del modelo (pesos renormalizados si falta), oferta de alimentos y comercio medida
+como exceso sobre lo que explica la población (dw.v_exceso_oferta) y OFERTA_EMERGENTE en esos dos ejes solo con
+residuo ≥ P75.
 
 Uso: python model/indice.py
 """
@@ -24,8 +31,12 @@ import pandas as pd
 import base
 from base import EJES, pct
 
-FLAGS_NUEVOS = [dict(codigo="OFERTA_INVISIBLE", prioridad=1,
-                     descripcion="Actividad reconocida en una ruta oficial sin registro en el DENUE (oferta informal)")]
+FLAGS_NUEVOS = [dict(codigo="OFERTA_SIN_REGISTRO", prioridad=1,
+                     descripcion="Actividad reconocida en una ruta oficial sin registro en el DENUE (oferta informal o "
+                                 "no registrada)"),
+                dict(codigo="OFERTA_INVISIBLE", prioridad=1,
+                     descripcion="Oferta del eje en percentil ≥ 60 con visibilidad en percentil ≤ 35 (vistas de "
+                                 "Wikipedia, dw.fact_visibilidad)")]
 
 
 def componentes(b: base.Base) -> pd.DataFrame:
@@ -53,18 +64,28 @@ def componentes(b: base.Base) -> pd.DataFrame:
     return pd.DataFrame(filas)
 
 
-def indice(c: pd.DataFrame, pesos: dict, potencial: pd.Series | None = None) -> pd.DataFrame:
+def indice(c: pd.DataFrame, pesos: dict, potencial: pd.Series | None = None, renormalizar: bool = False) -> pd.DataFrame:
+    """renormalizar=True: sin potencial (celda fuera de dominio) su peso se reparte entre los demás componentes
+    en vez de contar como 0."""
     c = c.copy()
     c["score_potencial"] = potencial.reindex(pd.MultiIndex.from_frame(c[["municipio_sk", "eje_sk"]])).to_numpy() \
         if potencial is not None else np.nan
     c["indice_oportunidad"] = (pesos["oferta"] * c.score_oferta + pesos["complementarios"] * c.score_complementarios
                                + pesos["accesibilidad"] * c.score_accesibilidad + pesos["social"] * c.score_social
                                + pesos.get("potencial_predicho", 0) * c.score_potencial.fillna(0))
+    if renormalizar:
+        w_pot = pesos.get("potencial_predicho", 0)
+        total = pesos["oferta"] + pesos["complementarios"] + pesos["accesibilidad"] + pesos["social"] + w_pot
+        c["indice_oportunidad"] *= np.where(c.score_potencial.isna(), total / (total - w_pot), 1.0)
     c["ranking_estatal"] = c.groupby("eje_sk").indice_oportunidad.rank(ascending=False, method="min").astype(int)
     return c
 
 
-def banderas(b: base.Base, c: pd.DataFrame) -> pd.DataFrame:
+def banderas(b: base.Base, c: pd.DataFrame, exceso: pd.Series | None = None,
+             visibilidad: pd.Series | None = None) -> pd.DataFrame:
+    """exceso (percentil del residuo de dw.v_exceso_oferta por municipio × eje): si se da, OFERTA_EMERGENTE en
+    alimentos y comercio exige además residuo ≥ P75, porque esos ejes atienden sobre todo a residentes.
+    visibilidad (percentil de vistas por municipio): si se da, se evalúa la OFERTA_INVISIBLE real."""
     m, inf, soc = b.mun, b.infra, b.social
     tipos = {r["codigo"]: r["tipo_flag_sk"] for r in base.sb._peticion("dim_tipo_flag?select=*", True, "dw")}
     vias_p25 = inf.km_vias_por_km2.quantile(0.25)
@@ -77,8 +98,9 @@ def banderas(b: base.Base, c: pd.DataFrame) -> pd.DataFrame:
         no_marca = not (x.es_ancla or x.es_pueblo_magico)
         minutos, vias = inf.min_ancla_cercana[mk], inf.km_vias_por_km2[mk]
         eje = EJES[e].replace("_", " ")
+        residentes_ok = exceso is None or e in (1, 3) or exceso.get((mk, e), 0) >= 0.75
         reglas = {
-            "OFERTA_EMERGENTE": (r.cl >= 1.25 and r.unidades >= 3 and no_marca,
+            "OFERTA_EMERGENTE": (r.cl >= 1.25 and r.unidades >= 3 and no_marca and residentes_ok,
                                  f"Cociente de localización {r.cl:.1f} en {eje} con {r.unidades:.0f} establecimientos, "
                                  f"fuera de anclas y Pueblos Mágicos"),
             "ACCESIBLE_NO_EXPLOTADO": (minutos <= 60 and r.score_oferta < 0.4 and r.score_complementarios >= 0.5
@@ -92,8 +114,13 @@ def banderas(b: base.Base, c: pd.DataFrame) -> pd.DataFrame:
                                f"cercana y {vias:.2f} km de vías principales/km²"),
         }
         inv = invisibles[(invisibles.municipio_sk == mk) & (invisibles.eje_sk == e)]
-        reglas["OFERTA_INVISIBLE"] = (len(inv) > 0, "Reconocida en ruta oficial sin registro DENUE: "
-                                      + ", ".join(inv.nombre) if len(inv) else "")
+        reglas["OFERTA_SIN_REGISTRO"] = (len(inv) > 0, "Reconocida en ruta oficial sin registro DENUE: "
+                                         + ", ".join(inv.nombre) if len(inv) else "")
+        if visibilidad is not None:
+            pv = visibilidad.get(mk, np.nan)
+            reglas["OFERTA_INVISIBLE"] = (r.score_oferta >= 0.6 and pv <= 0.35 and not x.es_ancla,
+                                          f"Oferta de {eje} en percentil {r.score_oferta:.0%} pero visibilidad en "
+                                          f"percentil {pv:.0%} (vistas de su artículo en Wikipedia)")
         algun = any(v[0] for v in reglas.values())
         grado = str(soc.grado_marginacion.get(mk, ""))
         reglas["IMPACTO_SOCIAL"] = (algun and grado in ("Alto", "Muy alto"),
