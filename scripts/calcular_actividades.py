@@ -276,9 +276,13 @@ def calcular_lugares(df: pd.DataFrame, solo: bool = False):
     lug = sb.leer("fact_atractivo_lugar", "dw", "atractivo_sk,municipio_sk,nombre,categoria,actividades,lat,lon,origen,url",
                   secreta=True)
     con_act = lug.actividades.map(lambda x: bool(x))
+    # Templos y parroquias no son señal de actividad religiosa del municipio (no inflan A1), pero sí son paradas
+    # religiosas reales: para el circuito temático cuentan como 'religioso'. La prioridad no cambia.
+    actividad = lug.actividades.map(lambda x: x[0] if x else None)
+    actividad = actividad.where(actividad.notna() | ~lug.categoria.isin(["templo", "santuario"]), "religioso")
     al = pd.DataFrame({
         "lugar_id": "al:" + lug.atractivo_sk.astype(str), "municipio_sk": lug.municipio_sk, "nombre": lug.nombre,
-        "actividad": lug.actividades.map(lambda x: x[0] if x else None), "categoria": lug.categoria,
+        "actividad": actividad, "categoria": lug.categoria,
         "tipo_parada": "atractivo", "origen": np.where(lug.origen == "catalogo_curado", "curado", "osm"),
         "url": lug.url, "personal_est": np.nan, "lat": pd.to_numeric(lug.lat), "lon": pd.to_numeric(lug.lon),
         "prioridad": np.where(lug.origen == "catalogo_curado", 1, np.where(con_act, 2, 6))})

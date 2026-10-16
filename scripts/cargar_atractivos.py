@@ -93,9 +93,11 @@ def main():
     with (RAIZ / "data" / "catalogos" / "atractivos.csv").open(encoding="utf-8") as f:
         for r in csv.DictReader(f):
             cve = por_nombre[sin_acentos(r["municipio"])]
+            # lat/lon solo cuando hay una fuente verificable del punto; sin ellas el circuito omite el lugar
+            lat, lon = (float(r["lat"]), float(r["lon"])) if r.get("lat") and r.get("lon") else (None, None)
             filas.append(dict(cve_geo=cve, nombre=r["nombre"].strip(), categoria=r["categoria"],
                               actividades=[a for a in r["actividades"].split("|") if a], descripcion=r["descripcion"],
-                              lat=None, lon=None, origen="catalogo_curado", fuente_sk=f_cur, url=r["fuente_url"]))
+                              lat=lat, lon=lon, origen="catalogo_curado", fuente_sk=f_cur, url=r["fuente_url"]))
     for archivo in ("atractivos.json", "puntos.json"):
         for e in json.loads((Path(args.osm) / archivo).read_text(encoding="utf-8"))["elements"]:
             t = e.get("tags", {})

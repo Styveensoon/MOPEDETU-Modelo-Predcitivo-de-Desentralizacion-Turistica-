@@ -21,7 +21,9 @@ WITH den AS (
     WHERE s.codigo_scian LIKE '712%' OR s.codigo_scian LIKE '713%'
 ), todos AS (
     SELECT 'al:' || l.atractivo_sk AS lugar_id, l.municipio_sk, l.nombre,
-           l.actividades[1] AS actividad, l.categoria, 'atractivo' AS tipo_parada,
+           -- templos/parroquias sin señal de actividad cuentan como parada religiosa del circuito temático
+           COALESCE(l.actividades[1], CASE WHEN l.categoria IN ('templo', 'santuario') THEN 'religioso' END) AS actividad,
+           l.categoria, 'atractivo' AS tipo_parada,
            CASE WHEN l.origen = 'catalogo_curado' THEN 'curado' ELSE 'osm' END AS origen, l.url,
            NULL::numeric AS personal_est, l.lat::float8 AS lat, l.lon::float8 AS lon,
            CASE WHEN l.origen = 'catalogo_curado' THEN 1 WHEN cardinality(l.actividades) > 0 THEN 2 ELSE 6 END AS prioridad
